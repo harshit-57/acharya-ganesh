@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 60px;
+    img {
+        width: 90px;
+    }
+}
+.info_n_action_button_container {
+    display: flex;
+    gap: 28px;
+}
+
+.contact_label {
+    display: flex;
+    color: var(--color-white);
+    align-items: center;
+    gap: 12px;
+
+    img {
+        width: 18px;
+    }
+}
+
+.action_button {
+    display: flex;
+    align-items: center;
+    color: var(--color-primary);
+    gap: 12px;
+    cursor: pointer;
+
+    img {
+        width: 18px;
+    }
+}

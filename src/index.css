@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap');
+
+:root {
+    font-family: 'Work Sans', serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    line-height: 1.5;
+    font-weight: 400;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+
+    --color-black: #000000;
+    --color-white: #ffffff;
+
+    --color-primary: #fed1a7;
+    --color-primary-bg: #fff3eb;
+    --color-button-primary-bg: #fed1a7;
+    --color-card-bg-dark: #23201d;
+    --color-header-menu-bg: #2c2520b2;
+    --color-header-menu-bg-hover: #e7a06d5d;
+    --color-border-dark: #5c4228;
+
+    --default-button-border-radius: 40px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+}
+ul {
+    list-style-type: none;
+}
+
+button {
+    border: none;
+    background-color: var(--color-black);
+    border-radius: var(--default-button-border-radius);
+    color: var(--color-white);
+}

@@ -1,0 +1,69 @@
+.container {
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+.hero_text_container {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+
+.hero_text_wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+
+    p,
+    h1 {
+        color: var(--color-primary);
+        text-align: center;
+    }
+
+    p:nth-child(1) {
+        text-transform: uppercase;
+        font-size: 22px;
+        font-weight: 500;
+    }
+
+    h1 {
+        font-size: 64px;
+        margin-top: 24px;
+        font-family: 'Sorts Mill Goudy', serif;
+    }
+
+    p:nth-child(3) {
+        text-transform: uppercase;
+        font-size: 16px;
+        margin-top: 12px;
+        font-weight: 500;
+    }
+
+    p:nth-child(4) {
+        font-size: 18px;
+        margin-top: 24px;
+        font-family: 'Sorts Mill Goudy', serif;
+        color: var(--color-white);
+    }
+    .book_appointment_button {
+        margin-top: 24px;
+        cursor: pointer;
+        transition: 0.2s;
+
+        &:hover {
+            background-color: var(--color-header-menu-bg);
+            color: var(--color-white);
+            border-color: var(--color-button-primary-bg);
+        }
+
+        &:hover > p {
+            color: var(--color-white);
+        }
+        &:hover > img {
+            filter: brightness(0) invert(1) !important;
+        }
+    }
+}

@@ -1,0 +1,167 @@
+export default [
+    {
+        route: '/',
+        id: '',
+        title: 'Home',
+        subMenus: null,
+    },
+    {
+        route: '/about',
+        id: '',
+        title: 'About',
+        subMenus: null,
+    },
+    {
+        route: '/courses',
+        id: '',
+        title: 'Courses',
+        subMenus: null,
+    },
+    {
+        route: '/services',
+        id: '',
+        title: 'Services',
+        subMenus: [
+            {
+                route: '/services/astro-vastu',
+                id: '',
+                title: 'Astro Vastu',
+                subMenus: null,
+            },
+            {
+                route: '/services/astrology',
+                id: '',
+                title: 'Astrology',
+                subMenus: null,
+            },
+            {
+                route: '/services/birth-chart-astrology',
+                id: '',
+                title: 'Birth Chart Astrology',
+                subMenus: null,
+            },
+            {
+                route: '/services/match-making',
+                id: '',
+                title: 'Match Making',
+                subMenus: null,
+            },
+            {
+                route: '/services/career-prediction',
+                id: '',
+                title: 'Career Prediction',
+                subMenus: null,
+            },
+            {
+                route: '/services/health-astrology',
+                id: '',
+                title: 'Health Astrology',
+                subMenus: null,
+            },
+            {
+                route: '/services/love-astrology',
+                id: '',
+                title: 'Love Astrology',
+                subMenus: null,
+            },
+            {
+                route: '/services/wealth-astrology',
+                id: '',
+                title: 'Wealth Astrology',
+                subMenus: null,
+            },
+        ],
+    },
+    {
+        route: '/divine-store',
+        id: '',
+        title: 'Divine Store',
+        subMenus: null,
+    },
+    {
+        route: '/web-stories',
+        id: '',
+        title: 'Web Stories',
+        subMenus: null,
+    },
+    {
+        route: '/blog',
+        id: '',
+        title: 'Blog',
+        subMenus: [
+            {
+                route: '/blog/astrology',
+                id: '',
+                title: 'Astrology',
+                subMenus: null,
+            },
+            {
+                route: '/blog/astro-vastu',
+                id: '',
+                title: 'Astro Vastu',
+                subMenus: null,
+            },
+            {
+                route: '/blog/compatibility',
+                id: '',
+                title: 'Compatibility',
+                subMenus: null,
+            },
+            {
+                route: '/blog/dosha',
+                id: '',
+                title: 'Dosha',
+                subMenus: null,
+            },
+            {
+                route: '/blog/festival',
+                id: '',
+                title: 'Festival',
+                subMenus: null,
+            },
+            {
+                route: '/blog/horoscope',
+                id: '',
+                title: 'Horoscope',
+                subMenus: null,
+            },
+        ],
+    },
+    {
+        route: '/spirituality',
+        id: '',
+        title: 'Spirituality',
+        subMenus: [
+            {
+                route: '/spirituality/aarti',
+                id: '',
+                title: 'Aarti',
+                subMenus: null,
+            },
+            {
+                route: '/spirituality/chalisa',
+                id: '',
+                title: 'Chalisa',
+                subMenus: null,
+            },
+            {
+                route: '/spirituality/mantras',
+                id: '',
+                title: 'Mantras',
+                subMenus: null,
+            },
+            {
+                route: '/spirituality/poojavidhi',
+                id: '',
+                title: 'Poojavidhi',
+                subMenus: null,
+            },
+        ],
+    },
+    {
+        route: '/contact',
+        id: '',
+        title: 'Contact',
+        subMenus: null,
+    },
+];
