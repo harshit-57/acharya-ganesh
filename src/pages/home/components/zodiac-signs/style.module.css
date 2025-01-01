@@ -1,5 +1,6 @@
 .container {
-    padding: 72px 180px;
+    min-height: auto;
+    padding: 0 120px;
     display: flex;
     flex-direction: column;
 }
@@ -32,10 +33,4 @@
             height: 376px;
         }
     }
-}
-.indicator_container {
-    display: flex;
-    align-self: center;
-    margin-top: 48px;
-    gap: 12px;
 }

@@ -15,12 +15,28 @@ import Zodiac10 from '../../../../assets/zodiac_10.png';
 import Zodiac11 from '../../../../assets/zodiac_11.png';
 import Zodiac12 from '../../../../assets/zodiac_12.png';
 
-import IcStar from '../../../../assets/star_rounded.png';
-
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+import { IndicatorContainer } from '../../../../components/indicator-container/IndicatorContainer';
+
+import { Spacer } from '../../../../components/spacer/Spacer';
+
+const ZodiacSignList = [
+    Zodiac1,
+    Zodiac2,
+    Zodiac3,
+    Zodiac4,
+    Zodiac5,
+    Zodiac6,
+    Zodiac7,
+    Zodiac8,
+    Zodiac9,
+    Zodiac10,
+    Zodiac11,
+    Zodiac12,
+];
 
 const ZodiacSigns = () => {
     const containerRef = useRef();
@@ -53,25 +69,14 @@ const ZodiacSigns = () => {
             </p>
             <div className={css.slides_container} ref={containerRef}>
                 <div className={css.slides_wrapper} ref={wrapperRef}>
-                    <img src={Zodiac1} alt={'Zodiac image card'} />
-                    <img src={Zodiac2} alt={'Zodiac image card'} />
-                    <img src={Zodiac3} alt={'Zodiac image card'} />
-                    <img src={Zodiac4} alt={'Zodiac image card'} />
-                    <img src={Zodiac5} alt={'Zodiac image card'} />
-                    <img src={Zodiac6} alt={'Zodiac image card'} />
-                    <img src={Zodiac7} alt={'Zodiac image card'} />
-                    <img src={Zodiac8} alt={'Zodiac image card'} />
-                    <img src={Zodiac9} alt={'Zodiac image card'} />
-                    <img src={Zodiac10} alt={'Zodiac image card'} />
-                    <img src={Zodiac11} alt={'Zodiac image card'} />
-                    <img src={Zodiac12} alt={'Zodiac image card'} />
+                    {Array.isArray(ZodiacSignList) &&
+                        ZodiacSignList.map((z, i) => (
+                            <img key={i} src={z} alt={'Zodiac image card'} />
+                        ))}
                 </div>
             </div>
-            <div className={css.indicator_container}>
-                {[...Array(indicatorCount)].map((c, i) => (
-                    <img src={IcStar} alt={'Star icon'} />
-                ))}
-            </div>
+            <Spacer vertical={'48px'} />
+            <IndicatorContainer count={indicatorCount} currentIndex={0} />
         </PageContainer>
     );
 };

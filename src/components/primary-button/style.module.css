@@ -1,12 +1,27 @@
 .container {
     background-color: var(--color-button-primary-bg);
     border-radius: var(--default-button-border-radius);
-    padding: 24px 85px;
+    padding: 20px 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 16px;
     border: 1px solid transparent;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+        background-color: var(--color-button-dark);
+        color: var(--color-white);
+        border-color: var(--color-button-primary-bg);
+    }
+
+    &:hover > p {
+        color: var(--color-white);
+    }
+    &:hover > img {
+        filter: brightness(0) invert(1) !important;
+    }
 
     p {
         font-size: 14px;

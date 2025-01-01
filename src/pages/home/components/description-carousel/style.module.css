@@ -1,0 +1,21 @@
+.container {
+    min-height: auto;
+    width: 100%;
+    position: relative;
+}
+.description_card_wrapper {
+    display: flex;
+}
+.description_card {
+    width: 100%;
+    aspect-ratio: 1320/720;
+}
+
+.indicator_container {
+    position: absolute;
+    bottom: 51px;
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+    justify-content: center;
+}

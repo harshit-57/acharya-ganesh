@@ -1,16 +1,26 @@
 import css from './style.module.css';
-
 import Hero from './components/hero/Hero';
 import { PageContainer } from '../../components/page-container/PageContainer';
 import Services from './components/services/Services';
 import ZodiacSigns from './components/zodiac-signs/ZodiacSigns';
-
+import { Section } from '../../components/section/Section';
+import { HorizontalBorder } from '../../components/spacer/Spacer';
+import DescriptionCarousel from './components/description-carousel/DescriptionCarousel';
+import Courses from './components/courses/Courses';
 const Home = () => {
     return (
         <PageContainer>
-            <Hero />
-            <Services />
-            <ZodiacSigns />
+            <Section>
+                <Hero />
+                <Services />
+            </Section>
+            <HorizontalBorder color={'#cebeb1'} />
+            <Section classname={css.section_zodiac_n_more}>
+                <ZodiacSigns />
+                <DescriptionCarousel />
+                <Courses />
+            </Section>
+            <HorizontalBorder color={'#cebeb1'} />
         </PageContainer>
     );
 };

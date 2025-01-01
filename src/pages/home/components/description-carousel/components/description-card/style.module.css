@@ -1,0 +1,28 @@
+.container {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    border-radius: 36px;
+    justify-content: center;
+    padding: 0 120px;
+
+    h2,
+    p {
+        text-align: center;
+        font-family: 'Sorts Mill Goudy', serif;
+    }
+    h2 {
+        font-size: 48px;
+        color: var(--color-gradient-bg);
+    }
+    p {
+        padding: 0 180px;
+        font-size: 16px;
+        line-height: 24px;
+        color: var(--color-white);
+    }
+}

@@ -1,0 +1,74 @@
+.container {
+    flex-grow: 0;
+    flex-shrink: 0;
+    border-radius: 24px;
+    width: 285px;
+    height: 457px;
+    border: 1px solid var(--color-border-dark);
+    position: relative;
+    overflow: hidden;
+}
+
+.container:hover > .buy_now_button {
+    visibility: visible;
+    opacity: 1;
+}
+
+.container:hover > .course_poster {
+    height: 60%;
+}
+
+.course_poster {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    z-index: 8;
+    transition: 0.5s;
+}
+.buy_now_button {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    z-index: 9;
+    transition: 0.5s;
+}
+.course_detail_container {
+    width: 100%;
+    height: 40%;
+    position: absolute;
+    bottom: 0;
+    padding: 20px;
+    gap: 20px;
+
+    h3 {
+        font-family: 'Sorts Mill Goudy';
+        font-size: 20px;
+        text-align: center;
+        color: var(--color-caption);
+    }
+
+    p {
+        display: flex;
+        font-family: 'Work Sans';
+        font-size: 24px;
+        color: var(--color-caption);
+        font-weight: 600;
+        align-items: center;
+        gap: 12px;
+        justify-content: center;
+
+        span {
+            text-decoration: line-through;
+            font-size: 16px;
+            font-weight: 400;
+            color: #2c2520b2;
+        }
+    }
+}

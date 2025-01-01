@@ -1,0 +1,6 @@
+.section_zodiac_n_more {
+    padding: 72px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+}

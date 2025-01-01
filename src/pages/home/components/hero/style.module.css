@@ -50,20 +50,5 @@
     }
     .book_appointment_button {
         margin-top: 24px;
-        cursor: pointer;
-        transition: 0.2s;
-
-        &:hover {
-            background-color: var(--color-header-menu-bg);
-            color: var(--color-white);
-            border-color: var(--color-button-primary-bg);
-        }
-
-        &:hover > p {
-            color: var(--color-white);
-        }
-        &:hover > img {
-            filter: brightness(0) invert(1) !important;
-        }
     }
 }
