@@ -1,4 +1,5 @@
-.section_zodiac_n_more {
+.section_zodiac_n_more,
+.section_gallery_n_more {
     padding: 72px 60px;
     display: flex;
     flex-direction: column;

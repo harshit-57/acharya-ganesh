@@ -7,6 +7,7 @@ import { Section } from '../../components/section/Section';
 import { HorizontalBorder } from '../../components/spacer/Spacer';
 import DescriptionCarousel from './components/description-carousel/DescriptionCarousel';
 import Courses from './components/courses/Courses';
+import Gallery from './components/gallery/Gallery';
 const Home = () => {
     return (
         <PageContainer>
@@ -21,6 +22,9 @@ const Home = () => {
                 <Courses />
             </Section>
             <HorizontalBorder color={'#cebeb1'} />
+            <Section classname={css.section_gallery_n_more}>
+                <Gallery />
+            </Section>
         </PageContainer>
     );
 };
