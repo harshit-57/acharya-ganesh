@@ -1,0 +1,53 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 24px;
+    border: 1px solid transparent;
+    border-color: var(--color-border-dark);
+    padding: 48px;
+    flex: 1;
+    background-color: var(--color-card-bg-dark);
+    gap: 24px;
+}
+
+.name_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h3 {
+        font-size: 21px;
+        font-family: 'Sorts Mill Goudy';
+        color: var(--color-white);
+    }
+    img {
+        width: 80px;
+    }
+}
+.border_container {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    div {
+        height: 2px;
+        flex: 1;
+        background-color: var(--color-primary);
+    }
+}
+
+.rating_container {
+    display: flex;
+    gap: 2px;
+
+    img {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.review {
+    font-family: 'Work Sans';
+    font-style: italic;
+    color: #cac3bc;
+}
