@@ -9,6 +9,8 @@ import DescriptionCarousel from './components/description-carousel/DescriptionCa
 import Courses from './components/courses/Courses';
 import Gallery from './components/gallery/Gallery';
 import Testimonial from './components/testimonials/Testimonials';
+import Blog from './components/blog/Blog';
+import Footer from '../footer/Footer';
 const Home = () => {
     return (
         <PageContainer>
@@ -26,7 +28,9 @@ const Home = () => {
             <Section classname={css.section_gallery_n_more}>
                 <Gallery />
                 <Testimonial />
+                <Blog />
             </Section>
+            <Footer />
         </PageContainer>
     );
 };

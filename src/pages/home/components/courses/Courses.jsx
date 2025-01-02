@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import LeftArrow from '../../../../assets/left-arrow.png';
 
 import coursesData from '../../../../data/courses-list';
-import { isIndexUnderOffset } from '../../../../util/GetSlideItemByOffset';
+import { isIndexUnderOffset } from '../../../../util/IndexUnderOffset';
 
 const PER_FRAME_COURSE_COUNT = 4;
 

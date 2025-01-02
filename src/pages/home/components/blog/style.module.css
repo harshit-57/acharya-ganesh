@@ -1,0 +1,20 @@
+.container {
+    min-height: auto;
+    padding: 80px 60px;
+    background-color: var(--color-primary);
+    border-radius: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.section_heading {
+    font-family: 'Sorts Mill Goudy';
+    font-size: 42px;
+    margin-top: 20px;
+    color: var(--color-caption);
+}
+.articles_container {
+    display: flex;
+    gap: 30px;
+}

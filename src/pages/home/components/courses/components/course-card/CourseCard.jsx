@@ -14,8 +14,10 @@ export const CourseCard = ({ course, style, className }) => {
             <div className={css.course_detail_container}>
                 <h3 className={css.course_label}>{course.label}</h3>
                 <p>
-                    <span>{course.discount ? course.price : ''}</span>
-                    {course.discount ? discountedPrice : course.price}
+                    <span>{course.discount ? '₹ ' + course.price : ''}</span>
+                    {course.discount
+                        ? '₹ ' + discountedPrice
+                        : '₹ ' + course.price}
                 </p>
             </div>
         </div>
