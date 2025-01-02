@@ -14,7 +14,9 @@ const Gallery = () => {
             <h2 className={css.section_heading}>Memories Over The Years</h2>
             <div className={css.gallery_grid}>
                 {Array.isArray(images) &&
-                    images.map((img, index) => <img src={img} alt="" />)}
+                    images.map((img, index) => (
+                        <img key={index} src={img} alt="" />
+                    ))}
             </div>
         </PageContainer>
     );

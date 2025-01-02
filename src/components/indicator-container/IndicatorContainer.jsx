@@ -4,7 +4,7 @@ import IcStarSelected from '../../assets/star_rounded_selected.png';
 export const IndicatorContainer = ({
     count = 0,
     currentIndex,
-    onIndicatorClick,
+    onIndicatorClick = () => {},
     className,
 }) => {
     return (

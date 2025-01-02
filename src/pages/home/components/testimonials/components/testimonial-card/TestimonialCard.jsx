@@ -20,7 +20,7 @@ export const TestimonialCard = ({ testimonial, style, className }) => {
                         Math.round(testimonial?.rating ? testimonial.rating : 0)
                     ),
                 ].map((c, i) => (
-                    <img src={IcRatingStar} alt={'Rating star icon'} />
+                    <img key={i} src={IcRatingStar} alt={'Rating star icon'} />
                 ))}
             </div>
             <p className={css.review}>{testimonial?.review}</p>
