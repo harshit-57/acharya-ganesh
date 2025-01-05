@@ -8,11 +8,9 @@ import App from './App';
  */
 export function render(_url) {
     const html = renderToString(
-        <StrictMode>
-            <StaticRouter location={_url}>
-                <App />
-            </StaticRouter>
-        </StrictMode>
+        <StaticRouter location={_url}>
+            <App />
+        </StaticRouter>
     );
     return { html };
 }
