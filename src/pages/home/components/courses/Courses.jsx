@@ -5,6 +5,8 @@ import { IndicatorContainer } from '../../../../components/indicator-container/I
 import { useState } from 'react';
 import { useEffect } from 'react';
 
+import ImgSectionBg from '../../../../assets/course_section_bg.png';
+
 import LeftArrow from '../../../../assets/left-arrow.png';
 
 import coursesData from '../../../../data/courses-list';
@@ -58,7 +60,7 @@ const Courses = () => {
 
     return (
         <PageContainer
-            // style={{ backgroundImage: `url(${ImgCourseBg})` }}
+            style={{ backgroundImage: `url(${ImgSectionBg})` }}
             className={css.container}
         >
             <h2 className={css.section_heading}>

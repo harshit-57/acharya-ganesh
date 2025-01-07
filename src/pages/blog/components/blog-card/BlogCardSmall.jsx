@@ -1,8 +1,13 @@
 import css from './style.module.css';
+import ImgJanmashtami from '../../../../assets/blog_thumbnail_janmashtami.jpg';
+
 export const BlogCardSmall = ({ blog, style, className }) => {
     return (
         <div className={[css.container, className].join(' ')}>
-            <div className={css.thumbnail}>
+            <div
+                style={{ backgroundImage: `url(${ImgJanmashtami})` }}
+                className={css.thumbnail}
+            >
                 <p>FESTIVAL</p>
             </div>
             <div className={css.content_container}>

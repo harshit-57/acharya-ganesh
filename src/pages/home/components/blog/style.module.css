@@ -1,11 +1,13 @@
 .container {
     min-height: auto;
     padding: 80px 60px;
-    background-color: var(--color-primary);
     border-radius: 36px;
     display: flex;
     flex-direction: column;
     gap: 48px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .section_heading {

@@ -1,0 +1,45 @@
+.container {
+    border-radius: 24px;
+    background-color: var(--color-gradient-bg);
+    border: 1px solid transparent;
+    border-color: var(--color-border-dark);
+}
+
+.thumbnail {
+    width: 100%;
+    height: 420px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 24px 24px 0 0;
+    position: relative;
+    background-color: cadetblue;
+}
+.content_container {
+    padding: 24px 36px;
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+        font-size: 27px;
+        font-family: 'Sorts Mill Goudy';
+        text-align: center;
+    }
+    & > p {
+        display: flex;
+        font-family: 'Work Sans';
+        font-size: 24px;
+        color: var(--color-caption);
+        font-weight: 600;
+        align-items: center;
+        gap: 12px;
+        justify-content: center;
+
+        span {
+            text-decoration: line-through;
+            font-size: 16px;
+            font-weight: 400;
+            color: #2c2520b2;
+        }
+    }
+}

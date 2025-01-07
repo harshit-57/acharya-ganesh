@@ -5,6 +5,8 @@ import { IndicatorContainer } from '../../../../components/indicator-container/I
 import { useState } from 'react';
 import { useEffect } from 'react';
 
+import ImgSectionBg from '../../../../assets/testimonial_bg.png';
+
 const testimonialData = [
     {
         id: '',
@@ -50,7 +52,10 @@ const Testimonial = () => {
         setVisibleTestimonialList(testmonials);
     }, [currrentOffset, testimonialList]);
     return (
-        <PageContainer className={css.container}>
+        <PageContainer
+            style={{ backgroundImage: `url(${ImgSectionBg})` }}
+            className={css.container}
+        >
             <h2 className={css.section_heading}>
                 Star Testimonials: A Look Back
             </h2>

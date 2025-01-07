@@ -1,7 +1,7 @@
 import css from './style.module.css';
 import { PageContainer } from '../../../../components/page-container/PageContainer';
 import { ArticleCard } from './components/ArticleCard';
-
+import ImgSectionbg from '../../../../assets/blog_section_bg.png';
 import articlesData from '../../../../data/blog-article-list';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -12,7 +12,10 @@ const Blog = () => {
         setArticleList(articlesData);
     }, []);
     return (
-        <PageContainer className={css.container}>
+        <PageContainer
+            style={{ backgroundImage: `url(${ImgSectionbg})` }}
+            className={css.container}
+        >
             <h2 className={css.section_heading}>
                 Discover the Cosmos on Our Blog
             </h2>

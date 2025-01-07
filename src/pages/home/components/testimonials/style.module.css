@@ -1,11 +1,13 @@
 .container {
     min-height: auto;
     border-radius: 36px;
-    background-color: #000000;
     padding: 40px 60px;
     display: flex;
     flex-direction: column;
     gap: 48px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .section_heading {
