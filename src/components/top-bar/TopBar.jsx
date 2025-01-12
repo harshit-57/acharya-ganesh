@@ -1,13 +1,13 @@
 import css from './style.module.css';
 
-import Logo from '../../../../../../assets/brand_logo.png';
-import IcPhone from '../../../../../../assets/ic_phone.png';
-import IcUser from '../../../../../../assets/user.png';
+import Logo from '../../assets/brand_logo.png';
+import IcPhone from '../../assets/ic_phone.png';
+import IcUser from '../../assets/user.png';
 
 const NUMBER_ALT_1 = '+91 73000-04325';
 const NUMBER_ALT_2 = '+91 73000-04326';
 
-const TopBar = () => {
+export const TopBar = () => {
     return (
         <div className={css.container}>
             <img src={Logo} />
@@ -40,5 +40,3 @@ const ActionButton = ({ icon, className, onClick, children }) => {
         </div>
     );
 };
-
-export default TopBar;

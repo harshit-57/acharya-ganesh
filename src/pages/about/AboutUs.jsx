@@ -1,8 +1,5 @@
 import css from './style.module.css';
 import { PageContainer } from '../../components/page-container/PageContainer';
-import TopBar from '../home/components/hero/components/top-bar/TopBar';
-import Navigation from '../home/components/hero/components/navigation/Navigation';
-import Footer from '../footer/Footer';
 import IcChevronIcon from '../../assets/chevron-down.png';
 import IcStar from '../../assets/star_primary_dark.png';
 
@@ -13,6 +10,9 @@ import ImgConsultationPoster from '../../assets/consultation_poster.jpg';
 import { Spacer } from '../../components/spacer/Spacer';
 import imageList from '../../data/gallery-images';
 import { useEffect, useState } from 'react';
+import { TopBar } from '../../components/top-bar/TopBar';
+import { Navigation } from '../../components/navigation/Navigation';
+import { Footer } from '../../components/footer/Footer';
 
 const AboutUs = () => {
     const [images, setImages] = useState([]);

@@ -1,6 +1,6 @@
 import css from './style.module.css';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import ChevronDown from '../../../../../../../../assets/chevron-down.png';
+import { NavLink, useNavigate } from 'react-router-dom';
+import ChevronDown from '../../../../assets/chevron-down.png';
 
 const MenuButton = ({ menu, className }) => {
     const subMenus = menu.subMenus;

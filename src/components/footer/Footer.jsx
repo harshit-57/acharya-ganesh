@@ -15,9 +15,9 @@ import IcLinkedInMono from '../../assets/ic_linkedin_mono.png';
 import IcPinterestMono from '../../assets/ic_pinterest_mono.png';
 import IcYoutubeMono from '../../assets/ic_youtube_mono.png';
 
-import { HorizontalBorder } from '../../components/spacer/Spacer';
+import { HorizontalBorder } from '../spacer/Spacer';
 
-const Footer = () => {
+export const Footer = () => {
     return (
         <div className={css.container}>
             <div className={css.sections_container}>
@@ -157,5 +157,3 @@ const AddressItem = ({ icon, desc }) => {
         </div>
     );
 };
-
-export default Footer;

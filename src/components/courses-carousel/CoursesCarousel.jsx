@@ -1,20 +1,19 @@
 import css from './style.module.css';
-import { PageContainer } from '../../../../components/page-container/PageContainer';
-import { CourseCard } from './components/course-card/CourseCard';
-import { IndicatorContainer } from '../../../../components/indicator-container/IndicatorContainer';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-import ImgSectionBg from '../../../../assets/course_section_bg.png';
+import ImgSectionBg from '../../assets/course_section_bg.png';
 
-import LeftArrow from '../../../../assets/left-arrow.png';
+import LeftArrow from '../../assets/left-arrow.png';
 
-import coursesData from '../../../../data/courses-list';
-import { isIndexUnderOffset } from '../../../../util/IndexUnderOffset';
-
+import coursesData from '../../data/courses-list';
+import { IndicatorContainer } from '../indicator-container/IndicatorContainer';
+import { PageContainer } from '../page-container/PageContainer';
+import { isIndexUnderOffset } from '../../util/IndexUnderOffset';
+import { CourseCard } from './components/course-card/CourseCard';
 const PER_FRAME_COURSE_COUNT = 4;
 
-const Courses = () => {
+export const CoursesCarousel = () => {
     const [courseDetailList, setCourseDetailList] = useState([]);
     const [visibleCourses, setVisibleCourses] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -88,5 +87,3 @@ const Courses = () => {
         </PageContainer>
     );
 };
-
-export default Courses;

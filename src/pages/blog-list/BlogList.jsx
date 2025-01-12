@@ -1,8 +1,5 @@
 import css from './style.module.css';
 import { PageContainer } from '../../components/page-container/PageContainer';
-import TopBar from '../home/components/hero/components/top-bar/TopBar';
-import Navigation from '../home/components/hero/components/navigation/Navigation';
-import Footer from '../footer/Footer';
 import { useParams } from 'react-router-dom';
 import IcChevronIcon from '../../assets/chevron-down.png';
 import { BlogCardSmall } from './components/blog-card/BlogCardSmall';
@@ -10,6 +7,9 @@ import { BlogCardSmall } from './components/blog-card/BlogCardSmall';
 import ImgBlogHeader from '../../assets/blog_header_bg.png';
 import { Spacer } from '../../components/spacer/Spacer';
 import { useState } from 'react';
+import { TopBar } from '../../components/top-bar/TopBar';
+import { Navigation } from '../../components/navigation/Navigation';
+import { Footer } from '../../components/footer/Footer';
 
 const BlogList = () => {
     const { category } = useParams();

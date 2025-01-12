@@ -49,3 +49,7 @@ button {
     border-radius: var(--default-button-border-radius);
     color: var(--color-white);
 }
+input,
+textarea {
+    font-family: 'Work Sans', serif;
+}

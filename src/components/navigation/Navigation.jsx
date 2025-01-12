@@ -1,11 +1,11 @@
 import css from './style.module.css';
 
-import menus from '../../../../../../data/menu-list';
+import menus from '../../data/menu-list';
 import MenuButton from './components/menu-button/MenuButton';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-const Navigation = () => {
+export const Navigation = () => {
     const [menuList, setMenuList] = useState([]);
     useEffect(() => setMenuList(menus), []);
     return (
@@ -15,5 +15,3 @@ const Navigation = () => {
         </div>
     );
 };
-
-export default Navigation;

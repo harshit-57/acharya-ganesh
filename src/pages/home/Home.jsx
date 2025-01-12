@@ -6,11 +6,11 @@ import ZodiacSigns from './components/zodiac-signs/ZodiacSigns';
 import { Section } from '../../components/section/Section';
 import { HorizontalBorder } from '../../components/spacer/Spacer';
 import DescriptionCarousel from './components/description-carousel/DescriptionCarousel';
-import Courses from './components/courses/Courses';
 import Gallery from './components/gallery/Gallery';
 import Testimonial from './components/testimonials/Testimonials';
 import Blog from './components/blog/Blog';
-import Footer from '../footer/Footer';
+import { Footer } from '../../components/footer/Footer';
+import { CoursesCarousel } from '../../components/courses-carousel/CoursesCarousel';
 const Home = () => {
     return (
         <PageContainer>
@@ -22,7 +22,7 @@ const Home = () => {
             <Section classname={css.section_zodiac_n_more}>
                 <ZodiacSigns />
                 <DescriptionCarousel />
-                <Courses />
+                <CoursesCarousel />
             </Section>
             <HorizontalBorder color={'#cebeb1'} />
             <Section classname={css.section_gallery_n_more}>

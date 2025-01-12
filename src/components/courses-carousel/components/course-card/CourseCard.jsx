@@ -1,7 +1,5 @@
 import css from './style.module.css';
-
-import { PrimaryButton } from '../../../../../../components/primary-button/PrimaryButton';
-
+import { PrimaryButton } from '../../../primary-button/PrimaryButton';
 export const CourseCard = ({ course, style, className }) => {
     const discountedPrice =
         course.price - Math.round((course.price / 100) * course.discount);
