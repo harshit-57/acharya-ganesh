@@ -30,7 +30,7 @@ const Article = () => {
                     <TableOfContent />
                     <div className={css.article_wrapper}>
                         <div className={css.article}>
-                            <h1>Introduction to Lakshmi Puja</h1>
+                            <h1>Course Content Of Master Class on Gemstones</h1>
                             <p>
                                 As the festive season approaches, millions of
                                 Hindus around the world eagerly anticipate one

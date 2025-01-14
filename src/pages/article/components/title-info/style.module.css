@@ -23,6 +23,9 @@
             padding: 8px 16px;
             background-color: var(--color-caption);
             color: var(--color-white);
+            &:hover {
+                background-color: #696460;
+            }
         }
     }
     .title {

@@ -9,13 +9,14 @@
     display: flex;
     flex: 1;
     justify-content: center;
+    padding: 50px 120px 100px 120px;
 }
 
 .hero_text_wrapper {
     align-items: center;
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 60%;
 
     p,
     h1 {
@@ -50,5 +51,35 @@
     }
     .book_appointment_button {
         margin-top: 24px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .hero_text_container {
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 24px;
+    }
+
+    .hero_text_wrapper {
+        justify-content: flex-start;
+        width: 100%;
+
+        p:nth-child(1) {
+            font-size: 16px;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-top: 20px;
+        }
+
+        p:nth-child(3) {
+            font-size: 14px;
+        }
+
+        p:nth-child(4) {
+            font-size: 16px;
+            margin-top: 20px;
+        }
     }
 }

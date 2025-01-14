@@ -1,15 +1,24 @@
 .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 60px;
-    img {
+    height: 120px;
+    position: relative;
+    .menu_icon {
+        display: none;
+    }
+    .logo {
+        position: absolute;
+        top: 50%;
+        left: 60px;
+        transform: translateY(-50%);
         width: 90px;
     }
 }
 .info_n_action_button_container {
     display: flex;
     gap: 28px;
+    position: absolute;
+    top: 50%;
+    right: 60px;
+    transform: translateY(-50%);
 }
 
 .contact_label {
@@ -32,5 +41,45 @@
 
     img {
         width: 18px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        .menu_icon {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 24px;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+        }
+        .logo {
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+        }
+    }
+    .info_n_action_button_container {
+        display: flex;
+        gap: 28px;
+        right: 24px;
+    }
+
+    .contact_label {
+        display: none;
+    }
+
+    .action_button {
+        display: flex;
+        align-items: center;
+        color: var(--color-primary);
+        gap: 12px;
+        cursor: pointer;
+
+        img {
+            width: 18px;
+        }
     }
 }

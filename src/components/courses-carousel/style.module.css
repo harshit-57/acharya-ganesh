@@ -74,3 +74,77 @@
     align-items: center;
     justify-content: center;
 }
+@media only screen and (max-width: 768px) {
+    .container {
+        border-radius: 36px;
+        background-color: antiquewhite;
+        padding: 100px 60px;
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+    }
+
+    .section_heading {
+        font-family: 'Sorts Mill Goudy';
+        text-align: center;
+        font-size: 42px;
+        color: var(--color-caption);
+    }
+
+    .course_slide_container {
+        width: 100%;
+        position: relative;
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover > img {
+                filter: brightness(0) invert(1) !important;
+            }
+        }
+        button > img {
+            width: 15px;
+        }
+        .prev_button {
+            left: -50px;
+        }
+        .next_button {
+            right: -50px;
+
+            img {
+                transform: rotate(180deg);
+            }
+        }
+
+        .prev_button,
+        .next_button {
+            z-index: 11;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 70px;
+            height: 70px;
+            background-color: var(--color-button-primary-bg);
+            border-radius: var(--default-button-border-radius);
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: 0.2s;
+            border-color: var(--color-border-dark);
+            color: var(--color-black);
+
+            &:hover {
+                background-color: var(--color-button-dark);
+                color: var(--color-white);
+            }
+        }
+    }
+
+    .course_slide_wrapper {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+}

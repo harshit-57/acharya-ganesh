@@ -1,8 +1,6 @@
 import { PageContainer } from '../../../../components/page-container/PageContainer';
 import css from './style.module.css';
-
 import BgImage from '../../../../assets/solar_system.jpg';
-
 import { PrimaryButton } from '../../../../components/primary-button/PrimaryButton';
 import { TopBar } from '../../../../components/top-bar/TopBar';
 import { Navigation } from '../../../../components/navigation/Navigation';

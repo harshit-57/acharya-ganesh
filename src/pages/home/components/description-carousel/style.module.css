@@ -18,3 +18,15 @@
     display: flex;
     justify-content: center;
 }
+@media only screen and (max-width: 768px) {
+    .description_card_wrapper {
+        display: flex;
+    }
+    .description_card {
+        width: 100%;
+    }
+
+    .indicator_container {
+        bottom: 20px;
+    }
+}

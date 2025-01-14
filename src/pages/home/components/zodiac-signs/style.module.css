@@ -29,8 +29,32 @@
             display: none;
         }
         img {
-            width: 269px;
-            height: 376px;
+            width: 270px;
+            height: 375px;
+        }
+    }
+}
+@media only screen and (max-width: 768px) {
+    .container {
+        padding: 0;
+    }
+
+    .section_heading {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .section_sub_heading {
+        text-align: center;
+        font-size: 14px;
+        margin-top: 12px;
+    }
+
+    .slides_container {
+        margin-top: 36px;
+
+        .slides_wrapper {
+            gap: 36px;
         }
     }
 }

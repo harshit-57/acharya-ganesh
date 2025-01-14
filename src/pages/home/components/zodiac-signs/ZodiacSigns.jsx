@@ -2,18 +2,18 @@ import css from './style.module.css';
 
 import { PageContainer } from '../../../../components/page-container/PageContainer';
 
-import Zodiac1 from '../../../../assets/zodiac_1.png';
-import Zodiac2 from '../../../../assets/zodiac_2.png';
-import Zodiac3 from '../../../../assets/zodiac_3.png';
-import Zodiac4 from '../../../../assets/zodiac_4.png';
-import Zodiac5 from '../../../../assets/zodiac_5.png';
-import Zodiac6 from '../../../../assets/zodiac_6.png';
-import Zodiac7 from '../../../../assets/zodiac_7.png';
-import Zodiac8 from '../../../../assets/zodiac_8.png';
-import Zodiac9 from '../../../../assets/zodiac_9.png';
-import Zodiac10 from '../../../../assets/zodiac_10.png';
-import Zodiac11 from '../../../../assets/zodiac_11.png';
-import Zodiac12 from '../../../../assets/zodiac_12.png';
+import Zodiac1 from '../../../../assets/Pisces-01.png';
+import Zodiac2 from '../../../../assets/Aquarius-02.png';
+import Zodiac3 from '../../../../assets/Capricorn-03.png';
+import Zodiac4 from '../../../../assets/Sagittarius-04.png';
+import Zodiac5 from '../../../../assets/Scorpio-05.png';
+import Zodiac6 from '../../../../assets/Libra-06.png';
+import Zodiac7 from '../../../../assets/Virgo-07.png';
+import Zodiac8 from '../../../../assets/Leo-08.png';
+import Zodiac9 from '../../../../assets/Cancer-09.png';
+import Zodiac10 from '../../../../assets/Gemini-10.png';
+import Zodiac11 from '../../../../assets/Tauras-11.png';
+import Zodiac12 from '../../../../assets/Aries-12.png';
 
 import { useEffect } from 'react';
 import { useRef } from 'react';

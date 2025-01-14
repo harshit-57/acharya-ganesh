@@ -25,12 +25,37 @@
     }
     h2 {
         font-size: 48px;
-        color: var(--color-gradient-bg);
+        color: var(--color-primary);
     }
     p {
         padding: 0 180px;
         font-size: 16px;
         line-height: 24px;
         color: var(--color-white);
+    }
+}
+@media only screen and (max-width: 768px) {
+    .container {
+        gap: 16px;
+        border-radius: 24px;
+        padding: 78px 24px;
+    }
+
+    .content_wrapper {
+        height: auto;
+        gap: 16px;
+
+        h2,
+        p {
+            text-align: center;
+            font-family: 'Sorts Mill Goudy', serif;
+        }
+        h2 {
+            font-size: 28px;
+        }
+        p {
+            padding: 0;
+            font-size: 15px;
+        }
     }
 }

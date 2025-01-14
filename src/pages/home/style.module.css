@@ -5,3 +5,11 @@
     flex-direction: column;
     gap: 72px;
 }
+@media only screen and (max-width: 768px) {
+    .section_zodiac_n_more,
+    .section_gallery_n_more {
+        min-height: auto !important;
+        padding: 60px 24px;
+        gap: 60px;
+    }
+}

@@ -2,6 +2,7 @@ import css from './style.module.css';
 
 import Logo from '../../assets/brand_logo.png';
 import IcPhone from '../../assets/ic_phone.png';
+import IcMenu from '../../assets/menu-02.png';
 import IcUser from '../../assets/user.png';
 
 const NUMBER_ALT_1 = '+91 73000-04325';
@@ -10,7 +11,8 @@ const NUMBER_ALT_2 = '+91 73000-04326';
 export const TopBar = () => {
     return (
         <div className={css.container}>
-            <img src={Logo} />
+            <img className={css.menu_icon} src={IcMenu} />
+            <img className={css.logo} src={Logo} />
             <div className={css.info_n_action_button_container}>
                 <ContactLabel icon={IcPhone}>{NUMBER_ALT_1}</ContactLabel>
                 <ContactLabel icon={IcPhone}>{NUMBER_ALT_2}</ContactLabel>
