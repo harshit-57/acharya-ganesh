@@ -11,9 +11,27 @@ import { IndicatorContainer } from '../indicator-container/IndicatorContainer';
 import { PageContainer } from '../page-container/PageContainer';
 import { isIndexUnderOffset } from '../../util/IndexUnderOffset';
 import { CourseCard } from './components/course-card/CourseCard';
-const PER_FRAME_COURSE_COUNT = 4;
+import useBreakpoint from 'use-breakpoint';
+const PER_FRAME_COURSE_COUNT_DESKTOP = 4;
+const PER_FRAME_COURSE_COUNT_MOBILE = 1;
+const BREAKPOINTS = { mobile: 0, tablet: 768, desktop: 1280 };
+
+const getCourseCountPerFrame = (device) => {
+    switch (device) {
+        case 'mobile':
+            return PER_FRAME_COURSE_COUNT_MOBILE;
+            break;
+        case 'desktop':
+        default:
+            return PER_FRAME_COURSE_COUNT_DESKTOP;
+    }
+};
 
 export const CoursesCarousel = () => {
+    const { breakpoint, maxWidth, minWidth } = useBreakpoint(
+        BREAKPOINTS,
+        'desktop'
+    );
     const [courseDetailList, setCourseDetailList] = useState([]);
     const [visibleCourses, setVisibleCourses] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,12 +47,12 @@ export const CoursesCarousel = () => {
             (c, i) =>
                 isIndexUnderOffset(
                     currentSlideOffset,
-                    PER_FRAME_COURSE_COUNT,
+                    getCourseCountPerFrame(breakpoint),
                     i
                 )
         );
         setVisibleCourses(courses);
-    }, [courseDetailList, currentSlideOffset, currentIndex]);
+    }, [courseDetailList, currentSlideOffset, currentIndex, breakpoint]);
 
     const onIndicatorClick = (index) => {
         setCurrentSlideOffset(1);
@@ -51,7 +69,7 @@ export const CoursesCarousel = () => {
             currentSlideOffset <
             Math.ceil(
                 courseDetailList[currentIndex].courses.length /
-                    PER_FRAME_COURSE_COUNT
+                    getCourseCountPerFrame(breakpoint)
             )
         )
             setCurrentSlideOffset(currentSlideOffset + 1);
