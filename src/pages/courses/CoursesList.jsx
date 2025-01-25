@@ -4,6 +4,8 @@ import IcChevronIcon from '../../assets/chevron-down.png';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
 import ImgHeaderBg from '../../assets/courses_header_bg.png';
+import ICSearchMd from '../../assets/search-md.png';
+import ICFilter from '../../assets/filter-lines.png';
 import { Spacer } from '../../components/spacer/Spacer';
 import { useEffect, useState } from 'react';
 import { CourseCard } from './components/course-card/CourseCard';
@@ -18,18 +20,40 @@ const CoursesList = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [showFilterDropDown, setShowFilterDropDown] = useState(false);
+    const [order, setOrder] = useState('desc');
+    const [sortBy, setSortBy] = useState('pr.PublishedOn');
 
     useEffect(() => {
         fetchCourses();
-    }, [currentPage]);
+    }, [currentPage, searchQuery, order]);
+    const handleSortingFilter = (p1, p2) => {
+        setOrder(p1);
+        setSortBy(p2);
+        setShowFilterDropDown(false);
+    };
 
     const fetchCourses = async () => {
         try {
             setLoading(true);
-            const response = await APIHelper.getCourses({
-                page: currentPage,
-                pageSize: COURSE_PER_PAGE,
-            });
+            let response;
+            if (searchQuery && searchQuery?.length >= 3) {
+                response = await APIHelper.getCourses({
+                    page: currentPage,
+                    pageSize: COURSE_PER_PAGE,
+                    search: searchQuery,
+                    sort: order,
+                    sortBy: sortBy,
+                });
+            } else {
+                response = await APIHelper.getCourses({
+                    page: currentPage,
+                    pageSize: COURSE_PER_PAGE,
+                    sort: order,
+                    sortBy: sortBy,
+                });
+            }
             setCourses(response.data?.data);
             const totalPage = Math.round(
                 (response.data?.total || 1) / COURSE_PER_PAGE
@@ -109,6 +133,83 @@ const CoursesList = () => {
                             </span>{' '}
                             <span>Courses</span>
                         </p>
+                    </div>
+                </div>
+            </div>
+            <div className={css.filter_container}>
+                <div className={css.filter_item_wrapper}>
+                    <div>
+                        <img src={ICSearchMd} alt={'Search icon'} />
+                        <input
+                            type={'text'}
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target?.value)}
+                            placeholder={'Search'}
+                        />
+                    </div>
+                </div>
+                <div className={css.filter_item_wrapper}>
+                    <p>
+                        Showing {(currentPage - 1) * COURSE_PER_PAGE + 1}-
+                        {currentPage * COURSE_PER_PAGE} of{' '}
+                        {pageCount * COURSE_PER_PAGE} Results
+                    </p>
+                </div>
+                <div className={css.filter_item_wrapper}>
+                    <div
+                        onClick={() =>
+                            setShowFilterDropDown(!showFilterDropDown)
+                        }
+                    >
+                        <img src={ICFilter} alt={'Filter icon'} />
+                        <p>{'Popularity'}</p>
+                        {showFilterDropDown && (
+                            <div className={css.filter_dropdown}>
+                                <p onClick={() => handleSortingFilter('', '')}>
+                                    No Filter
+                                </p>
+                                <p
+                                    onClick={() =>
+                                        handleSortingFilter(
+                                            'asc',
+                                            'pr.PublishedOn'
+                                        )
+                                    }
+                                >
+                                    Popularity
+                                </p>
+                                <p
+                                    onClick={() =>
+                                        handleSortingFilter(
+                                            'desc',
+                                            'pr.PublishedOn'
+                                        )
+                                    }
+                                >
+                                    Latest
+                                </p>
+                                <p
+                                    onClick={() =>
+                                        handleSortingFilter(
+                                            'asc',
+                                            'pr.Sale_Price'
+                                        )
+                                    }
+                                >
+                                    Price: Low to High
+                                </p>
+                                <p
+                                    onClick={() =>
+                                        handleSortingFilter(
+                                            'desc',
+                                            'pr.Sale_Price'
+                                        )
+                                    }
+                                >
+                                    Price: High to Low
+                                </p>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
