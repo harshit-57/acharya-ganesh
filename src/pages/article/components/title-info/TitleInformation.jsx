@@ -4,22 +4,19 @@ import IcFacebook from '../../../../assets/ic_facebook_mono.png';
 import IcInstagram from '../../../../assets/ic_instagram_mono.png';
 import IcX from '../../../../assets/ic_x_mono.png';
 import IcPinterest from '../../../../assets/ic_pinterest_mono.png';
-export const TitleInformation = ({}) => {
+export const TitleInformation = ({ blog }) => {
     return (
         <div className={css.container}>
             <img
                 className={css.thumbnail}
-                src={ImgThumbnail}
+                src={blog?.Image}
                 alt={'Thumbnail'}
             />
             <div className={css.title_container}>
                 <div className={css.category_container}>
                     <p className={css.category}>Festival</p>
                 </div>
-                <h1 className={css.title}>
-                    Celebrating Lakshmi Puja 2025: A Comprehensive Guide to the
-                    Festival of Wealth and Prosperity
-                </h1>
+                <h1 className={css.title}>{blog?.Title}</h1>
                 <div className={css.timestamp_container}>
                     <p className={css.timestamp}>
                         30th November, <br /> 2024

@@ -54,7 +54,6 @@
     display: flex;
     flex-wrap: wrap;
     padding: 72px 60px;
-    align-items: center;
     justify-content: center;
     gap: 30px;
 }
@@ -74,5 +73,6 @@
         border-radius: 20px;
         font-weight: 500;
         font-size: 14px;
+        cursor: pointer;
     }
 }

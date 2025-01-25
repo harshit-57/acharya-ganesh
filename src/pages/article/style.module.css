@@ -21,7 +21,9 @@
 .article {
     display: block;
 
-    h1 {
+    h1,
+    h2,
+    h4 {
         font-family: 'Sorts Mill Goudy';
         color: var(--color-caption);
         line-height: 40px;

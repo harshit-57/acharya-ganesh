@@ -5,7 +5,8 @@
 
     .thumbnail {
         flex: 1;
-        aspect-ratio: 62/42;
+        max-width: 50%;
+        aspect-ratio: 1280/720;
         object-fit: cover;
         border-radius: 24px;
     }

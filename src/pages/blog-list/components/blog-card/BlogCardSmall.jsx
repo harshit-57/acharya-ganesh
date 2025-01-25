@@ -1,24 +1,20 @@
 import css from './style.module.css';
-import ImgJanmashtami from '../../../../assets/blog_thumbnail_janmashtami.jpg';
-
-export const BlogCardSmall = ({ blog, style, className }) => {
+import parse from 'html-react-parser';
+export const BlogCardSmall = ({ blog, onClick, style, className }) => {
     return (
         <div className={[css.container, className].join(' ')}>
             <div className={css.thumbnail_wrapper}>
-                <img src={ImgJanmashtami} alt={'Thumbnail'} />
+                {blog?.Image && <img src={blog?.Image} alt={'Thumbnail'} />}
                 <p>FESTIVAL</p>
             </div>
             <div className={css.content_container}>
-                <h2>
-                    Celebrating Bhai Dooj 2025: A Festival of Sibling Love and
-                    Togetherness
+                <h2 onClick={onClick}>
+                    {blog?.Title.length > 75
+                        ? blog?.Title.slice(0, 75) + '...'
+                        : blog?.Title}
                 </h2>
-                <p>
-                    Bhai Dooj, also known as Bhau-Beej, Bhai Tika, or Bhai
-                    Phonta in different parts of India, is a beautiful festival
-                    celebrating th...
-                </p>
-                <p>-YUSHI</p>
+                <div>{parse(blog?.ShortDescription)}</div>
+                <p>- {blog?.PublishedBy}</p>
             </div>
         </div>
     );
