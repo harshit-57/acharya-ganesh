@@ -1,15 +1,22 @@
 import css from './style.module.css';
 import { Spacer } from '../../../../../components/spacer/Spacer';
-export const ArticleCard = ({ article, style, className }) => {
+import parse from 'html-react-parser';
+export const ArticleCard = ({ onClick, article, style, className }) => {
     return (
-        <div style={style} className={[className, css.container].join(' ')}>
-            <p className={css.category}>{article?.category}</p>
+        <div
+            onClick={onClick}
+            style={style}
+            className={[className, css.container].join(' ')}
+        >
+            <p className={css.category}>{article?.CategoryName}</p>
             <Spacer vertical={'24px'} />
-            <h3 className={css.title}>{article?.title}</h3>
+            <h3 className={css.title}>{article?.Title}</h3>
             <Spacer vertical={'10px'} />
-            <p className={css.shortDesc}>{article?.shortDesc}</p>
+            <p className={css.shortDesc}>
+                {parse(article?.ShortDescription || '')}
+            </p>
             <Spacer vertical={'10px'} />
-            <p className={css.author}>{'-' + article?.author}</p>
+            <p className={css.author}>{'-' + article?.PublishedBy}</p>
         </div>
     );
 };

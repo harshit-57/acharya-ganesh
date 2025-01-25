@@ -5,12 +5,23 @@ import ImgSectionbg from '../../../../assets/blog_section_bg.png';
 import articlesData from '../../../../data/blog-article-list';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { APIHelper } from '../../../../util/APIHelper';
+import { useNavigate } from 'react-router-dom';
 
 const Blog = () => {
+    const navigate = useNavigate();
     const [articleList, setArticleList] = useState([]);
     useEffect(() => {
-        setArticleList(articlesData);
+        getBlogs();
     }, []);
+
+    const getBlogs = async () => {
+        try {
+            const response = await APIHelper.getBlogs({ page: 1, pageSize: 3 });
+            setArticleList(response.data?.data);
+        } catch (e) {}
+    };
+
     return (
         <PageContainer
             style={{ backgroundImage: `url(${ImgSectionbg})` }}
@@ -22,7 +33,15 @@ const Blog = () => {
             <div className={css.articles_container}>
                 {Array.isArray(articleList) &&
                     articleList?.map((article, index) => (
-                        <ArticleCard key={index} article={article} />
+                        <ArticleCard
+                            key={index}
+                            article={article}
+                            onClick={() =>
+                                navigate(
+                                    `/blog/${article?.CategorySlug}/${article?.Slug}`
+                                )
+                            }
+                        />
                     ))}
             </div>
         </PageContainer>

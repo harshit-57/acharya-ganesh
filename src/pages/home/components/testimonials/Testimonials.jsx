@@ -6,33 +6,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 import ImgSectionBg from '../../../../assets/testimonial_bg.png';
-
-const testimonialData = [
-    {
-        id: '',
-        name: '1Sanjeev Choudhary',
-        rating: 5,
-        review: 'I was skeptical at first, but after my consultation with this astrologer, I’m a true believer. Their detailed analysis and personal advice has been a game-changer.',
-    },
-    {
-        id: '',
-        name: '2Kritika Srivastava',
-        rating: 5,
-        review: 'Hanish Sir is an expert in his field and possess great knowledge. He is an astrologer with a clear vision and understands other persons requirements to give an appropriate solution. He explains the complex concepts of astrology very easily to others. I highly recommend him to others.',
-    },
-    {
-        id: '',
-        name: '3Sanjeev Choudhary',
-        rating: 5,
-        review: 'Hanish Sir is an expert in his field and possess great knowledge. He is an astrologer with a clear vision and understands other persons requirements to give an appropriate solution. He explains the complex concepts of astrology very easily to others. I highly recommend him to others.',
-    },
-    {
-        id: '',
-        name: '4Sanjeev Choudhary',
-        rating: 5,
-        review: 'Hanish Sir is an expert in his field and possess great knowledge. He is an astrologer with a clear vision and understands other persons requirements to give an appropriate solution. He explains the complex concepts of astrology very easily to others. I highly recommend him to others.',
-    },
-];
+import { APIHelper } from '../../../../util/APIHelper.js';
 
 const PER_FRAME_TESTIMONIAL_COUNT = 2;
 
@@ -40,8 +14,17 @@ const Testimonial = () => {
     const [testimonialList, setTestimonialList] = useState([]);
     const [visibleTestimonialList, setVisibleTestimonialList] = useState([]);
     const [currrentOffset, setCurrentOffset] = useState(1);
+
+    const getTestimonials = async () => {
+        try {
+            const response = await APIHelper.getTestimonials();
+            setTestimonialList(response.data);
+        } catch (e) {
+            console.log(e);
+        }
+    };
     useEffect(() => {
-        setTestimonialList(testimonialData);
+        getTestimonials();
     }, []);
     useEffect(() => {
         const testmonials = testimonialList.filter(

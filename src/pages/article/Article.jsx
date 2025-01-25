@@ -20,6 +20,7 @@ const Article = () => {
     const [article, setArticle] = useState(null);
     useEffect(() => {
         getArticle();
+        window.scrollTo(0, 0);
     }, [slug]);
     const getArticle = async () => {
         try {
