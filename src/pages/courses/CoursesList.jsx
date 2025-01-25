@@ -27,7 +27,7 @@ const CoursesList = () => {
 
     useEffect(() => {
         fetchCourses();
-    }, [currentPage, searchQuery, order]);
+    }, [currentPage, searchQuery, sortBy, order]);
     const handleSortingFilter = (p1, p2) => {
         setOrder(p1);
         setSortBy(p2);
@@ -162,22 +162,17 @@ const CoursesList = () => {
                         }
                     >
                         <img src={ICFilter} alt={'Filter icon'} />
-                        <p>{'Popularity'}</p>
+                        <p>
+                            {sortBy == 'pr.PublishedOn' && order == 'asc'
+                                ? 'Older'
+                                : sortBy == 'pr.Sale_Price' && order == 'asc'
+                                ? 'Price Low to High'
+                                : sortBy == 'pr.Sale_Price' && order == 'desc'
+                                ? 'Price High to Low'
+                                : 'Latest'}
+                        </p>
                         {showFilterDropDown && (
                             <div className={css.filter_dropdown}>
-                                <p onClick={() => handleSortingFilter('', '')}>
-                                    No Filter
-                                </p>
-                                <p
-                                    onClick={() =>
-                                        handleSortingFilter(
-                                            'asc',
-                                            'pr.PublishedOn'
-                                        )
-                                    }
-                                >
-                                    Popularity
-                                </p>
                                 <p
                                     onClick={() =>
                                         handleSortingFilter(
@@ -187,6 +182,16 @@ const CoursesList = () => {
                                     }
                                 >
                                     Latest
+                                </p>
+                                <p
+                                    onClick={() =>
+                                        handleSortingFilter(
+                                            'asc',
+                                            'pr.PublishedOn'
+                                        )
+                                    }
+                                >
+                                    Older
                                 </p>
                                 <p
                                     onClick={() =>
