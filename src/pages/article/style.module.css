@@ -49,3 +49,19 @@
         }
     }
 }
+@media only screen and (max-width: 768px) {
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 72px;
+        padding: 37px 24px;
+    }
+    .article_container {
+        display: flex;
+        gap: 60px;
+
+        .article_wrapper {
+            flex: 1;
+        }
+    }
+}

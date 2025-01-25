@@ -74,3 +74,27 @@
         }
     }
 }
+@media only screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        gap: 36px;
+        padding: 60px 24px;
+
+        .thumbnail {
+            flex: none;
+            max-width: 100%;
+        }
+        .title_container {
+            flex: none;
+            padding: 0;
+        }
+        .category_container {
+            .category {
+                font-size: 10px;
+            }
+        }
+        .title {
+            font-size: 28px;
+        }
+    }
+}

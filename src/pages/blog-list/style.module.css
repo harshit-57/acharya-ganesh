@@ -76,3 +76,16 @@
         cursor: pointer;
     }
 }
+@media only screen and (max-width: 768px) {
+    .header_text_container {
+        padding: 50px;
+    }
+
+    .list_container {
+        padding: 60px 24px;
+    }
+    .blog_card {
+        width: 100%;
+        max-width: 420px;
+    }
+}

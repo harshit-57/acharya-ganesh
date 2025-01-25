@@ -156,3 +156,99 @@
         height: 144px;
     }
 }
+@media only screen and (max-width: 768px) {
+    .header_text_container {
+        padding: 50px;
+    }
+
+    .content_container {
+        padding: 60px 24px;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 40px;
+    }
+    .column {
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+
+        & > h2 {
+            text-align: center;
+            font-size: 28px;
+        }
+
+        & > p {
+            font-size: 16px;
+        }
+    }
+    .contact_info_container {
+        flex-direction: column;
+    }
+    .contact_info_row {
+        align-items: flex-start;
+        & > img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .contact_info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            & > h3 {
+                font-family: 'Sorts Mill Goudy';
+                font-size: 24px;
+                color: var(--color-caption);
+            }
+        }
+    }
+    .contact_form {
+        border-radius: 24px;
+        padding: 36px 24px;
+        gap: 36px;
+
+        .input_wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+
+            textarea {
+                padding: 16px 20px;
+                flex: 1;
+                border-radius: 24px;
+                height: 180px;
+                font-size: 16px;
+                font-weight: 500;
+                background-color: var(--color-card-bg-dark);
+                border: 1px solid #cac3bc;
+                color: #ffffff;
+
+                &::placeholder {
+                    font-size: 10px;
+                    font-weight: 500;
+                    font-size: 16px;
+                    color: #b5afa8;
+                }
+            }
+        }
+    }
+    .discover_heading {
+        font-size: 28px;
+        text-align: center;
+    }
+    .city_container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+
+        img {
+            width: 103px;
+            height: 103px;
+        }
+    }
+}

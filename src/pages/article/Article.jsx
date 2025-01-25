@@ -16,7 +16,6 @@ import parse from 'html-react-parser';
 const Article = () => {
     const { state: blog } = useLocation();
     const { id } = useParams();
-    console.log(blog);
     return (
         <PageContainer className={css.container}>
             <div
