@@ -17,7 +17,7 @@ const MenuButton = ({ menu, className }) => {
             <NavLink
                 to={menu.route}
                 id={menu.id}
-                onClick={() => console.log('parent')}
+                onClick={() => {}}
                 className={[className, css.menu_button].join(' ')}
             >
                 <p>{menu.title}</p>

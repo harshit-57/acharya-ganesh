@@ -1,18 +1,22 @@
 import css from './style.module.css';
 import ImgPoster from '../../../../assets/course_poster.png';
 import { PrimaryButton } from '../../../../components/primary-button/PrimaryButton';
-export const CourseCard = ({ course, style, className }) => {
+export const CourseCard = ({ onClick, course, style, className }) => {
     return (
         <div className={[css.container, className].join(' ')}>
             <div
-                style={{ backgroundImage: `url(${ImgPoster})` }}
+                style={{ backgroundImage: `url(${course?.Images[0]})` }}
                 className={css.thumbnail}
             ></div>
             <div className={css.content_container}>
-                <h2>One Day Workshop on Ketu</h2>
+                <h2 onClick={onClick}>{course?.Name}</h2>
                 <p>
-                    <span>{true ? '₹ ' + 2100 : ''}</span>
-                    {true ? '₹ ' + 1500 : '₹ ' + 1500}
+                    <span>
+                        {course?.Sale_Price ? '₹ ' + course?.Regular_Price : ''}
+                    </span>
+                    {course?.Sale_Price
+                        ? '₹ ' + course?.Sale_Price
+                        : '₹ ' + course?.Regular_Price}
                 </p>
                 <PrimaryButton>Buy now</PrimaryButton>
             </div>

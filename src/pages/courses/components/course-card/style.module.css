@@ -12,7 +12,7 @@
     background-size: cover;
     border-radius: 24px 24px 0 0;
     position: relative;
-    background-color: cadetblue;
+    background-color: #ffebdd;
 }
 .content_container {
     padding: 24px 36px;
@@ -24,6 +24,10 @@
         font-size: 27px;
         font-family: 'Sorts Mill Goudy';
         text-align: center;
+        cursor: pointer;
+        &:hover {
+            color: var(--color-caption);
+        }
     }
     & > p {
         display: flex;

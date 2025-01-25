@@ -1,0 +1,35 @@
+.container {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    h3 {
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--color-caption);
+        text-transform: uppercase;
+    }
+    .content_table_link {
+        display: flex;
+        gap: 8px;
+        background-color: var(--color-primary);
+        padding: 12px;
+        border-radius: 12px;
+        align-items: center;
+        img {
+            aspect-ratio: 1;
+            transform: rotate(-90deg);
+            filter: brightness(0) invert(0);
+        }
+        p {
+            font-weight: 500;
+            font-size: 14px;
+        }
+    }
+}
+@media only screen and (max-width: 768px) {
+    .container {
+        display: none;
+    }
+}

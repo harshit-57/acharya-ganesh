@@ -15,7 +15,7 @@ import IcStar from '../../assets/star_primary_dark.png';
 import parse from 'html-react-parser';
 import { useEffect, useState } from 'react';
 import { APIHelper } from '../../util/APIHelper';
-const Article = () => {
+const SArticle = () => {
     const { slug } = useParams();
     const [article, setArticle] = useState(null);
     useEffect(() => {
@@ -23,7 +23,7 @@ const Article = () => {
     }, [slug]);
     const getArticle = async () => {
         try {
-            const response = await APIHelper.getBlogs({ slug: slug });
+            const response = await APIHelper.getSpiritualities({ slug: slug });
             setArticle(response.data.data[0]);
         } catch (e) {
             console.log(e);
@@ -57,4 +57,4 @@ const Article = () => {
     );
 };
 
-export default Article;
+export default SArticle;

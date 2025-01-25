@@ -58,18 +58,6 @@
         font-size: 20px;
         line-height: 30px;
     }
-
-    li {
-        line-height: 28px;
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-        .bullet_star {
-            width: 16px;
-            height: 16px;
-            margin: 6px 0;
-        }
-    }
 }
 .related_courses_container {
     padding: 0 60px 60px 72px;
@@ -135,18 +123,6 @@
         h3 {
             font-size: 20px;
             line-height: 30px;
-        }
-
-        li {
-            line-height: 28px;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            .bullet_star {
-                width: 16px;
-                height: 16px;
-                margin: 6px 0;
-            }
         }
     }
     .related_courses_container {

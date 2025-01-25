@@ -2,17 +2,19 @@ import css from './style.module.css';
 import { PrimaryButton } from '../../../../components/primary-button/PrimaryButton';
 import { Spacer } from '../../../../components/spacer/Spacer';
 import ImgPoster from '../../../../assets/course_1.png';
-export const PriceAndPurchaseSection = () => {
+export const PriceAndPurchaseSection = ({ course }) => {
     return (
         <div className={css.container}>
-            <img className={css.poster} src={ImgPoster} alt={'Course poster'} />
+            <img
+                className={css.poster}
+                src={course?.Images[0]}
+                alt={'Course poster'}
+            />
             <div className={css.price_detail_container}>
-                <p className={css.tag}>Upcoming</p>
-                <h2 className={css.title}>
-                    Master Class on Gemstones (Rashi Ratna)
-                </h2>
+                <p className={css.tag}>{course?.CategoryName}</p>
+                <h2 className={css.title}>{course?.Name}</h2>
                 <p className={css.price}>
-                    <span>₹ 10,000</span>₹ 7,500
+                    <span>₹ {course?.Regular_Price}</span>₹ {course?.Sale_Price}
                 </p>
                 <div className={css.info_container}>
                     <p>

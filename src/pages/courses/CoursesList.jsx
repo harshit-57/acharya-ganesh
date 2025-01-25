@@ -5,13 +5,42 @@ import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
 import ImgHeaderBg from '../../assets/courses_header_bg.png';
 import { Spacer } from '../../components/spacer/Spacer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CourseCard } from './components/course-card/CourseCard';
 import { Footer } from '../../components/footer/Footer';
 import { Helmet } from 'react-helmet-async';
-
+import { useNavigate } from 'react-router-dom';
+import { APIHelper } from '../../util/APIHelper';
+const COURSE_PER_PAGE = 8;
 const CoursesList = () => {
+    const navigate = useNavigate();
+    const [courses, setCourses] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [pageCount, setPageCount] = useState(0);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        fetchCourses();
+    }, [currentPage]);
+
+    const fetchCourses = async () => {
+        try {
+            setLoading(true);
+            const response = await APIHelper.getCourses({
+                page: currentPage,
+                pageSize: COURSE_PER_PAGE,
+            });
+            setCourses(response.data?.data);
+            const totalPage = Math.round(
+                (response.data?.total || 1) / COURSE_PER_PAGE
+            );
+            setPageCount(totalPage);
+            setLoading(false);
+        } catch (e) {
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <PageContainer className={css.container}>
             <Helmet>
@@ -84,28 +113,18 @@ const CoursesList = () => {
                 </div>
             </div>
             <div className={css.list_container}>
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
-                <CourseCard className={css.blog_card} />
+                {loading && <p>Loading...</p>}
+                {!loading &&
+                    courses &&
+                    Array.isArray(courses) &&
+                    courses.map((course, index) => (
+                        <CourseCard
+                            key={course?.Id || index}
+                            course={course}
+                            className={css.course_card}
+                            onClick={() => navigate(course?.Slug)}
+                        />
+                    ))}
             </div>
             <div className={css.page_number_container}>
                 {[...Array(3)].map((number, index) => (
@@ -116,13 +135,23 @@ const CoursesList = () => {
                                     ? 'var(--color-primary)'
                                     : 'transparent',
                         }}
-                        onClick={() => {}}
+                        onClick={() => setCurrentPage(index + 1)}
                     >
                         {index + 1}
                     </p>
                 ))}
                 <p>...</p>
-                <p onClick={() => {}}>10</p>
+                <p
+                    style={{
+                        backgroundColor:
+                            pageCount == currentPage
+                                ? 'var(--color-primary)'
+                                : 'transparent',
+                    }}
+                    onClick={() => setCurrentPage(pageCount)}
+                >
+                    {pageCount}
+                </p>
             </div>
             <Spacer vertical={'72px'} />
             <Footer />
