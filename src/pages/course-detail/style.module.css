@@ -80,6 +80,12 @@
         color: var(--color-caption);
         font-size: 42px;
         font-family: 'Sorts Mill Goudy';
+        text-align: center;
+    }
+    & > div {
+        display: flex;
+        gap: 50px;
+        justify-content: center;
     }
 }
 @media only screen and (max-width: 768px) {
