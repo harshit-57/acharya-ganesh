@@ -46,6 +46,11 @@
         transition: 0.2s;
         cursor: pointer;
 
+        a{
+            color: var(--color-white);
+            text-decoration: none;
+        }
+
         &:hover {
             color: var(--color-primary);
         }

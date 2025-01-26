@@ -16,6 +16,9 @@ import IcPinterestMono from '../../assets/ic_pinterest_mono.png';
 import IcYoutubeMono from '../../assets/ic_youtube_mono.png';
 
 import { HorizontalBorder } from '../spacer/Spacer';
+import { NavLink } from 'react-router-dom';
+
+const SHOP_URL = 'https://acharyaganesh.shop/';
 
 export const Footer = () => {
     return (
@@ -24,14 +27,32 @@ export const Footer = () => {
                 <div className={css.section}>
                     <h3 className={css.section_heading}>Links</h3>
                     <ul className={css.links}>
-                        <li>Home</li>
-                        <li>About</li>
-                        <li>Courses</li>
-                        <li>Services</li>
-                        <li>Divine Store</li>
-                        <li>Web Stories</li>
-                        <li>Spirituality</li>
-                        <li>Contact</li>
+                        <li>
+                            <NavLink to={'/'}>Home</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/about'}>About</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/courses'}>Courses</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/'}>Services</NavLink>
+                        </li>
+                        <li>
+                            <a href={SHOP_URL} target={'_blank'}>
+                                Divine Store
+                            </a>
+                        </li>
+                        <li>
+                            <NavLink to={'/'}>Web Stories</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/spirituality'}>Spirituality</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/contact'}>Contact</NavLink>
+                        </li>
                     </ul>
                 </div>
                 <div className={css.section}>
