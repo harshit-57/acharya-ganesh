@@ -16,6 +16,8 @@ import { HealthAstrology } from './pages/services/health-astrology/HealthAstrolo
 import { LoveAstrology } from './pages/services/love-astrology/LoveAstrology';
 import { MatchMaking } from './pages/services/match-making/MatchMaking';
 import { WealthAstrology } from './pages/services/wealth-astrology/WealthAstrology';
+import WebStoriesList from './pages/web-stories/WebStoriesList';
+import { WebStoriesView } from './pages/web-stories-view/WebStoriesView';
 
 export default () => {
     return (
@@ -42,10 +44,8 @@ export default () => {
                 element={<WealthAstrology />}
             />
             <Route path="/blog" element={<BlogList />} />
-            <Route path="/blog" element={<BlogList />} />
             <Route path="/blog/:category" element={<BlogList />} />
             <Route path="/blog/:category/:slug" element={<Article />} />
-            <Route path="/spirituality" element={<SpiritualityList />} />
             <Route path="/spirituality" element={<SpiritualityList />} />
             <Route
                 path="/spirituality/:category"
@@ -58,6 +58,12 @@ export default () => {
             <Route path="/courses" element={<CoursesList />} />
             <Route path="/courses/:slug" element={<CourseDetail />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/web-stories" element={<WebStoriesList />} />
+            <Route path="/web-stories/:category" element={<WebStoriesList />} />
+            <Route
+                path="/web-stories/:category/:slug"
+                element={<WebStoriesView />}
+            />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<Navigate to={'/'} />} />
         </Routes>

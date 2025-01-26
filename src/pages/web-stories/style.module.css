@@ -1,0 +1,91 @@
+.container {
+}
+.header {
+    background-color: #5c5c5c;
+    min-height: auto !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.header_text_container {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    padding: 120px;
+    justify-content: center;
+}
+
+.header_text_wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+        font-size: 45px;
+        margin-top: 24px;
+        color: var(--color-primary);
+        font-family: 'Sorts Mill Goudy', serif;
+    }
+
+    p {
+        font-size: 16px;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: var(--color-white);
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        justify-content: center;
+
+        span {
+            display: flex;
+        }
+
+        img {
+            width: 24px;
+            height: 24px;
+            align-self: center;
+            transform: rotate(270deg);
+        }
+    }
+}
+.list_container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 72px 60px;
+    justify-content: center;
+    gap: 30px;
+}
+.blog_card {
+    width: 420px;
+}
+.page_number_container {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    p {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        border-radius: 20px;
+        font-weight: 500;
+        font-size: 14px;
+        cursor: pointer;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .header_text_container {
+        padding: 50px;
+    }
+
+    .list_container {
+        padding: 60px 24px;
+    }
+    .blog_card {
+        width: 100%;
+        max-width: 420px;
+    }
+}
