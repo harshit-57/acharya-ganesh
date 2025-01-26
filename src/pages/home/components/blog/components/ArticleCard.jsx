@@ -12,9 +12,9 @@ export const ArticleCard = ({ onClick, article, style, className }) => {
             <Spacer vertical={'24px'} />
             <h3 className={css.title}>{article?.Title}</h3>
             <Spacer vertical={'10px'} />
-            <p className={css.shortDesc}>
+            <div className={css.shortDesc}>
                 {parse(article?.ShortDescription || '')}
-            </p>
+            </div>
             <Spacer vertical={'10px'} />
             <p className={css.author}>{'-' + article?.PublishedBy}</p>
         </div>

@@ -8,14 +8,44 @@ import Article from './pages/article/Article';
 import CourseDetail from './pages/course-detail/CourseDetail';
 import SpiritualityList from './pages/spirituality/SpiritualityList';
 import SArticle from './pages/spirituality-article/SArticle';
+import { AstroVastu } from './pages/services/astro-vastu/AstroVastu';
+import { Astrology } from './pages/services/astrology/Astrology';
+import { BirthChart } from './pages/services/birth-chart/BirthChart';
+import { CareerPrediction } from './pages/services/career-prediction/CareerPrediction';
+import { HealthAstrology } from './pages/services/health-astrology/HealthAstrology';
+import { LoveAstrology } from './pages/services/love-astrology/LoveAstrology';
+import { MatchMaking } from './pages/services/match-making/MatchMaking';
+import { WealthAstrology } from './pages/services/wealth-astrology/WealthAstrology';
 
 export default () => {
     return (
         <Routes>
             <Route index path="/" element={<Home />} />
+            <Route path="/services/astro-vastu" element={<AstroVastu />} />
+            <Route path="/services/astrology" element={<Astrology />} />
+            <Route path="/services/birth-chart" element={<BirthChart />} />
+            <Route
+                path="/services/career-prediction"
+                element={<CareerPrediction />}
+            />
+            <Route
+                path="/services/health-astrology"
+                element={<HealthAstrology />}
+            />
+            <Route
+                path="/services/love-astrology"
+                element={<LoveAstrology />}
+            />
+            <Route path="/services/match-making" element={<MatchMaking />} />
+            <Route
+                path="/services/wealth-astrology"
+                element={<WealthAstrology />}
+            />
+            <Route path="/blog" element={<BlogList />} />
             <Route path="/blog" element={<BlogList />} />
             <Route path="/blog/:category" element={<BlogList />} />
             <Route path="/blog/:category/:slug" element={<Article />} />
+            <Route path="/spirituality" element={<SpiritualityList />} />
             <Route path="/spirituality" element={<SpiritualityList />} />
             <Route
                 path="/spirituality/:category"
