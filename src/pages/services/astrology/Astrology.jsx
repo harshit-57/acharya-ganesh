@@ -18,13 +18,13 @@ export const Astrology = () => {
             <div className={css.content_container}>
                 <div className={css.content_wrapper}>
                     <div className={css.column}>
-                        <h4 style={{ color: '#fcbf50', textAlign: 'center' }}>
+                        <h4 style={{ color: '#9a5c23', textAlign: 'center' }}>
                             Discover the
                         </h4>
-                        <h1 style={{ color: '#FCBF50', textAlign: 'center' }}>
+                        <h1 style={{ color: '#9a5c23', textAlign: 'center' }}>
                             Celestial Guidance | Astrology
                         </h1>
-                        <h4 style={{ color: '#fcbf50', textAlign: 'center' }}>
+                        <h4 style={{ color: '#9a5c23', textAlign: 'center' }}>
                             Services at Acharya Ganesh
                         </h4>
                         <p style={{ textAlign: 'center' }}>
@@ -43,7 +43,7 @@ export const Astrology = () => {
                         <p>
                             <h4
                                 style={{
-                                    color: '#fcbf50',
+                                    color: '#9a5c23',
                                     textAlign: 'center',
                                 }}
                             >
@@ -65,7 +65,7 @@ export const Astrology = () => {
                         <p>
                             <h4
                                 style={{
-                                    color: '#fcbf50',
+                                    color: '#9a5c23',
                                     textAlign: 'center',
                                 }}
                             >
@@ -88,30 +88,31 @@ export const Astrology = () => {
                         </p>
                     </div>
                     <div className={css.column}>
-                        <h4
+                        <h1
                             style={{
-                                color: '#fcbf50',
+                                color: '#9a5c23',
                                 textAlign: 'center',
                             }}
                         >
                             Personalized Astrology
-                        </h4>
-                        <h4
+                        </h1>
+                        <h3
                             style={{
-                                color: '#fcbf50',
+                                color: '#9a5c23',
                                 textAlign: 'center',
                             }}
                         >
                             Consultations
-                        </h4>
-                        <h4
+                        </h3>
+                        <h1
                             style={{
-                                color: '#fcbf50',
+                                color: '#9a5c23',
                                 textAlign: 'center',
                             }}
                         >
                             Understanding Your Cosmic Blueprint
-                        </h4>
+                        </h1>
+
                         <p style={{ textAlign: 'center' }}>
                             Our personalized consultations are at the heart of
                             what we do. Hanish Bagga and our team of expert
@@ -123,14 +124,14 @@ export const Astrology = () => {
                             it career, relationships, health, or personal
                             growth.
                         </p>
-                        <h4
+                        <h1
                             style={{
-                                color: '#fcbf50',
+                                color: '#9a5c23',
                                 textAlign: 'center',
                             }}
                         >
                             Perfect Solutions for Your Unique Journey
-                        </h4>
+                        </h1>
                         <p style={{ textAlign: 'center' }}>
                             Each consultation perfectly meets your needs,
                             providing customized remedies, including Lal Kitab
@@ -139,20 +140,26 @@ export const Astrology = () => {
                             events and empower you with the knowledge to create
                             a life of balance, happiness, and fulfillment.
                         </p>
-                        <h4
+                        <h1
                             style={{
-                                color: '#fcbf50',
+                                color: '#9a5c23',
                                 textAlign: 'center',
                             }}
                         >
                             Courses and Workshops | Learning the Celestial
-                        </h4>
+                        </h1>
                     </div>
                     <div className={css.row}>
-                        <p>
+                        <p
+                            style={{
+                                borderRadius: '10px',
+                                padding: '10px',
+                                border: '1px solid black',
+                            }}
+                        >
                             <h4
                                 style={{
-                                    color: '#fcbf50',
+                                    color: '#9a5c23',
                                     textAlign: 'center',
                                 }}
                             >
@@ -169,7 +176,7 @@ export const Astrology = () => {
                             astrologer yourself.
                             <h4
                                 style={{
-                                    color: '#fcbf50',
+                                    color: '#9a5c23',
                                     textAlign: 'center',
                                 }}
                             >
@@ -189,32 +196,342 @@ export const Astrology = () => {
                             alt={''}
                         />
                     </div>
-                    <div className={css.column}></div>
+                    <div className={css.column}>
+                        <h2 style={{ color: '#9a5c23', textAlign: 'center' }}>
+                            Why Choose
+                        </h2>
+                        <h1 style={{ color: '#9a5c23', textAlign: 'center' }}>
+                            Acharya Ganesh?
+                        </h1>
+                    </div>
                     <div className={css.row}>
                         <p>
-                            Understanding Your Cosmic Blueprint Our personalized
-                            consultations are at the heart of what we do. Hanish
-                            Bagga and our team of expert astrologers offer
-                            one-on-one sessions that delve deep into your birth
-                            chart, a cosmic snapshot of the sky at the moment of
-                            your birth. This chart serves as your guide to
-                            understanding your strengths, challenges, and the
-                            various aspects of your life—be it career,
-                            relationships, health, or personal growth.
+                            <h2
+                                style={{
+                                    color: '#9a5c23',
+                                    textAlign: 'center',
+                                }}
+                            >
+                                Understanding Your Cosmic Blueprint
+                            </h2>
+                            Our personalized consultations are at the heart of
+                            what we do. Hanish Bagga and our team of expert
+                            astrologers offer one-on-one sessions that delve
+                            deep into your birth chart, a cosmic snapshot of the
+                            sky at the moment of your birth. This chart serves
+                            as your guide to understanding your strengths,
+                            challenges, and the various aspects of your life—be
+                            it career, relationships, health, or personal
+                            growth.
                         </p>
+
                         <p>
-                            Perfect Solutions for Your Unique Journey Each
-                            consultation perfectly meets your needs, providing
-                            customized remedies, including Lal Kitab solutions,
-                            gemstone recommendations, and Vastu tips to enhance
-                            positive energy. Our aim is to forecast events and
-                            empower you with the knowledge to create a life of
-                            balance, happiness, and fulfillment.
+                            <h2
+                                style={{
+                                    color: '#9a5c23',
+                                    textAlign: 'center',
+                                }}
+                            >
+                                Perfect Solutions for Your Unique Journey
+                            </h2>
+                            Each consultation perfectly meets your needs,
+                            providing customized remedies, including Lal Kitab
+                            solutions, gemstone recommendations, and Vastu tips
+                            to enhance positive energy. Our aim is to forecast
+                            events and empower you with the knowledge to create
+                            a life of balance, happiness, and fulfillment.
                         </p>
+                    </div>
+                    <div className={css.column}>
+                        <h2 style={{ color: '#9a5c23', textAlign: 'center' }}>
+                            Learning the Celestial
+                        </h2>
+                    </div>
+
+                    <div className={css.row}>
+                        <p>
+                            <h2
+                                style={{
+                                    color: '#9a5c23',
+                                    textAlign: 'center',
+                                }}
+                            >
+                                Expertise and Experience
+                            </h2>
+                            With Hanish Bagga at the helm, Acharya Ganesh brings
+                            unparalleled expertise. Our team’s deep
+                            understanding of astrology, combined with a
+                            compassionate approach to consultation, ensures you
+                            receive guidance that’s not only insightful but also
+                            truly transformative.
+                        </p>
+
+                        <p>
+                            <h2
+                                style={{
+                                    color: '#9a5c23',
+                                    textAlign: 'center',
+                                }}
+                            >
+                                Global Community and Reach
+                            </h2>
+                            Our services have touched clients’ lives worldwide,
+                            building a global community of individuals who have
+                            found guidance and solace in our astrology services.
+                            No matter where you are, Acharya Ganesh brings the
+                            wisdom of the stars to your doorstep
+                        </p>
+                    </div>
+                    <div className={css.row}>
+                        <p>
+                            <h2
+                                style={{
+                                    color: '#9a5c23',
+                                    textAlign: 'center',
+                                }}
+                            >
+                                Commitment to Empowerment
+                            </h2>
+                            More than just providing astrological consultations,
+                            we’re dedicated to empowering you with knowledge and
+                            tools to take control of your destiny. Through our
+                            consultations, courses, and workshops, we aim to
+                            enlighten and inspire, helping you to unlock your
+                            fullest potential.
+                        </p>
+
+                        <p>
+                            <h2
+                                style={{
+                                    color: '#9a5c23',
+                                    textAlign: 'center',
+                                }}
+                            >
+                                Customized and Compassionate Care
+                            </h2>
+                            We recognize that each individual’s journey is
+                            unique. We offer personalized consultations and
+                            remedies tailored to your needs and circumstances.
+                            We aim to provide support and solutions that
+                            resonate with you, fostering growth and positive
+                            change.
+                        </p>
+                    </div>
+
+                    <div className={css.column}>
+                        <h2 style={{ color: '#9a5c23', textAlign: 'center' }}>
+                            A Journey of
+                        </h2>
+                        <h1 style={{ color: '#9a5c23', textAlign: 'center' }}>
+                            Transformation Awaits
+                        </h1>
+                    </div>
+
+                    <div className={css.column}>
+                        <h1
+                            style={{
+                                color: '#9a5c23',
+                                textAlign: 'center',
+                            }}
+                        >
+                            Understanding Your Cosmic Blueprint
+                        </h1>
+                        <p style={{ textAlign: 'center' }}>
+                            Our personalized consultations are at the heart of
+                            what we do. Hanish Bagga and our team of expert
+                            astrologers offer one-on-one sessions that delve
+                            deep into your birth chart, a cosmic snapshot of the
+                            sky at the moment of your birth. This chart serves
+                            as your guide to understanding your strengths,
+                            challenges, and the various aspects of your life—be
+                            it career, relationships, health, or personal
+                            growth.
+                        </p>
+                        <h1
+                            style={{
+                                color: '#9a5c23',
+                                textAlign: 'center',
+                            }}
+                        >
+                            Perfect Solutions for Your Unique Journey
+                        </h1>
+                        <p style={{ textAlign: 'center' }}>
+                            Each consultation perfectly meets your needs,
+                            providing customized remedies, including Lal Kitab
+                            solutions, gemstone recommendations, and Vastu tips
+                            to enhance positive energy. Our aim is to forecast
+                            events and empower you with the knowledge to create
+                            a life of balance, happiness, and fulfillment.
+                        </p>
+                    </div>
+
+                    <div className={css.column}>
+                        <p
+                            style={{
+                                borderRadius: '10px',
+                                padding: '10px',
+                                border: '1px solid black',
+                            }}
+                        >
+                            <h1
+                                style={{
+                                    color: '#9a5c23',
+                                    textAlign: 'center',
+                                }}
+                            >
+                                Connect with Us
+                            </h1>
+                            <p style={{ textAlign: 'center' }}>
+                                Ready to explore the celestial insights and
+                                unlock the secrets of your destiny? Visit our
+                                website to book a consultation, enroll in a
+                                course, or simply learn more about our services.
+                                At Acharya Ganesh, we’re not just offering
+                                astrology services but a journey of
+                                self-discovery and empowerment guided by the
+                                stars.
+                            </p>
+
+                            <h2
+                                style={{
+                                    color: '#9a5c23',
+                                    textAlign: 'center',
+                                }}
+                            >
+                                Join Us, and the light of the cosmos illuminate
+                                your way.
+                            </h2>
+                        </p>
+                    </div>
+
+                    <div
+                        style={{
+                            background: '#2D2D2D ',
+                            padding: ' 2rem 10rem',
+                        }}
+                        className={css.column}
+                    >
+                        <h2
+                            style={{
+                                color: '#9a5c23',
+                                textAlign: 'center',
+                            }}
+                        >
+                            Discover Astrologers In Your City
+                        </h2>
+                        <Spacer vertical={'16px'} />
+                        <div className={css.row}>
+                            <div className={css.column}>
+                                <p>
+                                    <h2
+                                        style={{
+                                            color: '#9a5c23',
+                                            textAlign: 'center',
+                                            fontSize: '14px',
+                                            textAlign: 'left',
+                                        }}
+                                    >
+                                        Best Astrologer in Delhi
+                                    </h2>
+                                </p>
+                                <p>
+                                    <h2
+                                        style={{
+                                            color: '#9a5c23',
+                                            textAlign: 'center',
+                                            fontSize: '14px',
+                                            textAlign: 'left',
+                                        }}
+                                    >
+                                        Best Astrologer in Chennai
+                                    </h2>
+                                </p>
+                            </div>
+
+                            <div className={css.column}>
+                                <p>
+                                    <h2
+                                        style={{
+                                            color: '#9a5c23',
+                                            textAlign: 'center',
+                                            fontSize: '14px',
+                                            textAlign: 'left',
+                                        }}
+                                    >
+                                        Best Astrologer in Kolkata
+                                    </h2>
+                                </p>
+                                <p>
+                                    <h2
+                                        style={{
+                                            color: '#9a5c23',
+                                            textAlign: 'center',
+                                            fontSize: '14px',
+                                            textAlign: 'left',
+                                        }}
+                                    >
+                                        Best Astrologer in Hyderabad
+                                    </h2>
+                                </p>
+                            </div>
+
+                            <div className={css.column}>
+                                <p>
+                                    <h2
+                                        style={{
+                                            color: '#9a5c23',
+                                            textAlign: 'center',
+                                            fontSize: '14px',
+                                            textAlign: 'left',
+                                        }}
+                                    >
+                                        Best Astrologer in Mumbai
+                                    </h2>
+                                </p>
+                                <p>
+                                    <h2
+                                        style={{
+                                            color: '#9a5c23',
+                                            textAlign: 'center',
+                                            fontSize: '14px',
+                                            textAlign: 'left',
+                                        }}
+                                    >
+                                        Best Astrologer in Pune
+                                    </h2>
+                                </p>
+                            </div>
+
+                            <div className={css.column}>
+                                <p>
+                                    <h2
+                                        style={{
+                                            color: '#9a5c23',
+                                            textAlign: 'center',
+                                            fontSize: '14px',
+                                            textAlign: 'left',
+                                        }}
+                                    >
+                                        Best Astrologer in Bangalore
+                                    </h2>
+                                </p>
+                                <p>
+                                    <h2
+                                        style={{
+                                            color: '#9a5c23',
+                                            textAlign: 'center',
+                                            fontSize: '14px',
+                                            textAlign: 'left',
+                                        }}
+                                    >
+                                        Best Astrologer in Ahmedabad
+                                    </h2>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <Spacer vertical={'72px'} />
             <Footer />
         </PageContainer>
     );
