@@ -31,7 +31,7 @@ const SpiritualityList = () => {
             const response = await APIHelper.getSpiritualities({
                 page: currentPage,
                 pageSize: BLOG_PER_PAGE,
-                category: category,
+                category: category || undefined,
             });
             setBlogs(response.data?.data);
             const totalPage = Math.round(
@@ -60,7 +60,7 @@ const SpiritualityList = () => {
                             <span>
                                 <img src={IcChevronIcon} alt={''} />
                             </span>{' '}
-                            <span>{category.toUpperCase()} Spirituality</span>
+                            <span>{category?.toUpperCase()} Spirituality</span>
                         </p>
                     </div>
                 </div>
@@ -73,7 +73,13 @@ const SpiritualityList = () => {
                         <SCardSmall
                             key={blog?.Id || index}
                             blog={blog}
-                            onClick={() => navigate(blog?.Slug)}
+                            onClick={() =>
+                                navigate(
+                                    category
+                                        ? blog?.Slug
+                                        : `${blog?.CategorySlug}/${blog?.Slug}`
+                                )
+                            }
                             className={css.blog_card}
                         />
                     ))}

@@ -31,7 +31,7 @@ const BlogList = () => {
             const response = await APIHelper.getBlogs({
                 page: currentPage,
                 pageSize: BLOG_PER_PAGE,
-                category: category,
+                category: category || undefined,
             });
             setBlogs(response.data?.data);
             const totalPage = Math.round(
@@ -61,7 +61,7 @@ const BlogList = () => {
                             <span>
                                 <img src={IcChevronIcon} alt={''} />
                             </span>{' '}
-                            <span>{category.toUpperCase()} Blog</span>
+                            <span>{category?.toUpperCase()} Blog</span>
                         </p>
                     </div>
                 </div>
@@ -74,7 +74,13 @@ const BlogList = () => {
                         <BlogCardSmall
                             key={blog?.Id || index}
                             blog={blog}
-                            onClick={() => navigate(blog?.Slug)}
+                            onClick={() =>
+                                navigate(
+                                    category
+                                        ? blog?.Slug
+                                        : `${blog?.CategorySlug}/${blog?.Slug}`
+                                )
+                            }
                             className={css.blog_card}
                         />
                     ))}
