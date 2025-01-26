@@ -35,7 +35,7 @@ export default [
                 subMenus: null,
             },
             {
-                route: '/services/birth-chart-astrology',
+                route: '/services/birth-chart',
                 id: '',
                 title: 'Birth Chart Astrology',
                 subMenus: null,

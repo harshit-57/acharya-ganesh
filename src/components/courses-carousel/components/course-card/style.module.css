@@ -3,7 +3,7 @@
     flex-shrink: 0;
     border-radius: 24px;
     width: 285px;
-    height: 457px;
+    height: 200px;
     border: 1px solid var(--color-border-dark);
     position: relative;
     overflow: hidden;

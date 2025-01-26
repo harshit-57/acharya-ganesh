@@ -3,10 +3,10 @@ import { PageContainer } from '../../components/page-container/PageContainer';
 import { useParams } from 'react-router-dom';
 import IcChevronIcon from '../../assets/chevron-down.png';
 import { SCardSmall } from './components/card/SCardSmall';
+import { useEffect, useState } from 'react';
 
 import ImgBlogHeader from '../../assets/blog_header_bg.png';
 import { Spacer } from '../../components/spacer/Spacer';
-import { useEffect, useState } from 'react';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
 import { Footer } from '../../components/footer/Footer';

@@ -1,0 +1,9 @@
+.container {
+}
+.header {
+    background-color: #5c5c5c;
+    min-height: auto !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
