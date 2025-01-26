@@ -15,7 +15,7 @@ const MenuButton = ({ menu, className }) => {
     return (
         <div className={css.menu_button_container}>
             <NavLink
-                to={!subMenuAvailable && menu.route}
+                to={menu.route}
                 id={menu.id}
                 onClick={() => {}}
                 className={[className, css.menu_button].join(' ')}

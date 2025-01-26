@@ -233,24 +233,47 @@ const CoursesList = () => {
                     ))}
             </div>
             <div className={css.page_number_container}>
-                {[...Array(3)].map((number, index) => (
-                    <p
-                        style={{
-                            backgroundColor:
-                                index + 1 == currentPage
-                                    ? 'var(--color-primary)'
-                                    : 'transparent',
-                        }}
-                        onClick={() => setCurrentPage(index + 1)}
-                    >
-                        {index + 1}
-                    </p>
-                ))}
-                <p>...</p>
                 <p
                     style={{
                         backgroundColor:
-                            pageCount == currentPage
+                            currentPage === 1
+                                ? 'var(--color-primary)'
+                                : 'transparent',
+                    }}
+                    onClick={() => setCurrentPage(1)}
+                >
+                    1
+                </p>
+
+                {currentPage > 3 && <p>...</p>}
+
+                {[...Array(5)].map((_, index) => {
+                    const page = currentPage - 2 + index;
+                    if (page > 1 && page < pageCount) {
+                        return (
+                            <p
+                                key={page}
+                                style={{
+                                    backgroundColor:
+                                        page === currentPage
+                                            ? 'var(--color-primary)'
+                                            : 'transparent',
+                                }}
+                                onClick={() => setCurrentPage(page)}
+                            >
+                                {page}
+                            </p>
+                        );
+                    }
+                    return null;
+                })}
+
+                {currentPage < pageCount - 2 && <p>...</p>}
+
+                <p
+                    style={{
+                        backgroundColor:
+                            currentPage === pageCount
                                 ? 'var(--color-primary)'
                                 : 'transparent',
                     }}
@@ -259,6 +282,7 @@ const CoursesList = () => {
                     {pageCount}
                 </p>
             </div>
+
             <Spacer vertical={'72px'} />
             <Footer />
         </PageContainer>

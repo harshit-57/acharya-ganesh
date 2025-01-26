@@ -13,8 +13,10 @@ export default () => {
     return (
         <Routes>
             <Route index path="/" element={<Home />} />
+            <Route path="/blog" element={<BlogList />} />
             <Route path="/blog/:category" element={<BlogList />} />
             <Route path="/blog/:category/:slug" element={<Article />} />
+            <Route path="/spirituality" element={<SpiritualityList />} />
             <Route
                 path="/spirituality/:category"
                 element={<SpiritualityList />}
