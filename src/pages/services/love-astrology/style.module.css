@@ -35,7 +35,8 @@
     display: flex;
     gap: 40px;
 
-    & > p {
+    & > p,
+    & > ol {
         flex: 1;
     }
 
@@ -43,5 +44,23 @@
         width: 50%;
         max-width: 1280px;
         align-self: flex-start;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .row {
+        flex-direction: column;
+        gap: 40px;
+
+        & > p,
+        & > ol {
+            flex: none;
+        }
+
+        & > img {
+            width: 100%;
+            max-width: 1280px;
+            align-self: flex-start;
+        }
     }
 }
