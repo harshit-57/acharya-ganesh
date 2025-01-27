@@ -154,4 +154,9 @@
         width: 100%;
         max-width: 420px;
     }
+    .filter_container{
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
 }
