@@ -2,8 +2,9 @@
     flex-grow: 0;
     flex-shrink: 0;
     border-radius: 24px;
-    width: 285px;
-    height: 200px;
+    /* width: 250px; */
+    height: 400px;
+    aspect-ratio: auto 300 / 424;
     border: 1px solid var(--color-border-dark);
     position: relative;
     overflow: hidden;

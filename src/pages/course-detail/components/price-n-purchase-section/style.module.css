@@ -4,8 +4,9 @@
 }
 .poster {
     flex: 1;
-    max-width: 420px;
-    aspect-ratio: 420/625;
+    /* max-width: 420px; */
+    height: 600px;
+    aspect-ratio: auto 300 / 424;
     border-radius: 24px;
     object-fit: cover;
 }

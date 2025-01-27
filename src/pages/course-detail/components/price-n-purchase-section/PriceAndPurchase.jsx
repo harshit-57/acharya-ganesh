@@ -13,7 +13,11 @@ export const PriceAndPurchaseSection = ({ course }) => {
                 alt={'Course poster'}
             />
             <div className={css.price_detail_container}>
-                <p className={css.tag}>{course?.CategoryName}</p>
+                <p className={css.tag}>
+                    {course?.Categories?.map((c) => c?.CategoryName)?.join(
+                        ', '
+                    )}
+                </p>
                 <h2 className={css.title}>{course?.Name}</h2>
                 <p className={css.price}>
                     <span>₹ {course?.Regular_Price}</span>₹ {course?.Sale_Price}

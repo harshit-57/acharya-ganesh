@@ -8,7 +8,7 @@ import { useNav } from '../../hook/useNav';
 
 const NUMBER_ALT_1 = '+91 73000-04325';
 const NUMBER_ALT_2 = '+91 73000-04326';
-const COURSES_LINK = 'https://acharyaganesh.com/courses';
+const COURSES_LINK = 'https://courses.acharyaganesh.com/';
 
 export const TopBar = () => {
     const { showNav, setShowNav } = useNav();
