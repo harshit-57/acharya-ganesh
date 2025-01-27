@@ -8,49 +8,49 @@ import ImgService7 from '../assets/service_bg_3.png';
 import ImgService8 from '../assets/service_bg_4.png';
 export default [
     {
-        route: '',
+        route: '/services/astro-vastu',
         id: '',
         title: 'Astro Vastu',
         graphic: ImgService1,
     },
     {
-        route: '',
+        route: '/services/astrology',
         id: '',
         title: 'Astrology',
         graphic: ImgService2,
     },
     {
-        route: '',
+        route: '/services/birth-chart',
         id: '',
         title: 'Birth Chart Astrology',
         graphic: ImgService3,
     },
     {
-        route: '',
+        route: '/services/match-making',
         id: '',
         title: 'Match Making',
         graphic: ImgService4,
     },
     {
-        route: '',
+        route: '/services/career-prediction',
         id: '',
         title: 'Career Prediction',
         graphic: ImgService5,
     },
     {
-        route: '',
+        route: '/services/health-astrology',
         id: '',
         title: 'Health Astrology',
         graphic: ImgService6,
     },
     {
-        route: '',
+        route: '/services/love-astrology',
         id: '',
         title: 'Love Astrology',
         graphic: ImgService7,
     },
     {
-        route: '',
+        route: '/services/wealth-astrology',
         id: '',
         title: 'Wealth Astrology',
         graphic: ImgService8,
