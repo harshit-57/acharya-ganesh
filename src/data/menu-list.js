@@ -73,10 +73,11 @@ export default [
         ],
     },
     {
-        route: '/divine-store',
+        route: '',
         id: '',
         title: 'Divine Store',
         subMenus: null,
+        link: 'https://acharyaganesh.com/shop/',
     },
     {
         route: '/web-stories',

@@ -116,9 +116,27 @@
         display: flex;
         gap: 30px;
 
+        .input_container {
+            flex: 1;
+        }
+
+        select {
+            padding: 16px 20px;
+            width: 100%;
+            border-radius: 100px;
+            font-size: 16px;
+            font-weight: 500;
+            background-color: var(--color-card-bg-dark);
+            border: 1px solid #cac3bc;
+            color: #ffffff;
+            -moz-appearance:none;
+            -webkit-appearance:none;
+            appearance:none;
+        }
+
         textarea {
             padding: 16px 20px;
-            flex: 1;
+            width: 100%;
             border-radius: 24px;
             height: 180px;
             font-size: 16px;
@@ -126,6 +144,8 @@
             background-color: var(--color-card-bg-dark);
             border: 1px solid #cac3bc;
             color: #ffffff;
+            min-height: 100px;
+            resize: vertical;
 
             &::placeholder {
                 font-size: 10px;
@@ -133,6 +153,13 @@
                 font-size: 16px;
                 color: #b5afa8;
             }
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 4px;
+            margin-left: 12px;
         }
     }
 }

@@ -27,6 +27,11 @@ const getApi =
     async (params = {}) =>
         await axiosHelper('GET', endpoint, params, {}, 'token');
 
+const postApi =
+    async (endpoint) =>
+    async (data = {}) =>
+        await axiosHelper('POST', endpoint, {}, data, 'token');
+
 export const APIHelper = Object.freeze({
     getBlogCategories: await getApi('getBlogCategories'),
     getBlogTags: await getApi('getBlogTags'),
@@ -42,4 +47,5 @@ export const APIHelper = Object.freeze({
     getWebStoryCategories: await getApi('getWebStoryCategories'),
     getWebStoryTags: await getApi('getWebStoryTags'),
     getCourses: await getApi('getCourses'),
+    createLead: await postApi('createLead'),
 });

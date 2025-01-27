@@ -2,6 +2,8 @@ import css from './style.module.css';
 import { PrimaryButton } from '../../../../components/primary-button/PrimaryButton';
 import { Spacer } from '../../../../components/spacer/Spacer';
 import ImgPoster from '../../../../assets/course_1.png';
+import parse from 'html-react-parser';
+import { NavLink } from 'react-router-dom';
 export const PriceAndPurchaseSection = ({ course }) => {
     return (
         <div className={css.container}>
@@ -16,7 +18,7 @@ export const PriceAndPurchaseSection = ({ course }) => {
                 <p className={css.price}>
                     <span>₹ {course?.Regular_Price}</span>₹ {course?.Sale_Price}
                 </p>
-                <div className={css.info_container}>
+                {/* <div className={css.info_container}>
                     <p>
                         <span>Duration:</span> Overall Duration 6 Hours
                     </p>
@@ -39,9 +41,14 @@ export const PriceAndPurchaseSection = ({ course }) => {
                     <p>
                         <span>Language:</span> A mix of Hindi and English
                     </p>
+                </div> */}
+                <div className={css.info_container}>
+                    {parse(course?.ShortDescription || '')}
                 </div>
                 <Spacer vertical={'24px'} />
-                <PrimaryButton>Buy Now</PrimaryButton>
+                <a href={course?.ProductURL} target="_blank">
+                    <PrimaryButton>Buy Now</PrimaryButton>
+                </a>
             </div>
         </div>
     );

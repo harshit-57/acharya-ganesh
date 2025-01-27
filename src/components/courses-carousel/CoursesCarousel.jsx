@@ -13,7 +13,6 @@ import { PageContainer } from '../page-container/PageContainer';
 import { CourseCard } from './components/course-card/CourseCard';
 import useBreakpoint from 'use-breakpoint';
 import { APIHelper } from '../../util/APIHelper';
-import { NavLink } from 'react-router-dom';
 const PER_FRAME_COURSE_COUNT_DESKTOP = 4;
 const PER_FRAME_COURSE_COUNT_MOBILE = 1;
 const PER_FRAME_COURSE_COUNT_TABLET = 2;
@@ -126,9 +125,7 @@ export const CoursesCarousel = () => {
                 <div className={css.course_slide_wrapper}>
                     {Array.isArray(visibleCourses) &&
                         visibleCourses?.map((c, index) => (
-                            <NavLink to={`/courses/${c?.Slug}`}>
-                                <CourseCard key={index} course={c} />
-                            </NavLink>
+                            <CourseCard key={index} course={c} />
                         ))}
                 </div>
             </div>
