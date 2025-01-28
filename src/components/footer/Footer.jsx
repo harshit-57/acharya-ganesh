@@ -19,6 +19,12 @@ import { HorizontalBorder } from '../spacer/Spacer';
 import { NavLink } from 'react-router-dom';
 
 const SHOP_URL = 'https://acharyaganesh.shop/';
+const FACEBOOK_URL = 'https://www.facebook.com/AcharyaGaneshOfficial/';
+const INSTAGRAM_URL = 'https://www.instagram.com/officialacharyaganesh/';
+const YOUTUBE_URL = 'https://www.youtube.com/@acharyaganeshchannel';
+const X_URL = 'https://x.com/acharyaganesh73';
+const PINTEREST_URL = 'https://in.pinterest.com/acharyaganesh_/';
+const LINKEDIN_URL = 'https://www.linkedin.com/company/acharya-ganesh/';
 
 export const Footer = () => {
     return (
@@ -69,76 +75,88 @@ export const Footer = () => {
                     </p>
                     <div className={css.social_container}>
                         <div>
-                            <img
-                                className={css.social}
-                                src={IcFacebookMono}
-                                alt={''}
-                            />
-                            <img
-                                className={css.social_color}
-                                src={IcFacebook}
-                                alt={''}
-                            />
+                            <a href={FACEBOOK_URL} target={'_blank'}>
+                                <img
+                                    className={css.social}
+                                    src={IcFacebookMono}
+                                    alt={''}
+                                />
+                                <img
+                                    className={css.social_color}
+                                    src={IcFacebook}
+                                    alt={''}
+                                />
+                            </a>
                         </div>
                         <div>
-                            <img
-                                className={css.social}
-                                src={IcInstagramMono}
-                                alt={''}
-                            />
-                            <img
-                                className={css.social_color}
-                                src={IcInstagram}
-                                alt={''}
-                            />
+                            <a href={INSTAGRAM_URL} target={'_blank'}>
+                                <img
+                                    className={css.social}
+                                    src={IcInstagramMono}
+                                    alt={''}
+                                />
+                                <img
+                                    className={css.social_color}
+                                    src={IcInstagram}
+                                    alt={''}
+                                />
+                            </a>
                         </div>
                         <div>
-                            <img
-                                className={css.social}
-                                src={IcXMono}
-                                alt={''}
-                            />
-                            <img
-                                className={css.social_color}
-                                src={IcX}
-                                alt={''}
-                            />
+                            <a href={X_URL} target={'_blank'}>
+                                <img
+                                    className={css.social}
+                                    src={IcXMono}
+                                    alt={''}
+                                />
+                                <img
+                                    className={css.social_color}
+                                    src={IcX}
+                                    alt={''}
+                                />
+                            </a>
                         </div>
                         <div>
-                            <img
-                                className={css.social}
-                                src={IcLinkedInMono}
-                                alt={''}
-                            />
-                            <img
-                                className={css.social_color}
-                                src={IcLinkedIn}
-                                alt={''}
-                            />
+                            <a href={LINKEDIN_URL} target={'_blank'}>
+                                <img
+                                    className={css.social}
+                                    src={IcLinkedInMono}
+                                    alt={''}
+                                />
+                                <img
+                                    className={css.social_color}
+                                    src={IcLinkedIn}
+                                    alt={''}
+                                />
+                            </a>
                         </div>
                         <div>
-                            <img
-                                className={css.social}
-                                src={IcPinterestMono}
-                                alt={''}
-                            />
-                            <img
-                                className={css.social_color}
-                                src={IcPinterest}
-                                alt={''}
-                            />
+                            <a href={PINTEREST_URL} target={'_blank'}>
+                                <img
+                                    className={css.social}
+                                    src={IcPinterestMono}
+                                    alt={''}
+                                />
+                                <img
+                                    className={css.social_color}
+                                    src={IcPinterest}
+                                    alt={''}
+                                />
+                            </a>
                         </div>
                         <div>
-                            <img
-                                className={css.social}
-                                src={IcYoutubeMono}
-                                alt={''}
-                            />
-                            <img
-                                className={css.social_color}
-                                src={IcYoutube}
-                                alt={''}
-                            />
+                            <a href={YOUTUBE_URL} target={'_blank'}>
+                                <img
+                                    className={css.social}
+                                    src={IcYoutubeMono}
+                                    alt={''}
+                                />
+                                <img
+                                    className={css.social_color}
+                                    src={IcYoutube}
+                                    alt={''}
+                                />
+                            </a>
                         </div>
                     </div>
                 </div>
