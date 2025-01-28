@@ -4,14 +4,16 @@ export const CardSmall = ({ blog, onClick, style, className }) => {
     return (
         <div className={[css.container, className].join(' ')}>
             <div className={css.thumbnail_wrapper}>
-                {blog?.Image && <img src={blog?.Image} alt={'Thumbnail'} />}
+                {blog?.CoverImageUrl && (
+                    <img src={blog?.CoverImageUrl} alt={'Thumbnail'} />
+                )}
                 <p>{blog?.CategoryName}</p>
             </div>
             <div className={css.content_container}>
                 <h2 onClick={onClick}>
                     {blog?.Title.length > 75
-                        ? blog?.Title.slice(0, 75) + '...'
-                        : blog?.Title}
+                        ? parse(blog?.Title.slice(0, 75)) + '...'
+                        : parse(blog?.Title)}
                 </h2>
                 <div>{parse(blog?.ShortDescription || '')}</div>
                 <p>- {blog?.PublishedBy}</p>

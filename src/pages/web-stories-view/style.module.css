@@ -29,6 +29,14 @@
     width: 100%;
     height: 100%;
     position: relative;
+    .story_media_main {
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
     .story_media {
         width: 100%;
         position: absolute;

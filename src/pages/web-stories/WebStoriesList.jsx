@@ -13,7 +13,6 @@ import { Footer } from '../../components/footer/Footer';
 import { APIHelper } from '../../util/APIHelper';
 import { useNavigate } from 'react-router-dom';
 const STORIES_PER_PAGE = 9;
-import list from '../../data/web-stories-list.js';
 const WebStoriesList = () => {
     const navigate = useNavigate();
     const [stories, setStories] = useState([]);
@@ -29,15 +28,15 @@ const WebStoriesList = () => {
     const fetchStories = async () => {
         try {
             setLoading(true);
-            // const response = await APIHelper.getWebStories({
-            //     page: currentPage,
-            //     pageSize: STORIES_PER_PAGE,
-            // });
-            setStories(list);
-            // const totalPage = Math.round(
-            //     (response.data?.total || 1) / STORIES_PER_PAGE
-            // );
-            // setPageCount(totalPage);
+            const response = await APIHelper.getWebStories({
+                page: currentPage,
+                pageSize: STORIES_PER_PAGE,
+            });
+            setStories(response?.data?.data);
+            const totalPage = Math.round(
+                (response.data?.total || 1) / STORIES_PER_PAGE
+            );
+            setPageCount(totalPage);
             setLoading(false);
         } catch (e) {
         } finally {
@@ -76,8 +75,8 @@ const WebStoriesList = () => {
                             onClick={() =>
                                 navigate(
                                     category
-                                        ? blog?.Slug
-                                        : `${blog?.CategorySlug}/${blog?.Slug}`
+                                        ? blog?.Id
+                                        : `${blog?.CategorySlug}/${blog?.Id}`
                                 )
                             }
                             className={css.blog_card}
