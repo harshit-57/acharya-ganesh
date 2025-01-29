@@ -3,8 +3,10 @@ import css from './style.module.css';
 import Stories from 'react-insta-stories';
 import IcPlay from '../../assets/play.svg';
 import IcPause from '../../assets/pause.svg';
+import LeftArrow from '../../assets/left-arrow.png';
 import { useParams } from 'react-router-dom';
 import { APIHelper } from '../../util/APIHelper';
+import parse from 'html-react-parser';
 export const WebStoriesView = () => {
     const { slug } = useParams();
     const [ws, setWs] = useState(null);
@@ -19,94 +21,158 @@ export const WebStoriesView = () => {
             console.log(e);
         }
     };
-    const stories = [
-        // ws?.CoverImageUrl ||
-        //     'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.2bJ9_f9aKoGCME7ZIff-ZwHaJ4%26pid%3DApi&f=1&ipt=8f5362c1ddb3ce7c507902636a92e2c0e8b20e015b03a062e0c0524ac47319d3&ipo=images',
-        {
-            content: ({ action, isPaused }) => {
-                return (
-                    <div className={css.story_content_container}>
-                        <img
-                            className={css.story_play_pause_button}
-                            src={isPaused ? IcPlay : IcPause}
-                            alt={''}
-                            onClick={() =>
-                                isPaused ? action('play') : action('pause')
-                            }
-                        />
-                        <img
-                            className={css.story_media_main}
-                            src={
-                                ws?.CoverImageUrl ||
-                                'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.2bJ9_f9aKoGCME7ZIff-ZwHaJ4%26pid%3DApi&f=1&ipt=8f5362c1ddb3ce7c507902636a92e2c0e8b20e015b03a062e0c0524ac47319d3&ipo=images'
-                            }
-                            alt={''}
-                        />
-                    </div>
-                );
-            },
-            url:
-                ws?.CoverImageUrl ||
-                'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.2bJ9_f9aKoGCME7ZIff-ZwHaJ4%26pid%3DApi&f=1&ipt=8f5362c1ddb3ce7c507902636a92e2c0e8b20e015b03a062e0c0524ac47319d3&ipo=images',
-        },
-        {
-            content: ({ action, isPaused }) => {
-                return (
-                    <div className={css.story_content_container}>
-                        <img
-                            className={css.story_play_pause_button}
-                            src={isPaused ? IcPlay : IcPause}
-                            alt={''}
-                            onClick={() =>
-                                isPaused ? action('play') : action('pause')
-                            }
-                        />
-                        <img
-                            className={css.story_media}
-                            src={
-                                'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.hitc.com%2Fstatic%2Fuploads%2F2023%2F10%2Fa24bf0b9-2502-4925-9a9a-53cfd58035de.jpg&f=1&nofb=1&ipt=907f6b509122e8d5b59b860b9549ea85ffe3128f3dd466f07b83bcb1ee2da2b3&ipo=images'
-                            }
-                            alt={''}
-                        />
-                        <div className={css.story_text_container}>
-                            <h2>Capricon</h2>
-                            <p>
-                                Get your daily horoscope and discover what the
-                                stars have in store for you. From love and
-                                relationships to career and success, our daily
-                                horoscope has got you covered.
-                            </p>
-                        </div>
-                    </div>
-                );
-            },
-            url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.hitc.com%2Fstatic%2Fuploads%2F2023%2F10%2Fa24bf0b9-2502-4925-9a9a-53cfd58035de.jpg&f=1&nofb=1&ipt=907f6b509122e8d5b59b860b9549ea85ffe3128f3dd466f07b83bcb1ee2da2b3&ipo=images',
-        },
-    ];
+
+    const stories = ws?.Images?.length
+        ? ws?.Images?.sort((a, b) => a.ImageOrder - b.ImageOrder)?.map(
+              (img) => {
+                  return {
+                      content: ({ action, isPaused }) => {
+                          return (
+                              <div
+                                  className={`${css.story_content_container} ${css.zoom_out}`}
+                              >
+                                  <img
+                                      className={css.story_play_pause_button}
+                                      src={isPaused ? IcPlay : IcPause}
+                                      alt={''}
+                                      onClick={() =>
+                                          isPaused
+                                              ? action('play')
+                                              : action('pause')
+                                      }
+                                  />
+                                  <img
+                                      className={
+                                          img?.ImageText
+                                              ? css.story_media
+                                              : css.story_media_main
+                                      }
+                                      src={
+                                          img?.ImageUrl ||
+                                          'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.2bJ9_f9aKoGCME7ZIff-ZwHaJ4%26pid%3DApi&f=1&ipt=8f5362c1ddb3ce7c507902636a92e2c0e8b20e015b03a062e0c0524ac47319d3&ipo=images'
+                                      }
+                                      alt={''}
+                                  />
+                                  {img?.ImageText && (
+                                      <div
+                                          className={`${css.story_text_container} ${css[currentAnimation]}`}
+                                      >
+                                          {/* <h2>Capricon</h2>
+                             <p>
+                                 Get your daily horoscope and discover what the
+                                 stars have in store for you. From love and
+                                 relationships to career and success, our daily
+                                 horoscope has got you covered.
+                             </p> */}
+                                          {parse(img?.ImageText)}
+                                      </div>
+                                  )}
+                              </div>
+                          );
+                      },
+                      url:
+                          img?.ImageUrl ||
+                          'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.2bJ9_f9aKoGCME7ZIff-ZwHaJ4%26pid%3DApi&f=1&ipt=8f5362c1ddb3ce7c507902636a92e2c0e8b20e015b03a062e0c0524ac47319d3&ipo=images',
+                  };
+              }
+          )
+        : [
+              // ws?.CoverImageUrl ||
+              //     'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.2bJ9_f9aKoGCME7ZIff-ZwHaJ4%26pid%3DApi&f=1&ipt=8f5362c1ddb3ce7c507902636a92e2c0e8b20e015b03a062e0c0524ac47319d3&ipo=images',
+              {
+                  content: ({ action, isPaused }) => {
+                      return (
+                          <div
+                              className={`${css.story_content_container} ${css.zoom_out}`}
+                          >
+                              <img
+                                  className={css.story_play_pause_button}
+                                  src={isPaused ? IcPlay : IcPause}
+                                  alt={''}
+                                  onClick={() =>
+                                      isPaused
+                                          ? action('play')
+                                          : action('pause')
+                                  }
+                              />
+                              <img
+                                  className={css.story_media_main}
+                                  src={
+                                      ws?.CoverImageUrl ||
+                                      'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.2bJ9_f9aKoGCME7ZIff-ZwHaJ4%26pid%3DApi&f=1&ipt=8f5362c1ddb3ce7c507902636a92e2c0e8b20e015b03a062e0c0524ac47319d3&ipo=images'
+                                  }
+                                  alt={''}
+                              />
+                          </div>
+                      );
+                  },
+                  url:
+                      ws?.CoverImageUrl ||
+                      'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.2bJ9_f9aKoGCME7ZIff-ZwHaJ4%26pid%3DApi&f=1&ipt=8f5362c1ddb3ce7c507902636a92e2c0e8b20e015b03a062e0c0524ac47319d3&ipo=images',
+              },
+          ];
+
+    const randomAnimation = () => {
+        const animations = [
+            'fade_zoom_in',
+            'zoom_out',
+            'slide_in_left',
+            'slide_in_right',
+            'bounce',
+            'rotate_in',
+            'flip_in',
+        ];
+        const randomIndex = Math.floor(Math.random() * animations.length);
+        return animations[randomIndex];
+    };
 
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentAnimation, setCurrentAnimation] = useState(randomAnimation());
 
-    // const getColors = () => {
-    //     stories[currentIndex];
-    // };
-    // useEffect(() => {
-    //     getColors();
-    // }, [currentIndex]);
+    const onNext = () => {
+        if (currentIndex < stories.length - 1)
+            setCurrentIndex(currentIndex + 1);
+    };
+    const onPrev = () => {
+        if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
+    };
 
     return (
         <div
             className={css.container}
-            style={{ backgroundImage: `url(${stories[currentIndex]?.url})` }}
+            style={{
+                backgroundImage: `url(${
+                    stories?.length ? stories[currentIndex]?.url : ''
+                })`,
+            }}
         >
             <div className={css.wrapper}>
+                <button
+                    onClick={onPrev}
+                    className={css.prev_button}
+                    style={{ opacity: currentIndex <= 0 ? 0.2 : 1 }}
+                >
+                    <img src={LeftArrow} alt={''} />
+                </button>
+                <button
+                    onClick={onNext}
+                    className={css.next_button}
+                    style={{
+                        opacity: currentIndex >= stories.length - 1 ? 0.2 : 1,
+                    }}
+                >
+                    <img src={LeftArrow} alt={''} />
+                </button>
                 <Stories
-                    stories={stories}
-                    defaultInterval={5000}
+                    stories={stories?.length ? stories : []}
+                    defaultInterval={ws?.TimeDuration * 10}
                     width={432}
                     height={768}
-                    // preloadCount={1}
+                    preloadCount={1}
                     currentIndex={currentIndex}
-                    onStoryStart={() => {}}
+                    onStoryStart={() => {
+                        setCurrentAnimation(randomAnimation());
+                    }}
                     onStoryEnd={() => {
                         if (currentIndex < stories.length - 1)
                             setCurrentIndex(currentIndex + 1);
