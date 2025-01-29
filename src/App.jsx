@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
 import Home from './pages/home/Home';
 import BlogList from './pages/blog-list/BlogList';
 import CoursesList from './pages/courses/CoursesList';
@@ -19,6 +19,7 @@ import { WealthAstrology } from './pages/services/wealth-astrology/WealthAstrolo
 import WebStoriesList from './pages/web-stories/WebStoriesList';
 import { WebStoriesView } from './pages/web-stories-view/WebStoriesView';
 import { useEffect } from 'react';
+import Login from './admin/login/login';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
@@ -84,7 +85,32 @@ export default () => {
                 />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="*" element={<Navigate to={'/'} />} />
+
+                {/* Admin Routes */}
+                <Route path="/admin/login" element={<Login />} />
+                <Route element={<AdminGuard />}>
+                    <Route
+                        path="/admin"
+                        element={<Navigate to={'/admin/dashboard'} />}
+                    />
+                    <Route
+                        path="/admin/dashboard"
+                        element={
+                            <>
+                                <h1> Admin Dashboard</h1>
+                            </>
+                        }
+                    />
+                </Route>
             </Routes>
         </>
     );
+};
+
+const AdminGuard = () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        return <Navigate to={'/admin/login'} />;
+    }
+    return <Outlet />;
 };
