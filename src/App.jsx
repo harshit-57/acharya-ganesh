@@ -19,7 +19,7 @@ import { WealthAstrology } from './pages/services/wealth-astrology/WealthAstrolo
 import WebStoriesList from './pages/web-stories/WebStoriesList';
 import { WebStoriesView } from './pages/web-stories-view/WebStoriesView';
 import { useEffect } from 'react';
-import Login from './admin/login/login';
+import Login from './admin/login/Login';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
