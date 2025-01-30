@@ -9,14 +9,6 @@ import IcPin from '../../assets/location_pin.png';
 import IcPhone from '../../assets/contact.png';
 import IcEnvelope from '../../assets/envelope.png';
 import ImgContactFormBg from '../../assets/contact_form_bg.png';
-import ImgDiscoverDelhi from '../../assets/discover_delhi.png';
-import ImgDiscoverKolkata from '../../assets/discover_kolkata.png';
-import ImgDiscoverMumbai from '../../assets/discover_mumbai.png';
-import ImgDiscoverBanglore from '../../assets/discover_banglore.png';
-import ImgDiscoverChennai from '../../assets/discover_chennai.png';
-import ImgDiscoverHydrabad from '../../assets/discover_hydrabad.png';
-import ImgDiscoverPune from '../../assets/discover_pune.png';
-import ImgDiscoverAhemdabad from '../../assets/discover_ahemdabad.png';
 import { Spacer } from '../../components/spacer/Spacer';
 import { InputField } from '../../components/input-field/InputField';
 import { TopBar } from '../../components/top-bar/TopBar';
@@ -210,16 +202,30 @@ const Contact = () => {
                             >
                                 You can always send us a message or email.
                             </ContactInfo>
-                            <ContactInfo icon={IcPin} title={'Email Us'}>
-                                Hall No. 201 Plot No. 959 Niti Khand 1, Opposite
-                                Orange County, Indirapuram Ghaziabad, 201014
-                            </ContactInfo>
+                            <a
+                                href={`https://maps.google.com/?q=${'Hall No. 201 Plot No. 959 Niti Khand 1, Opposite Orange County, Indirapuram Ghaziabad, 201014'}`}
+                            >
+                                <ContactInfo icon={IcPin} title={'Address'}>
+                                    Hall No. 201 Plot No. 959 Niti Khand 1,
+                                    Opposite Orange County, Indirapuram
+                                    Ghaziabad, 201014
+                                </ContactInfo>
+                            </a>
                             <ContactInfo icon={IcPhone} title={'Contact Us'}>
-                                (+91) 73000 04325, (+91) 73000 04326
+                                <a href="tel:+917300004325">
+                                    <span> (+91) 73000 04325</span>,
+                                </a>
+                                <a href="tel:+917300004326">
+                                    <span> (+91) 73000 04326</span>
+                                </a>
                             </ContactInfo>
                             <ContactInfo icon={IcEnvelope} title={'Email Us'}>
-                                info@acharyaganesh.com,
-                                connect@acharyaganesh.com
+                                <a href="mailto:info@acharyaganesh.com">
+                                    <span> info@acharyaganesh.com</span>,
+                                </a>
+                                <a href="mailto:connect@acharyaganesh.com">
+                                    <span> connect@acharyaganesh.com</span>
+                                </a>
                             </ContactInfo>
                         </div>
                     </div>
@@ -321,50 +327,6 @@ const Contact = () => {
                                 Submit
                             </PrimaryButton>
                         </div>
-                    </div>
-                </div>
-                <div
-                    className={[css.row, css.discover_cities_container].join(
-                        ' '
-                    )}
-                >
-                    <h3 className={css.discover_heading}>
-                        Discover Best Astrologers in your City
-                    </h3>
-                    <div className={css.city_container}>
-                        <img
-                            src={ImgDiscoverDelhi}
-                            alt={'Discover city icon'}
-                        />
-                        <img
-                            src={ImgDiscoverDelhi}
-                            alt={'Discover city icon'}
-                        />
-                        <img
-                            src={ImgDiscoverMumbai}
-                            alt={'Discover city icon'}
-                        />
-                        <img
-                            src={ImgDiscoverBanglore}
-                            alt={'Discover city icon'}
-                        />
-                        <img
-                            src={ImgDiscoverChennai}
-                            alt={'Discover city icon'}
-                        />
-                        <img
-                            src={ImgDiscoverHydrabad}
-                            alt={'Discover city icon'}
-                        />
-                        <img src={ImgDiscoverPune} alt={'Discover city icon'} />
-                        <img
-                            src={ImgDiscoverKolkata}
-                            alt={'Discover city icon'}
-                        />
-                        <img
-                            src={ImgDiscoverAhemdabad}
-                            alt={'Discover city icon'}
-                        />
                     </div>
                 </div>
             </div>

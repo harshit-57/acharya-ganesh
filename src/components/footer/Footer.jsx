@@ -26,6 +26,9 @@ const X_URL = 'https://x.com/acharyaganesh73';
 const PINTEREST_URL = 'https://in.pinterest.com/acharyaganesh_/';
 const LINKEDIN_URL = 'https://www.linkedin.com/company/acharya-ganesh/';
 
+const ADDRESS_URL =
+    'https://maps.google.com/?q=Hall No. 201 Plot No. 959 Niti Khand 1, Opposite Orange County, Indirapuram Ghaziabad, 201014';
+
 export const Footer = () => {
     return (
         <div className={css.container}>
@@ -163,20 +166,32 @@ export const Footer = () => {
                 <div className={css.section}>
                     <h3 className={css.section_heading}>Address</h3>
                     <div className={css.address_detail_container}>
-                        <AddressItem
-                            icon={IcHome}
-                            desc={
-                                'Hall No. 201 Plot No. 959 Niti Khand 1, Opposite Orange County, Indirapuram Ghaziabad, 201014'
-                            }
-                        />
-                        <AddressItem
-                            icon={IcMail}
-                            desc={'info@acharyaganesh.com'}
-                        />
-                        <AddressItem
-                            icon={IcMail}
-                            desc={'connect@acharyaganesh.com'}
-                        />
+                        <a href={ADDRESS_URL} target={'_blank'}>
+                            <AddressItem
+                                icon={IcHome}
+                                desc={
+                                    'Hall No. 201 Plot No. 959 Niti Khand 1, Opposite Orange County, Indirapuram Ghaziabad, 201014'
+                                }
+                            />
+                        </a>
+                        <a
+                            href={'mailto:info@acharyaganesh.com'}
+                            target={'_blank'}
+                        >
+                            <AddressItem
+                                icon={IcMail}
+                                desc={'info@acharyaganesh.com'}
+                            />
+                        </a>
+                        <a
+                            href={'mailto:connect@acharyaganesh.com'}
+                            target={'_blank'}
+                        >
+                            <AddressItem
+                                icon={IcMail}
+                                desc={'connect@acharyaganesh.com'}
+                            />
+                        </a>
                     </div>
                 </div>
             </div>

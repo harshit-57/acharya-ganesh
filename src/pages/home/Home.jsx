@@ -12,6 +12,7 @@ import Blog from './components/blog/Blog';
 import { Footer } from '../../components/footer/Footer';
 import { CoursesCarousel } from '../../components/courses-carousel/CoursesCarousel';
 import { Helmet } from 'react-helmet-async';
+import Citation from '../citation/Citation';
 const Home = () => {
     return (
         <PageContainer>
@@ -80,6 +81,7 @@ const Home = () => {
                 <Gallery />
                 <Testimonial />
                 <Blog />
+                <Citation />
             </Section>
             <Footer />
         </PageContainer>

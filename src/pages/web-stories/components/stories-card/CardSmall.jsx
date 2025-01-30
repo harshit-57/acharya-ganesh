@@ -16,7 +16,10 @@ export const CardSmall = ({ blog, onClick, style, className }) => {
                         : parse(blog?.Title)}
                 </h2>
                 <div>{parse(blog?.ShortDescription || '')}</div>
-                <p>- {blog?.PublishedBy}</p>
+                <p>
+                    {'- Acharya Ganesh'}
+                    {/* {blog?.PublishedBy} */}
+                </p>
             </div>
         </div>
     );

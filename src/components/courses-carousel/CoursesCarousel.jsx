@@ -54,7 +54,7 @@ export const CoursesCarousel = () => {
             const response = await APIHelper.getCourses({
                 page: 1,
                 pageSize: 10,
-                category: 'upcoming,live-class',
+                category: 'upcoming,live-class,uncategorized,course',
             });
             setCourses(response?.data?.data);
         } catch (error) {

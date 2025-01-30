@@ -14,7 +14,10 @@ export const BlogCardSmall = ({ blog, onClick, style, className }) => {
                         : blog?.Title}
                 </h2>
                 <div>{parse(blog?.ShortDescription)}</div>
-                <p>- {blog?.PublishedBy}</p>
+                <p>
+                    {'- Acharya Ganesh'}
+                    {/* {blog?.PublishedBy} */}
+                </p>
             </div>
         </div>
     );

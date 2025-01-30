@@ -16,7 +16,10 @@ export const ArticleCard = ({ onClick, article, style, className }) => {
                 {parse(article?.ShortDescription || '')}
             </div>
             <Spacer vertical={'10px'} />
-            <p className={css.author}>{'-' + article?.PublishedBy}</p>
+            <p className={css.author}>
+                {'- Acharya Ganesh'}
+                {/* {blog?.PublishedBy} */}
+            </p>
         </div>
     );
 };
