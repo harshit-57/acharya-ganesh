@@ -4,8 +4,10 @@ import IcFacebook from '../../../../assets/ic_facebook_mono.png';
 import IcInstagram from '../../../../assets/ic_instagram_mono.png';
 import IcX from '../../../../assets/ic_x_mono.png';
 import IcPinterest from '../../../../assets/ic_pinterest_mono.png';
-import { useEffect, useState } from 'react';
-import { getDaySuffix } from '../../../../util/GetDaySuffix';
+import { useEffect, useMemo, useState } from 'react';
+import { getDaySuffix, getReadingTime } from '../../../../util/helper';
+import { LINKS } from '../../../../util/constants';
+import { htmlToText } from 'html-to-text';
 const months = [
     'January',
     'February',
@@ -29,6 +31,12 @@ export const TitleInformation = ({ article }) => {
         setTimeStamp(`${day}${getDaySuffix(day)} ${months[date.getMonth()]}`);
         setYear(date.getFullYear() - 1);
     }, [article]);
+
+    const readingTime = useMemo(
+        () => getReadingTime(article?.Description),
+        [article]
+    );
+
     return (
         <div className={css.container}>
             <img
@@ -40,7 +48,7 @@ export const TitleInformation = ({ article }) => {
                 <div className={css.category_container}>
                     <p className={css.category}>{article?.CategoryName}</p>
                 </div>
-                <h1 className={css.title}>{article?.Title}</h1>
+                <h1 className={css.title}>{htmlToText(article?.Title)}</h1>
                 <div className={css.timestamp_container}>
                     <p className={css.timestamp}>
                         {timestamp} <br />
@@ -48,22 +56,31 @@ export const TitleInformation = ({ article }) => {
                     </p>
                     <div className={css.vertical_border}></div>
                     <p className={css.read_time}>
-                        15 mins <br /> read
+                        {readingTime > 1 ? readingTime + ' mins' : '1 min'}
+                        <br /> read
                     </p>
                 </div>
                 <div className={css.socials_container}>
-                    <div className={css.social_button_wrapper}>
-                        <img src={IcFacebook} alt={'Social icon'} />
-                    </div>
-                    <div className={css.social_button_wrapper}>
-                        <img src={IcInstagram} alt={'Social icon'} />
-                    </div>
-                    <div className={css.social_button_wrapper}>
-                        <img src={IcX} alt={'Social icon'} />
-                    </div>
-                    <div className={css.social_button_wrapper}>
-                        <img src={IcPinterest} alt={'Social icon'} />
-                    </div>
+                    <a href={LINKS.FACEBOOK_URL} target={'_blank'}>
+                        <div className={css.social_button_wrapper}>
+                            <img src={IcFacebook} alt={'Social icon'} />
+                        </div>
+                    </a>
+                    <a href={LINKS.INSTAGRAM_URL} target={'_blank'}>
+                        <div className={css.social_button_wrapper}>
+                            <img src={IcInstagram} alt={'Social icon'} />
+                        </div>
+                    </a>
+                    <a href={LINKS.X_URL} target={'_blank'}>
+                        <div className={css.social_button_wrapper}>
+                            <img src={IcX} alt={'Social icon'} />
+                        </div>
+                    </a>
+                    <a href={LINKS.PINTEREST_URL} target={'_blank'}>
+                        <div className={css.social_button_wrapper}>
+                            <img src={IcPinterest} alt={'Social icon'} />
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

@@ -10,9 +10,14 @@ export const ArticleCard = ({ onClick, article, style, className }) => {
         >
             <p className={css.category}>{article?.CategoryName}</p>
             <Spacer vertical={'24px'} />
-            <h3 className={css.title}>{article?.Title}</h3>
+            <h3
+                className={`content-two-line ${css.title}`}
+                title={article?.Title}
+            >
+                {article?.Title}
+            </h3>
             <Spacer vertical={'10px'} />
-            <div className={css.shortDesc}>
+            <div className={`html-content content-four-line ${css.shortDesc}`}>
                 {parse(article?.ShortDescription || '')}
             </div>
             <Spacer vertical={'10px'} />

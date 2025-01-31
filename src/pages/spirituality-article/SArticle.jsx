@@ -44,7 +44,7 @@ const SArticle = () => {
                 <div className={css.article_container}>
                     <TableOfContent />
                     <div className={css.article_wrapper}>
-                        <div className={css.article}>
+                        <div className={`html-content`}>
                             {parse(article?.Description || '')}
                         </div>
                     </div>

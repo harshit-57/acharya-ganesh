@@ -1,3 +1,4 @@
+import { htmlToText } from 'html-to-text';
 import css from './style.module.css';
 import parse from 'html-react-parser';
 export const CardSmall = ({ blog, onClick, style, className }) => {
@@ -10,12 +11,19 @@ export const CardSmall = ({ blog, onClick, style, className }) => {
                 <p>{blog?.CategoryName}</p>
             </div>
             <div className={css.content_container}>
-                <h2 onClick={onClick}>
-                    {blog?.Title.length > 75
-                        ? parse(blog?.Title.slice(0, 75)) + '...'
-                        : parse(blog?.Title)}
+                <h2
+                    className={`html-content content-two-line`}
+                    title={blog.Title}
+                    onClick={onClick}
+                >
+                    {parse(blog?.Title)}
                 </h2>
-                <div>{parse(blog?.ShortDescription || '')}</div>
+                <div
+                    className={`html-content content-three-line`}
+                    title={htmlToText(blog?.ShortDescription)}
+                >
+                    {parse(blog?.ShortDescription || '')}
+                </div>
                 <p>
                     {'- Acharya Ganesh'}
                     {/* {blog?.PublishedBy} */}

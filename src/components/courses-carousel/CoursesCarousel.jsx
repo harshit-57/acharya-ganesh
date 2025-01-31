@@ -9,7 +9,6 @@ import ImgSectionBg from '../../assets/course_section_bg.png';
 // import coursesData from '../../data/courses-list';
 import { IndicatorContainer } from '../indicator-container/IndicatorContainer';
 import { PageContainer } from '../page-container/PageContainer';
-// import { isIndexUnderOffset } from '../../util/IndexUnderOffset';
 import { CourseCard } from './components/course-card/CourseCard';
 import useBreakpoint from 'use-breakpoint';
 import { APIHelper } from '../../util/APIHelper';

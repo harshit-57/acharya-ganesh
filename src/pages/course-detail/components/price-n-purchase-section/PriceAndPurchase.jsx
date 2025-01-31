@@ -22,31 +22,7 @@ export const PriceAndPurchaseSection = ({ course }) => {
                 <p className={css.price}>
                     <span>₹ {course?.Regular_Price}</span>₹ {course?.Sale_Price}
                 </p>
-                {/* <div className={css.info_container}>
-                    <p>
-                        <span>Duration:</span> Overall Duration 6 Hours
-                    </p>
-                    <p>
-                        <span>No. of Sessions:</span> 2
-                    </p>
-                    <p>
-                        <span>Session Duration:</span> 3 Hours Per Day
-                    </p>
-                    <p>
-                        <span>Day:</span> 11th & 12th January (Saturday &
-                        Sunday)
-                    </p>
-                    <p>
-                        <span>Timing:</span> 12 PM to 3 PM
-                    </p>
-                    <p>
-                        <span>Category:</span> Live Class
-                    </p>
-                    <p>
-                        <span>Language:</span> A mix of Hindi and English
-                    </p>
-                </div> */}
-                <div className={css.info_container}>
+                <div className={`html-content`}>
                     {parse(course?.ShortDescription || '')}
                 </div>
                 <Spacer vertical={'24px'} />

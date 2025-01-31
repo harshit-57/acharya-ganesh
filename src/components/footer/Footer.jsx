@@ -17,17 +17,7 @@ import IcYoutubeMono from '../../assets/ic_youtube_mono.png';
 
 import { HorizontalBorder } from '../spacer/Spacer';
 import { NavLink } from 'react-router-dom';
-
-const SHOP_URL = 'https://acharyaganesh.shop/';
-const FACEBOOK_URL = 'https://www.facebook.com/AcharyaGaneshOfficial/';
-const INSTAGRAM_URL = 'https://www.instagram.com/officialacharyaganesh/';
-const YOUTUBE_URL = 'https://www.youtube.com/@acharyaganeshchannel';
-const X_URL = 'https://x.com/acharyaganesh73';
-const PINTEREST_URL = 'https://in.pinterest.com/acharyaganesh_/';
-const LINKEDIN_URL = 'https://www.linkedin.com/company/acharya-ganesh/';
-
-const ADDRESS_URL =
-    'https://maps.google.com/?q=Hall No. 201 Plot No. 959 Niti Khand 1, Opposite Orange County, Indirapuram Ghaziabad, 201014';
+import { LINKS } from '../../util/constants';
 
 export const Footer = () => {
     return (
@@ -49,7 +39,7 @@ export const Footer = () => {
                             <NavLink to={'/'}>Services</NavLink>
                         </li>
                         <li>
-                            <a href={SHOP_URL} target={'_blank'}>
+                            <a href={LINKS.SHOP_URL} target={'_blank'}>
                                 Divine Store
                             </a>
                         </li>
@@ -78,7 +68,7 @@ export const Footer = () => {
                     </p>
                     <div className={css.social_container}>
                         <div>
-                            <a href={FACEBOOK_URL} target={'_blank'}>
+                            <a href={LINKS.FACEBOOK_URL} target={'_blank'}>
                                 <img
                                     className={css.social}
                                     src={IcFacebookMono}
@@ -92,7 +82,7 @@ export const Footer = () => {
                             </a>
                         </div>
                         <div>
-                            <a href={INSTAGRAM_URL} target={'_blank'}>
+                            <a href={LINKS.INSTAGRAM_URL} target={'_blank'}>
                                 <img
                                     className={css.social}
                                     src={IcInstagramMono}
@@ -106,7 +96,7 @@ export const Footer = () => {
                             </a>
                         </div>
                         <div>
-                            <a href={X_URL} target={'_blank'}>
+                            <a href={LINKS.X_URL} target={'_blank'}>
                                 <img
                                     className={css.social}
                                     src={IcXMono}
@@ -120,7 +110,7 @@ export const Footer = () => {
                             </a>
                         </div>
                         <div>
-                            <a href={LINKEDIN_URL} target={'_blank'}>
+                            <a href={LINKS.LINKEDIN_URL} target={'_blank'}>
                                 <img
                                     className={css.social}
                                     src={IcLinkedInMono}
@@ -134,7 +124,7 @@ export const Footer = () => {
                             </a>
                         </div>
                         <div>
-                            <a href={PINTEREST_URL} target={'_blank'}>
+                            <a href={LINKS.PINTEREST_URL} target={'_blank'}>
                                 <img
                                     className={css.social}
                                     src={IcPinterestMono}
@@ -148,7 +138,7 @@ export const Footer = () => {
                             </a>
                         </div>
                         <div>
-                            <a href={YOUTUBE_URL} target={'_blank'}>
+                            <a href={LINKS.YOUTUBE_URL} target={'_blank'}>
                                 <img
                                     className={css.social}
                                     src={IcYoutubeMono}
@@ -166,7 +156,7 @@ export const Footer = () => {
                 <div className={css.section}>
                     <h3 className={css.section_heading}>Address</h3>
                     <div className={css.address_detail_container}>
-                        <a href={ADDRESS_URL} target={'_blank'}>
+                        <a href={LINKS.ADDRESS_URL} target={'_blank'}>
                             <AddressItem
                                 icon={IcHome}
                                 desc={
