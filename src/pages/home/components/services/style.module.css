@@ -5,6 +5,7 @@
     font-family: 'Sorts Mill Goudy', serif;
     font-size: 32px;
     color: var(--color-caption);
+    font-weight: bold;
 }
 .service_list_container {
     width: 100%;

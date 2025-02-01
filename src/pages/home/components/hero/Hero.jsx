@@ -17,7 +17,7 @@ const Hero = () => {
             <div className={css.hero_text_container}>
                 <div className={css.hero_text_wrapper}>
                     <p>Welcome To</p>
-                    <h1>Acharya Ganesh’s</h1>
+                    <h1 className={css.main_text}>Acharya Ganesh’s</h1>
                     <p>Astrology Universe</p>
                     <p>
                         Welcome to a world where the ancient wisdom of the stars

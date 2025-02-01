@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import IcChevronIcon from '../../assets/chevron-down.png';
 import { BlogCardSmall } from './components/blog-card/BlogCardSmall';
 
-import ImgBlogHeader from '../../assets/blog_header_bg.png';
+import ImgBlogHeader from '../../assets/blog_main_bg.png';
 import { Spacer } from '../../components/spacer/Spacer';
 import { useEffect, useState } from 'react';
 import { TopBar } from '../../components/top-bar/TopBar';

@@ -3,7 +3,7 @@ import { PageContainer } from '../../components/page-container/PageContainer';
 import IcChevronIcon from '../../assets/chevron-down.png';
 import IcStar from '../../assets/star_primary_dark.png';
 
-import ImgHeaderBg from '../../assets/contact_header_bg.png';
+import ImgHeaderBg from '../../assets/about_header_bg.png';
 import ImgHanish from '../../assets/hanish.jpg';
 import ImgStatsBg from '../../assets/about_stats_bg.jpg';
 import ImgConsultationPoster from '../../assets/consultation_poster.jpg';
@@ -16,6 +16,7 @@ import { Footer } from '../../components/footer/Footer';
 import { Helmet } from 'react-helmet-async';
 const AboutUs = () => {
     const [images, setImages] = useState([]);
+    const [readMore, setReadMore] = useState('Read More');
 
     useEffect(() => setImages(imageList), []);
     return (
@@ -114,15 +115,36 @@ const AboutUs = () => {
                                 upbringing infused him with a respect for
                                 ancient wisdom and cosmic influences, which he
                                 applies in guiding individuals toward
-                                enlightenment and growth. Specializing in Astro
-                                Vastu, he adeptly combines Vedic astrology with
-                                Lal Kitab remedies to enhance life’s prosperity
-                                and happiness. As an educator, Astrologer Hanish
-                                Bagga is dedicated to sharing his knowledge,
-                                offering courses for all levels, and initiating
-                                a free Lal Kitab astrology course to give back
-                                to the community.
+                                enlightenment and growth.
                             </p>
+                            {readMore === 'Read More' && (
+                                <span
+                                    className={css.read_more_link}
+                                    onClick={() => setReadMore('Read Less')}
+                                >
+                                    {readMore}
+                                </span>
+                            )}
+                            {readMore === 'Read Less' && (
+                                <p>
+                                    Specializing in Astro Vastu, he adeptly
+                                    combines Vedic astrology with Lal Kitab
+                                    remedies to enhance life’s prosperity and
+                                    happiness. As an educator, Astrologer Hanish
+                                    Bagga is dedicated to sharing his knowledge,
+                                    offering courses for all levels, and
+                                    initiating a free Lal Kitab astrology course
+                                    to give back to the community.
+                                </p>
+                            )}
+                             {readMore === 'Read Less' && (
+                                <span
+                                    className={css.read_more_link}
+                                    onClick={() => setReadMore('Read More')}
+                                >
+                                    {readMore}
+                                </span>
+                            )}
                         </div>
                     </div>
                     <div

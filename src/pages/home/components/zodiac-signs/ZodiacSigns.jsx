@@ -24,18 +24,54 @@ import { IndicatorContainer } from '../../../../components/indicator-container/I
 import { Spacer } from '../../../../components/spacer/Spacer';
 
 const ZodiacSignList = [
-    Zodiac1,
-    Zodiac2,
-    Zodiac3,
-    Zodiac4,
-    Zodiac5,
-    Zodiac6,
-    Zodiac7,
-    Zodiac8,
-    Zodiac9,
-    Zodiac10,
-    Zodiac11,
-    Zodiac12,
+    {
+        img: Zodiac1,
+        link: 'https://acharyaganesh.com/zodiac-signs/Pisces-zodiac-sign',
+    },
+    {
+        img: Zodiac2,
+        link: 'https://acharyaganesh.com/zodiac-signs/aquarius-zodiac-signs',
+    },
+    {
+        img: Zodiac3,
+        link: 'https://acharyaganesh.com/zodiac-signs/Capricorn-zodiac-sign',
+    },
+    {
+        img: Zodiac4,
+        link: 'https://acharyaganesh.com/zodiac-signs/Sagittarius-zodiac-sign',
+    },
+    {
+        img: Zodiac5,
+        link: 'https://acharyaganesh.com/zodiac-signs/scorpio-zodiac-signs',
+    },
+    {
+        img: Zodiac6,
+        link: 'https://acharyaganesh.com/zodiac-signs/Libra-zodiac-sign',
+    },
+    {
+        img: Zodiac7,
+        link: 'https://acharyaganesh.com/zodiac-signs/virgo-zodiac-signs',
+    },
+    {
+        img: Zodiac8,
+        link: 'https://acharyaganesh.com/zodiac-signs/Leo-zodiac-sign',
+    },
+    {
+        img: Zodiac9,
+        link: 'https://acharyaganesh.com/zodiac-signs/Cancer-zodiac-sign',
+    },
+    {
+        img: Zodiac10,
+        link: 'https://acharyaganesh.com/zodiac-signs/gemini-zodiac-sign',
+    },
+    {
+        img: Zodiac11,
+        link: ' https://acharyaganesh.com/zodiac-signs/taurus-zodiac-sign',
+    },
+    {
+        img: Zodiac12,
+        link: 'https://acharyaganesh.com/zodiac-signs/aries-zodiac-sign',
+    },
 ];
 
 const ZodiacSigns = () => {
@@ -58,6 +94,10 @@ const ZodiacSigns = () => {
         wrapperRef
     );
 
+    const openLink = (link) => {
+        window.open(link, '_blank');
+    };
+
     return (
         <PageContainer className={css.container}>
             <h2 className={css.section_heading}>
@@ -71,7 +111,12 @@ const ZodiacSigns = () => {
                 <div className={css.slides_wrapper} ref={wrapperRef}>
                     {Array.isArray(ZodiacSignList) &&
                         ZodiacSignList.map((z, i) => (
-                            <img key={i} src={z} alt={'Zodiac image card'} />
+                            <img
+                                key={i}
+                                src={z.img}
+                                alt={'Zodiac image card'}
+                                onClick={() => openLink(z.link)}
+                            />
                         ))}
                 </div>
             </div>
