@@ -53,7 +53,7 @@
     h2 {
         font-size: 27px;
         font-family: 'Sorts Mill Goudy';
-
+        font-weight: bold;
         &:hover {
             color: var(--color-caption);
         }

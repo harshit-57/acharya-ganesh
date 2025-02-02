@@ -9,7 +9,7 @@
         top: 50%;
         left: 60px;
         transform: translateY(-50%);
-        width: 90px;
+        width: 110px;
     }
 }
 .info_n_action_button_container {
@@ -26,7 +26,7 @@
     color: var(--color-white);
     align-items: center;
     gap: 12px;
-
+    font-size: 20px;
     img {
         width: 18px;
     }
@@ -38,7 +38,7 @@
     color: var(--color-primary);
     gap: 12px;
     cursor: pointer;
-
+    font-size: 20px;
     img {
         width: 18px;
     }

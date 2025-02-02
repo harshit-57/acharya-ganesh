@@ -5,7 +5,7 @@ import IcChevronIcon from '../../assets/chevron-down.png';
 import { SCardSmall } from './components/card/SCardSmall';
 import { useEffect, useState } from 'react';
 
-import ImgBlogHeader from '../../assets/blog_header_bg.png';
+import ImgBlogHeader from '../../assets/spirituality_header_bg.png';
 import { Spacer } from '../../components/spacer/Spacer';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
@@ -85,6 +85,7 @@ const SpiritualityList = () => {
                     ))}
             </div>
             <div className={css.page_number_container}>
+                <p onClick={() =>{ if (currentPage > 1) setCurrentPage(currentPage -1)}}>Prev</p>
                 {[...Array(3)].map((number, index) => (
                     <p
                         style={{
@@ -110,6 +111,7 @@ const SpiritualityList = () => {
                 >
                     {pageCount}
                 </p>
+                <p onClick={() =>{ setCurrentPage(currentPage + 1)}}>Next</p>
             </div>
             <Spacer vertical={'72px'} />
             <Footer />

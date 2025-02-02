@@ -3,7 +3,7 @@ import { PageContainer } from '../../components/page-container/PageContainer';
 import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
 import IcChevronIcon from '../../assets/chevron-down.png';
 
-import ImgHeaderBg from '../../assets/contact_header_bg.png';
+import ImgHeaderBg from '../../assets/contact_main_bg.png';
 import IcGlobe from '../../assets/globe.png';
 import IcPin from '../../assets/location_pin.png';
 import IcPhone from '../../assets/contact.png';

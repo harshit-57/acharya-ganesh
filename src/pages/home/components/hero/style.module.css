@@ -23,6 +23,9 @@
         color: var(--color-primary);
         text-align: center;
     }
+    .main_text {
+        font-weight: bold;
+    }
 
     p:nth-child(1) {
         text-transform: uppercase;
@@ -46,7 +49,7 @@
     p:nth-child(4) {
         font-size: 18px;
         margin-top: 24px;
-        font-family: 'Sorts Mill Goudy', serif;
+        font-family: 'Work Sans', serif;
         color: var(--color-white);
     }
     .book_appointment_button {
