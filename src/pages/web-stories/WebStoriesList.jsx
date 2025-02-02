@@ -84,6 +84,7 @@ const WebStoriesList = () => {
                     ))}
             </div>
             <div className={css.page_number_container}>
+                <p onClick={() =>{ if (currentPage > 1) setCurrentPage(currentPage -1)}}>Prev</p>
                 {[...Array(3)].map((number, index) => (
                     <p
                         style={{
@@ -109,6 +110,7 @@ const WebStoriesList = () => {
                 >
                     {pageCount}
                 </p>
+                <p onClick={() =>{ setCurrentPage(currentPage + 1)}}>Next</p>
             </div>
             <Spacer vertical={'72px'} />
             <Footer />
