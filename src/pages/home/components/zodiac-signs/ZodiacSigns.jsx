@@ -22,55 +22,68 @@ import { useState } from 'react';
 import { IndicatorContainer } from '../../../../components/indicator-container/IndicatorContainer';
 
 import { Spacer } from '../../../../components/spacer/Spacer';
+import { useNavigate } from 'react-router-dom';
 
 const ZodiacSignList = [
     {
         img: Zodiac12,
-        link: 'https://acharyaganesh.com/zodiac-signs/aries-zodiac-sign',
+        // link: 'https://acharyaganesh.com/zodiac-signs/aries-zodiac-sign',
+        route: 'blog/zodiac-signs/aries-zodiac-sign',
     },
     {
         img: Zodiac11,
-        link: ' https://acharyaganesh.com/zodiac-signs/taurus-zodiac-sign',
+        // link: 'https://acharyaganesh.com/zodiac-signs/taurus-zodiac-sign',
+        route: 'blog/zodiac-signs/taurus-zodiac-sign',
     },
     {
         img: Zodiac10,
-        link: 'https://acharyaganesh.com/zodiac-signs/gemini-zodiac-sign',
+        // link: 'https://acharyaganesh.com/zodiac-signs/gemini-zodiac-sign',
+        route: 'blog/zodiac-signs/gemini-zodiac-sign',
     },
     {
         img: Zodiac9,
-        link: 'https://acharyaganesh.com/zodiac-signs/Cancer-zodiac-sign',
+        // link: 'https://acharyaganesh.com/zodiac-signs/Cancer-zodiac-sign',
+        route: 'blog/zodiac-signs/Cancer-zodiac-sign',
     },
     {
         img: Zodiac8,
-        link: 'https://acharyaganesh.com/zodiac-signs/Leo-zodiac-sign',
+        // link: 'https://acharyaganesh.com/zodiac-signs/Leo-zodiac-sign',
+        route: 'blog/zodiac-signs/Leo-zodiac-sign',
     },
     {
         img: Zodiac7,
-        link: 'https://acharyaganesh.com/zodiac-signs/virgo-zodiac-signs',
+        // link: 'https://acharyaganesh.com/zodiac-signs/virgo-zodiac-signs',
+        route: 'blog/zodiac-signs/virgo-zodiac-signs',
     },
     {
         img: Zodiac6,
-        link: 'https://acharyaganesh.com/zodiac-signs/Libra-zodiac-sign',
+        // link: 'https://acharyaganesh.com/zodiac-signs/Libra-zodiac-sign',
+        route: 'blog/zodiac-signs/Libra-zodiac-sign',
     },
     {
         img: Zodiac5,
-        link: 'https://acharyaganesh.com/zodiac-signs/scorpio-zodiac-signs',
+        // link: 'https://acharyaganesh.com/zodiac-signs/scorpio-zodiac-signs',
+        route: 'blog/zodiac-signs/scorpio-zodiac-signs',
     },
     {
         img: Zodiac4,
-        link: 'https://acharyaganesh.com/zodiac-signs/Sagittarius-zodiac-sign',
+        // link: 'https://acharyaganesh.com/zodiac-signs/Sagittarius-zodiac-sign',
+        route: 'blog/zodiac-signs/Sagittarius-zodiac-sign',
     },
     {
         img: Zodiac3,
-        link: 'https://acharyaganesh.com/zodiac-signs/Capricorn-zodiac-sign',
+        // link: 'https://acharyaganesh.com/zodiac-signs/Capricorn-zodiac-sign',
+        route: 'blog/zodiac-signs/Capricorn-zodiac-sign',
     },
     {
         img: Zodiac2,
-        link: 'https://acharyaganesh.com/zodiac-signs/aquarius-zodiac-signs',
+        // link: 'https://acharyaganesh.com/zodiac-signs/aquarius-zodiac-signs',
+        route: 'blog/zodiac-signs/aquarius-zodiac-signs',
     },
     {
         img: Zodiac1,
         link: 'https://acharyaganesh.com/zodiac-signs/Pisces-zodiac-sign',
+        route: 'blog/zodiac-signs/Pisces-zodiac-sign',
     },
 ];
 
@@ -79,6 +92,7 @@ const ZodiacSigns = () => {
     const wrapperRef = useRef();
     const [indicatorCount, setIndicatorCount] = useState(0);
     const [currentOffset, setCurrentOffset] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const containerWidth = containerRef.current.offsetWidth;
@@ -125,7 +139,8 @@ const ZodiacSigns = () => {
     };
 
     const openLink = (link) => {
-        window.open(link, '_blank');
+        // window.open(link, '_blank');
+        navigate(link);
     };
 
     return (
@@ -163,7 +178,7 @@ const ZodiacSigns = () => {
                                 key={i}
                                 src={z.img}
                                 alt={'Zodiac image card'}
-                                onClick={() => openLink(z.link)}
+                                onClick={() => openLink(z.route)}
                             />
                         ))}
                 </div>

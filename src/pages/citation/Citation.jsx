@@ -16,7 +16,7 @@ const Citation = () => {
                 Discover Best Astrologers in your City
             </h3>
             <div className={css.city_container}>
-                <img src={ImgDiscoverDelhi} alt={'Discover city icon'} />
+                {/* <img src={ImgDiscoverDelhi} alt={'Discover city icon'} /> */}
                 <img src={ImgDiscoverDelhi} alt={'Discover city icon'} />
                 <img src={ImgDiscoverMumbai} alt={'Discover city icon'} />
                 <img src={ImgDiscoverBanglore} alt={'Discover city icon'} />
