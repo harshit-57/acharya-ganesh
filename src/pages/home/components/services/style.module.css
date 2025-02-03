@@ -1,5 +1,6 @@
 .container {
     padding: 72px 60px;
+    min-height: unset;
 }
 .section_heading {
     font-family: 'Sorts Mill Goudy', serif;
@@ -9,11 +10,23 @@
 }
 .service_list_container {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex;
+    flex-wrap: wrap; */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 24px;
     gap: 24px;
     margin-top: 48px;
+    transition: all 0.3s ease-in-out;
 }
+.show_more_button {
+    margin: auto;
+    margin-top: 48px;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+}
+
 @media only screen and (max-width: 768px) {
     .container {
         padding: 60px 24px;

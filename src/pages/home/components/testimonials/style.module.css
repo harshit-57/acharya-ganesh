@@ -20,7 +20,8 @@
 }
 
 .testimonial_container {
-    display: flex;
+    /* display: flex; */
+    display: grid;
     gap: 30px;
 }
 @media only screen and (max-width: 768px) {

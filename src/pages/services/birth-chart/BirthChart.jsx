@@ -20,7 +20,7 @@ export const BirthChart = () => {
                 <div className={css.content_wrapper}>
                     <div className={css.column}>
                         <h1 style={{ color: '#9a5c23', textAlign: 'center' }}>
-                            Birth Chart Astrology
+                            Muhurat
                         </h1>
                         <h4 style={{ color: '#9a5c23', textAlign: 'center' }}>
                             Know Your Health Horoscope By Your Date of Birth
@@ -30,7 +30,7 @@ export const BirthChart = () => {
                     {/* <div className={css.row}>
                         <p style={{ textAlign: 'center' }}>
                             In the intriguing world of Indian astrology, the
-                            Birth chart astrology is essential. This cosmic
+                            Muhurat is essential. This cosmic
                             blueprint, created using the exact date, time, and
                             location of one’s birth, depicts the positions of
                             the planets and stars at that specific moment. It’s
@@ -38,8 +38,8 @@ export const BirthChart = () => {
                             arrangement to reveal information about one’s
                             personality, life path, and destiny. At Acharya
                             Ganesh, we are skilled astrologers who can answer
-                            your questions based on your birth chart. Using your
-                            birth chart as a guide, we can learn about your
+                            your questions based on your muhurat. Using your
+                            muhurat as a guide, we can learn about your
                             strengths, weaknesses, and unique qualities,
                             allowing you to connect more intimately with
                             yourself and others.
@@ -47,7 +47,7 @@ export const BirthChart = () => {
                     </div>
                     <div className={css.row}>
                         <p>
-                            Birth Chart Astrology is a powerful tool that
+                            Muhurat is a powerful tool that
                             provides a complete blueprint of your life based on
                             the position of celestial bodies at the time of your
                             birth. By examining the unique aspects of your
@@ -63,7 +63,7 @@ export const BirthChart = () => {
                         </p>
                         <p>
                             Our service involves a deep, personalized analysis
-                            of your birth chart, covering important areas such
+                            of your muhurat, covering important areas such
                             as your sun sign, moon sign, rising sign, and
                             planetary positions. From there, we identify how
                             these aspects influence your life’s journey and
@@ -84,24 +84,23 @@ export const BirthChart = () => {
                                     textAlign: 'center',
                                 }}
                             >
-                                What is Our Birth Chart Astrology?
+                                What is Our Muhurat?
                             </h4>
-                            Birth chart astrology visually represents the
-                            planets when a child is born. It is an astronomical
-                            birth chart that is made based on an individual’s
-                            specific date, time, and birth location. This chart
-                            depicts the various positions of planets and
-                            constellations at the moment of the child’s birth.
-                            At Acharya Ganesh, we use Kundli to forecast future
-                            events and analyze past experiences. The positioning
-                            of the Sun, Moon, and other planets can signal
-                            favorable times for new initiatives or warn of
-                            potential difficulties. For example, a strong
-                            placement of Jupiter, the planet of growth and
-                            expansion, may indicate periods of prosperity and
-                            success. On the other hand, a challenging Saturn
-                            position may indicate times when patience and
-                            perseverance are tested.
+                            Muhurat visually represents the planets when a child
+                            is born. It is an astronomical muhurat that is made
+                            based on an individual’s specific date, time, and
+                            birth location. This chart depicts the various
+                            positions of planets and constellations at the
+                            moment of the child’s birth. At Acharya Ganesh, we
+                            use Kundli to forecast future events and analyze
+                            past experiences. The positioning of the Sun, Moon,
+                            and other planets can signal favorable times for new
+                            initiatives or warn of potential difficulties. For
+                            example, a strong placement of Jupiter, the planet
+                            of growth and expansion, may indicate periods of
+                            prosperity and success. On the other hand, a
+                            challenging Saturn position may indicate times when
+                            patience and perseverance are tested.
                         </p>
 
                         <p>
@@ -113,7 +112,7 @@ export const BirthChart = () => {
                             >
                                 How We Define Health Astrology By Date of Birth?
                             </h4>
-                            Our natal planets in the birth chart are stable,
+                            Our natal planets in the muhurat are stable,
                             although the planets in the sky are constantly
                             moving over our various Houses. Each planet has its
                             own orbit, but because we follow the sun’s 365-day
@@ -141,7 +140,7 @@ export const BirthChart = () => {
                             >
                                 How We Define Health Astrology By Date of Birth?
                             </h4>
-                            Our natal planets in the birth chart are stable,
+                            Our natal planets in the muhurat are stable,
                             although the planets in the sky are constantly
                             moving over our various Houses. Each planet has its
                             own orbit, but because we follow the sun’s 365-day
@@ -167,7 +166,7 @@ export const BirthChart = () => {
                                 }}
                             >
                                 What are the first things we look at in your
-                                birth chart?
+                                muhurat?
                             </h4>
                             At Acharya Ganesha, when we enter your birth
                             information into a computer, you will likely see a
@@ -189,7 +188,7 @@ export const BirthChart = () => {
                         <h2 style={{ color: '#9a5c23', textAlign: 'left' }}>
                             1st House
                         </h2>
-                        This portion of the birth chart is also known as the
+                        This portion of the muhurat is also known as the
                         ascendant, or rising. It represents the energy we put
                         out into the world, the first thing people notice about
                         us is our identity and how we show ourselves.
@@ -205,15 +204,15 @@ export const BirthChart = () => {
                         <h2 style={{ color: '#9a5c23', textAlign: 'left' }}>
                             The 3rd House
                         </h2>
-                        This area of the birth chart represents communication,
-                        early childhood education, siblings, roommates, and the
+                        This area of the muhurat represents communication, early
+                        childhood education, siblings, roommates, and the
                         community.
                     </div>
                     <div className={css.column}>
                         <h2 style={{ color: '#9a5c23', textAlign: 'left' }}>
                             4th House
                         </h2>
-                        The fourth house of the birth chart represents our
+                        The fourth house of the muhurat represents our
                         relationship with our family, home life, ancestors, and
                         aspirations.
                     </div>
@@ -238,7 +237,7 @@ export const BirthChart = () => {
                         <h2 style={{ color: '#9a5c23', textAlign: 'left' }}>
                             7th House
                         </h2>
-                        The seventh house in the birth chart represents
+                        The seventh house in the muhurat represents
                         interpersonal interactions, contracts, marital
                         alliances, and opens enemies.
                     </div>
@@ -281,7 +280,7 @@ export const BirthChart = () => {
                     </div>
                     <div className={css.column}>
                         <h1 style={{ color: '#9a5c23', textAlign: 'center' }}>
-                            The placements of planets by Date of Birth Chart
+                            The placements of planets by Date of Muhurat
                         </h1>
                     </div>
                     <div className={css.column}>
@@ -313,13 +312,13 @@ export const BirthChart = () => {
                         <h2 style={{ color: '#9a5c23', textAlign: 'left' }}>
                             Houses and Aspects
                         </h2>
-                        Our health horoscope by date of birth chart is divided
-                        into 12 houses, which reflect different aspects of your
-                        life. The angles between planets (aspects) exhibit
-                        distinct behaviors. For example, if two planets are
-                        close together, it is a conjunction, indicating a
-                        combination of energy. If they form a right angle
-                        (square), it may indicate a difficulty.
+                        Our health horoscope by date of muhurat is divided into
+                        12 houses, which reflect different aspects of your life.
+                        The angles between planets (aspects) exhibit distinct
+                        behaviors. For example, if two planets are close
+                        together, it is a conjunction, indicating a combination
+                        of energy. If they form a right angle (square), it may
+                        indicate a difficulty.
                     </div>
                     <div className={css.column}>
                         <h2 style={{ color: '#9a5c23', textAlign: 'left' }}>
@@ -348,13 +347,13 @@ export const BirthChart = () => {
                         At the heart of astrology, the cosmic warrior is the
                         long-held concept that the human spirit reflects the
                         universe: both are magnificently diverse and infinitely
-                        mysterious. Ultimately, birth chart astrology is the art
-                        of stargazing. Your inquisitive nature will constantly
+                        mysterious. Ultimately, muhurat is the art of
+                        stargazing. Your inquisitive nature will constantly
                         shine a light on the darkness. So, if you want your
-                        birth chart horoscope, Acharya Ganesh is the sole option
-                        to meet your needs. We have the professional knowledge
-                        and experience to deliver the best horoscope 24/7. So
-                        please visit our website or contact us directly.
+                        muhurat horoscope, Acharya Ganesh is the sole option to
+                        meet your needs. We have the professional knowledge and
+                        experience to deliver the best horoscope 24/7. So please
+                        visit our website or contact us directly.
                     </div>
                 </div>
             </div>

@@ -35,9 +35,9 @@ export default [
                 subMenus: null,
             },
             {
-                route: '/services/birth-chart',
+                route: '/services/muhurat',
                 id: '',
-                title: 'Birth Chart Astrology',
+                title: 'Muhurat',
                 subMenus: null,
             },
             {

@@ -38,7 +38,7 @@ export default () => {
                 <Route index path="/" element={<Home />} />
                 <Route path="/services/astro-vastu" element={<AstroVastu />} />
                 <Route path="/services/astrology" element={<Astrology />} />
-                <Route path="/services/birth-chart" element={<BirthChart />} />
+                <Route path="/services/muhurat" element={<BirthChart />} />
                 <Route
                     path="/services/career-prediction"
                     element={<CareerPrediction />}

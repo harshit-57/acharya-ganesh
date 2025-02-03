@@ -69,6 +69,13 @@
     }
 }
 
+.show_more_button {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+}
+
 .course_slide_wrapper {
     display: flex;
     gap: 20px;

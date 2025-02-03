@@ -20,9 +20,9 @@ export default [
         graphic: ImgService2,
     },
     {
-        route: '/services/birth-chart',
+        route: '/services/muhurat',
         id: '',
-        title: 'Birth Chart Astrology',
+        title: 'Muhurat',
         graphic: ImgService3,
     },
     {
