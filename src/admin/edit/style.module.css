@@ -1,0 +1,212 @@
+@import '//cdn.quilljs.com/1.2.2/quill.snow.css';
+
+.container {
+    padding: 10px;
+    background-color: #fff3eb;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    padding: 0 50px;
+}
+
+.left_content {
+    width: 60%;
+}
+
+.title {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: calc(infinity * 1px);
+    padding: 16px 20px;
+    margin: 15px 0;
+    font-weight: 600;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.permalink {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: calc(infinity * 1px);
+    margin: 15px 0;
+}
+
+.permalink label {
+    margin-right: 10px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.permalink input {
+    flex: 1;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    font-size: 16px;
+}
+
+.edit_icon {
+    font-size: 1.2em;
+    color: #c75b12;
+    cursor: pointer;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.buttons button {
+    padding: 12px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.save_drafts {
+    background-color: #fff;
+    color: #000;
+    color: #23201d;
+    border: 1px solid #23201d;
+    position: relative;
+}
+
+.preview_changes {
+    background-color: #9a5c23;
+    color: #fff;
+    border: 1px solid #9a5c23;
+}
+
+.content_container {
+    border-radius: 10px;
+    padding: 16px 24px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+}
+
+.form_buttons {
+    background-color: #f3f3f3;
+    color: #9a5c23;
+    border: 1px solid #cac3cb;
+}
+
+.header {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.subheader {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.text {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.additional_header {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.margins {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.pond_width {
+    width: 70%;
+}
+
+.container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input,
+.select,
+.color_picker {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.input_container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon {
+    font-size: 1.2em;
+    color: #ddd;
+}
+
+.custom_size_button {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.custom_size_button.active {
+    background-color: #007cba;
+    color: white;
+}
+
+.color_display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input_box {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    margin-top: 10px;
+    outline: none;
+}
+
+.color_box {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #000;
+    margin: 20px auto;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
