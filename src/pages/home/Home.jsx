@@ -6,7 +6,7 @@ import ZodiacSigns from './components/zodiac-signs/ZodiacSigns';
 import { Section } from '../../components/section/Section';
 import { HorizontalBorder } from '../../components/spacer/Spacer';
 import DescriptionCarousel from './components/description-carousel/DescriptionCarousel';
-import Gallery from './components/gallery/Gallery';
+import Gallery from '../../components/gallery/Gallery';
 import Testimonial from './components/testimonials/Testimonials';
 import Blog from './components/blog/Blog';
 import { Footer } from '../../components/footer/Footer';

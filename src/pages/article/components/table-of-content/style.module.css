@@ -22,9 +22,15 @@
             transform: rotate(-90deg);
             filter: brightness(0) invert(0);
         }
-        p {
-            font-weight: 500;
-            font-size: 14px;
+        a {
+            cursor: pointer;
+            &:hover {
+                text-decoration: underline;
+            }
+            p {
+                font-weight: 500;
+                font-size: 14px;
+            }
         }
     }
 }

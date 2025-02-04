@@ -14,6 +14,7 @@ import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
 import { Footer } from '../../components/footer/Footer';
 import { Helmet } from 'react-helmet-async';
+import Gallery from '../../components/gallery/Gallery';
 const AboutUs = () => {
     const [images, setImages] = useState([]);
     const [readMore, setReadMore] = useState('Read More');
@@ -137,7 +138,7 @@ const AboutUs = () => {
                                     to give back to the community.
                                 </p>
                             )}
-                             {readMore === 'Read Less' && (
+                            {readMore === 'Read Less' && (
                                 <span
                                     className={css.read_more_link}
                                     onClick={() => setReadMore('Read More')}
@@ -235,7 +236,7 @@ const AboutUs = () => {
                             </div>
                         </div>
                     </div>
-                    <div className={css.gallery_container}>
+                    {/* <div className={css.gallery_container}>
                         <h2 className={css.section_heading}>
                             Memories Over The Years
                         </h2>
@@ -245,7 +246,8 @@ const AboutUs = () => {
                                     <img key={index} src={img} alt="" />
                                 ))}
                         </div>
-                    </div>
+                    </div> */}
+                    <Gallery />
                     <div className={css.row}>
                         <div
                             className={[css.column, css.card_primary_bg].join(

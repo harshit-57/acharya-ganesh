@@ -1,6 +1,7 @@
 import css from './style.module.css';
 import { Spacer } from '../../../../../components/spacer/Spacer';
 import parse from 'html-react-parser';
+import { htmlToText } from 'html-to-text';
 export const ArticleCard = ({ onClick, article, style, className }) => {
     return (
         <div
@@ -14,7 +15,7 @@ export const ArticleCard = ({ onClick, article, style, className }) => {
                 className={`content-two-line ${css.title}`}
                 title={article?.Title}
             >
-                {article?.Title}
+                {htmlToText(article?.Title)}
             </h3>
             <Spacer vertical={'10px'} />
             <div className={`html-content content-four-line ${css.shortDesc}`}>
