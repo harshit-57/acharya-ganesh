@@ -59,6 +59,7 @@
     .article_container {
         display: flex;
         gap: 60px;
+        flex-direction: column;
 
         .article_wrapper {
             flex: 1;

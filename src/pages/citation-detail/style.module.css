@@ -1,0 +1,129 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+    padding: 72px 60px;
+}
+.citation_detail_container {
+    display: flex;
+    gap: 60px;
+
+    .citation_detail_wrapper {
+        flex: 1;
+    }
+}
+.header {
+    background-color: #5c5c5c;
+    min-height: auto !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.header_text_container {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    padding: 80px;
+    justify-content: center;
+}
+
+.header_text_wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+        font-size: 45px;
+        margin-top: 24px;
+        color: var(--color-primary);
+        font-family: 'Sorts Mill Goudy', serif;
+    }
+
+    p {
+        font-size: 16px;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: var(--color-white);
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        justify-content: center;
+
+        span {
+            display: flex;
+        }
+
+        img {
+            width: 24px;
+            height: 24px;
+            align-self: center;
+            transform: rotate(270deg);
+        }
+    }
+}
+
+.stats_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 58px;
+    border-radius: 36px;
+    gap: 20px;
+
+    p {
+        display: flex;
+        align-items: center;
+        font-family: 'Sorts Mill Goudy';
+        font-size: 40px;
+        color: #fed1a7;
+        gap: 16px;
+
+        span {
+            margin-top: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-white);
+        }
+    }
+}
+.consult_button {
+    p {
+        color: #000;
+        font-weight: 600;
+    }
+}
+
+.sidebar_container {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+
+    & > img {
+        border-radius: 24px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .header_text_wrapper {
+        h3 {
+            font-size: 32px;
+            text-align: center;
+        }
+        .stats_container {
+            flex-direction: column;
+        }
+        .consult_button {
+            padding: 15px;
+        }
+    }
+
+    .citation_detail_container {
+        flex-direction: column;
+    }
+
+    .sidebar_container {
+        width: 100%;
+        margin: auto;
+    }
+}

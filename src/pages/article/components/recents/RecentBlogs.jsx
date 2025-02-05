@@ -6,6 +6,7 @@ import ImgPlaceholderThumbnail from '../../../../assets/recent_blog_thumbnail_pl
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { APIHelper } from '../../../../util/APIHelper';
+import ContactForm from '../../../../components/contact-form/ContactForm';
 export const RecentBlogs = () => {
     const navigate = useNavigate();
     const [articleList, setArticleList] = useState([]);
@@ -43,19 +44,7 @@ export const RecentBlogs = () => {
                         </div>
                     ))}
             </div>
-            <div className={css.contact_form_container}>
-                <h3>Contact Us</h3>
-                <InputField className={css.input} placeholder={'Name'} />
-                <InputField className={css.input} placeholder={'Email'} />
-                <InputField className={css.input} placeholder={'Phone No'} />
-                <InputField className={css.input} placeholder={'Services'} />
-                <textarea
-                    className={css.input}
-                    name={'note'}
-                    placeholder={'Please Write Any Note Here...'}
-                ></textarea>
-                <PrimaryButton>Submit</PrimaryButton>
-            </div>
+            <ContactForm />
         </div>
     );
 };

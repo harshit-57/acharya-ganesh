@@ -20,6 +20,7 @@ import WebStoriesList from './pages/web-stories/WebStoriesList';
 import { WebStoriesView } from './pages/web-stories-view/WebStoriesView';
 import { useEffect } from 'react';
 import Login from './admin/login/Login';
+import CitationDetail from './pages/citation-detail/CitationDetail';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
@@ -84,6 +85,10 @@ export default () => {
                     element={<WebStoriesView />}
                 />
                 <Route path="/contact" element={<Contact />} />
+                <Route
+                    path="/citation/:slug/:location"
+                    element={<CitationDetail />}
+                />
                 <Route path="*" element={<Navigate to={'/'} />} />
 
                 {/* Admin Routes */}

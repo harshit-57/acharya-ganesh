@@ -3,6 +3,7 @@ import ImgConsultation from '../../../../assets/consultation_poster_2.jpg';
 import { InputField } from '../../../../components/input-field/InputField';
 import { PrimaryButton } from '../../../../components/primary-button/PrimaryButton';
 import ImgPlaceholderThumbnail from '../../../../assets/recent_blog_thumbnail_placeholder.jpg';
+import ContactForm from '../../../../components/contact-form/ContactForm';
 export const RecentBlogs = () => {
     return (
         <div className={css.container}>
@@ -31,19 +32,7 @@ export const RecentBlogs = () => {
                     </p>
                 </div>
             </div>
-            <div className={css.contact_form_container}>
-                <h3>Contact Us</h3>
-                <InputField className={css.input} placeholder={'Name'} />
-                <InputField className={css.input} placeholder={'Email'} />
-                <InputField className={css.input} placeholder={'Phone No'} />
-                <InputField className={css.input} placeholder={'Services'} />
-                <textarea
-                    className={css.input}
-                    name={'note'}
-                    placeholder={'Please Write Any Note Here...'}
-                ></textarea>
-                <PrimaryButton>Submit</PrimaryButton>
-            </div>
+            <ContactForm />
         </div>
     );
 };
