@@ -21,6 +21,7 @@ import { WebStoriesView } from './pages/web-stories-view/WebStoriesView';
 import { useEffect } from 'react';
 import Login from './admin/login/Login';
 import CitationDetail from './pages/citation-detail/CitationDetail';
+import Edit from './admin/edit/Edit';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
@@ -98,6 +99,7 @@ export default () => {
                         path="/admin"
                         element={<Navigate to={'/admin/dashboard'} />}
                     />
+                    <Route path="/admin/edit" element={<Edit />} />
                     <Route
                         path="/admin/dashboard"
                         element={

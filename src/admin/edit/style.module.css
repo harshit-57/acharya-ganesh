@@ -1,16 +1,17 @@
 @import '//cdn.quilljs.com/1.2.2/quill.snow.css';
 
 .container {
-    padding: 10px;
+    /* padding: 50px; */
     background-color: #fff3eb;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     padding: 0 50px;
+    gap: 20px;
 }
 
 .left_content {
-    width: 60%;
+    width: 70%;
 }
 
 .title {
@@ -210,3 +211,195 @@
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
+.icon_name_info_container{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.icon_name_info{
+    font-size: 12px;
+    color: #9A5C23;
+    font-weight: 800;
+    margin-left: 10px;
+
+}
+.icon_name_info_example{
+    font-size: 12px;
+    color: #2C2520B2;
+    margin-left: 10px;
+}
+.costomize_container{
+    background: #F3F3F3;
+    padding: 3px;
+    display: flex;
+    border-radius: 8px
+}
+
+.focus_title_container{
+    margin-bottom: 16px; 
+}
+
+
+
+.seo_title_container {
+    margin-bottom: 16px;
+  }
+  
+  .label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .input_wrapper {
+    width: 100%;
+    border: 1px solid #dadada;
+    border-radius: 12px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+  }
+  
+  .seo_input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    background: transparent;
+  }
+  
+  .button_group {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  
+  .action_button {
+    padding: 8px 16px;
+    border: 1px solid #F3F3F3;
+    border-radius: 20px;
+    
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color : #000;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .action_button:hover {
+    background: #f0f0f0;
+  }
+  
+
+
+
+
+
+
+
+  .status_panel {
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 400px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .status_panel h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  .status_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+  }
+  
+  .status_row .label {
+    font-weight: 500;
+  }
+  
+  .status_row .value {
+    color: #4A5568;
+  }
+  
+  .status_row button {
+    color: #3182ce;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: underline;
+  }
+  
+  .checkbox_row {
+    display: flex;
+    align-items: center;
+    padding: 4px 0;
+  }
+  
+  .checkbox_row input {
+    margin-right: 8px;
+  }
+  
+  .checkbox_row span {
+    color: #4A5568;
+  }
+  
+  .checkbox_row .status {
+    font-weight: 500;
+  }
+  
+  .divider {
+    border-top: 1px solid #E2E8F0;
+    margin: 16px 0;
+  }
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .boldValue{
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .publish_cell{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .publish_cell_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .publish_cell_edit{
+    font-size: 16px;
+    color: #9A5C23;
+    font-weight: 800;
+    margin-left: 10px;
+  }

@@ -8,6 +8,8 @@ export const InputField = ({
     onchange,
     name,
     error,
+    value,
+    readOnly,
 }) => {
     return (
         <div className={css.input_container}>
@@ -18,6 +20,8 @@ export const InputField = ({
                 style={style}
                 onChange={onchange}
                 className={[css.input, className].join(' ')}
+                value={value}
+                readOnly={readOnly}
             />
             {error && <p className={css.error}>{error}</p>}
         </div>
