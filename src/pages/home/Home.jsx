@@ -13,6 +13,7 @@ import { Footer } from '../../components/footer/Footer';
 import { CoursesCarousel } from '../../components/courses-carousel/CoursesCarousel';
 import { Helmet } from 'react-helmet-async';
 import CitationBox from '../../components/citation-box/CitationBox';
+import VideoReviews from './components/video-review/VideoReview';
 const Home = () => {
     return (
         <PageContainer>
@@ -80,6 +81,7 @@ const Home = () => {
             <Section classname={css.section_gallery_n_more}>
                 <Gallery />
                 <Testimonial />
+                <VideoReviews />
                 <Blog />
                 <CitationBox />
             </Section>
