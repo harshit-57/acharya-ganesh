@@ -21,6 +21,7 @@ import { WebStoriesView } from './pages/web-stories-view/WebStoriesView';
 import { useEffect } from 'react';
 import Login from './admin/login/Login';
 import CitationDetail from './pages/citation-detail/CitationDetail';
+import Citation from './pages/citation/Citation';
 import Edit from './admin/edit/Edit';
 
 const RouteChangeDetector = () => {
@@ -86,10 +87,8 @@ export default () => {
                     element={<WebStoriesView />}
                 />
                 <Route path="/contact" element={<Contact />} />
-                <Route
-                    path="/citation/:slug/:location"
-                    element={<CitationDetail />}
-                />
+                <Route path="/citation" element={<Citation />} />
+                <Route path="/citation/:slug" element={<CitationDetail />} />
                 <Route path="*" element={<Navigate to={'/'} />} />
 
                 {/* Admin Routes */}

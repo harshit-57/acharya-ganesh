@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import css from './style.module.css';
 import { PageContainer } from '../../components/page-container/PageContainer';
 import { TopBar } from '../../components/top-bar/TopBar';
@@ -7,12 +7,51 @@ import { Footer } from '../../components/footer/Footer';
 import { HorizontalBorder, Spacer } from '../../components/spacer/Spacer';
 import CitationBanner from '../../assets/citation-banner.png';
 import ImgConsultation from '../../assets/consultation_poster.jpg';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
 import ContactForm from '../../components/contact-form/ContactForm.jsx';
+import ArrowCircle from '../../assets/arrow_circle.png';
+import Blog from '../../components/blog/Blog.jsx';
 
 const CitationDetail = () => {
-    const { slug, location } = useParams();
+    const { state: citation } = useLocation();
+
+    console.log(citation);
+
+    const [showFaq, setShowFaq] = useState();
+
+    const faqList = [
+        {
+            question: `How do I find a reliable ${citation?.type || '-'} in ${
+                citation?.location
+            }?`,
+            answer: ` Look for experienced consultants with good reviews, proper certifications, and a proven track record in ${citation?.location}.`,
+        },
+        {
+            question: `What services are included in a ${
+                citation?.type || '-'
+            } in ${citation?.location}?`,
+            answer: `Services typically include site inspection, detailed analysis, recommendations, and follow-up guidance.`,
+        },
+        {
+            question: `How much does a ${citation?.type || '-'} cost in ${
+                citation?.location
+            }?`,
+            answer: ` Consultation fees vary based on property size and type of service required. Contact for detailed pricing.`,
+        },
+        {
+            question: `What should I expect during a ${
+                citation?.type || '-'
+            } in ${citation?.location}?`,
+            answer: ` Expect a thorough property assessment, energy flow analysis, and detailed recommendations for improvements.`,
+        },
+        {
+            question: `How can I book a ${citation?.type || '-'} in ${
+                citation?.location
+            }?`,
+            answer: `Contact us through our website, phone, or email to schedule a consultation at your convenience.`,
+        },
+    ];
 
     return (
         <PageContainer className={css.container}>
@@ -25,7 +64,8 @@ const CitationDetail = () => {
                 <div className={css.header_text_container}>
                     <div className={css.header_text_wrapper}>
                         <h3>
-                            Consult With The Best Vastu Consultant in Kolkata
+                            Consult With The Best {citation?.type || '-'} in{' '}
+                            {citation?.location}
                         </h3>
                         <div className={css.stats_container}>
                             <p>
@@ -63,30 +103,36 @@ const CitationDetail = () => {
                         <div className={`html-content`}>
                             <h1>
                                 <strong>
-                                    Best Vastu Consultant in Kolkata
+                                    Best {citation?.type || '-'} in{' '}
+                                    {citation?.location}
                                 </strong>
                             </h1>
                             <p>
                                 <span>
-                                    Vastu is a study of architecture that for
-                                    the most part focuses on the directions of a
-                                    Residential or Commercial space along with
-                                    joining each of the five natural elements to
-                                    make a friendly setting/air assisting the
-                                    tenants with having harmony, satisfaction,
-                                    and sufficiency of health or wellbeing.
+                                    {' '}
+                                    {citation?.type || '-'} is a study of
+                                    architecture that for the most part focuses
+                                    on the directions of a Residential or
+                                    Commercial space along with joining each of
+                                    the five natural elements to make a friendly
+                                    setting/air assisting the tenants with
+                                    having harmony, satisfaction, and
+                                    sufficiency of health or wellbeing.
                                 </span>
                             </p>
                             <p>
                                 <span>A </span>
-                                <b>Vastu Consultant</b>
+                                <b> {citation?.type || '-'} </b>
                                 <span> examines the current </span>
                                 <span>
                                     {' '}
-                                    Vastu for a Home or commercial place and
-                                    suggests significant{' '}
+                                    {citation?.type || '-'} for a Home or
+                                    commercial place and suggests significant{' '}
                                 </span>
-                                <b>Vastu Shastra Consultant</b>
+                                <b>
+                                    {' '}
+                                    {citation?.type || '-'} Shastra Consultant
+                                </b>
                                 <span>
                                     {' '}
                                     to mollify all Vastu-related imbalances in
@@ -106,12 +152,14 @@ const CitationDetail = () => {
                                     The son of Vishwakarma, Mamuni Mayan
                                     invented{' '}
                                 </span>
-                                <b>Vastu Shastra</b>
+                                <b> {citation?.type || '-'} Shastra</b>
                                 <span>
-                                    . It is the reported piece of Vastu Vidya.
-                                    Vastu Vidya information is an assortment of
-                                    methods of reasoning and theories that are
-                                    very flexible. Ancient Vastu Shastra belief
+                                    . It is the reported piece of{' '}
+                                    {citation?.type || '-'} Vidya.{' '}
+                                    {citation?.type || '-'} Vidya information is
+                                    an assortment of methods of reasoning and
+                                    theories that are very flexible. Ancient{' '}
+                                    {citation?.type || '-'} Shastra belief
                                     systems include those for the planning and
                                     design of temples, houses, workplaces,
                                     cities, urban communities, gardens, streets,
@@ -119,24 +167,34 @@ const CitationDetail = () => {
                                 </span>
                             </p>
                             <h1>
-                                <b>Top Vastu Consultant in Kolkata</b>
+                                <b>
+                                    Top {citation?.type || '-'} in{' '}
+                                    {citation?.location}
+                                </b>
                             </h1>
                             <p>
                                 <span>
-                                    Kolkata is a city of joy for its deep
-                                    encapsulation of culture, love, secret,
-                                    respect, and most certainly some astonishing
-                                    sweet delicacies. Kolkata, as it is
-                                    currently referred to, is a city that
-                                    maintains an ideal juxtaposition between the
-                                    old world and the modern one.
+                                    {' '}
+                                    {citation?.location} is a city of joy for
+                                    its deep encapsulation of culture, love,
+                                    secret, respect, and most certainly some
+                                    astonishing sweet delicacies.{' '}
+                                    {citation?.location}, as it is currently
+                                    referred to, is a city that maintains an
+                                    ideal juxtaposition between the old world
+                                    and the modern one.
                                 </span>
                             </p>
                             <p>
                                 <span>
                                     Hanish Bagga is one of the most famous and{' '}
                                 </span>
-                                <b>Best</b> <b>Vastu Consultants in Kolkata</b>
+                                <b>Best</b>{' '}
+                                <b>
+                                    {' '}
+                                    {citation?.type || '-'}s in{' '}
+                                    {citation?.location}
+                                </b>
                                 <span>
                                     {' '}
                                     to solve any Vastu-related question for
@@ -149,15 +207,16 @@ const CitationDetail = () => {
                             <p>
                                 <span>
                                     These multitudes of issues are perhaps a
-                                    result of specific explicit Vastu faults.
-                                    There are simple solutions for correcting
-                                    those faults, which require no demolition.
+                                    result of specific explicit{' '}
+                                    {citation?.type || '-'} faults. There are
+                                    simple solutions for correcting those
+                                    faults, which require no demolition.
                                 </span>
                             </p>
                             <h3>
                                 <b>
-                                    Some of the common problems faced due to
-                                    Vastu imbalance:
+                                    Some of the common problems faced due to{' '}
+                                    {citation?.type || '-'} imbalance:
                                 </b>
                             </h3>
                             <ul>
@@ -230,13 +289,14 @@ const CitationDetail = () => {
                             <p>
                                 <span>
                                     These multitudes of issues are perhaps a
-                                    result of specific explicit Vastu faults.
-                                    There are simple solutions for correcting
-                                    those faults, which require no demolition.
+                                    result of specific explicit{' '}
+                                    {citation?.type || '-'} faults. There are
+                                    simple solutions for correcting those
+                                    faults, which require no demolition.
                                 </span>
                             </p>
                             <h1>
-                                <b>Vastu Tips for Home:</b>
+                                <b> {citation?.type || '-'} Tips for Home:</b>
                             </h1>
                             <ul>
                                 <li>
@@ -281,12 +341,16 @@ const CitationDetail = () => {
                                 </li>
                                 <li>
                                     <span>To consult Hanish Bagga, </span>
-                                    <b>Vastu Expert</b>
+                                    <b> {citation?.type || '-'} Expert</b>
                                     <span>
                                         , just contact his team at{' '}
-                                        <strong>
-                                            +91 7300004325, 7300004326
-                                        </strong>
+                                        <a href="tel:+917300004325">
+                                            <strong>+91 7300004325</strong>
+                                        </a>
+                                        ,{' '}
+                                        <a href="tel:+917300004326">
+                                            <strong>+91 7300004326</strong>
+                                        </a>
                                         , or fill in your details at{' '}
                                         <a href="https://acharyaganesh.com/">
                                             <strong>
@@ -300,83 +364,35 @@ const CitationDetail = () => {
                         <div className={css.faq_section}>
                             <h1>
                                 <strong>
-                                    FAQs about Best Vastu Consultant in Kolkata:
+                                    FAQs about Best {citation?.type || '-'} in{' '}
+                                    {citation?.location}:
                                 </strong>
                             </h1>
-                            <div class="faq-item">
-                                <button class="faq-question">
-                                    Q1. How do I find a reliable Vastu
-                                    consultant in Kolkata?
-                                    <span class="plus">+</span>
-                                </button>
-                                <div class="faq-answer">
-                                    <p>
-                                        Look for experienced consultants with
-                                        good reviews, proper certifications, and
-                                        a proven track record in Kolkata.
-                                    </p>
-                                </div>
-                            </div>
 
-                            <div class="faq-item">
-                                <button class="faq-question">
-                                    Q2. What services are included in a Vastu
-                                    consultation in Kolkata?
-                                    <span class="plus">+</span>
-                                </button>
-                                <div class="faq-answer">
-                                    <p>
-                                        Services typically include site
-                                        inspection, detailed analysis,
-                                        recommendations, and follow-up guidance.
-                                    </p>
+                            {faqList?.map((faq, i) => (
+                                <div className={css.faq_item}>
+                                    <button
+                                        className={css.faq_question}
+                                        onClick={() =>
+                                            showFaq == i
+                                                ? setShowFaq(null)
+                                                : setShowFaq(i)
+                                        }
+                                    >
+                                        <p>
+                                            Q{i + 1}. {faq?.question}
+                                        </p>
+                                        <span className={css.collapse}>
+                                            <img src={ArrowCircle} alt="+" />
+                                        </span>
+                                    </button>
+                                    {showFaq == i && (
+                                        <div className={css.faq_answer}>
+                                            <p>{faq?.answer}</p>
+                                        </div>
+                                    )}
                                 </div>
-                            </div>
-
-                            <div class="faq-item">
-                                <button class="faq-question">
-                                    Q3. How much does a Vastu consultation cost
-                                    in Kolkata?
-                                    <span class="plus">+</span>
-                                </button>
-                                <div class="faq-answer">
-                                    <p>
-                                        Consultation fees vary based on property
-                                        size and type of service required.
-                                        Contact for detailed pricing.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="faq-item">
-                                <button class="faq-question">
-                                    Q4. What should I expect during a Vastu
-                                    consultation in Kolkata?
-                                    <span class="plus">+</span>
-                                </button>
-                                <div class="faq-answer">
-                                    <p>
-                                        Expect a thorough property assessment,
-                                        energy flow analysis, and detailed
-                                        recommendations for improvements.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="faq-item">
-                                <button class="faq-question">
-                                    Q5. How can I book a Vastu consultation in
-                                    Kolkata?
-                                    <span class="plus">+</span>
-                                </button>
-                                <div class="faq-answer">
-                                    <p>
-                                        Contact us through our website, phone,
-                                        or email to schedule a consultation at
-                                        your convenience.
-                                    </p>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
                     <div className={css.sidebar_container}>
@@ -387,6 +403,7 @@ const CitationDetail = () => {
                         <ContactForm />
                     </div>
                 </div>
+                <Blog />
             </div>
             <Spacer vertical={'72px'} />
             <Footer />

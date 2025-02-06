@@ -1,12 +1,12 @@
 import css from './style.module.css';
-import { PageContainer } from '../../../../components/page-container/PageContainer';
+import { PageContainer } from '../page-container/PageContainer';
 import { ArticleCard } from './components/ArticleCard';
-import ImgSectionBg from '../../../../assets/blog_section_bg.png';
+import ImgSectionBg from '../../assets/blog_section_bg.png';
 import { useState, useEffect } from 'react';
-import { APIHelper } from '../../../../util/APIHelper';
+import { APIHelper } from '../../util/APIHelper';
 import { useNavigate } from 'react-router-dom';
-import { IndicatorContainer } from '../../../../components/indicator-container/IndicatorContainer';
-import LeftArrow from '../../../../assets/left-arrow.png';
+import { IndicatorContainer } from '../indicator-container/IndicatorContainer';
+import LeftArrow from '../../assets/left-arrow.png';
 import useBreakpoint from 'use-breakpoint';
 
 const PER_FRAME_ARTICLE_COUNT_DESKTOP = 3;

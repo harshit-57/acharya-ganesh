@@ -1,5 +1,5 @@
 import css from './style.module.css';
-import { Spacer } from '../../../../../components/spacer/Spacer';
+import { Spacer } from '../../spacer/Spacer';
 import parse from 'html-react-parser';
 import { htmlToText } from 'html-to-text';
 export const ArticleCard = ({ onClick, article, style, className }) => {

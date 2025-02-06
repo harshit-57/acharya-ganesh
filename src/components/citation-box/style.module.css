@@ -1,0 +1,67 @@
+.discover_cities_container {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+.discover_heading {
+    color: var(--color-caption);
+    font-size: 42px;
+    font-family: 'Sorts Mill Goudy';
+}
+.city_container {
+    /* display: flex;
+    flex-wrap: wrap;
+    gap: 24px; */
+    display: grid;
+    gap: 50px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    text-align: center;
+    padding: 0 50px;
+    .city_wrapper {
+        padding: 20px;
+        background-color: var(--color-caption);
+        align-self: flex-start;
+        border-radius: 100px;
+        color: var(--color-white);
+        transition: padding 0.5s;
+        text-transform: uppercase;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    a {
+        font-family: 'Work Sans';
+        font-weight: 700;
+        font-size: 11px;
+    }
+    img {
+        width: 144px;
+        height: 144px;
+    }
+}
+
+.show_more_button {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+}
+
+@media only screen and (max-width: 768px) {
+    .discover_heading {
+        font-size: 28px;
+        text-align: center;
+    }
+    .city_container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+
+        img {
+            width: 103px;
+            height: 103px;
+        }
+    }
+}

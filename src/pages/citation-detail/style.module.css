@@ -104,6 +104,44 @@
     }
 }
 
+.faq_section {
+    margin-top: 1rem;
+    h1 {
+        font-family: 'Sorts Mill Goudy';
+        font-size: 30px;
+        font-weight: 400;
+        color: var(--color-caption);
+        line-height: 40px;
+        margin: 0;
+        padding-top: 1.5rem;
+        margin-bottom: var(--h1-margin-bottom, 1.5rem);
+    }
+
+    .faq_item {
+        padding: 20px 0;
+        border-bottom: 1px solid #cac3bc;
+
+        .faq_question {
+            font-family: Work Sans;
+            font-size: 20px;
+            font-weight: 600;
+            border: none;
+            background-color: unset;
+            border-radius: 0;
+            color: inherit;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+        .faq_answer {
+            margin: 30px;
+        }
+    }
+}
+
 @media only screen and (max-width: 768px) {
     .header_text_wrapper {
         h3 {
