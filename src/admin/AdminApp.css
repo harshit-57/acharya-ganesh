@@ -1,0 +1,37 @@
+.Toastify__progress-bar {
+    background-color: #0432a3 !important;
+}
+
+.Toastify__toast--success .Toastify__toast-icon svg {
+    fill: #0432a3 !important;
+}
+
+.MuiFormHelperText-root {
+    color: #d9534f !important;
+}
+
+.MuiFormHelperText-root.Mui-error {
+    color: #d9534f !important;
+}
+
+.MuiFormLabel-root.Mui-error {
+    color: #d9534f !important;
+}
+
+.MuiInput-underline.Mui-error:after {
+    border-color: #d9534f !important;
+}
+
+.bread-link:hover {
+    cursor: pointer;
+}
+
+input:-webkit-autofill,
+.my-class:-webkit-autofill {
+    -webkit-transition-delay: 9999999s;
+}
+
+.makeStyles-root-3 {
+    align-items: center;
+    gap: 5px;
+}

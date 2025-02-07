@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { ADMINAPIHELPER } from '../../util/APIHelper';
-import Logo from '../../assets/brand_logo.png';
-import { PageContainer } from '../../components/page-container/PageContainer';
+import { ADMINAPIHELPER } from '../../../util/APIHelper';
+import Logo from '../../../assets/brand_logo.png';
+import { PageContainer } from '../../../components/page-container/PageContainer';
 import css from './style.module.css';
 import { useNavigate } from 'react-router-dom';
+import BgImage from '../../../assets/solar_system.jpg';
+import { PrimaryButton } from '../../../components/primary-button/PrimaryButton';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -64,7 +66,10 @@ const Login = () => {
 
     return (
         <PageContainer>
-            <div className={css.container}>
+            <div
+                className={css.container}
+                style={{ backgroundImage: `url(${BgImage})` }}
+            >
                 <div className={css.row}>
                     <div className={css.column}>
                         <div className={css.card}>
@@ -73,7 +78,7 @@ const Login = () => {
                                 <h4>Login</h4>
                             </div>
                             <div className={css.cardBody}>
-                                <form onSubmit={handleSubmit}>
+                                <form>
                                     <div className={css.formGroup}>
                                         <label htmlFor="email">Email</label>
                                         <input
@@ -110,12 +115,12 @@ const Login = () => {
                                             </div>
                                         )}
                                     </div>
-                                    <button
-                                        type="submit"
+                                    <PrimaryButton
                                         className={css.button}
+                                        onClick={handleSubmit}
                                     >
                                         {loading ? 'Loading...' : 'Login'}
-                                    </button>
+                                    </PrimaryButton>
                                 </form>
                             </div>
                         </div>

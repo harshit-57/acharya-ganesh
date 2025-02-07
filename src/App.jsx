@@ -19,10 +19,12 @@ import { WealthAstrology } from './pages/services/wealth-astrology/WealthAstrolo
 import WebStoriesList from './pages/web-stories/WebStoriesList';
 import { WebStoriesView } from './pages/web-stories-view/WebStoriesView';
 import { useEffect } from 'react';
-import Login from './admin/login/Login';
+import Login from './admin/pages/login/Login';
 import CitationDetail from './pages/citation-detail/CitationDetail';
 import Citation from './pages/citation/Citation';
-import Edit from './admin/edit/Edit';
+import Edit from './admin/content-editor/Conten';
+import AdminApp from './admin/AdminApp';
+import Dashboard from './admin/pages/dashboard/Dashboard';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
@@ -93,30 +95,15 @@ export default () => {
 
                 {/* Admin Routes */}
                 <Route path="/admin/login" element={<Login />} />
-                <Route element={<AdminGuard />}>
+                <Route element={<AdminApp />}>
                     <Route
                         path="/admin"
                         element={<Navigate to={'/admin/dashboard'} />}
                     />
                     <Route path="/admin/edit" element={<Edit />} />
-                    <Route
-                        path="/admin/dashboard"
-                        element={
-                            <>
-                                <h1> Admin Dashboard</h1>
-                            </>
-                        }
-                    />
+                    <Route path="/admin/dashboard" element={<Dashboard />} />
                 </Route>
             </Routes>
         </>
     );
-};
-
-const AdminGuard = () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-        return <Navigate to={'/admin/login'} />;
-    }
-    return <Outlet />;
 };

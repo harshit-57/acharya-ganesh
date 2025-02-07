@@ -426,7 +426,6 @@ export const Astrology = () => {
                                     <h2
                                         style={{
                                             color: '#9a5c23',
-                                            textAlign: 'center',
                                             fontSize: '14px',
                                             textAlign: 'left',
                                         }}
@@ -438,7 +437,6 @@ export const Astrology = () => {
                                     <h2
                                         style={{
                                             color: '#9a5c23',
-                                            textAlign: 'center',
                                             fontSize: '14px',
                                             textAlign: 'left',
                                         }}
@@ -453,7 +451,6 @@ export const Astrology = () => {
                                     <h2
                                         style={{
                                             color: '#9a5c23',
-                                            textAlign: 'center',
                                             fontSize: '14px',
                                             textAlign: 'left',
                                         }}
@@ -465,7 +462,6 @@ export const Astrology = () => {
                                     <h2
                                         style={{
                                             color: '#9a5c23',
-                                            textAlign: 'center',
                                             fontSize: '14px',
                                             textAlign: 'left',
                                         }}
@@ -480,7 +476,6 @@ export const Astrology = () => {
                                     <h2
                                         style={{
                                             color: '#9a5c23',
-                                            textAlign: 'center',
                                             fontSize: '14px',
                                             textAlign: 'left',
                                         }}
@@ -492,7 +487,6 @@ export const Astrology = () => {
                                     <h2
                                         style={{
                                             color: '#9a5c23',
-                                            textAlign: 'center',
                                             fontSize: '14px',
                                             textAlign: 'left',
                                         }}
@@ -507,7 +501,6 @@ export const Astrology = () => {
                                     <h2
                                         style={{
                                             color: '#9a5c23',
-                                            textAlign: 'center',
                                             fontSize: '14px',
                                             textAlign: 'left',
                                         }}
@@ -519,7 +512,6 @@ export const Astrology = () => {
                                     <h2
                                         style={{
                                             color: '#9a5c23',
-                                            textAlign: 'center',
                                             fontSize: '14px',
                                             textAlign: 'left',
                                         }}
