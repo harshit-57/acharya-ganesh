@@ -6,9 +6,9 @@ import {
     styled,
     useTheme,
 } from '@mui/material';
-import { MatxLayoutSettings as settings } from './MatxLayout/settings';
 import { topBarHeight } from '../utils/constant';
 import { Paragraph, Span } from './Typography';
+import useSettings from '../hooks/useSettings';
 
 const AppFooter = styled(Toolbar)(() => ({
     display: 'flex',
@@ -37,24 +37,30 @@ const FooterContent = styled('div')(() => ({
 
 const Footer = () => {
     const theme = useTheme();
+    const { settings } = useSettings();
 
     const footerTheme = settings.themes[settings.footer.theme] || theme;
 
     return (
         <ThemeProvider theme={footerTheme}>
-            <AppBar color="primary" position="static" sx={{ zIndex: 96 }}>
+            <AppBar color="secondary" position="static" sx={{ zIndex: 96 }}>
                 <AppFooter>
-                    {/* <FooterContent>
-            <a href="https://ui-lib.com/downloads/matx-pro-react-admin/">
-              <Button variant="contained" color="secondary">
-                Get MatX Pro
-              </Button>
-            </a>
-            <Span sx={{ m: 'auto' }}></Span>
-            <Paragraph sx={{ m: 0 }}>
-              Design and Developed by <a href="http://ui-lib.com">UI Lib</a>
-            </Paragraph>
-          </FooterContent> */}
+                    <FooterContent>
+                        <a href="/" target="_blank">
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                // style={{ color: 'black' }}
+                            >
+                                Visit Site
+                            </Button>
+                        </a>
+                        <Span sx={{ m: 'auto' }}></Span>
+                        <Paragraph sx={{ m: 0 }}>
+                            © All Rights Reserved{' '}
+                            <a href="/about">Acharya Ganesh</a>
+                        </Paragraph>
+                    </FooterContent>
                 </AppFooter>
             </AppBar>
         </ThemeProvider>

@@ -1,9 +1,10 @@
-import { MatxLayoutSettings as settings } from '../MatxLayout/settings';
+import useSettings from '../../hooks/useSettings';
 import SecondarySidenavTheme from '../MatxTheme/SecondarySidenavTheme/SecondarySidenavTheme';
 import SecondarySidebarContent from './SecondarySidebarContent';
 import SecondarySidebarToggle from './SecondarySidebarToggle';
 
 const SecondarySidebar = () => {
+    const { settings } = useSettings();
     const secondarySidebarTheme =
         settings.themes[settings.secondarySidebar.theme];
 

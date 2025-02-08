@@ -25,13 +25,13 @@ const axiosHelper = async (method, url, params = {}, data = {}, token) => {
 
 const getApi =
     async (endpoint) =>
-    async (params = {}) =>
-        await axiosHelper('GET', endpoint, params, {}, 'token');
+    async (params = {}, token) =>
+        await axiosHelper('GET', endpoint, params, {}, token);
 
 const postApi =
-    async (endpoint) =>
-    async (data = {}) =>
-        await axiosHelper('POST', endpoint, {}, data, 'token');
+    async (endpoint, token) =>
+    async (data = {}, token) =>
+        await axiosHelper('POST', endpoint, {}, data, token);
 
 export const APIHelper = Object.freeze({
     getBlogCategories: await getApi('v1/GetDivine/getBlogCategories'),
@@ -55,4 +55,5 @@ export const APIHelper = Object.freeze({
 
 export const ADMINAPIHELPER = Object.freeze({
     login: await postApi('v1/admin/login'),
+    getAdminPermission: await getApi('v1/admin/get-admin-permission'),
 });

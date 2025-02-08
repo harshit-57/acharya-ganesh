@@ -1,8 +1,9 @@
 import { ThemeProvider, useTheme } from '@mui/material';
-import { MatxLayoutSettings as settings } from '../../MatxLayout/settings';
+import useSettings from '../../../hooks/useSettings';
 
 const SidenavTheme = ({ children }) => {
     const theme = useTheme();
+    const { settings } = useSettings();
     const sidenavTheme =
         settings.themes[settings.layout1Settings.leftSidebar.theme] || theme;
 

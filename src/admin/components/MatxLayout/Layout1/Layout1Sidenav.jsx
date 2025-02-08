@@ -1,16 +1,13 @@
 import { memo } from 'react';
 import { Hidden, Switch, Box, styled, useTheme } from '@mui/material';
 import { themeShadows } from '../../MatxTheme/themeColors';
-import {
-    MatxLayoutSettings as settings,
-    MatxLayoutUpdateSettings as updateSettings,
-} from '../settings';
 import { convertHexToRGB } from '../../../utils/utils';
 import { sidenavCompactWidth, sideNavWidth } from '../../../utils/constant';
 import Brand from '../../Brand';
 import Sidenav from '../../Sidenav';
+import useSettings from '../../../hooks/useSettings';
 
-const SidebarNavRoot = styled(Box)(({ theme, width, bg, image }) => ({
+const SidebarNavRoot = styled(Box)(({ color, width, bg, image }) => ({
     position: 'fixed',
     top: 0,
     left: 0,
@@ -22,7 +19,7 @@ const SidebarNavRoot = styled(Box)(({ theme, width, bg, image }) => ({
     backgroundSize: 'cover',
     zIndex: 111,
     overflow: 'hidden',
-    color: theme.palette.text.primary,
+    color,
     transition: 'all 250ms ease-in-out',
     backgroundImage: `linear-gradient(to bottom, rgba(${bg}, 0.96), rgba(${bg}, 0.96)), url(${image})`,
     '&:hover': {
@@ -45,7 +42,8 @@ const NavListBox = styled(Box)({
 
 const Layout1Sidenav = () => {
     const theme = useTheme();
-    const leftSidebar = settings.layout1Settings.leftSidebar;
+    const { settings, updateSettings } = useSettings();
+    const leftSidebar = settings?.layout1Settings?.leftSidebar;
     const { mode, bgImgURL } = leftSidebar;
 
     const getSidenavWidth = () => {
@@ -58,7 +56,9 @@ const Layout1Sidenav = () => {
         }
     };
 
-    const primaryRGB = convertHexToRGB('#001763');
+    const primaryRGB = convertHexToRGB(
+        theme?.palette?.background?.default || '#001763'
+    );
 
     const updateSidebarMode = (sidebarSettings) => {
         updateSettings({
@@ -72,6 +72,7 @@ const Layout1Sidenav = () => {
 
     return (
         <SidebarNavRoot
+            color={theme?.palette?.text?.primary}
             image={bgImgURL}
             bg={primaryRGB}
             width={getSidenavWidth()}
@@ -81,8 +82,8 @@ const Layout1Sidenav = () => {
                     <Hidden smDown>
                         <Switch
                             onChange={handleSidenavToggle}
-                            checked={leftSidebar.mode !== 'full'}
-                            color="secondary"
+                            checked={leftSidebar?.mode !== 'full'}
+                            color="primary"
                             size="small"
                         />
                     </Hidden>

@@ -11,9 +11,9 @@ import {
 import { Clear, KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { H6, Small } from './Typography';
-import { MatxLayoutSettings as settings } from './/MatxLayout/settings';
 import { themeShadows } from './MatxTheme/themeColors';
 import { sideNavWidth, topBarHeight } from '../utils/constant';
+import useSettings from '../hooks/useSettings';
 
 // styled components
 const MiniCart = styled(Box)({
@@ -87,6 +87,7 @@ const data = [
 ];
 
 function ShoppingCart({ container }) {
+    const { settings } = useSettings();
     const [panelOpen, setPanelOpen] = useState(false);
     const [cartList, setCartList] = useState([...data]);
 

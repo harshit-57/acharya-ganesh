@@ -1,8 +1,9 @@
 import { Box, styled } from '@mui/material';
 import { MatxLogo } from './';
-import { MatxLayoutSettings as settings } from './MatxLayout/settings';
 import { Span } from './Typography';
 import { Link } from 'react-router-dom';
+import Logo from '../../assets/brand_logo.png';
+import useSettings from '../hooks/useSettings';
 
 const BrandRoot = styled(Box)(() => ({
     display: 'flex',
@@ -18,6 +19,7 @@ const StyledSpan = styled(Span)(({ mode }) => ({
 }));
 
 const Brand = ({ children }) => {
+    const { settings } = useSettings();
     const leftSidebar = settings.layout1Settings.leftSidebar;
     const { mode } = leftSidebar;
 
@@ -26,14 +28,14 @@ const Brand = ({ children }) => {
             <Box display="flex" alignItems="center">
                 <Link to="/">
                     <img
-                        src="/assets/images/np-05.jpg"
+                        src={Logo}
                         width="30px"
                         // style={{ borderRadius: '50%' }}
                         alt=""
                     />
                 </Link>
                 <StyledSpan mode={mode} className="sidenavHoverShow">
-                    NoblePage
+                    Acharya Ganesh
                 </StyledSpan>
             </Box>
 

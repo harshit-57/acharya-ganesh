@@ -1,6 +1,7 @@
-import { MatxLayoutSettings as settings } from './MatxLayout/settings';
+import useSettings from '../hooks/useSettings';
 
 const MatxLogo = ({ className }) => {
+    const { settings } = useSettings();
     const theme = settings.themes[settings.activeTheme];
 
     return (

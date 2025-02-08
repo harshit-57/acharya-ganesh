@@ -1,32 +1,29 @@
 import { themes } from '../MatxTheme/initThemes';
 import layout1Settings from './Layout1/Layout1Settings';
 
-// UPDATE BELOW CODE
-// DOC http://demos.ui-lib.com/matx-react-doc/layout.html
 export const MatxLayoutSettings = {
-    activeLayout: 'layout1', // layout1, layout2
-    activeTheme: 'blue', // View all valid theme colors inside MatxTheme/themeColors.js
+    activeLayout: 'layout1',
+    activeTheme: 'whiteBrown',
     perfectScrollbar: false,
 
     themes: themes,
-    layout1Settings, // open Layout1/Layout1Settings.js
+    layout1Settings,
 
     secondarySidebar: {
         show: true,
         open: false,
-        theme: 'slateDark1', //s View all valid theme colors inside MatxTheme/themeColors.js
+        theme: 'slateDark1',
     },
-    // Footer options
     footer: {
         show: true,
         fixed: false,
-        theme: 'slateDark1', // View all valid theme colors inside MatxTheme/themeColors.js
+        theme: 'whiteBrownDark',
     },
 };
 
-export const MatxLayoutUpdateSettings = (settings) => {
+export const MatxLayoutUpdateSettings = (settings = {}) => {
     MatxLayoutSettings.activeLayout = settings.activeLayout || 'layout1';
-    MatxLayoutSettings.activeTheme = settings.activeTheme || 'blue';
+    MatxLayoutSettings.activeTheme = settings.activeTheme || 'whiteBrown';
     MatxLayoutSettings.perfectScrollbar = settings.perfectScrollbar || false;
     MatxLayoutSettings.themes = settings.themes || themes;
     MatxLayoutSettings.layout1Settings =
@@ -39,6 +36,6 @@ export const MatxLayoutUpdateSettings = (settings) => {
     MatxLayoutSettings.footer = settings.footer || {
         show: true,
         fixed: false,
-        theme: 'slateDark1',
+        theme: 'whiteBrownDark',
     };
 };

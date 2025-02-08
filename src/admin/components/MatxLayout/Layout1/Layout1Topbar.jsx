@@ -14,17 +14,11 @@ import {
 
 import { MatxMenu, MatxSearchBox } from '../../';
 import { themeShadows } from '../../MatxTheme/themeColors';
-// import useAuth from 'app/hooks/useAuth';
-import {
-    MatxLayoutSettings as settings,
-    MatxLayoutUpdateSettings as updateSettings,
-} from '../settings';
 import { topBarHeight } from '../../../utils/constant';
 
 import { Span } from '../../Typography';
-import NotificationBar from '../../NotificationBar/NotificationBar';
-import ShoppingCart from '../../ShoppingCart';
-import { getRoleAndpermission } from '../../../utils/utils';
+import useSettings from '../../../hooks/useSettings';
+import useAuth from '../../../hooks/useAuth';
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
     color: theme.palette.text.primary,
@@ -87,7 +81,8 @@ const IconBox = styled('div')(({ theme }) => ({
 const Layout1Topbar = () => {
     const navigate = useNavigate();
     const theme = useTheme();
-    // const { logout, roleAndPermission } = useAuth();
+    const { settings, updateSettings } = useSettings();
+    const { logout, admin } = useAuth();
     const isMdScreen = useMediaQuery(theme.breakpoints.down('md'));
 
     const updateSidebarMode = (sidebarSettings) => {
@@ -111,8 +106,6 @@ const Layout1Topbar = () => {
         updateSidebarMode({ mode });
     };
 
-    const user = JSON.parse(localStorage.getItem('user'));
-
     return (
         <TopbarRoot>
             <TopbarContainer>
@@ -123,48 +116,29 @@ const Layout1Topbar = () => {
                 </Box>
 
                 <Box display="flex" alignItems="center">
-                    {/* <MatxSearchBox />
-
-          <NotificationProvider>
-            <NotificationBar />
-          </NotificationProvider>
-
-          <ShoppingCart /> */}
+                    {/* 
+                    <MatxSearchBox /> 
+                    <NotificationProvider>
+                        <NotificationBar />
+                    </NotificationProvider> 
+                    */}
 
                     <MatxMenu
                         menuButton={
                             <UserMenu>
                                 <Hidden xsDown>
                                     <Span>
-                                        Hi <strong>{user?.first_name}</strong>
+                                        Hi <strong>{admin?.Name}</strong>
                                     </Span>
                                 </Hidden>
                                 <Avatar
-                                    src={user?.profile_img || user?.avatar}
+                                    src={admin?.ProfileImg}
                                     sx={{ cursor: 'pointer' }}
                                 />
                             </UserMenu>
                         }
                     >
-                        {/* <StyledItem>
-              <Link to="/">
-                <Icon> home </Icon>
-                <Span> Home </Span>
-              </Link>
-            </StyledItem>
-
-            <StyledItem>
-              <Link to="/page-layouts/user-profile">
-                <Icon> person </Icon>
-                <Span> Profile </Span>
-              </Link>
-            </StyledItem>
-
-            <StyledItem>
-              <Icon> settings </Icon>
-              <Span> Settings </Span>
-            </StyledItem> */}
-                        <StyledItem
+                        {/* <StyledItem
                             // disabled={
                             //     !getRoleAndpermission(
                             //         roleAndPermission,
@@ -176,10 +150,8 @@ const Layout1Topbar = () => {
                         >
                             <Icon> account_circle </Icon>
                             <Span> My Account </Span>
-                        </StyledItem>
-                        <StyledItem
-                        // onClick={logout}
-                        >
+                        </StyledItem> */}
+                        <StyledItem onClick={logout}>
                             <Icon> power_settings_new </Icon>
                             <Span> Logout </Span>
                         </StyledItem>

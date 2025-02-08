@@ -1,6 +1,6 @@
 import { Fragment, useState, Children } from 'react';
 import { Menu, ThemeProvider, Box, styled } from '@mui/material';
-import { MatxLayoutSettings as settings } from './MatxLayout/settings';
+import useSettings from '../hooks/useSettings';
 
 const MenuButton = styled(Box)(({ theme }) => ({
     display: 'inline-block',
@@ -10,6 +10,7 @@ const MenuButton = styled(Box)(({ theme }) => ({
 
 const MatxMenu = (props) => {
     const [anchorEl, setAnchorEl] = useState(null);
+    const { settings } = useSettings();
 
     const children = Children.toArray(props.children);
     let { shouldCloseOnItemClick = true, horizontalPosition = 'left' } = props;

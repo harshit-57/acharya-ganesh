@@ -1,9 +1,9 @@
 import { Box, ButtonBase, Icon, styled } from '@mui/material';
-import { MatxLayoutSettings as settings } from '../MatxLayout/settings';
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Paragraph, Span } from '../Typography';
 import MatxVerticalNavExpansionPanel from './MatxVerticalNavExpansionPanel';
+import useSettings from '../../hooks/useSettings';
 
 const ListLabel = styled(Paragraph)(({ theme, mode }) => ({
     fontSize: '12px',
@@ -74,6 +74,7 @@ const BadgeValue = styled('div')(() => ({
 }));
 
 const MatxVerticalNav = ({ items }) => {
+    const { settings } = useSettings();
     const { mode } = settings.layout1Settings.leftSidebar;
 
     const renderLevels = (data) => {

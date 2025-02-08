@@ -3,9 +3,10 @@ import { ADMINAPIHELPER } from '../../../util/APIHelper';
 import Logo from '../../../assets/brand_logo.png';
 import { PageContainer } from '../../../components/page-container/PageContainer';
 import css from './style.module.css';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import BgImage from '../../../assets/solar_system.jpg';
 import { PrimaryButton } from '../../../components/primary-button/PrimaryButton';
+import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -15,6 +16,7 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
+    let { isAuthenticated, login } = useAuth();
 
     const handleValidation = () => {
         let isError = true;
@@ -41,28 +43,19 @@ const Login = () => {
         if (handleValidation()) {
             setLoading(true);
             try {
-                const response = await ADMINAPIHELPER.login({
-                    email,
-                    password,
-                });
-                console.log(response.data);
-                setLoading(false);
-                if (response.data.success) {
-                    localStorage.setItem('token', response.data.token);
-                    localStorage.setItem(
-                        'admin',
-                        JSON.stringify(response.data.data)
-                    );
+                await login({ email, password }).then((res) => {
                     navigate('/admin/dashboard');
-                } else {
-                    alert(response.data.message);
-                }
+                });
             } catch (error) {
                 setLoading(false);
                 console.log(error);
             }
         }
     };
+
+    if (isAuthenticated) {
+        return <Navigate to={'/admin/dashboard'} />;
+    }
 
     return (
         <PageContainer>

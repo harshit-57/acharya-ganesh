@@ -1,10 +1,7 @@
 import { Fab, Icon, IconButton } from '@mui/material';
 import { styled, useTheme } from '@mui/material';
-import {
-    MatxLayoutSettings as settings,
-    MatxLayoutUpdateSettings as updateSettings,
-} from '../MatxLayout/settings';
 import clsx from 'clsx';
+import useSettings from '../../hooks/useSettings';
 
 const Toggle = styled('div')(() => ({
     position: 'fixed',
@@ -18,6 +15,7 @@ const Toggle = styled('div')(() => ({
 }));
 
 const SecondarySidebarToggle = () => {
+    const { settings, updateSettings } = useSettings();
     const toggle = () => {
         updateSettings({
             secondarySidebar: { open: !settings.secondarySidebar.open },

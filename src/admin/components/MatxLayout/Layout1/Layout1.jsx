@@ -14,10 +14,7 @@ import Footer from '../../Footer';
 import SidenavTheme from '../../MatxTheme/SidenavTheme/SidenavTheme';
 import Layout1Sidenav from './Layout1Sidenav';
 import Layout1Topbar from './Layout1Topbar';
-import {
-    MatxLayoutSettings as settings,
-    MatxLayoutUpdateSettings as updateSettings,
-} from '../settings';
+import useSettings from '../../../hooks/useSettings';
 
 const Layout1Root = styled(Box)(({ theme }) => ({
     display: 'flex',
@@ -55,8 +52,9 @@ const LayoutContainer = styled(Box)(({ width, open }) => ({
 }));
 
 const Layout1 = () => {
+    const { settings, updateSettings } = useSettings();
     const { layout1Settings, secondarySidebar } = settings;
-    const topbarTheme = settings.themes[layout1Settings.topbar.theme];
+    const topbarTheme = settings?.themes[layout1Settings?.topbar?.theme];
     const {
         leftSidebar: { mode: sidenavMode, show: showSidenav },
     } = layout1Settings;
@@ -76,10 +74,10 @@ const Layout1 = () => {
 
     const sidenavWidth = getSidenavWidth();
     const theme = useTheme();
-    const isMdScreen = useMediaQuery(theme.breakpoints.down('md'));
+    const isMdScreen = useMediaQuery(theme?.breakpoints.down('md'));
 
     const ref = useRef({ isMdScreen, settings });
-    const layoutClasses = `theme-${theme.palette.type}`;
+    const layoutClasses = `theme-${theme?.palette?.type}`;
 
     useEffect(() => {
         let { settings } = ref.current;
@@ -100,8 +98,8 @@ const Layout1 = () => {
             )}
 
             <LayoutContainer width={sidenavWidth} open={secondarySidebar.open}>
-                {layout1Settings.topbar.show &&
-                    layout1Settings.topbar.fixed && (
+                {layout1Settings?.topbar?.show &&
+                    layout1Settings?.topbar?.fixed && (
                         <ThemeProvider theme={topbarTheme}>
                             <Layout1Topbar
                                 fixed={true}
@@ -132,8 +130,8 @@ const Layout1 = () => {
 
                 {!settings.perfectScrollbar && (
                     <ContentBox>
-                        {layout1Settings.topbar.show &&
-                            !layout1Settings.topbar.fixed && (
+                        {layout1Settings?.topbar?.show &&
+                            !layout1Settings?.topbar?.fixed && (
                                 <ThemeProvider theme={topbarTheme}>
                                     <Layout1Topbar />
                                 </ThemeProvider>
@@ -145,16 +143,16 @@ const Layout1 = () => {
                             </MatxSuspense>
                         </Box>
 
-                        {settings.footer.show && !settings.footer.fixed && (
+                        {settings?.footer?.show && !settings?.footer?.fixed && (
                             <Footer />
                         )}
                     </ContentBox>
                 )}
 
-                {settings.footer.show && settings.footer.fixed && <Footer />}
+                {settings?.footer?.show && settings?.footer?.fixed && (
+                    <Footer />
+                )}
             </LayoutContainer>
-
-            {/* {settings.secondarySidebar.show && <SecondarySidebar />} */}
         </Layout1Root>
     );
 };

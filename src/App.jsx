@@ -25,6 +25,7 @@ import Citation from './pages/citation/Citation';
 import Edit from './admin/content-editor/Conten';
 import AdminApp from './admin/AdminApp';
 import Dashboard from './admin/pages/dashboard/Dashboard';
+import { AuthProvider } from './admin/contexts/AuthContext';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
@@ -94,8 +95,21 @@ export default () => {
                 <Route path="*" element={<Navigate to={'/'} />} />
 
                 {/* Admin Routes */}
-                <Route path="/admin/login" element={<Login />} />
-                <Route element={<AdminApp />}>
+                <Route
+                    path="/admin/login"
+                    element={
+                        <AuthProvider>
+                            <Login />
+                        </AuthProvider>
+                    }
+                />
+                <Route
+                    element={
+                        <AuthProvider>
+                            <AdminApp />
+                        </AuthProvider>
+                    }
+                >
                     <Route
                         path="/admin"
                         element={<Navigate to={'/admin/dashboard'} />}

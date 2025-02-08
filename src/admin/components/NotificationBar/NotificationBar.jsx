@@ -13,11 +13,11 @@ import {
 import { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 // import useNotification from 'app/hooks/useNotification';
-import { MatxLayoutSettings as settings } from '../MatxLayout/settings';
 import { sideNavWidth, topBarHeight } from '../../utils/constant';
 import { getTimeDifference } from '../../utils/utils.js';
 import { themeShadows } from '../MatxTheme/themeColors';
 import { Paragraph, Small } from '../Typography';
+import useSettings from '../../hooks/useSettings.js';
 
 const Notification = styled('div')(() => ({
     padding: '16px',
@@ -80,6 +80,7 @@ const Heading = styled('span')(({ theme }) => ({
 
 const NotificationBar = ({ container }) => {
     const theme = useTheme();
+    const { settings } = useSettings();
     const secondary = theme.palette.text.secondary;
     const [panelOpen, setPanelOpen] = useState(false);
     // const { deleteNotification, clearNotifications, notifications } =

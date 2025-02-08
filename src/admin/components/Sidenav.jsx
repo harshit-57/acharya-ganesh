@@ -2,11 +2,8 @@ import { Fragment } from 'react';
 import Scrollbar from 'react-perfect-scrollbar';
 import { styled } from '@mui/material';
 import { MatxVerticalNav } from './';
-import {
-    MatxLayoutSettings as settings,
-    MatxLayoutUpdateSettings as updateSettings,
-} from './MatxLayout/settings';
 import { navigations } from '../navigations';
+import useSettings from '../hooks/useSettings';
 
 const StyledScrollBar = styled(Scrollbar)(() => ({
     paddingLeft: '1rem',
@@ -27,20 +24,21 @@ const SideNavMobile = styled('div')(({ theme }) => ({
 }));
 
 const Sidenav = ({ children }) => {
+    const { settings, updateSettings } = useSettings();
     const updateSidebarMode = (sidebarSettings) => {
         let activeLayoutSettingsName = settings.activeLayout + 'Settings';
         let activeLayoutSettings = settings[activeLayoutSettingsName];
 
-        // updateSettings({
-        //     ...settings,
-        //     [activeLayoutSettingsName]: {
-        //         ...activeLayoutSettings,
-        //         leftSidebar: {
-        //             ...activeLayoutSettings.leftSidebar,
-        //             ...sidebarSettings,
-        //         },
-        //     },
-        // });
+        updateSettings({
+            ...settings,
+            [activeLayoutSettingsName]: {
+                ...activeLayoutSettings,
+                leftSidebar: {
+                    ...activeLayoutSettings.leftSidebar,
+                    ...sidebarSettings,
+                },
+            },
+        });
     };
 
     return (

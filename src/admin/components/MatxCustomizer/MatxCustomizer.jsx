@@ -11,15 +11,12 @@ import {
     Tooltip,
     useTheme,
 } from '@mui/material';
-import {
-    MatxLayoutSettings as settings,
-    MatxLayoutUpdateSettings as updateSettings,
-} from '../MatxLayout/settings';
 import { Fragment, useState } from 'react';
 import Scrollbar from 'react-perfect-scrollbar';
 import { themeShadows } from '../MatxTheme/themeColors';
 import { H5, Span } from '../Typography';
 import BadgeSelected from './BadgeSelected';
+import useSettings from '../../hooks/useSettings';
 
 const Label = styled(Span)(({ theme }) => ({
     fontWeight: 700,
@@ -90,6 +87,7 @@ const StyledScrollBar = styled(Scrollbar)(() => ({
 }));
 
 const MatxCustomizer = () => {
+    const { settings, updateSettings } = useSettings();
     const theme = useTheme();
     const [open, setOpen] = useState(false);
     const [tabIndex, setTabIndex] = useState(0);
