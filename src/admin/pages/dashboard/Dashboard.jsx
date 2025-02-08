@@ -3,6 +3,7 @@ import { Card, Grid, styled, useTheme, MenuItem, Box } from '@mui/material';
 import { Fragment } from 'react';
 import UsersData from './components/UsersData';
 import LineChart from './components/LineChart';
+import StatCards from './components/StatCards';
 
 const ContentBox = styled('div')(({ theme }) => ({
     margin: '30px',
@@ -45,7 +46,7 @@ const Dashboard = () => {
         totalActiveRevenue: 0,
         totalBlockedRevenue: 0,
     });
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -76,38 +77,8 @@ const Dashboard = () => {
         <Fragment>
             <ContentBox className="analytics">
                 <Grid container spacing={3}>
-                    {/* <Grid item lg={12} md={12} sm={12} xs={12}>
-            <h2>Revenue</h2>
-            <RevenueData total_revenue_generated="$25785" />
-
-            <Grid item lg={12} md={12} sm={12} xs={12}>
-              <Card sx={{ px: 3, py: 2, mb: 1, border: "1px solid #e5e5e5" }}>
-                <CardHeader>
-                  <Title>Revenue Data Analytics</Title>
-                  <Box>
-                    <Select
-                      size="small"
-                      defaultValue="new Date().getFullYear()"
-                      onChange={handleUserYear}
-                    >
-                      <MenuItem value="new Date().getFullYear()">new Date().getFullYear()</MenuItem>
-                      <MenuItem value="2022">2022</MenuItem>
-                      <MenuItem value="2021">2021</MenuItem>
-                    </Select>
-                  </Box>
-                </CardHeader>
-                <LineChart
-                  dataX={userDataX}
-                  dataY={userDataY}
-                  height="350px"
-                  color={[palette.primary.main, palette.primary.light]}
-                  name="Revenue Generated"
-                />
-              </Card>
-            </Grid>
-          </Grid> */}
                     <Grid item lg={12} md={12} sm={12} xs={12}>
-                        {/* <StatCards /> */}
+                        <StatCards />
                         <h2>Users</h2>
                         <UsersData
                             total_registered_users={dashboardData?.totalUsers}
@@ -150,8 +121,24 @@ const Dashboard = () => {
                   </Box> */}
                                 </CardHeader>
                                 <LineChart
-                                    dataX={[]}
-                                    dataY={[]}
+                                    dataX={[
+                                        'Jan',
+                                        'Feb',
+                                        'Mar',
+                                        'Apr',
+                                        'May',
+                                        'Jun',
+                                        'Jul',
+                                        'Aug',
+                                        'Sep',
+                                        'Oct',
+                                        'Nov',
+                                        'Dec',
+                                    ]}
+                                    dataY={[
+                                        100, 120, 170, 167, 180, 135, 200, 195,
+                                        205, 190, 230, 235,
+                                    ]}
                                     height="350px"
                                     color={[
                                         palette.primary.main,
