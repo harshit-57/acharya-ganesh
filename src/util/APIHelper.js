@@ -3,7 +3,8 @@ import axios from 'axios';
 const useLocalHostApi = true;
 
 const BASE_URL_PROD = 'https://';
-const BASE_URL_LOCAL = 'http://localhost:4200/v1/GetDivine';
+const BASE_URL_LOCAL = 'http://localhost:4200';
+// const BASE_URL_LOCAL = 'http://34.131.192.173:4200';
 
 const getBaseUrl = () => (useLocalHostApi ? BASE_URL_LOCAL : BASE_URL_PROD);
 
@@ -24,22 +25,35 @@ const axiosHelper = async (method, url, params = {}, data = {}, token) => {
 
 const getApi =
     async (endpoint) =>
-    async (params = {}) =>
-        await axiosHelper('GET', endpoint, params, {}, 'token');
+    async (params = {}, token) =>
+        await axiosHelper('GET', endpoint, params, {}, token);
+
+const postApi =
+    async (endpoint, token) =>
+    async (data = {}, token) =>
+        await axiosHelper('POST', endpoint, {}, data, token);
 
 export const APIHelper = Object.freeze({
-    getBlogCategories: await getApi('getBlogCategories'),
-    getBlogTags: await getApi('getBlogTags'),
-    getBlogs: await getApi('getBlogs'),
-    getCitations: await getApi('getCitations'),
-    getCourseCategories: await getApi('getCourseCategories'),
-    getCourseTags: await getApi('getCourseTags'),
-    getSpiritualities: await getApi('getSpiritualities'),
-    getSpiritualityTags: await getApi('getSpiritualityTags'),
-    getSpiritualityCategories: await getApi('getSpiritualityCategories'),
-    getTestimonials: await getApi('getTestimonials'),
-    getWebStories: await getApi('getWebStories'),
-    getWebStoryCategories: await getApi('getWebStoryCategories'),
-    getWebStoryTags: await getApi('getWebStoryTags'),
-    getCourses: await getApi('getCourses'),
+    getBlogCategories: await getApi('v1/GetDivine/getBlogCategories'),
+    getBlogTags: await getApi('v1/GetDivine/getBlogTags'),
+    getBlogs: await getApi('v1/GetDivine/getBlogs'),
+    getCitations: await getApi('v1/GetDivine/getCitations'),
+    getCourseCategories: await getApi('v1/GetDivine/getCourseCategories'),
+    getCourseTags: await getApi('v1/GetDivine/getCourseTags'),
+    getSpiritualities: await getApi('v1/GetDivine/getSpiritualities'),
+    getSpiritualityTags: await getApi('v1/GetDivine/getSpiritualityTags'),
+    getSpiritualityCategories: await getApi(
+        'v1/GetDivine/getSpiritualityCategories'
+    ),
+    getTestimonials: await getApi('v1/GetDivine/getTestimonials'),
+    getWebStories: await getApi('v1/GetDivine/getWebStories'),
+    getWebStoryCategories: await getApi('v1/GetDivine/getWebStoryCategories'),
+    getWebStoryTags: await getApi('v1/GetDivine/getWebStoryTags'),
+    getCourses: await getApi('v1/GetDivine/getCourses'),
+    createLead: await postApi('v1/GetDivine/createLead'),
+});
+
+export const ADMINAPIHELPER = Object.freeze({
+    login: await postApi('v1/admin/login'),
+    getAdminPermission: await getApi('v1/admin/get-admin-permission'),
 });

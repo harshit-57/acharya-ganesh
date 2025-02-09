@@ -4,6 +4,7 @@ import BgImage from '../../../../assets/solar_system.jpg';
 import { PrimaryButton } from '../../../../components/primary-button/PrimaryButton';
 import { TopBar } from '../../../../components/top-bar/TopBar';
 import { Navigation } from '../../../../components/navigation/Navigation';
+import { NavLink } from 'react-router-dom';
 
 const Hero = () => {
     return (
@@ -16,7 +17,7 @@ const Hero = () => {
             <div className={css.hero_text_container}>
                 <div className={css.hero_text_wrapper}>
                     <p>Welcome To</p>
-                    <h1>Acharya Ganesh’s</h1>
+                    <h1 className={css.main_text}>Acharya Ganesh’s</h1>
                     <p>Astrology Universe</p>
                     <p>
                         Welcome to a world where the ancient wisdom of the stars
@@ -26,9 +27,11 @@ const Hero = () => {
                         range of astrology courses tailored to enthusiasts,
                         practitioners, and aspiring astrologers a like.
                     </p>
-                    <PrimaryButton className={css.book_appointment_button}>
-                        book an appointment
-                    </PrimaryButton>
+                    <NavLink to={'/contact'}>
+                        <PrimaryButton className={css.book_appointment_button}>
+                            book an appointment
+                        </PrimaryButton>
+                    </NavLink>
                 </div>
             </div>
         </PageContainer>

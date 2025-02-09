@@ -12,10 +12,10 @@
     border-radius: var(--default-button-border-radius);
     color: var(--color-white);
     display: flex;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 500;
     gap: 4px;
-    padding: 16px 28px;
+    padding: 14px 20px;
 
     &:hover {
         background-color: var(--color-border-dark);

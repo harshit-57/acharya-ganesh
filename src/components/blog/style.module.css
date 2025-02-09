@@ -1,0 +1,134 @@
+.container {
+    min-height: auto;
+    padding: 80px 60px;
+    border-radius: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.section_heading {
+    font-family: 'Sorts Mill Goudy';
+    font-size: 42px;
+    margin-top: 20px;
+    color: var(--color-caption);
+    font-size: bold;
+}
+.articles_container {
+    display: flex;
+    gap: 30px;
+}
+
+.article_slide_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover > img {
+            filter: brightness(0) invert(1) !important;
+        }
+    }
+    button > img {
+        width: 15px;
+    }
+    .prev_button {
+        left: -50px;
+    }
+    .next_button {
+        right: -50px;
+
+        img {
+            transform: rotate(180deg);
+        }
+    }
+
+    .prev_button {
+        left: -50px;
+    }
+    .next_button {
+        right: -50px;
+
+        img {
+            transform: rotate(180deg);
+        }
+    }
+
+    .prev_button,
+    .next_button {
+        z-index: 11;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 70px;
+        height: 70px;
+        background-color: var(--color-button-primary-bg);
+        border-radius: var(--default-button-border-radius);
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: 0.2s;
+        border-color: var(--color-border-dark);
+        color: var(--color-black);
+
+        &:hover {
+            background-color: var(--color-button-dark);
+            color: var(--color-white);
+        }
+    }
+
+    .article_slide_wrapper {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.5s ease-in-out;
+        will-change: transform;
+
+        img {
+            width: 300px;
+            height: 300px;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        padding: 60px 24px;
+        border-radius: 24px;
+    }
+
+    .section_heading {
+        font-size: 28px;
+    }
+    .articles_container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    .article_slide_container {
+        button > img {
+            width: 13px;
+        }
+        .prev_button {
+            left: -20px;
+        }
+        .next_button {
+            right: -20px;
+        }
+
+        .prev_button,
+        .next_button {
+            z-index: 11;
+            width: 50px;
+            height: 50px;
+        }
+    }
+}

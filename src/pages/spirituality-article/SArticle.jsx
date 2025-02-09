@@ -42,9 +42,9 @@ const SArticle = () => {
             <HorizontalBorder color={'#cebeb1'} />
             <div className={css.content}>
                 <div className={css.article_container}>
-                    <TableOfContent />
+                    <TableOfContent article={article} />
                     <div className={css.article_wrapper}>
-                        <div className={css.article}>
+                        <div className={`html-content`}>
                             {parse(article?.Description || '')}
                         </div>
                     </div>

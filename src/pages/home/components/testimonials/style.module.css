@@ -16,14 +16,29 @@
     margin-top: 60px;
     text-align: center;
     color: var(--color-primary);
+    font-weight: bold;
 }
 
 .testimonial_container {
-    display: flex;
+    /* display: flex; */
+    display: grid;
     gap: 30px;
 }
 @media only screen and (max-width: 768px) {
     .container {
-        display: none;
+        border-radius: 24px;
+        padding: 24px;
+    }
+
+    .section_heading {
+        font-family: 'Sorts Mill Goudy';
+        font-size: 28px;
+        margin-top: 50px;
+    }
+
+    .testimonial_container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
     }
 }

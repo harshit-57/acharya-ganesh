@@ -20,6 +20,7 @@ const Article = () => {
     const [article, setArticle] = useState(null);
     useEffect(() => {
         getArticle();
+        window.scrollTo(0, 0);
     }, [slug]);
     const getArticle = async () => {
         try {
@@ -42,9 +43,9 @@ const Article = () => {
             <HorizontalBorder color={'#cebeb1'} />
             <div className={css.content}>
                 <div className={css.article_container}>
-                    <TableOfContent />
+                    <TableOfContent article={article} />
                     <div className={css.article_wrapper}>
-                        <div className={css.article}>
+                        <div className={`html-content`}>
                             {parse(article?.Description || '')}
                         </div>
                     </div>

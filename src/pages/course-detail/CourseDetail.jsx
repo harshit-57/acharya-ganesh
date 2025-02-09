@@ -44,7 +44,7 @@ const CourseDetail = () => {
                         <img src={IcDescription} alt={'Description icon'} />
                         <p>Description</p>
                     </div>
-                    <div className={css.description}>
+                    <div className={`html-content`}>
                         {parse(course?.ProductDescription || '')}
                     </div>
                 </div>

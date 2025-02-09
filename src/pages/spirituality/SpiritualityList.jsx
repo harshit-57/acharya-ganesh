@@ -3,10 +3,10 @@ import { PageContainer } from '../../components/page-container/PageContainer';
 import { useParams } from 'react-router-dom';
 import IcChevronIcon from '../../assets/chevron-down.png';
 import { SCardSmall } from './components/card/SCardSmall';
-
-import ImgBlogHeader from '../../assets/blog_header_bg.png';
-import { Spacer } from '../../components/spacer/Spacer';
 import { useEffect, useState } from 'react';
+
+import ImgBlogHeader from '../../assets/spirituality_page_banner.jpg';
+import { Spacer } from '../../components/spacer/Spacer';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
 import { Footer } from '../../components/footer/Footer';
@@ -31,7 +31,7 @@ const SpiritualityList = () => {
             const response = await APIHelper.getSpiritualities({
                 page: currentPage,
                 pageSize: BLOG_PER_PAGE,
-                category: category,
+                category: category || undefined,
             });
             setBlogs(response.data?.data);
             const totalPage = Math.round(
@@ -60,7 +60,7 @@ const SpiritualityList = () => {
                             <span>
                                 <img src={IcChevronIcon} alt={''} />
                             </span>{' '}
-                            <span>{category.toUpperCase()} Spirituality</span>
+                            <span>{category?.toUpperCase()} Spirituality</span>
                         </p>
                     </div>
                 </div>
@@ -73,12 +73,21 @@ const SpiritualityList = () => {
                         <SCardSmall
                             key={blog?.Id || index}
                             blog={blog}
-                            onClick={() => navigate(blog?.Slug)}
+                            onClick={() =>
+                                navigate(`/spirituality/detail/${blog?.Slug}`)
+                            }
                             className={css.blog_card}
                         />
                     ))}
             </div>
             <div className={css.page_number_container}>
+                <p
+                    onClick={() => {
+                        if (currentPage > 1) setCurrentPage(currentPage - 1);
+                    }}
+                >
+                    Prev
+                </p>
                 {[...Array(3)].map((number, index) => (
                     <p
                         style={{
@@ -103,6 +112,13 @@ const SpiritualityList = () => {
                     onClick={() => setCurrentPage(pageCount)}
                 >
                     {pageCount}
+                </p>
+                <p
+                    onClick={() => {
+                        setCurrentPage(currentPage + 1);
+                    }}
+                >
+                    Next
                 </p>
             </div>
             <Spacer vertical={'72px'} />

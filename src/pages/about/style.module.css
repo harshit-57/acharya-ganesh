@@ -73,16 +73,29 @@
     border-radius: 36px;
 }
 
+.read_more_link {
+    color: var(--color-content-link);
+    cursor: pointer;
+}
+
+.read_more_link:hover {
+    color: var(--color-content-link-hover);
+    cursor: pointer;
+}
+
 .about_description_container {
     flex: 1;
     border-radius: 36px;
     padding: 48px;
     background-color: #f9eae0;
+    min-height: 600px;
+    height: auto;
 
     h2 {
         color: var(--color-caption);
         font-size: 42px;
         font-family: 'Sorts Mill Goudy';
+        font-weight: bold;
     }
     h4 {
         font-weight: 600;
@@ -113,7 +126,7 @@
         align-items: center;
         font-family: 'Sorts Mill Goudy';
         font-size: 64px;
-        color: var(--color-caption);
+        color: #fed1a7;
         gap: 16px;
 
         span {
@@ -143,9 +156,10 @@
     font-size: 42px;
     font-family: 'Sorts Mill Goudy';
     color: var(--color-caption);
+    font-weight: bold;
 }
 .desc {
-    font-size: 16px;
+    font-size: 18px;
     color: #121212;
 }
 
@@ -164,6 +178,9 @@
             height: 16px;
             margin: 6px 0;
         }
+        p {
+            font-size: 18px;
+        }
     }
 }
 .gallery_container {
@@ -177,6 +194,8 @@
     font-family: 'Sorts Mill Goudy';
     font-size: 42px;
     color: var(--color-caption);
+    font-weight: bold;
+    text-align: center;
 }
 .gallery_grid {
     display: flex;

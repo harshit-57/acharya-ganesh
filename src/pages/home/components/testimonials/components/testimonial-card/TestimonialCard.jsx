@@ -6,7 +6,7 @@ export const TestimonialCard = ({ testimonial, style, className }) => {
     return (
         <div style={style} className={[className, css.container].join(' ')}>
             <div className={css.name_container}>
-                <h3>{testimonial?.name}</h3>
+                <h3>{testimonial?.UserName}</h3>
                 <img src={IcQuote} alt={''} />
             </div>
             <div className={css.border_container}>
@@ -17,13 +17,13 @@ export const TestimonialCard = ({ testimonial, style, className }) => {
             <div className={css.rating_container}>
                 {[
                     ...Array(
-                        Math.round(testimonial?.rating ? testimonial.rating : 0)
+                        Math.round(testimonial?.Rating ? testimonial.Rating : 0)
                     ),
                 ].map((c, i) => (
                     <img key={i} src={IcRatingStar} alt={'Rating star icon'} />
                 ))}
             </div>
-            <p className={css.review}>{testimonial?.review}</p>
+            <p className={css.review}>{testimonial?.Description}</p>
         </div>
     );
 };

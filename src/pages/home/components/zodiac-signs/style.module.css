@@ -9,10 +9,11 @@
     color: var(--color-caption);
     font-size: 42px;
     font-family: 'Sorts Mill Goudy', serif;
+    font-weight: bold;
 }
 
 .section_sub_heading {
-    font-size: 16px;
+    font-size: 18px;
     font-family: 'Work Sans';
     margin-top: 8px;
 }
@@ -20,6 +21,7 @@
 .slides_container {
     width: 100%;
     margin-top: 48px;
+    position: relative;
 
     .slides_wrapper {
         display: flex;
@@ -31,6 +33,41 @@
         img {
             width: 270px;
             height: 375px;
+            cursor: pointer;
+        }
+    }
+    .prev_button {
+        left: -60px;
+    }
+    .next_button {
+        right: -60px;
+
+        img {
+            transform: rotate(180deg);
+        }
+    }
+
+    .prev_button,
+    .next_button {
+        z-index: 9999;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        background-color: var(--color-button-primary-bg);
+        border-radius: var(--default-button-border-radius);
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: 0.2s;
+        border-color: var(--color-border-dark);
+        color: var(--color-black);
+
+        &:hover {
+            background-color: var(--color-button-primary-bg-hover);
+        }
+        img {
+            width: 15px;
         }
     }
 }
@@ -55,6 +92,22 @@
 
         .slides_wrapper {
             gap: 36px;
+        }
+        .prev_button {
+            left: 5px;
+        }
+        .next_button {
+            right: 5px;
+        }
+
+        .prev_button,
+        .next_button {
+            z-index: 9999;
+            width: 50px;
+            height: 50px;
+            img {
+                width: 13px;
+            }
         }
     }
 }

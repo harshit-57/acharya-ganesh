@@ -16,6 +16,7 @@
     text-align: center;
     font-size: 42px;
     color: var(--color-caption);
+    font-weight: bold;
 }
 
 .course_slide_container {
@@ -68,11 +69,20 @@
     }
 }
 
+.show_more_button {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+}
+
 .course_slide_wrapper {
     display: flex;
     gap: 20px;
     align-items: center;
     justify-content: center;
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
 }
 @media only screen and (max-width: 768px) {
     .container {

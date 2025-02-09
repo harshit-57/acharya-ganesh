@@ -18,7 +18,7 @@ export default [
         subMenus: null,
     },
     {
-        route: '/services',
+        route: null,
         id: '',
         title: 'Services',
         subMenus: [
@@ -35,9 +35,9 @@ export default [
                 subMenus: null,
             },
             {
-                route: '/services/birth-chart-astrology',
+                route: '/services/muhurat',
                 id: '',
-                title: 'Birth Chart Astrology',
+                title: 'Muhurat',
                 subMenus: null,
             },
             {
@@ -73,10 +73,11 @@ export default [
         ],
     },
     {
-        route: '/divine-store',
+        route: '',
         id: '',
         title: 'Divine Store',
         subMenus: null,
+        link: 'https://acharyaganesh.com/shop/',
     },
     {
         route: '/web-stories',

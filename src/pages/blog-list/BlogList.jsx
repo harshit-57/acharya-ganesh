@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import IcChevronIcon from '../../assets/chevron-down.png';
 import { BlogCardSmall } from './components/blog-card/BlogCardSmall';
 
-import ImgBlogHeader from '../../assets/blog_header_bg.png';
+import ImgBlogHeader from '../../assets/blog_main_bg.png';
 import { Spacer } from '../../components/spacer/Spacer';
 import { useEffect, useState } from 'react';
 import { TopBar } from '../../components/top-bar/TopBar';
@@ -31,7 +31,7 @@ const BlogList = () => {
             const response = await APIHelper.getBlogs({
                 page: currentPage,
                 pageSize: BLOG_PER_PAGE,
-                category: category,
+                category: category || undefined,
             });
             setBlogs(response.data?.data);
             const totalPage = Math.round(
@@ -61,7 +61,7 @@ const BlogList = () => {
                             <span>
                                 <img src={IcChevronIcon} alt={''} />
                             </span>{' '}
-                            <span>{category.toUpperCase()} Blog</span>
+                            <span>{category?.toUpperCase()} Blog</span>
                         </p>
                     </div>
                 </div>
@@ -74,12 +74,21 @@ const BlogList = () => {
                         <BlogCardSmall
                             key={blog?.Id || index}
                             blog={blog}
-                            onClick={() => navigate(blog?.Slug)}
+                            onClick={() =>
+                                navigate(`/blog/detail/${blog?.Slug}`)
+                            }
                             className={css.blog_card}
                         />
                     ))}
             </div>
             <div className={css.page_number_container}>
+                <p
+                    onClick={() => {
+                        if (currentPage > 1) setCurrentPage(currentPage - 1);
+                    }}
+                >
+                    Prev
+                </p>
                 {[...Array(3)].map((number, index) => (
                     <p
                         style={{
@@ -104,6 +113,13 @@ const BlogList = () => {
                     onClick={() => setCurrentPage(pageCount)}
                 >
                     {pageCount}
+                </p>
+                <p
+                    onClick={() => {
+                        setCurrentPage(currentPage + 1);
+                    }}
+                >
+                    Next
                 </p>
             </div>
             <Spacer vertical={'72px'} />

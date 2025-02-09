@@ -6,12 +6,14 @@ import ZodiacSigns from './components/zodiac-signs/ZodiacSigns';
 import { Section } from '../../components/section/Section';
 import { HorizontalBorder } from '../../components/spacer/Spacer';
 import DescriptionCarousel from './components/description-carousel/DescriptionCarousel';
-import Gallery from './components/gallery/Gallery';
+import Gallery from '../../components/gallery/Gallery';
 import Testimonial from './components/testimonials/Testimonials';
-import Blog from './components/blog/Blog';
+import Blog from '../../components/blog/Blog';
 import { Footer } from '../../components/footer/Footer';
 import { CoursesCarousel } from '../../components/courses-carousel/CoursesCarousel';
 import { Helmet } from 'react-helmet-async';
+import CitationBox from '../../components/citation-box/CitationBox';
+import VideoReviews from './components/video-review/VideoReview';
 const Home = () => {
     return (
         <PageContainer>
@@ -79,7 +81,9 @@ const Home = () => {
             <Section classname={css.section_gallery_n_more}>
                 <Gallery />
                 <Testimonial />
+                <VideoReviews />
                 <Blog />
+                <CitationBox />
             </Section>
             <Footer />
         </PageContainer>

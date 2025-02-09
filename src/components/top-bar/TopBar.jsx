@@ -8,6 +8,7 @@ import { useNav } from '../../hook/useNav';
 
 const NUMBER_ALT_1 = '+91 73000-04325';
 const NUMBER_ALT_2 = '+91 73000-04326';
+const COURSES_LINK = 'https://courses.acharyaganesh.com/';
 
 export const TopBar = () => {
     const { showNav, setShowNav } = useNav();
@@ -20,9 +21,15 @@ export const TopBar = () => {
             />
             <img className={css.logo} src={Logo} />
             <div className={css.info_n_action_button_container}>
-                <ContactLabel icon={IcPhone}>{NUMBER_ALT_1}</ContactLabel>
-                <ContactLabel icon={IcPhone}>{NUMBER_ALT_2}</ContactLabel>
-                <ActionButton icon={IcUser}>Log in</ActionButton>
+                <a href={`tel:${NUMBER_ALT_1}`}>
+                    <ContactLabel icon={IcPhone}>{NUMBER_ALT_1}</ContactLabel>
+                </a>
+                <a href={`tel:${NUMBER_ALT_1}`}>
+                    <ContactLabel icon={IcPhone}>{NUMBER_ALT_2}</ContactLabel>
+                </a>
+                <a target={'_blank'} href={COURSES_LINK}>
+                    <ActionButton icon={IcUser}>Log in</ActionButton>
+                </a>
             </div>
         </div>
     );

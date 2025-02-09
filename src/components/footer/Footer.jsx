@@ -16,6 +16,8 @@ import IcPinterestMono from '../../assets/ic_pinterest_mono.png';
 import IcYoutubeMono from '../../assets/ic_youtube_mono.png';
 
 import { HorizontalBorder } from '../spacer/Spacer';
+import { NavLink } from 'react-router-dom';
+import { LINKS } from '../../util/constants';
 
 export const Footer = () => {
     return (
@@ -24,14 +26,32 @@ export const Footer = () => {
                 <div className={css.section}>
                     <h3 className={css.section_heading}>Links</h3>
                     <ul className={css.links}>
-                        <li>Home</li>
-                        <li>About</li>
-                        <li>Courses</li>
-                        <li>Services</li>
-                        <li>Divine Store</li>
-                        <li>Web Stories</li>
-                        <li>Spirituality</li>
-                        <li>Contact</li>
+                        <li>
+                            <NavLink to={'/'}>Home</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/about'}>About</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/courses'}>Courses</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/'}>Services</NavLink>
+                        </li>
+                        <li>
+                            <a href={LINKS.SHOP_URL} target={'_blank'}>
+                                Divine Store
+                            </a>
+                        </li>
+                        <li>
+                            <NavLink to={'/'}>Web Stories</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/spirituality'}>Spirituality</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/contact'}>Contact</NavLink>
+                        </li>
                     </ul>
                 </div>
                 <div className={css.section}>
@@ -48,96 +68,120 @@ export const Footer = () => {
                     </p>
                     <div className={css.social_container}>
                         <div>
-                            <img
-                                className={css.social}
-                                src={IcFacebookMono}
-                                alt={''}
-                            />
-                            <img
-                                className={css.social_color}
-                                src={IcFacebook}
-                                alt={''}
-                            />
+                            <a href={LINKS.FACEBOOK_URL} target={'_blank'}>
+                                <img
+                                    className={css.social}
+                                    src={IcFacebookMono}
+                                    alt={''}
+                                />
+                                <img
+                                    className={css.social_color}
+                                    src={IcFacebook}
+                                    alt={''}
+                                />
+                            </a>
                         </div>
                         <div>
-                            <img
-                                className={css.social}
-                                src={IcInstagramMono}
-                                alt={''}
-                            />
-                            <img
-                                className={css.social_color}
-                                src={IcInstagram}
-                                alt={''}
-                            />
+                            <a href={LINKS.INSTAGRAM_URL} target={'_blank'}>
+                                <img
+                                    className={css.social}
+                                    src={IcInstagramMono}
+                                    alt={''}
+                                />
+                                <img
+                                    className={css.social_color}
+                                    src={IcInstagram}
+                                    alt={''}
+                                />
+                            </a>
                         </div>
                         <div>
-                            <img
-                                className={css.social}
-                                src={IcXMono}
-                                alt={''}
-                            />
-                            <img
-                                className={css.social_color}
-                                src={IcX}
-                                alt={''}
-                            />
+                            <a href={LINKS.X_URL} target={'_blank'}>
+                                <img
+                                    className={css.social}
+                                    src={IcXMono}
+                                    alt={''}
+                                />
+                                <img
+                                    className={css.social_color}
+                                    src={IcX}
+                                    alt={''}
+                                />
+                            </a>
                         </div>
                         <div>
-                            <img
-                                className={css.social}
-                                src={IcLinkedInMono}
-                                alt={''}
-                            />
-                            <img
-                                className={css.social_color}
-                                src={IcLinkedIn}
-                                alt={''}
-                            />
+                            <a href={LINKS.LINKEDIN_URL} target={'_blank'}>
+                                <img
+                                    className={css.social}
+                                    src={IcLinkedInMono}
+                                    alt={''}
+                                />
+                                <img
+                                    className={css.social_color}
+                                    src={IcLinkedIn}
+                                    alt={''}
+                                />
+                            </a>
                         </div>
                         <div>
-                            <img
-                                className={css.social}
-                                src={IcPinterestMono}
-                                alt={''}
-                            />
-                            <img
-                                className={css.social_color}
-                                src={IcPinterest}
-                                alt={''}
-                            />
+                            <a href={LINKS.PINTEREST_URL} target={'_blank'}>
+                                <img
+                                    className={css.social}
+                                    src={IcPinterestMono}
+                                    alt={''}
+                                />
+                                <img
+                                    className={css.social_color}
+                                    src={IcPinterest}
+                                    alt={''}
+                                />
+                            </a>
                         </div>
                         <div>
-                            <img
-                                className={css.social}
-                                src={IcYoutubeMono}
-                                alt={''}
-                            />
-                            <img
-                                className={css.social_color}
-                                src={IcYoutube}
-                                alt={''}
-                            />
+                            <a href={LINKS.YOUTUBE_URL} target={'_blank'}>
+                                <img
+                                    className={css.social}
+                                    src={IcYoutubeMono}
+                                    alt={''}
+                                />
+                                <img
+                                    className={css.social_color}
+                                    src={IcYoutube}
+                                    alt={''}
+                                />
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div className={css.section}>
                     <h3 className={css.section_heading}>Address</h3>
                     <div className={css.address_detail_container}>
-                        <AddressItem
-                            icon={IcHome}
-                            desc={
-                                'Hall No. 201 Plot No. 959 Niti Khand 1, Opposite Orange County, Indirapuram Ghaziabad, 201014'
-                            }
-                        />
-                        <AddressItem
-                            icon={IcMail}
-                            desc={'info@acharyaganesh.com'}
-                        />
-                        <AddressItem
-                            icon={IcMail}
-                            desc={'connect@acharyaganesh.com'}
-                        />
+                        <a href={LINKS.ADDRESS_URL} target={'_blank'}>
+                            <AddressItem
+                                icon={IcHome}
+                                desc={
+                                    'Hall No. 201 Plot No. 959 Niti Khand 1, Opposite Orange County, Indirapuram Ghaziabad, 201014'
+                                }
+                            />
+                        </a>
+                        <a
+                            href={'mailto:info@acharyaganesh.com'}
+                            target={'_blank'}
+                        >
+                            <AddressItem
+                                icon={IcMail}
+                                desc={'info@acharyaganesh.com'}
+                            />
+                        </a>
+                        <a
+                            href={'mailto:connect@acharyaganesh.com'}
+                            target={'_blank'}
+                        >
+                            <AddressItem
+                                icon={IcMail}
+                                desc={'connect@acharyaganesh.com'}
+                            />
+                        </a>
                     </div>
                 </div>
             </div>
