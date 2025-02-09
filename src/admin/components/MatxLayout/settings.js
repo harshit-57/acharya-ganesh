@@ -16,7 +16,7 @@ export const MatxLayoutSettings = {
     },
     footer: {
         show: true,
-        fixed: false,
+        fixed: true,
         theme: 'whiteBrownDark',
     },
 };

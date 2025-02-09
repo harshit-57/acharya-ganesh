@@ -75,18 +75,20 @@ const BlogList = () => {
                             key={blog?.Id || index}
                             blog={blog}
                             onClick={() =>
-                                navigate(
-                                    category
-                                        ? blog?.Slug
-                                        : `${blog?.CategorySlug}/${blog?.Slug}`
-                                )
+                                navigate(`/blog/detail/${blog?.Slug}`)
                             }
                             className={css.blog_card}
                         />
                     ))}
             </div>
             <div className={css.page_number_container}>
-                <p onClick={() =>{ if (currentPage > 1) setCurrentPage(currentPage -1)}}>Prev</p>
+                <p
+                    onClick={() => {
+                        if (currentPage > 1) setCurrentPage(currentPage - 1);
+                    }}
+                >
+                    Prev
+                </p>
                 {[...Array(3)].map((number, index) => (
                     <p
                         style={{
@@ -112,7 +114,13 @@ const BlogList = () => {
                 >
                     {pageCount}
                 </p>
-                <p onClick={() =>{ setCurrentPage(currentPage + 1)}}>Next</p>
+                <p
+                    onClick={() => {
+                        setCurrentPage(currentPage + 1);
+                    }}
+                >
+                    Next
+                </p>
             </div>
             <Spacer vertical={'72px'} />
             <Footer />

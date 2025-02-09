@@ -26,6 +26,10 @@ import Edit from './admin/content-editor/Conten';
 import AdminApp from './admin/AdminApp';
 import Dashboard from './admin/pages/dashboard/Dashboard';
 import { AuthProvider } from './admin/contexts/AuthContext';
+import ManageCourses from './admin/pages/manage-course/ManageCourse';
+import ManageBlogs from './admin/pages/manage-blog/ManageBlog';
+import ManageSpirituality from './admin/pages/manage-spirituality/ManageSpirituality';
+import ManageStory from './admin/pages/manage-stories/ManageStory';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
@@ -67,14 +71,14 @@ export default () => {
                 />
                 <Route path="/blog" element={<BlogList />} />
                 <Route path="/blog/:category" element={<BlogList />} />
-                <Route path="/blog/:category/:slug" element={<Article />} />
+                <Route path="/blog/detail/:slug" element={<Article />} />
                 <Route path="/spirituality" element={<SpiritualityList />} />
                 <Route
                     path="/spirituality/:category"
                     element={<SpiritualityList />}
                 />
                 <Route
-                    path="/spirituality/:category/:slug"
+                    path="/spirituality/detail/:slug"
                     element={<SArticle />}
                 />
                 <Route path="/courses" element={<CoursesList />} />
@@ -114,8 +118,18 @@ export default () => {
                         path="/admin"
                         element={<Navigate to={'/admin/dashboard'} />}
                     />
-                    <Route path="/admin/edit" element={<Edit />} />
+                    <Route
+                        path="/admin/content-editor/:type/:type_id"
+                        element={<Edit />}
+                    />
                     <Route path="/admin/dashboard" element={<Dashboard />} />
+                    <Route path="/admin/courses" element={<ManageCourses />} />
+                    <Route path="/admin/blogs" element={<ManageBlogs />} />
+                    <Route
+                        path="/admin/spiritualities"
+                        element={<ManageSpirituality />}
+                    />
+                    <Route path="/admin/stories" element={<ManageStory />} />
                 </Route>
             </Routes>
         </>

@@ -6,6 +6,8 @@ import './AdminApp.css';
 import useAuth from './hooks/useAuth';
 import { SettingsProvider } from './contexts/SettingsContext';
 import { Helmet } from 'react-helmet-async';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AdminApp = () => {
     let { isAuthenticated } = useAuth();
@@ -28,6 +30,7 @@ const AdminApp = () => {
                     <CssBaseline />
                     <MatxLayout />
                 </MatxTheme>
+                <ToastContainer />
             </SettingsProvider>
         </PageContainer>
     );

@@ -129,9 +129,7 @@ const Blog = () => {
                                 key={index}
                                 article={article}
                                 onClick={() =>
-                                    navigate(
-                                        `/blog/${article?.CategorySlug}/${article?.Slug}`
-                                    )
+                                    navigate(`/blog/detail/${article?.Slug}`)
                                 }
                             />
                         ))}

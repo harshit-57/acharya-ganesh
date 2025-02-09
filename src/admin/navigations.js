@@ -9,20 +9,26 @@ export const navigations = [
     },
     { label: 'PAGES', type: 'label' },
     {
-        name: 'Product Management',
-        path: '/admin/login',
+        name: 'Courses Management',
+        path: '/admin/courses',
         icon: 'content_paste',
     },
     {
         name: 'Blog Management',
-        path: '/admin/login',
+        path: '/admin/blogs',
         icon: 'edit_document',
     },
     {
-        name: 'Sprituality Management',
-        path: '/admin/login',
+        name: 'Spirituality Management',
+        path: '/admin/spiritualities',
         icon: 'psychology_alt',
     },
+    {
+        name: 'Web Story Management',
+        path: '/admin/stories',
+        icon: 'psychology_alt',
+    },
+    { label: 'REVIEWS', type: 'label' },
     {
         name: 'Testimonial Management',
         path: '/admin/login',

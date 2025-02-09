@@ -29,9 +29,7 @@ export const RecentBlogs = () => {
                     articleList.map((article, index) => (
                         <div
                             onClick={() =>
-                                navigate(
-                                    `/blog/${article?.CategorySlug}/${article?.Slug}`
-                                )
+                                navigate(`/blog/detail/${article?.Slug}`)
                             }
                             key={index}
                             className={css.recent_blog}

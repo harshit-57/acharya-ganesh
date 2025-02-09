@@ -772,7 +772,7 @@ const Edit = () => {
                 </div>
             </div>
 
-            <div className={styles.left_content}>
+            <div className={styles.right_content}>
                 <div className={styles.content_container}>
                     <div>
                         <div className={styles.additional_header}>
