@@ -8,6 +8,7 @@ import Article from './pages/article/Article';
 import CourseDetail from './pages/course-detail/CourseDetail';
 import SpiritualityList from './pages/spirituality/SpiritualityList';
 import SArticle from './pages/spirituality-article/SArticle';
+import BookConsultation from './pages/book-consultation/BookConsultation';
 
 export default () => {
     return (
@@ -28,6 +29,7 @@ export default () => {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<Navigate to={'/'} />} />
+            <Route path="/bookConsultation" element={<BookConsultation/>}/>
         </Routes>
     );
 };

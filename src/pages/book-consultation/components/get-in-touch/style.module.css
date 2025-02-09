@@ -1,0 +1,39 @@
+.container {
+    background-color: black;
+    color: white;
+    padding: 60px;
+    border-radius: 35px;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+    margin: 40px auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+    margin-bottom: 20px;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .buttonContainer {
+        display: flex;
+        flex-direction: column;
+      }
+      
+  }
+  
