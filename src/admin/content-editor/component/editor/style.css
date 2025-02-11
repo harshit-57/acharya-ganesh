@@ -1,0 +1,36 @@
+.editor {
+    margin-top: 20px;
+    color: rgb(0, 0, 0);
+
+    .ql-toolbar {
+        border: none;
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        &:hover {
+            color: var(--color-caption) !important;
+        }
+        .ql-active {
+            color: var(--color-caption) !important;
+            .ql-stroke {
+                stroke: var(--color-caption) !important;
+            }
+        }
+    }
+
+    .ql-container {
+        padding: 5px;
+        border: none;
+        .ql-editor {
+            min-height: 200px;
+        }
+    }
+    .ql-tooltip {
+        left: 0 !important;
+    }
+}
+
+.short_editor {
+    .ql-editor {
+        max-height: 500px;
+    }
+}

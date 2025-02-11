@@ -111,7 +111,7 @@ const ContactForm = () => {
                     placeholder={'Name'}
                     type={'text'}
                     name={'name'}
-                    onchange={handleChange}
+                    onChange={handleChange}
                     error={errorData.name}
                 />
                 <InputField
@@ -120,7 +120,7 @@ const ContactForm = () => {
                     placeholder={'Email'}
                     type={'email'}
                     name={'email'}
-                    onchange={handleChange}
+                    onChange={handleChange}
                     error={errorData.email}
                 />
                 <InputField
@@ -129,7 +129,7 @@ const ContactForm = () => {
                     placeholder={'Phone No'}
                     type={'text'}
                     name={'phone'}
-                    onchange={handleChange}
+                    onChange={handleChange}
                     error={errorData.phone}
                 />
                 {/* <InputField

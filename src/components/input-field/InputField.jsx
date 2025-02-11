@@ -5,7 +5,7 @@ export const InputField = ({
     placeholder,
     style,
     className,
-    onchange,
+    onChange,
     name,
     error,
     value,
@@ -18,7 +18,7 @@ export const InputField = ({
                 name={name}
                 placeholder={placeholder}
                 style={style}
-                onChange={onchange}
+                onChange={onChange}
                 className={[css.input, className].join(' ')}
                 value={value}
                 readOnly={readOnly}

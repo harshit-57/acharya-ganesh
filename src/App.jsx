@@ -23,7 +23,7 @@ import { useEffect } from 'react';
 import Login from './admin/pages/login/Login';
 import CitationDetail from './pages/citation-detail/CitationDetail';
 import Citation from './pages/citation/Citation';
-import Edit from './admin/content-editor/Conten';
+import Edit from './admin/content-editor/Content';
 import AdminApp from './admin/AdminApp';
 import Dashboard from './admin/pages/dashboard/Dashboard';
 import { AuthProvider } from './admin/contexts/AuthContext';
@@ -124,7 +124,7 @@ export default () => {
                         element={<Navigate to={'/admin/dashboard'} />}
                     />
                     <Route
-                        path="/admin/content-editor/:type/:type_id"
+                        path="/admin/content-editor/:type/:slug"
                         element={<Edit />}
                     />
                     <Route path="/admin/dashboard" element={<Dashboard />} />

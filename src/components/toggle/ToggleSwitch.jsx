@@ -5,7 +5,7 @@ const ToggleSwitch = ({
     label = 'Toggle',
     isChecked = false,
     onToggle = () => {},
-    onColor = '#4CAF50',
+    onColor = 'primary',
     offColor = '#ccc',
 }) => {
     return (
