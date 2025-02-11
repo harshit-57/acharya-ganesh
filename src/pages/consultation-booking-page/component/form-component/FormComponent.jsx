@@ -16,6 +16,7 @@ const FormCompnent = () => {
     services: '',
     consultationCallType: ''
   });
+  
 
   const dateTimeRef = useRef(null);
 
@@ -58,7 +59,8 @@ const FormCompnent = () => {
       </div>
       <div className={styles.formGroup}>
         <div className={styles.dateTimeContainer}>
-          <input
+          <input  
+            
             type="datetime-local"
             name="dateAndTime"
             value={formData.dateAndTime}

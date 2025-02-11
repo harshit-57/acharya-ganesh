@@ -9,8 +9,7 @@ const FAQItem = ({ question }) => {
     <div className={styles.faqItem}>
       <button className={styles.faqButton} onClick={() => setIsOpen(!isOpen)}>
         <div className={styles.faqContent}>
-          <div className={styles.bullet}></div> {/* Circular Bullet */}
-          <span>{question}</span>
+          <li>{question}</li>
         </div>
         <span className={`${styles.arrow} ${isOpen ? styles.open : ""}`}>▼</span>
       </button>

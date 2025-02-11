@@ -10,9 +10,7 @@
     min-width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
 }
-
 
 
 .header::before {
@@ -62,7 +60,14 @@
     display: flex;
     align-items: center;
 }
-
+.row_info_content_tel{
+    display: flex;
+    gap: 5px;
+}
+.row_info_content_email{
+    display: flex;
+    gap: 5px;
+}
 .row_info_heading {
     display: flex;
     flex-direction: column;
@@ -122,11 +127,19 @@
     .row{
         flex-direction: column;
         gap: 20px;
+        max-width: 500px;
     }
     .row_info{
         width: 100%;
     }
     .row_form{
         width: 100%;
+    }
+    .bookconsultation{
+        padding: 30px 36px;
+    }
+    .row_info_content_email{
+        flex-direction: column;
+        gap: 5px;
     }
 }

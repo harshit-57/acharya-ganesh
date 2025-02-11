@@ -27,7 +27,9 @@ const BookConsultation = () => {
             <div className={css.WhyChooseUs}>
                 <WhyChooseUs />
             </div>
-            <BookingSteps />
+            <div className={css.BookingSteps}>
+                <BookingSteps />
+            </div>
             <div className={css.Hanish_info}>
                 <div className={css.row}>
                     <div className={css.about_description_container}>

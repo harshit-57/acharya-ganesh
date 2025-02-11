@@ -28,7 +28,8 @@ const FAQSection = () => {
       <h2 className={styles.faqTitle}>Frequently Asked Questions</h2>
       {initialFAQs.map((e) => {
         return (
-          <FAQItem question={e} />
+          
+            <FAQItem question={e} />
         )
       })}
       {showMore && extraFAQs.map((e) => {
