@@ -2,7 +2,7 @@ import styles from './style.module.css';
 
 import Card from "./component/card/card";
 import Heading from './component/heading/header';
-import Button from './component/button/button';
+import {useNavigate} from "react-router-dom";
 import ConsultingstepBg from "../../../../assets/book_consultation_Steps_bg.png";
 
 
@@ -16,7 +16,17 @@ const steps = [
   { step: 6, title: "Get in touch with one of our expert astrologers", description: "Connect with one of our skilled astrologers for personalized guidance and insights." },
 ];
 
+
+
+
+
 const BookingSteps = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    
+    navigate('/bookConsultationForm');
+  };
   return (
     <div className={styles.container} style={{ backgroundImage: `url(${ConsultingstepBg})` }}>
       <Heading text="Steps For Booking A Consultation" />
@@ -25,10 +35,19 @@ const BookingSteps = () => {
           <Card key={step} step={step} title={title} description={description} />
         ))}
       </div>
+
       <div className={styles.buttonContainer}>
-        <Button color={"#FED1A7"} text="Meet In Person"/>
-        <Button  color={"#FFF3EB"}  text="Meet Online"/>
+        
+        <button className={styles.button} onClick={handleClick}>
+              MEET IN PERSON
+        </button>
+       
+
+        <button className={styles.button} onClick={handleClick}>
+              MEET ONLINE
+        </button>
       </div>
+      
       
     </div>
   );
