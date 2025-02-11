@@ -1,0 +1,143 @@
+.form {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    border-radius: 36px;
+    padding-top: 50px;
+    padding-right: 40px;
+    padding-bottom: 50px;
+    padding-left: 40px;
+
+}
+
+.formGroup {
+    position: relative;
+}
+
+.formGroup input,
+.formGroup select {
+    width: 100%;
+    border-radius: 100px;
+    padding-top: 16px;
+    padding-right: 20px;
+    padding-bottom: 16px;
+    padding-left: 20px;
+    border-width: 1px;
+    border: 1px solid var(--Color-Scheme-Card-Text, #CAC3BC);
+    background: var(--Color-Scheme-Card-Bg, #23201D);
+    font-size: 16px;
+    color: #B5AFA8;
+}
+
+.formGroup input::placeholder,
+.formGroup select {
+    color: #B5AFA8;
+
+}
+
+.dateTimeContainer {
+    position: relative;
+}
+
+.dateTimeInput {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--Color-Scheme-Card-Text, #CAC3BC);
+    border-radius: 4px;
+    background: var(--Color-Scheme-Card-Bg, #23201D);
+    font-size: 16px;
+    color: #B5AFA8;
+}
+
+
+
+
+
+.submitButton {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 100px;
+    padding-top: 24px;
+    font-family: Work Sans;
+
+    padding-right: 48px;
+    padding-bottom: 24px;
+    padding-left: 48px;
+    background: var(--Primary-Color-Color-Secondary-Button, #FED1A7);
+    color: black;
+
+    span {
+        font-family: Work Sans;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0%;
+    }
+}
+
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+input[type="date"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+  }
+
+  input[type="date"]::after {
+    content: url("../../../../assets/book_consultation_form_dateIcon.png");
+    position: absolute;
+    right: 17px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #ff0000; 
+  }
+  input[type="datetime-local"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+  }
+  input[type="datetime-local"]::after {
+    content: url("../../../../assets/book_consultation_form_dateIcon.png");
+    position: absolute;
+    right: 17px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #ff0000; 
+  }
+  input[type="time"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+  }
+  input[type="time"]::after {
+    content: url("../../../../assets/book_consultation_form_time.png");
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #ff0000; 
+  }
+  
+  
+  

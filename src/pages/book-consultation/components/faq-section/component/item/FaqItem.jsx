@@ -14,7 +14,8 @@ const FAQItem = ({ question }) => {
         </div>
         <span className={`${styles.arrow} ${isOpen ? styles.open : ""}`}>▼</span>
       </button>
-      {isOpen && <p className={styles.faqAnswer}>This is the answer to "{question}".</p>}
+      {isOpen && <p>Most consultations last between 30 minutes to 45 minutes, depending on the type of session you choose. You'll receive
+        detailed insights during our time together, so you can leave with clear guidance.</p>}
     </div>
   );
 };

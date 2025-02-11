@@ -31,6 +31,7 @@ import ManageCourses from './admin/pages/manage-course/ManageCourse';
 import ManageBlogs from './admin/pages/manage-blog/ManageBlog';
 import ManageSpirituality from './admin/pages/manage-spirituality/ManageSpirituality';
 import ManageStory from './admin/pages/manage-stories/ManageStory';
+import FormConsultation from './pages/consultation-booking-page/BookConsultationForm';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
@@ -101,6 +102,7 @@ export default () => {
                     path="/bookConsultation"
                     element={<BookConsultation />}
                 />
+                <Route path = "/bookConsultationForm" element = {<FormConsultation/>}/>
                 <Route path="*" element={<Navigate to={'/'} />} />
 
                 {/* Admin Routes */}
