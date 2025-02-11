@@ -7,7 +7,7 @@ import HanishImg from '../../assets/book_consultation_hanish_bagga.png';
 import { Footer } from "../../components/footer/Footer";
 import Testimonial from "../home/components/testimonials/Testimonials";
 import { Spacer } from "../../components/spacer/Spacer";
-import BookingSteps from "./components/get-in-touch/GetTouch";
+import BookingSteps from "./components/step-consultation/StepsConsultation";
 import WhyChooseUs from "./components/why-choose-us/WhyChoose";
 import FAQSection from "./components/faq-section/FaqSection";
 import { InputField } from "../../components/input-field/InputField";
@@ -32,34 +32,22 @@ const BookConsultation = () => {
             <div className={css.WhyChooseUs}>
                 <WhyChooseUs />
             </div>
-            <BookingSteps />
+            < BookingSteps/>
             <div className={css.Hanish_info}>
                 <div className={css.row}>
-                    <div className={css.about_description_container}>
+                <div className={css.about_description_container}>
                         <h2>Hanish Bagga</h2>
                         <Spacer vertical={'4px'} />
                         <h4>Founder & Director at Acharya Ganesh</h4>
                         <Spacer vertical={'24px'} />
                         <p>
-                            Astrologer Hanish Bagga, the esteemed founder
-                            and director of Acharya Ganesh, is celebrated
-                            for his innovative work in astrology, Vastu, and
-                            related fields. With over a decade of
-                            experience, Jyotish Hanish Bagga transitioned
-                            from a successful corporate career to pursue his
-                            passion in astrology, driven by a deeper
-                            calling. Originating from Rajasthan, his
-                            upbringing infused him with a respect for
-                            ancient wisdom and cosmic influences, which he
-                            applies in guiding individuals toward
-                            enlightenment and growth. Specializing in Astro
-                            Vastu, he adeptly combines Vedic astrology with
-                            Lal Kitab remedies to enhance life’s prosperity
-                            and happiness. As an educator, Astrologer Hanish
-                            Bagga is dedicated to sharing his knowledge,
-                            offering courses for all levels, and initiating
-                            a free Lal Kitab astrology course to give back
-                            to the community.
+                        I’m Hanish Bagga, an astrologer with over 17 years of experience and 40,000+ consultations worldwide. My approach blends deep astrological insight with a genuine commitment to helping you align with your true purpose.
+                        <br/>
+                        <br/>
+                        I believe astrology is not just about predicting the future—it’s about empowering you to make informed, confident decisions. Whether you’re seeking clarity in your career, relationships, or life path, I provide personalized guidance tailored to your unique journey.
+                        <br/>
+                        <br/>  
+                        Let’s unlock the potential the stars have in store for you, and create the life you’re meant to lead.
                         </p>
                     </div>
                     <img

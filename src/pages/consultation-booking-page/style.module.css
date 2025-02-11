@@ -1,0 +1,132 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+}
+
+.header {
+    background-color: #23201D;
+    min-height: 500px;
+    min-width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+.header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 500px;
+    min-width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.bookconsultation {
+    display: flex;
+    justify-content: center;
+}
+
+.row {
+    max-width: 1320px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.row_info {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    padding-top: 12px;
+}
+
+.row_form {
+    width: 50%;
+}
+
+.contact_label2 {
+    font-family: Work Sans;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+
+}
+
+.contact_label {
+    display: flex;
+    align-items: center;
+}
+
+.row_info_heading {
+    display: flex;
+    flex-direction: column;
+    
+    gap: 8px;
+
+    h2 {
+        font-family: Sorts Mill Goudy;
+        font-weight: 400;
+        text-align: start;
+        font-size: 42px;
+        line-height: 50.4px;
+        letter-spacing: -3%;
+        color: var(--Primary-Color-Caption-Color, #9A5C23);
+    }
+
+    h4 {
+        font-family: Work Sans;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0%;
+        color: var(--Primary-Color-Color-Foreground, #121212);
+    }
+}
+
+.row_info_content {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    
+
+    div {
+        h3 {
+            font-family: Sorts Mill Goudy;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 36px;
+            letter-spacing: 0%;
+            color: var(--Primary-Color-Caption-Color, #9A5C23);
+        }
+
+        h4 {
+            font-family: Work Sans;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: 0%;
+            color: var(--Primary-Color-Color-Foreground, #121212);
+        }
+    }
+}
+.row_form{
+    width: 40%;
+}
+@media only screen and (max-width: 768px) {
+    .row{
+        flex-direction: column;
+        gap: 20px;
+    }
+    .row_info{
+        width: 100%;
+    }
+    .row_form{
+        width: 100%;
+    }
+}

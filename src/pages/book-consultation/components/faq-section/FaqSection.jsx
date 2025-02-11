@@ -1,9 +1,10 @@
 import { useState } from "react";
 
 import styles from './style.module.css';
-import FAQList from "./component/list/List";
+
 import IcStar from '../../../../assets/Star 4.png';
 import FAQBg from "../../../../assets/book_consultatio_faq.png";
+import FAQItem from "./component/item/FaqItem";
 
 const FAQSection = () => {
   const [showMore, setShowMore] = useState(false);
@@ -23,10 +24,18 @@ const FAQSection = () => {
   ];
 
   return (
-    <div className={styles.container} style={{ backgroundImage: `url(${FAQBg})`}}>
+    <div className={styles.container} style={{ backgroundImage: `url(${FAQBg})` }}>
       <h2 className={styles.faqTitle}>Frequently Asked Questions</h2>
-      <FAQList faqs={initialFAQs} />
-      {showMore && <FAQList  faqs={extraFAQs} />}
+      {initialFAQs.map((e) => {
+        return (
+          <FAQItem question={e} />
+        )
+      })}
+      {showMore && extraFAQs.map((e) => {
+        return (
+          <FAQItem question={e} />
+        )
+      })}
       <button className={styles.showMoreBtn} onClick={() => setShowMore(!showMore)}>
         <img src={IcStar} alt={''} />
         {showMore ? "Show Less" : "Show More"}

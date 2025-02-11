@@ -13,13 +13,7 @@
 }
 
 
-.testimonial{
-    padding: 72px 60px;
-}
 
-.faqsection{
-    padding: 72px 60px;
-}
 .header::before {
     content: "";
     position: absolute;
@@ -31,27 +25,22 @@
     background: rgba(0, 0, 0, 0.5);
 }
 
+
+.testimonial{
+    padding: 72px 60px;
+}
+
+.faqsection{
+    padding: 72px 60px;
+}
+
 .row {
     display: flex;
     gap: 72px;
     max-width: 1200px;
 }
-.getintouch_container{
-    display: flex;
-    flex-direction: column;
-    gap: 72px;
-    max-width: 1200px;
-    text-align: center;
-    
-}
-.getintouch{
-    display: flex;
-    justify-content: center;
-}
-.getintouch_row{
-    display: flex;
-    gap: 72px;
-}
+
+
 
 .Hanish_info{
     display: flex;
@@ -62,19 +51,46 @@
     flex: 1;
     aspect-ratio: 1;
     border-radius: 36px;
-    height: 534px;
+    min-height: 534px;
     width: 50%;
+}
+
+
+.getintouch{
+    display: flex;
+    justify-content: center;
+}
+.getintouch_container{
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+    text-align: center;
+}
+.getintouch_row{
+    display: flex;
+    gap: 72px;
+    max-width: 1200px;
 }
 .rowform {
     flex: 1;
     flex-direction: column;
-
+    width: 50%;
 }
 .row_info{
     min-height: 288px;
     display: flex;
     flex-direction: column;
     gap: 36px;
+    width: 50%;
+}
+.getintouch_heading{
+    font-family: Sorts Mill Goudy;
+font-weight: 400;
+font-size: 42px;
+line-height: 50.4px;
+letter-spacing: -3%;
+text-align: center;
+color: var(--Primary-Color-Caption-Color, #9A5C23);
 }
 .row_info_heading{
     font-family: Work Sans;
@@ -145,33 +161,35 @@ text-align: start;
     background-color: #f9eae0;
 
     h2 {
-        color: var(--color-caption);
+        font-family: Sorts Mill Goudy;
+        font-weight: 400;
         font-size: 42px;
-        font-family: 'Sorts Mill Goudy';
+        line-height: 50.4px;
+        letter-spacing: -3%;
+        color: var(--Primary-Color-Caption-Color, #9A5C23);
     }
+
     h4 {
+        font-family: Work Sans;
         font-weight: 600;
         font-size: 16px;
         line-height: 28px;
+        letter-spacing: 0%;
+
         color: #2c2520;
     }
 
     p {
+        font-family: Work Sans;
         font-weight: 400;
         font-size: 16px;
         line-height: 28px;
+        letter-spacing: 0%;
+
         color: #2c2520;
     }
 }
-.getintouch_heading{
-    font-family: Sorts Mill Goudy;
-font-weight: 400;
-font-size: 42px;
-line-height: 50.4px;
-letter-spacing: -3%;
-text-align: center;
-color: var(--Primary-Color-Caption-Color, #9A5C23);
-}
+
 
 @media only screen and (max-width: 768px) {
     .container {
@@ -188,15 +206,10 @@ color: var(--Primary-Color-Caption-Color, #9A5C23);
         flex: 1;
         flex-direction: column;
         align-items: center;
-
-        & > h2 {
-            text-align: center;
-            font-size: 28px;
-        }
-
-        & > p {
-            font-size: 16px;
-        }
+        width: 100%;
+    }
+    .row_info{
+        width: 100%;
     }
     .person_image{
         height: 342px;
