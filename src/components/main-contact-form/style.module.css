@@ -1,0 +1,246 @@
+.container {
+}
+.header {
+    background-color: #5c5c5c;
+    min-height: auto !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.header_text_container {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    padding: 120px;
+    justify-content: center;
+}
+
+.header_text_wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+        font-size: 45px;
+        margin-top: 24px;
+        color: var(--color-primary);
+        font-family: 'Sorts Mill Goudy', serif;
+    }
+
+    p {
+        font-size: 16px;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: var(--color-white);
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        justify-content: center;
+
+        span {
+            display: flex;
+        }
+
+        img {
+            width: 24px;
+            height: 24px;
+            align-self: center;
+            transform: rotate(270deg);
+        }
+    }
+}
+
+.content_container {
+    width: 100%;
+    padding: 72px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+}
+
+.row {
+    display: flex;
+}
+.column {
+    flex: 1;
+    flex-direction: column;
+
+    & > h2 {
+        font-family: 'Sorts Mill Goudy';
+        font-size: 42px;
+        color: var(--color-caption);
+    }
+
+    & > p {
+        font-size: 16px;
+        color: #121212;
+    }
+}
+.contact_info_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+.contact_info_row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    & > img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .contact_info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        & > h3 {
+            font-family: 'Sorts Mill Goudy';
+            font-size: 24px;
+            color: var(--color-caption);
+        }
+    }
+}
+.contact_form {
+    background-size: cover;
+    background-position: center;
+    border-radius: 36px;
+    padding: 50px 40px;
+    gap: 50px;
+    display: flex;
+    flex-direction: column;
+
+    .input_wrapper {
+        display: flex;
+        gap: 30px;
+
+        .input_container {
+            flex: 1;
+        }
+
+        select {
+            padding: 16px 20px;
+            width: 100%;
+            border-radius: 100px;
+            font-size: 16px;
+            font-weight: 500;
+            background-color: var(--color-card-bg-dark);
+            border: 1px solid #cac3bc;
+            color: #ffffff;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        textarea {
+            padding: 16px 20px;
+            width: 100%;
+            border-radius: 24px;
+            height: 180px;
+            font-size: 16px;
+            font-weight: 500;
+            background-color: var(--color-card-bg-dark);
+            border: 1px solid #cac3bc;
+            color: #ffffff;
+            min-height: 100px;
+            resize: vertical;
+
+            &::placeholder {
+                font-size: 10px;
+                font-weight: 500;
+                font-size: 16px;
+                color: #b5afa8;
+            }
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 4px;
+            margin-left: 12px;
+        }
+    }
+}
+@media only screen and (max-width: 768px) {
+    .header_text_container {
+        padding: 50px;
+    }
+
+    .content_container {
+        padding: 60px 24px;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 40px;
+    }
+    .column {
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+
+        & > h2 {
+            text-align: center;
+            font-size: 28px;
+        }
+
+        & > p {
+            font-size: 16px;
+        }
+    }
+    .contact_info_container {
+        flex-direction: column;
+    }
+    .contact_info_row {
+        align-items: flex-start;
+        & > img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .contact_info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            & > h3 {
+                font-family: 'Sorts Mill Goudy';
+                font-size: 24px;
+                color: var(--color-caption);
+            }
+        }
+    }
+    .contact_form {
+        border-radius: 24px;
+        padding: 36px 24px;
+        gap: 36px;
+
+        .input_wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+
+            textarea {
+                padding: 16px 20px;
+                flex: 1;
+                border-radius: 24px;
+                height: 180px;
+                font-size: 16px;
+                font-weight: 500;
+                background-color: var(--color-card-bg-dark);
+                border: 1px solid #cac3bc;
+                color: #ffffff;
+
+                &::placeholder {
+                    font-size: 10px;
+                    font-weight: 500;
+                    font-size: 16px;
+                    color: #b5afa8;
+                }
+            }
+        }
+    }
+}
