@@ -16,18 +16,20 @@ import {
     AccordionDetails,
     AccordionSummary,
     Box,
-    Divider,
+    Checkbox,
     Icon,
     Typography,
     useTheme,
 } from '@mui/material';
 import { MatxLoading } from '../components';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { Spacer } from '../../components/spacer/Spacer';
+import { HorizontalBorder, Spacer } from '../../components/spacer/Spacer';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayJs from 'dayjs';
+import { toast } from 'react-toastify';
 
+// Register the plugins
 registerPlugin(FilePondPluginImagePreview);
 
 const Edit = () => {
@@ -53,7 +55,7 @@ const Edit = () => {
         publishedOn: new Date(),
         categories: [],
         tags: [],
-        isProduct: type === 'course' ? true : false,
+        isCourse: type === 'course' ? true : false,
         productUrl: '',
         buyText: '',
         regularPrice: '',
@@ -70,6 +72,7 @@ const Edit = () => {
     };
 
     const [data, setData] = useState(initalData);
+    const [categories, setCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isTableContent, setIsTableContent] = useState(false);
     const [slugInput, setSlugInput] = useState('');
@@ -78,6 +81,13 @@ const Edit = () => {
     const [editStatus, setEditStatus] = useState(false);
     const [publishedOnInput, setPublishedOnInput] = useState(new Date());
     const [editPublishedOn, setEditPublishedOn] = useState(false);
+    const [categoryTab, setCategoryTab] = useState('');
+    const [newCategoryInput, setNewCategoryInput] = useState('');
+    const [newCategory, setNewCategory] = useState(false);
+    const [tagInput, setTagInput] = useState('');
+    const [suggestTag, setSuggestTag] = useState(false);
+
+    const imageUpload = useRef(null);
 
     const handleChangeData = (event) => {
         const { name, value } = event.target;
@@ -87,71 +97,113 @@ const Edit = () => {
     useEffect(() => {
         setTimeout(() => {
             updateSettings({
-                layout1Settings: { leftSidebar: { mode: 'compact' } },
+                layout1Settings: {
+                    leftSidebar: {
+                        mode: 'compact',
+                        title:
+                            !state?.Id || slug === 'new'
+                                ? `New ${type}`
+                                : `Edit ${type}`,
+                    },
+                },
             });
         }, 100);
+        if (slug != 'new' && state?.Id) {
+            setIsLoading(true);
+            switch (type) {
+                case 'course':
+                    (async () => {
+                        const response = (
+                            await APIHelper.getCourses({ slug: slug })
+                        )?.data?.data[0];
+                        setData({
+                            id: response?.Id,
+                            title: response?.Name,
+                            description: response?.ProductDescription,
+                            slug: response?.Slug,
+                            image: response?.Images?.length
+                                ? response?.Images[0]
+                                : '',
+                            focusKeyphrase:
+                                response?.Focus_Keyphrase ||
+                                response?.Slug?.split('-')?.join(' '),
+                            metaTitle: response?.Meta_Title,
+                            metaSiteName: response?.Meta_SiteName,
+                            metaDescription: response?.Meta_Desc,
+                            isShortDescription: true,
+                            shortDescription: response?.ShortDescription,
+                            extraDetails: {
+                                images: response?.Extra_Images || [],
+                                link: response?.Extra_Link || '',
+                                icon: response?.Extra_Icon || '',
+                                size: response?.Extra_Size || '',
+                                textColor: response?.Extra_Text_Color || '',
+                                bgColor: response?.Extra_Bg_Color || '',
+                            },
+                            isTOP: response?.isTOP || false,
+                            status: response?.Status,
+                            publishedOn: response?.PublishedOn
+                                ? new Date(response?.PublishedOn)
+                                : new Date(),
 
-        if (slug != 'new' && state?.Id) setIsLoading(true);
-        switch (type) {
-            case 'course':
-                (async () => {
-                    const response = (
-                        await APIHelper.getCourses({ slug: slug })
-                    )?.data?.data[0];
-                    setData({
-                        id: response?.Id,
-                        title: response?.Name,
-                        description: response?.ProductDescription,
-                        slug: response?.Slug,
-                        image: response?.Images?.length
-                            ? response?.Images[0]
-                            : '',
-                        focusKeyphrase:
-                            response?.Focus_Keyphrase ||
-                            response?.Slug?.split('-')?.join(' '),
-                        metaTitle: response?.Meta_Title,
-                        metaSiteName: response?.Meta_SiteName,
-                        metaDescription: response?.Meta_Desc,
-                        isShortDescription: true,
-                        shortDescription: response?.ShortDescription,
-                        extraDetails: {
-                            images: response?.Extra_Images || [],
-                            link: response?.Extra_Link || '',
-                            icon: response?.Extra_Icon || '',
-                            size: response?.Extra_Size || '',
-                            textColor: response?.Extra_Text_Color || '',
-                            bgColor: response?.Extra_Bg_Color || '',
-                        },
-                        isTOP: response?.isTOP || false,
-                        status: response?.Status,
-                        publishedOn: response?.PublishedOn
-                            ? new Date(response?.PublishedOn)
-                            : new Date(),
+                            categories: response?.Categories?.map((item) => ({
+                                id: item?.CategoryId,
+                                name: item?.CategoryName,
+                            })),
+                            // tags: response?.Tags?.map((item) => ({
+                            //     id: item?.TagId,
+                            //     name: item?.TagName,
+                            // })),
+                            tags: [
+                                {
+                                    id: 1,
+                                    name: 'Astro',
+                                },
+                                {
+                                    id: 2,
+                                    name: 'Vastu',
+                                },
+                                {
+                                    id: 3,
+                                    name: 'Shastra',
+                                },
+                                {
+                                    id: 4,
+                                    name: 'Pooja',
+                                },
+                            ],
 
-                        categories: response?.Categories?.map((item) => ({
-                            id: item?.CategoryId,
-                            name: item?.CategoryName,
-                        })),
-                        tags: response?.Tags?.map((item) => ({
-                            id: item?.TagId,
-                            name: item?.TagName,
-                        })),
+                            // For Product/Courses
+                            isCourse: true,
+                            productUrl: response?.ProductURL,
+                            buyText: response?.Buy_Text,
+                            regularPrice: Math.ceil(
+                                response?.Regular_Price || 0
+                            ),
+                            salePrice: Math.ceil(response?.Sale_Price || 0),
+                            productImages: response?.Images,
+                        });
+                        const categoryResponse =
+                            await APIHelper.getCourseCategories();
+                        setCategories(categoryResponse?.data);
+                        setIsLoading(false);
+                    })();
+                    break;
 
-                        // For Product/Courses
-                        isProduct: true,
-                        productUrl: response?.ProductURL,
-                        buyText: response?.Buy_Text,
-                        regularPrice: Math.ceil(response?.Regular_Price || 0),
-                        salePrice: Math.ceil(response?.Sale_Price || 0),
-                        productImages: response?.Images,
-                    });
+                default:
                     setIsLoading(false);
-                })();
-                break;
-
-            default:
-                break;
+                    break;
+            }
         }
+        return () => {
+            updateSettings({
+                layout1Settings: {
+                    leftSidebar: {
+                        title: '',
+                    },
+                },
+            });
+        };
     }, []);
 
     const baseLink =
@@ -171,6 +223,26 @@ const Edit = () => {
         // else if (data.publishedOn > new Date()) return 'Scheduled';
         else return 'Pending';
     }, [data.status]);
+
+    const handleTagsChange = (tag) => {
+        if (!tag) return;
+
+        const tagList = tag?.split(',')?.map((item) => item.trim());
+
+        tagList?.forEach((item) => {
+            if (data.tags.some((tag) => tag.name === item)) return;
+            setData({
+                ...data,
+                tags: [
+                    ...data.tags,
+                    {
+                        name: item,
+                    },
+                ],
+            });
+        });
+        setTagInput('');
+    };
 
     return isLoading ? (
         <MatxLoading />
@@ -212,7 +284,9 @@ const Edit = () => {
                                     setData({ ...data, slug: slugInput });
                                 }}
                             >
-                                <Icon>check_circle</Icon>
+                                <Icon sx={{ color: '#000' }}>
+                                    check_circle_outline
+                                </Icon>
                             </span>
                             <Spacer horizontal={'10px'} />
                             <span
@@ -221,7 +295,9 @@ const Edit = () => {
                                     setEditSlug(false);
                                 }}
                             >
-                                <Icon>cancel</Icon>
+                                <Icon sx={{ color: '#000' }}>
+                                    cancel_outline
+                                </Icon>
                             </span>
                         </>
                     ) : (
@@ -264,9 +340,7 @@ const Edit = () => {
                         </button>
                     </div> */}
                     <div className={styles.additional_header}>
-                        <span>
-                            {type == 'course' ? 'Product' : type} Description
-                        </span>
+                        <span>{type} Description</span>
                     </div>
                     <Editor
                         content={data?.description}
@@ -276,7 +350,7 @@ const Edit = () => {
                     />
                 </div>
 
-                {data?.isProduct && (
+                {data?.isCourse && (
                     <Accordion
                         defaultExpanded
                         className={styles.accordion_container}
@@ -293,13 +367,13 @@ const Edit = () => {
                             className={styles.additional_header}
                         >
                             <Typography component="div" variant="div">
-                                <span>Product data</span>
+                                <span>{type} data</span>
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Box className={styles.content_wrappper}>
                                 <p className={styles.content_label}>
-                                    Product URL
+                                    {type} URL
                                 </p>
                                 <InputField
                                     className={styles.input}
@@ -307,7 +381,7 @@ const Edit = () => {
                                     value={data?.productUrl}
                                     name="productUrl"
                                     onChange={handleChangeData}
-                                    placeholder="Enter Product URL"
+                                    placeholder="Enter Course URL"
                                 />
 
                                 <p className={styles.content_label}>
@@ -367,10 +441,7 @@ const Edit = () => {
                             className={styles.additional_header}
                         >
                             <Typography component="div" variant="div">
-                                <span>
-                                    {type == 'course' ? 'Product' : type} Short
-                                    Description
-                                </span>
+                                <span>{type} Short Description</span>
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails sx={{ padding: '0px' }}>
@@ -754,7 +825,7 @@ const Edit = () => {
                             </div>
 
                             <p className={styles.content_label}>Custom Size</p>
-                            <div className={styles.costomize_container}>
+                            <div className={styles.tab_container}>
                                 {['', '2x1', '1x2', '2x2'].map((size) => (
                                     <button
                                         key={size}
@@ -767,34 +838,11 @@ const Edit = () => {
                                                 },
                                             })
                                         }
-                                        style={{
-                                            padding: '10px 20px',
-                                            border: 'none',
-                                            borderRadius: '12px',
-                                            backgroundColor:
-                                                data?.extraDetails?.size ===
-                                                size
-                                                    ? 'white'
-                                                    : 'transparent',
-                                            boxShadow:
-                                                data?.extraDetails?.size ===
-                                                size
-                                                    ? '0 2px 6px rgba(0, 0, 0, 0.1)'
-                                                    : 'none',
-                                            fontWeight:
-                                                data?.extraDetails?.size ===
-                                                size
-                                                    ? 'bold'
-                                                    : 'normal',
-                                            color:
-                                                data?.extraDetails?.size ===
-                                                size
-                                                    ? '#000'
-                                                    : '#AAA',
-                                            cursor: 'pointer',
-                                            transition: 'all 0.3s ease',
-                                            width: '100%',
-                                        }}
+                                        className={
+                                            data?.extraDetails?.size === size
+                                                ? styles.tab_button_active
+                                                : styles.tab_button
+                                        }
                                     >
                                         {size || 'None'}
                                     </button>
@@ -956,7 +1004,7 @@ const Edit = () => {
                     </AccordionSummary>
                     <AccordionDetails>
                         <Box className={styles.content_wrappper}>
-                            <div>
+                            <div style={{ marginBottom: '20px' }}>
                                 <div className={styles.publish_cell_container}>
                                     <div className={styles.publish_cell}>
                                         <svg
@@ -1029,7 +1077,9 @@ const Edit = () => {
                                                 });
                                             }}
                                         >
-                                            <Icon>check_circle</Icon>
+                                            <Icon sx={{ color: '#000' }}>
+                                                check_circle_outline
+                                            </Icon>
                                         </span>
                                         <span
                                             className={styles.edit_icon}
@@ -1037,7 +1087,9 @@ const Edit = () => {
                                                 setEditStatus(false);
                                             }}
                                         >
-                                            <Icon>cancel</Icon>
+                                            <Icon sx={{ color: '#000' }}>
+                                                cancel_outline
+                                            </Icon>
                                         </span>
                                     </div>
                                 )}
@@ -1095,9 +1147,6 @@ const Edit = () => {
                                         className={
                                             styles.publish_cell_edit_container
                                         }
-                                        style={{
-                                            marginTop: '10px',
-                                        }}
                                     >
                                         <LocalizationProvider
                                             dateAdapter={AdapterDayjs}
@@ -1125,7 +1174,9 @@ const Edit = () => {
                                                 });
                                             }}
                                         >
-                                            <Icon>check_circle</Icon>
+                                            <Icon sx={{ color: '#000' }}>
+                                                check_circle_outline
+                                            </Icon>
                                         </span>
                                         <span
                                             className={styles.edit_icon}
@@ -1133,11 +1184,14 @@ const Edit = () => {
                                                 setEditPublishedOn(false);
                                             }}
                                         >
-                                            <Icon>cancel</Icon>
+                                            <Icon sx={{ color: '#000' }}>
+                                                cancel_outline
+                                            </Icon>
                                         </span>
                                     </div>
                                 )}
                             </div>
+                            <HorizontalBorder height="1px" color="#ddd" />
                             <div
                                 style={{
                                     display: 'flex',
@@ -1152,6 +1206,353 @@ const Edit = () => {
                                     {data?.id ? 'Update' : 'Publish'}
                                 </button>
                             </div>
+                        </Box>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion
+                    defaultExpanded
+                    className={styles.accordion_container}
+                >
+                    <AccordionSummary
+                        expandIcon={
+                            <ArrowDropDownIcon
+                                color="disabled"
+                                sx={{ fontSize: '2rem' }}
+                            />
+                        }
+                        aria-controls="panel1-content"
+                        id="panel1-header"
+                        className={styles.additional_header}
+                    >
+                        <Typography component="div" variant="div">
+                            <span>{type} Image</span>
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Box className={styles.content_wrappper}>
+                            <div>
+                                <FilePond
+                                    credits={false}
+                                    files={data?.image ? [data?.image] : []}
+                                    ref={imageUpload}
+                                    required
+                                    acceptedFileTypes={['image/*']}
+                                    allowFileEncode
+                                    imagePreviewHeight={420}
+                                    allowRemove={false}
+                                    allowReplace={true}
+                                    onaddfile={(error, file) => {
+                                        // console.log(error, file);
+                                        if (file)
+                                            setData({
+                                                ...data,
+                                                image: file,
+                                            });
+                                    }}
+                                    // instantUpload={false}
+                                    // server={'/api/upload'}
+                                    allowMultiple={false}
+                                    maxFiles={1}
+                                    name="files"
+                                    labelIdle={`Drag & Drop ${type} image or <span class="filepond--label-action">Browse</span>`}
+                                />
+                            </div>
+                            <HorizontalBorder height="1px" color="#ddd" />
+                            {data?.image ? (
+                                <div
+                                    className={styles.image_footer}
+                                    onClick={() => {
+                                        setData({
+                                            ...data,
+                                            image: null,
+                                        });
+                                    }}
+                                >
+                                    <span>Remove {type} Image</span>
+                                </div>
+                            ) : (
+                                <div
+                                    className={styles.image_footer}
+                                    onClick={() => {
+                                        imageUpload.current?.browse();
+                                    }}
+                                >
+                                    <span>Add {type} Image</span>
+                                </div>
+                            )}
+                        </Box>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion
+                    defaultExpanded
+                    className={styles.accordion_container}
+                >
+                    <AccordionSummary
+                        expandIcon={
+                            <ArrowDropDownIcon
+                                color="disabled"
+                                sx={{ fontSize: '2rem' }}
+                            />
+                        }
+                        aria-controls="panel1-content"
+                        id="panel1-header"
+                        className={styles.additional_header}
+                    >
+                        <Typography component="div" variant="div">
+                            <span>{type} Categories</span>
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Box className={styles.content_wrappper}>
+                            <div className={styles.tab_container}>
+                                <button
+                                    onClick={() => setCategoryTab('')}
+                                    className={
+                                        categoryTab === ''
+                                            ? styles.tab_button_active
+                                            : styles.tab_button
+                                    }
+                                >
+                                    All Categories
+                                </button>
+                                <button
+                                    onClick={() => setCategoryTab('most')}
+                                    className={
+                                        categoryTab === 'most'
+                                            ? styles.tab_button_active
+                                            : styles.tab_button
+                                    }
+                                >
+                                    Most Used
+                                </button>
+                            </div>
+                            <div className={styles.category_container}>
+                                {categories?.map((category) => (
+                                    <div
+                                        key={category.Id}
+                                        className={styles.category_item}
+                                    >
+                                        <Checkbox
+                                            checked={data?.categories
+                                                ?.map((c) => c.id)
+                                                ?.includes(category.Id)}
+                                            onChange={(e) => {
+                                                if (e.target.checked) {
+                                                    setData({
+                                                        ...data,
+                                                        categories: [
+                                                            ...data?.categories,
+                                                            {
+                                                                id: category.Id,
+                                                                name: category.Name,
+                                                            },
+                                                        ],
+                                                    });
+                                                } else {
+                                                    setData({
+                                                        ...data,
+                                                        categories:
+                                                            data?.categories?.filter(
+                                                                (c) =>
+                                                                    c.id !==
+                                                                    category.Id
+                                                            ),
+                                                    });
+                                                }
+                                            }}
+                                        />
+                                        <span>{category.Name}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <HorizontalBorder height="1px" color="#ddd" />
+                            {newCategory ? (
+                                <div
+                                    className={
+                                        styles.publish_cell_edit_container
+                                    }
+                                >
+                                    <InputField
+                                        className={styles.input}
+                                        type={'text'}
+                                        value={newCategoryInput}
+                                        onChange={(e) =>
+                                            setNewCategoryInput(e.target.value)
+                                        }
+                                        placeholder={'Enter New Category'}
+                                    />
+                                    <span
+                                        className={styles.edit_icon}
+                                        onClick={() => {
+                                            setNewCategory(false);
+                                            toast.warn(
+                                                'Need to create a api for this'
+                                            );
+                                        }}
+                                    >
+                                        <Icon sx={{ color: '#000' }}>
+                                            check_circle_outline
+                                        </Icon>
+                                    </span>
+                                    <span
+                                        className={styles.edit_icon}
+                                        onClick={() => {
+                                            setNewCategory(false);
+                                        }}
+                                    >
+                                        <Icon sx={{ color: '#000' }}>
+                                            cancel_outline
+                                        </Icon>
+                                    </span>
+                                </div>
+                            ) : (
+                                <div
+                                    className={styles.category_new}
+                                    onClick={() => {
+                                        setNewCategory(true);
+                                        setNewCategoryInput('');
+                                    }}
+                                >
+                                    <Icon>add</Icon>
+                                    <span>Add New Category</span>
+                                </div>
+                            )}
+                        </Box>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion
+                    defaultExpanded
+                    className={styles.accordion_container}
+                >
+                    <AccordionSummary
+                        expandIcon={
+                            <ArrowDropDownIcon
+                                color="disabled"
+                                sx={{ fontSize: '2rem' }}
+                            />
+                        }
+                        aria-controls="panel1-content"
+                        id="panel1-header"
+                        className={styles.additional_header}
+                    >
+                        <Typography component="div" variant="div">
+                            <span>{type} Tags</span>
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Box className={styles.content_wrappper}>
+                            <div className={styles.publish_cell_edit_container}>
+                                <InputField
+                                    className={styles.input}
+                                    type={'text'}
+                                    value={tagInput}
+                                    onChange={(e) =>
+                                        setTagInput(e.target.value)
+                                    }
+                                    placeholder={'Enter Tag'}
+                                />
+                                <div className={styles.buttons}>
+                                    <button
+                                        className={styles.preview_changes}
+                                        onClick={() =>
+                                            handleTagsChange(tagInput)
+                                        }
+                                    >
+                                        {'Add'}
+                                    </button>
+                                </div>
+                            </div>
+                            <span
+                                className={styles.icon_name_info_container}
+                                style={{ marginTop: 0 }}
+                            >
+                                <svg
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 20 20"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M10 12.8V10M10 7.2H10.007M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                                        stroke="#2C2520"
+                                        stroke-opacity="0.7"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                                <span className={styles.icon_name_info_example}>
+                                    Separate tags with commas
+                                </span>
+                            </span>
+                            <div className={styles.tag_container}>
+                                {data?.tags?.map((tag) => (
+                                    <div
+                                        key={tag.Id}
+                                        className={styles.tag_item}
+                                    >
+                                        <span>{tag.name}</span>
+                                        <Icon
+                                            sx={{
+                                                color: '#000',
+                                                cursor: 'pointer',
+                                            }}
+                                            onClick={() => {
+                                                setData({
+                                                    ...data,
+                                                    tags: data?.tags?.filter(
+                                                        (t) =>
+                                                            t.name !== tag.name
+                                                    ),
+                                                });
+                                            }}
+                                        >
+                                            cancel_outline
+                                        </Icon>
+                                    </div>
+                                ))}
+                            </div>
+                            <HorizontalBorder height="1px" color="#ddd" />
+                            <div
+                                className={styles.tag_most}
+                                onClick={() => {
+                                    setSuggestTag(!suggestTag);
+                                }}
+                            >
+                                <span>Choose from the most used tags</span>
+                            </div>
+                            {suggestTag && (
+                                <div>
+                                    {[
+                                        {
+                                            id: 8,
+                                            name: 'Astrology',
+                                        },
+                                        {
+                                            id: 9,
+                                            name: 'Nakshatra Simplified Course',
+                                        },
+                                        {
+                                            id: 10,
+                                            name: 'Vimshottari Dasha Workshop',
+                                        },
+                                    ]?.map((tag) => (
+                                        <div
+                                            key={tag.id}
+                                            className={styles.tag_link}
+                                            onClick={() =>
+                                                handleTagsChange(tag?.name)
+                                            }
+                                        >
+                                            <span>{tag?.name}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </Box>
                     </AccordionDetails>
                 </Accordion>

@@ -10,6 +10,7 @@ import {
     Box,
     styled,
     useTheme,
+    Typography,
 } from '@mui/material';
 
 import { MatxMenu, MatxSearchBox } from '../../';
@@ -109,10 +110,19 @@ const Layout1Topbar = () => {
     return (
         <TopbarRoot>
             <TopbarContainer>
-                <Box display="flex">
+                <Box display="flex" alignItems="center">
                     <StyledIconButton onClick={handleSidebarToggle}>
                         <Icon>menu</Icon>
                     </StyledIconButton>
+                    {settings?.layout1Settings?.leftSidebar?.title && (
+                        <Typography
+                            variant="h6"
+                            color={theme?.palette?.text?.primary || '#000'}
+                            textTransform={'capitalize'}
+                        >
+                            {settings.layout1Settings.leftSidebar.title}
+                        </Typography>
+                    )}
                 </Box>
 
                 <Box display="flex" alignItems="center">

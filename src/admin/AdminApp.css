@@ -35,3 +35,7 @@ input:-webkit-autofill,
     align-items: center;
     gap: 5px;
 }
+
+/* a.filepond--credits {
+    display: none !important;
+} */

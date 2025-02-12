@@ -224,6 +224,9 @@
         font-size: 16px;
         color: #000;
         width: 100%;
+        &:focus {
+            outline-color: var(--color-caption);
+        }
     }
 }
 
@@ -254,11 +257,35 @@
     margin-left: 10px;
 }
 
-.costomize_container {
+.tab_container {
     background: #f3f3f3;
     padding: 3px;
     display: flex;
     border-radius: 8px;
+    .tab_button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 12px;
+        background-color: transparent;
+        box-shadow: none;
+        font-weight: normal;
+        color: #aaa;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+    .tab_button_active {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 12px;
+        background-color: white;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        font-weight: bold;
+        color: #000;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
 }
 
 .seo_title_container {
@@ -321,6 +348,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-top: 10px;
 }
 
 .publish_cell_edit {
@@ -329,4 +357,63 @@
     font-weight: 800;
     margin-left: 10px;
     cursor: pointer;
+}
+
+.category_container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    .category_item {
+        display: flex;
+        align-items: center;
+        /* gap: 10px; */
+        color: #000;
+    }
+}
+.category_new {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    span {
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: underline;
+    }
+}
+
+.tag_container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    .tag_item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        /* gap: 10px; */
+        color: #000;
+    }
+}
+.tag_most {
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+}
+.tag_link {
+    color: #000;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.image_footer {
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: capitalize;
 }
