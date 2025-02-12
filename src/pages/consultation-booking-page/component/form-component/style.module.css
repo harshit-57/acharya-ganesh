@@ -100,12 +100,14 @@
         pointer-events: none;
         color: #ff0000;
     }
+
     input[type='datetime-local'] {
         appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none;
         position: relative;
     }
+
     input[type='datetime-local']::after {
         content: url('../../../../assets/book_consultation_form_dateIcon.png');
         position: absolute;
@@ -115,12 +117,14 @@
         pointer-events: none;
         color: #ff0000;
     }
+
     input[type='time'] {
         appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none;
         position: relative;
     }
+
     input[type='time']::after {
         content: url('../../../../assets/book_consultation_form_time.png');
         position: absolute;
