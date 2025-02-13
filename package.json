@@ -41,7 +41,7 @@
         "react-helmet-async": "^2.0.5",
         "react-insta-stories": "^2.7.0",
         "react-perfect-scrollbar": "^1.5.8",
-        "react-quill": "^0.0.2",
+        "react-quill": "^2.0.0",
         "react-router-dom": "^7.1.1",
         "react-toastify": "^11.0.3",
         "sirv": "^3.0.0",

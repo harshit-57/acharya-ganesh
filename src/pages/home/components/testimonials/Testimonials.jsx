@@ -40,8 +40,8 @@ const Testimonial = () => {
 
     const getTestimonials = async () => {
         try {
-            const response = await APIHelper.getTestimonials();
-            setTestimonialList(response.data);
+            const response = await APIHelper.getTestimonials({ pageSize: 6 });
+            setTestimonialList(response?.data?.data);
         } catch (e) {
             console.log(e);
         }
