@@ -9,7 +9,7 @@ export const PriceAndPurchaseSection = ({ course }) => {
         <div className={css.container}>
             <img
                 className={css.poster}
-                src={course?.Images[0]}
+                src={course?.Images?.length ? course?.Images[0] : ''}
                 alt={'Course poster'}
             />
             <div className={css.price_detail_container}>

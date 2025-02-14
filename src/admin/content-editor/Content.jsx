@@ -512,7 +512,47 @@ const Edit = () => {
                     >
                         Save Drafts
                     </button>
-                    <button className={styles.preview_changes}>
+                    <button
+                        className={styles.preview_changes}
+                        onClick={() => {
+                            if (data?.title) {
+                                const previewData = {
+                                    Name: data.title,
+                                    Slug: data.slug,
+                                    ProductDescription: data?.description,
+                                    Focus_Keyphrase: data.focusKeyphrase,
+                                    Meta_Title: data.metaTitle,
+                                    Meta_SiteName: data.metaSiteName,
+                                    Meta_Desc: data.metaDescription,
+                                    Regular_Price: data.regularPrice,
+                                    Sale_Price: data.salePrice,
+                                    ProductURL: data.productUrl,
+                                    ShortDescription: data.shortDescription,
+                                    Buy_Text: data.buyText,
+                                    PublishedOn: data.publishedOn,
+                                    IsTop: data.isTOP,
+                                    Status: data.status,
+                                    Categories: data.categories?.map(
+                                        (category) => ({
+                                            CategoryId: category.id,
+                                            CategoryName: category.name,
+                                        })
+                                    ),
+                                    Tags: data.tags?.map((tag) => ({
+                                        TagId: tag.id,
+                                        TagName: tag.name,
+                                    })),
+                                    Images: data.productImages,
+                                };
+                                navigate(
+                                    `/courses/${
+                                        previewData?.Slug || 'new'
+                                    }?preview=true`,
+                                    { state: { data: previewData } }
+                                );
+                            }
+                        }}
+                    >
                         Preview Changes
                     </button>
                 </div>
