@@ -148,14 +148,16 @@ const Edit = () => {
                                 ? new Date(response?.PublishedOn)
                                 : new Date(),
 
-                            categories: response?.Categories?.map((item) => ({
-                                id: item?.CategoryId,
-                                name: item?.CategoryName,
-                            })),
-                            tags: response?.Tags?.map((item) => ({
-                                id: item?.TagId,
-                                name: item?.TagName,
-                            })),
+                            categories:
+                                response?.Categories?.map((item) => ({
+                                    id: item?.CategoryId,
+                                    name: item?.CategoryName,
+                                })) || [],
+                            tags:
+                                response?.Tags?.map((item) => ({
+                                    id: item?.TagId,
+                                    name: item?.TagName,
+                                })) || [],
                             isCourse: true,
                             productUrl: response?.ProductURL,
                             buyText: response?.Buy_Text,
