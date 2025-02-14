@@ -9,19 +9,29 @@ import { TopBar } from '../../components/top-bar/TopBar';
 import { PriceAndPurchaseSection } from './components/price-n-purchase-section/PriceAndPurchase';
 import { CourseCard } from './components/course-card/CourseCard';
 import ImgCourse1 from '../../assets/course_1.png';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { APIHelper } from '../../util/APIHelper';
 import parse from 'html-react-parser';
+import { toast } from 'react-toastify';
 const CourseDetail = () => {
     const { slug } = useParams();
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     const [course, setCourse] = useState(null);
     useEffect(() => {
+        // if (searchParams?.get('preview')) {};
         getCourse();
     }, [slug]);
     const getCourse = async () => {
         try {
-            const response = await APIHelper.getCourses({ slug: slug });
+            const response = await APIHelper.getCourses({
+                slug: slug,
+                status: 1,
+            });
+            if (!response?.data?.data?.length) {
+                navigate('/courses');
+            }
             setCourse(response.data.data[0]);
         } catch (e) {
             console.log(e);

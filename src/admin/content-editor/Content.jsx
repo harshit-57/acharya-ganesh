@@ -35,6 +35,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayJs from 'dayjs';
 import { toast } from 'react-toastify';
 import { htmlToText } from 'html-to-text';
+import AlertDialog from '../components/Alert';
 
 // Register the plugins
 registerPlugin(FilePondPluginImagePreview);
@@ -97,6 +98,7 @@ const Edit = () => {
     const [newCategory, setNewCategory] = useState(false);
     const [tagInput, setTagInput] = useState('');
     const [suggestTag, setSuggestTag] = useState(false);
+    const [showDeleteAlert, setShowDeleteAlert] = useState(false);
     const imageUpload = useRef(null);
 
     const init = useCallback(() => {
@@ -140,7 +142,7 @@ const Edit = () => {
                                 textColor: response?.Extra_Text_Color || '',
                                 bgColor: response?.Extra_Bg_Color || '',
                             },
-                            isTOP: response?.isTOP || false,
+                            isTOP: response?.IsTop || false,
                             status: response?.Status,
                             publishedOn: response?.PublishedOn
                                 ? new Date(response?.PublishedOn)
@@ -202,8 +204,6 @@ const Edit = () => {
         };
     }, []);
 
-    console.log(tags);
-
     const handleChangeData = (event) => {
         const { name, value } = event.target;
         if (name) setData({ ...data, [name]: value });
@@ -234,45 +234,48 @@ const Edit = () => {
         setTagInput('');
     };
 
-    const handleValidation = () => {
+    const handleValidation = (payload) => {
         let isValid = true;
-        if (!data?.title) {
+        if (!payload?.title) {
             toast.error('Title is required');
             isValid = false;
             return isValid;
         }
 
-        if (data?.title?.length > 50) {
+        if (payload?.title?.length > 50) {
             toast.error('Title should be less than 50 characters');
             isValid = false;
             return isValid;
         }
 
-        if (!data?.description) {
+        if (payload?.status == 1 && !payload?.description) {
             toast.error('Description is required');
             isValid = false;
             return isValid;
         }
 
-        if (htmlToText(data?.description)?.length < 200) {
+        if (
+            payload?.status == 1 &&
+            htmlToText(payload?.description)?.length < 200
+        ) {
             toast.error('Description should be more than 200 characters');
             isValid = false;
             return isValid;
         }
 
-        if (!data?.image) {
+        if (payload?.status == 1 && !payload?.image) {
             toast.error('Image is required');
             isValid = false;
             return isValid;
         }
 
-        if (data?.isShortDescription) {
-            if (!data?.shortDescription) {
+        if (payload?.status == 1 && payload?.isShortDescription) {
+            if (!payload?.shortDescription) {
                 toast.error('Short Description is required');
                 isValid = false;
                 return isValid;
             }
-            if (htmlToText(data?.shortDescription)?.length < 100) {
+            if (htmlToText(payload?.shortDescription)?.length < 100) {
                 toast.error(
                     'Short Description should be more than 100 characters'
                 );
@@ -281,32 +284,32 @@ const Edit = () => {
             }
         }
 
-        if (!data?.categories?.length) {
+        if (payload?.status == 1 && !payload?.categories?.length) {
             toast.error('Category is required');
             isValid = false;
             return isValid;
         }
 
-        if (data?.isCourse) {
-            if (!data?.productUrl) {
+        if (payload?.status == 1 && payload?.isCourse) {
+            if (!payload?.productUrl) {
                 toast.error('Course URL is required');
                 isValid = false;
                 return isValid;
             }
-            if (!data?.buyText) {
+            if (!payload?.buyText) {
                 toast.error('Buy Text is required');
                 isValid = false;
                 return isValid;
             }
-            if (!data?.regularPrice) {
+            if (!payload?.regularPrice) {
                 toast.error('Regular Price is required');
                 isValid = false;
                 return isValid;
             }
         }
 
-        if (data?.id) {
-            if (!data?.slug) {
+        if (payload?.id) {
+            if (!payload?.slug) {
                 toast.error('Slug is required');
                 isValid = false;
                 return isValid;
@@ -315,51 +318,85 @@ const Edit = () => {
         return isValid;
     };
 
-    const handleSubmit = async () => {
-        const isValid = handleValidation();
-        console.log(isValid, type, data);
+    const handleSubmit = async (status) => {
+        let payload = data;
+        if (status) payload.status = status;
+
+        const isValid = handleValidation(payload);
         if (!isValid) return;
 
         switch (type) {
             case 'course':
                 setIsLoading(true);
-                if (data?.id) {
-                    ADMINAPIHELPER.updateCourse(data, token)
+                if (payload?.id) {
+                    ADMINAPIHELPER.updateCourse(payload, token)
                         ?.then((response) => {
                             if (response?.data?.success) {
                                 toast.success('Course updated successfully');
-                                navigate(
-                                    `/courses/detail/${response?.data?.data?.slug}`
-                                );
+                                navigate(`/admin/courses`);
                             } else {
                                 toast.error(response?.message);
                             }
                             setIsLoading(false);
                         })
                         .catch((error) => {
-                            toast.error(error?.message);
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
                             setIsLoading(false);
                         });
                 } else {
-                    ADMINAPIHELPER.createCourse(data, token)
+                    ADMINAPIHELPER.createCourse(payload, token)
                         ?.then((response) => {
                             if (response?.data?.success) {
                                 toast.success('Course created successfully');
-                                navigate(
-                                    `/courses/detail/${response?.data?.data?.slug}`
-                                );
+                                navigate(`/admin/courses`);
                             } else {
                                 toast.error(response?.message);
                             }
                             setIsLoading(false);
                         })
                         .catch((error) => {
-                            toast.error(error?.message);
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
                             setIsLoading(false);
                         });
                 }
                 break;
             default:
+                break;
+        }
+    };
+
+    const handleDelete = async () => {
+        switch (type) {
+            case 'course':
+                if (data?.id) {
+                    setIsLoading(true);
+                    ADMINAPIHELPER.updateCourse(
+                        { id: data?.id, deletedOn: new Date() },
+                        token
+                    )
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success('Course deleted successfully');
+                                navigate(`/admin/courses`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                }
+                break;
+            default:
+                setShowDeleteAlert(false);
                 break;
         }
     };
@@ -466,7 +503,15 @@ const Edit = () => {
                 )}
 
                 <div className={styles.buttons}>
-                    <button className={styles.save_drafts}>Save Drafts</button>
+                    <button
+                        className={styles.save_drafts}
+                        onClick={() => {
+                            setData({ ...data, status: 2 });
+                            handleSubmit(2);
+                        }}
+                    >
+                        Save Drafts
+                    </button>
                     <button className={styles.preview_changes}>
                         Preview Changes
                     </button>
@@ -1352,12 +1397,13 @@ const Edit = () => {
                                             : {}
                                     }
                                     disabled={!data?.id}
+                                    onClick={() => setShowDeleteAlert(true)}
                                 >
                                     Move To Trash
                                 </button>
                                 <button
                                     className={styles.preview_changes}
-                                    onClick={handleSubmit}
+                                    onClick={() => handleSubmit()}
                                 >
                                     {data?.id ? 'Update' : 'Publish'}
                                 </button>
@@ -1700,6 +1746,15 @@ const Edit = () => {
                     </AccordionDetails>
                 </Accordion>
             </div>
+            {showDeleteAlert && (
+                <AlertDialog
+                    modal={showDeleteAlert}
+                    toggle={() => setShowDeleteAlert(!showDeleteAlert)}
+                    title="Delete Course"
+                    description="Are you want to sure delete the course?"
+                    confirmFunc={() => handleDelete()}
+                />
+            )}
         </div>
     );
 };

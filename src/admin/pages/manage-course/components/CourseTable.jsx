@@ -30,6 +30,8 @@ const PaginationTable = ({
     setSortBy,
     showDeleteAlert,
     setShowDeleteAlert,
+    selectedData,
+    setSelectedData,
 }) => {
     const theme = useTheme();
     const primaryColor = theme?.palette?.primary?.main;
@@ -276,6 +278,7 @@ const PaginationTable = ({
                                             setShowDeleteAlert(
                                                 !showDeleteAlert
                                             );
+                                            setSelectedData(course);
                                         }}
                                     >
                                         <Tooltip title="Delete">

@@ -16,7 +16,7 @@ import { toast } from 'react-toastify';
 import { PrintExcel, getRoleAndpermission } from '../../utils/utils';
 import moment from 'moment';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { APIHelper } from '../../../util/APIHelper';
+import { ADMINAPIHELPER, APIHelper } from '../../../util/APIHelper';
 
 const ContentBox = styled('div')(({ theme }) => ({
     margin: '30px',
@@ -50,8 +50,7 @@ const H2 = styled('h2')(({ theme }) => ({
 }));
 
 const ManageCourses = () => {
-    const [searchParams] = useSearchParams();
-    const { palette } = useTheme();
+    const token = localStorage.getItem('accessToken');
     const navigate = useNavigate();
     const [courses, setCourses] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -63,6 +62,7 @@ const ManageCourses = () => {
     const [sort, setSort] = useState('desc');
     const [sortBy, setSortBy] = useState('pr.id');
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+    const [selectedData, setSelectedData] = useState(null);
 
     useEffect(() => {
         fetchCourses();
@@ -97,6 +97,7 @@ const ManageCourses = () => {
             setTotalCount(response.data?.total);
             setLoading(false);
         } catch (e) {
+            console.log(e);
         } finally {
             setLoading(false);
         }
@@ -111,8 +112,6 @@ const ManageCourses = () => {
                 page: 1,
                 pageSize: totalCount,
             });
-
-            setExportLoading(false);
             PrintExcel(
                 res?.data?.data,
                 `CourseData-${moment(new Date()).format('YYYY-MM-DD')}.xlsx`
@@ -120,21 +119,38 @@ const ManageCourses = () => {
             toast.success('Exported successfully');
         } catch (err) {
             console.log(err);
+        } finally {
             setExportLoading(false);
         }
     };
 
     const handleDelete = async () => {
         try {
-            // setLoading(true);
-            // const res = await APIHelper.deleteCourse(
-            //     searchParams.get('id')
-            // );
-            // setLoading(false);
+            setLoading(true);
+            if (selectedData?.Id)
+                ADMINAPIHELPER.updateCourse(
+                    { id: selectedData?.Id, deletedOn: new Date() },
+                    token
+                )
+                    ?.then((response) => {
+                        if (response?.data?.success) {
+                            toast.success('Course deleted successfully');
+                            fetchCourses();
+                        } else {
+                            toast.error(response?.message);
+                        }
+                        setLoading(false);
+                    })
+                    .catch((error) => {
+                        toast.error(
+                            error?.response?.data?.message || error?.message
+                        );
+                        setLoading(false);
+                    });
             setShowDeleteAlert(false);
-            toast.success('Deleted successfully');
-            // fetchCourses();
+            setSelectedData(null);
         } catch (err) {
+            console.log(err);
             setLoading(false);
             toast.error('Something went wrong');
         }
@@ -239,6 +255,8 @@ const ManageCourses = () => {
                                 setSortBy={setSortBy}
                                 showDeleteAlert={showDeleteAlert}
                                 setShowDeleteAlert={setShowDeleteAlert}
+                                selectedData={selectedData}
+                                setSelectedData={setSelectedData}
                             />
                         </div>
                     </Grid>

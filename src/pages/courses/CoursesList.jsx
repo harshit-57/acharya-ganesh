@@ -42,6 +42,7 @@ const CoursesList = () => {
                 response = await APIHelper.getCourses({
                     page: currentPage,
                     pageSize: COURSE_PER_PAGE,
+                    status: 1,
                     search: searchQuery,
                     sort: order,
                     sortBy: sortBy,
@@ -50,6 +51,7 @@ const CoursesList = () => {
                 response = await APIHelper.getCourses({
                     page: currentPage,
                     pageSize: COURSE_PER_PAGE,
+                    status: 1,
                     sort: order,
                     sortBy: sortBy,
                 });
