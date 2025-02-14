@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-// import 'react-quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.snow.css';
 import './style.css';
 import { Typography } from '@mui/material';
 
@@ -46,64 +46,66 @@ const Editor = ({ placeholder, content, setContent, style, className }) => {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            import('react-quill').then((module) => {
-                const Quill = module.Quill || window.Quill;
-                if (!window.Quill) window.Quill = Quill;
+            import('react-quill')
+                .then((module) => {
+                    const Quill = module.Quill || window.Quill;
+                    if (!window.Quill) window.Quill = Quill;
 
-                // import('quill-image-resize-module-react')
-                //     .then((ImageResize) => {
-                //         Quill.register(
-                //             'modules/imageResize',
-                //             ImageResize.default
-                //         );
-                //         setModules((prev) => ({
-                //             ...prev,
-                //             imageResize: {
-                //                 parchment: Quill.import('parchment'),
-                //                 modules: ['Resize', 'DisplaySize'],
-                //             },
-                //         }));
-                //     })
-                //     .catch((err) =>
-                //         console.error('Failed to load ImageResize:', err)
-                //     );
+                    // import('quill-image-resize-module-react')
+                    //     .then((ImageResize) => {
+                    //         Quill.register(
+                    //             'modules/imageResize',
+                    //             ImageResize.default
+                    //         );
+                    //         setModules((prev) => ({
+                    //             ...prev,
+                    //             imageResize: {
+                    //                 parchment: Quill.import('parchment'),
+                    //                 modules: ['Resize', 'DisplaySize'],
+                    //             },
+                    //         }));
+                    //     })
+                    //     .catch((err) =>
+                    //         console.error('Failed to load ImageResize:', err)
+                    //     );
 
-                import('@xeger/quill-image-actions')
-                    .then((ImageActions) => {
-                        Quill.register(
-                            'modules/imageActions',
-                            ImageActions.default
+                    import('@xeger/quill-image-actions')
+                        .then((ImageActions) => {
+                            Quill.register(
+                                'modules/imageActions',
+                                ImageActions.default
+                            );
+                            setModules((prev) => ({
+                                ...prev,
+                                imageActions: {
+                                    modules: ['Resize', 'DisplaySize'],
+                                },
+                            }));
+                        })
+                        .catch((err) =>
+                            console.error('Failed to load ImageActions:', err)
                         );
-                        setModules((prev) => ({
-                            ...prev,
-                            imageActions: {
-                                modules: ['Resize', 'DisplaySize'],
-                            },
-                        }));
-                    })
-                    .catch((err) =>
-                        console.error('Failed to load ImageActions:', err)
-                    );
 
-                import('@xeger/quill-image-formats')
-                    .then((ImageFormats) => {
-                        Quill.register(
-                            'modules/imageFormats',
-                            ImageFormats.default
+                    import('@xeger/quill-image-formats')
+                        .then((ImageFormats) => {
+                            Quill.register(
+                                'modules/imageFormats',
+                                ImageFormats.default
+                            );
+                            setModules((prev) => ({
+                                ...prev,
+                                imageFormats: {
+                                    modules: ['Resize', 'DisplaySize'],
+                                },
+                            }));
+                        })
+                        .catch((err) =>
+                            console.error('Failed to load ImageFormats:', err)
                         );
-                        setModules((prev) => ({
-                            ...prev,
-                            imageFormats: {
-                                modules: ['Resize', 'DisplaySize'],
-                            },
-                        }));
-                    })
-                    .catch((err) =>
-                        console.error('Failed to load ImageFormats:', err)
-                    );
 
-                setReactQuill(() => module.default);
-            });
+                    setReactQuill(() => module.default);
+                })
+                .catch((err) => console.log('sffe ', err));
         }
     }, []);
     const handleChange = (html) => {

@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
 import styles from './style.module.css';
 import { FilePond, registerPlugin } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
@@ -9,8 +15,8 @@ import ToggleSwitch from '../../components/toggle/ToggleSwitch';
 import { InputField } from '../../components/input-field/InputField';
 import useSettings from '../hooks/useSettings';
 import Editor from './component/editor/Editor';
-import { useLocation, useParams } from 'react-router-dom';
-import { APIHelper } from '../../util/APIHelper';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { ADMINAPIHELPER, APIHelper } from '../../util/APIHelper';
 import {
     Accordion,
     AccordionDetails,
@@ -28,6 +34,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayJs from 'dayjs';
 import { toast } from 'react-toastify';
+import { htmlToText } from 'html-to-text';
 
 // Register the plugins
 registerPlugin(FilePondPluginImagePreview);
@@ -37,18 +44,21 @@ const Edit = () => {
     const theme = useTheme();
     const primaryColor = theme?.palette?.primary?.main;
     const { state } = useLocation();
+    const navigate = useNavigate();
     const { type, slug } = useParams();
+    const token = localStorage.getItem('accessToken');
 
     const initalData = {
         title: '',
         description: '',
-        slug: '',
+        // slug: '',
         image: '',
         focusKeyphrase: '',
         metaTitle: '',
-        metaSiteName: '',
+        metaSiteName:
+            'Acharya Ganesh: Solutions for Life, Love, and Career Woes',
         metaDescription: '',
-        isShortDescription: false,
+        isShortDescription: ['course'].includes(type) ? true : false,
         shortDescription: '',
         isTOP: false,
         status: 1,
@@ -57,7 +67,7 @@ const Edit = () => {
         tags: [],
         isCourse: type === 'course' ? true : false,
         productUrl: '',
-        buyText: '',
+        buyText: 'Buy Now',
         regularPrice: '',
         salePrice: '',
         productImages: [],
@@ -73,6 +83,7 @@ const Edit = () => {
 
     const [data, setData] = useState(initalData);
     const [categories, setCategories] = useState([]);
+    const [tags, setTags] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isTableContent, setIsTableContent] = useState(false);
     const [slugInput, setSlugInput] = useState('');
@@ -86,33 +97,23 @@ const Edit = () => {
     const [newCategory, setNewCategory] = useState(false);
     const [tagInput, setTagInput] = useState('');
     const [suggestTag, setSuggestTag] = useState(false);
-
     const imageUpload = useRef(null);
 
-    const handleChangeData = (event) => {
-        const { name, value } = event.target;
-        if (name) setData({ ...data, [name]: value });
-    };
+    const init = useCallback(() => {
+        switch (type) {
+            case 'course':
+                (async () => {
+                    setIsLoading(true);
+                    const categoryResponse =
+                        await APIHelper.getCourseCategories({});
+                    setCategories(categoryResponse?.data);
 
-    useEffect(() => {
-        setTimeout(() => {
-            updateSettings({
-                layout1Settings: {
-                    leftSidebar: {
-                        mode: 'compact',
-                        title:
-                            !state?.Id || slug === 'new'
-                                ? `New ${type}`
-                                : `Edit ${type}`,
-                    },
-                },
-            });
-        }, 100);
-        if (slug != 'new' && state?.Id) {
-            setIsLoading(true);
-            switch (type) {
-                case 'course':
-                    (async () => {
+                    const tagResponse = await APIHelper.getCourseTags({
+                        pageSize: 3,
+                        filter: 'most_used',
+                    });
+                    setTags(tagResponse?.data);
+                    if (slug != 'new' && state?.Id) {
                         const response = (
                             await APIHelper.getCourses({ slug: slug })
                         )?.data?.data[0];
@@ -125,8 +126,7 @@ const Edit = () => {
                                 ? response?.Images[0]
                                 : '',
                             focusKeyphrase:
-                                response?.Focus_Keyphrase ||
-                                response?.Slug?.split('-')?.join(' '),
+                                response?.Focus_Keyphrase || response?.Name,
                             metaTitle: response?.Meta_Title,
                             metaSiteName: response?.Meta_SiteName,
                             metaDescription: response?.Meta_Desc,
@@ -150,30 +150,10 @@ const Edit = () => {
                                 id: item?.CategoryId,
                                 name: item?.CategoryName,
                             })),
-                            // tags: response?.Tags?.map((item) => ({
-                            //     id: item?.TagId,
-                            //     name: item?.TagName,
-                            // })),
-                            tags: [
-                                {
-                                    id: 1,
-                                    name: 'Astro',
-                                },
-                                {
-                                    id: 2,
-                                    name: 'Vastu',
-                                },
-                                {
-                                    id: 3,
-                                    name: 'Shastra',
-                                },
-                                {
-                                    id: 4,
-                                    name: 'Pooja',
-                                },
-                            ],
-
-                            // For Product/Courses
+                            tags: response?.Tags?.map((item) => ({
+                                id: item?.TagId,
+                                name: item?.TagName,
+                            })),
                             isCourse: true,
                             productUrl: response?.ProductURL,
                             buyText: response?.Buy_Text,
@@ -183,18 +163,34 @@ const Edit = () => {
                             salePrice: Math.ceil(response?.Sale_Price || 0),
                             productImages: response?.Images,
                         });
-                        const categoryResponse =
-                            await APIHelper.getCourseCategories();
-                        setCategories(categoryResponse?.data);
-                        setIsLoading(false);
-                    })();
-                    break;
-
-                default:
+                    }
                     setIsLoading(false);
-                    break;
-            }
+                })();
+                break;
+
+            default:
+                setIsLoading(false);
+                break;
         }
+    }, [type]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            updateSettings({
+                layout1Settings: {
+                    leftSidebar: {
+                        mode: 'compact',
+                        title:
+                            !state?.Id || slug === 'new'
+                                ? `New ${type}`
+                                : `Edit ${type}`,
+                    },
+                },
+            });
+        }, 100);
+
+        init();
+
         return () => {
             updateSettings({
                 layout1Settings: {
@@ -206,23 +202,12 @@ const Edit = () => {
         };
     }, []);
 
-    const baseLink =
-        type === 'course'
-            ? `${window?.location?.origin}/courses`
-            : type === 'blog'
-            ? `${window?.location?.origin}/blog/detail`
-            : type === 'spirtuality'
-            ? `${window?.location?.origin}/spirtuality/detail`
-            : type === 'story'
-            ? `${window?.location?.origin}/web-stories`
-            : `${window?.location?.origin}/${type}`;
+    console.log(tags);
 
-    const statusName = useMemo(() => {
-        if (data.status == 1) return 'Published';
-        else if (data.status == 2) return 'Draft';
-        // else if (data.publishedOn > new Date()) return 'Scheduled';
-        else return 'Pending';
-    }, [data.status]);
+    const handleChangeData = (event) => {
+        const { name, value } = event.target;
+        if (name) setData({ ...data, [name]: value });
+    };
 
     const handleTagsChange = (tag) => {
         if (!tag) return;
@@ -230,7 +215,12 @@ const Edit = () => {
         const tagList = tag?.split(',')?.map((item) => item.trim());
 
         tagList?.forEach((item) => {
-            if (data.tags.some((tag) => tag.name === item)) return;
+            if (
+                data.tags.some(
+                    (tag) => tag.name?.toLowerCase() === item?.toLowerCase()
+                )
+            )
+                return;
             setData({
                 ...data,
                 tags: [
@@ -243,6 +233,157 @@ const Edit = () => {
         });
         setTagInput('');
     };
+
+    const handleValidation = () => {
+        let isValid = true;
+        if (!data?.title) {
+            toast.error('Title is required');
+            isValid = false;
+            return isValid;
+        }
+
+        if (data?.title?.length > 50) {
+            toast.error('Title should be less than 50 characters');
+            isValid = false;
+            return isValid;
+        }
+
+        if (!data?.description) {
+            toast.error('Description is required');
+            isValid = false;
+            return isValid;
+        }
+
+        if (htmlToText(data?.description)?.length < 200) {
+            toast.error('Description should be more than 200 characters');
+            isValid = false;
+            return isValid;
+        }
+
+        if (!data?.image) {
+            toast.error('Image is required');
+            isValid = false;
+            return isValid;
+        }
+
+        if (data?.isShortDescription) {
+            if (!data?.shortDescription) {
+                toast.error('Short Description is required');
+                isValid = false;
+                return isValid;
+            }
+            if (htmlToText(data?.shortDescription)?.length < 100) {
+                toast.error(
+                    'Short Description should be more than 100 characters'
+                );
+                isValid = false;
+                return isValid;
+            }
+        }
+
+        if (!data?.categories?.length) {
+            toast.error('Category is required');
+            isValid = false;
+            return isValid;
+        }
+
+        if (data?.isCourse) {
+            if (!data?.productUrl) {
+                toast.error('Course URL is required');
+                isValid = false;
+                return isValid;
+            }
+            if (!data?.buyText) {
+                toast.error('Buy Text is required');
+                isValid = false;
+                return isValid;
+            }
+            if (!data?.regularPrice) {
+                toast.error('Regular Price is required');
+                isValid = false;
+                return isValid;
+            }
+        }
+
+        if (data?.id) {
+            if (!data?.slug) {
+                toast.error('Slug is required');
+                isValid = false;
+                return isValid;
+            }
+        }
+        return isValid;
+    };
+
+    const handleSubmit = async () => {
+        const isValid = handleValidation();
+        console.log(isValid, type, data);
+        if (!isValid) return;
+
+        switch (type) {
+            case 'course':
+                setIsLoading(true);
+                if (data?.id) {
+                    ADMINAPIHELPER.updateCourse(data, token)
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success('Course updated successfully');
+                                navigate(
+                                    `/courses/detail/${response?.data?.data?.slug}`
+                                );
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(error?.message);
+                            setIsLoading(false);
+                        });
+                } else {
+                    ADMINAPIHELPER.createCourse(data, token)
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success('Course created successfully');
+                                navigate(
+                                    `/courses/detail/${response?.data?.data?.slug}`
+                                );
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(error?.message);
+                            setIsLoading(false);
+                        });
+                }
+                break;
+            default:
+                break;
+        }
+    };
+
+    const baseLink = useMemo(
+        () =>
+            type === 'course'
+                ? `${window?.location?.origin}/courses`
+                : type === 'blog'
+                ? `${window?.location?.origin}/blog/detail`
+                : type === 'spirtuality'
+                ? `${window?.location?.origin}/spirtuality/detail`
+                : type === 'story'
+                ? `${window?.location?.origin}/web-stories`
+                : `${window?.location?.origin}/${type}`,
+        [type]
+    );
+
+    const statusName = useMemo(() => {
+        if (data.status == 1) return 'Published';
+        else if (data.status == 2) return 'Draft';
+        // else if (data.publishedOn > new Date()) return 'Scheduled';
+        else return 'Pending';
+    }, [data.status]);
 
     return isLoading ? (
         <MatxLoading />
@@ -257,76 +398,80 @@ const Edit = () => {
                     placeholder="Enter Title"
                     onChange={handleChangeData}
                 />
-                <div className={styles.permalink}>
-                    <label>Permalink:</label>
-                    {editSlug || !data?.slug ? (
-                        <>
-                            <div className={styles.link_input}>
-                                {' '}
-                                <p>
-                                    {baseLink}
-                                    {'/'}
-                                </p>
-                                <InputField
-                                    type="text"
-                                    value={slugInput}
-                                    name="slug"
-                                    placeholder="Enter Slug"
-                                    onChange={(e) => {
-                                        setSlugInput(e.target.value);
+                {data?.id && (
+                    <div className={styles.permalink}>
+                        <label>Permalink:</label>
+                        {editSlug || !data?.slug ? (
+                            <>
+                                <div className={styles.link_input}>
+                                    {' '}
+                                    <p>
+                                        {baseLink}
+                                        {'/'}
+                                    </p>
+                                    <InputField
+                                        type="text"
+                                        value={slugInput}
+                                        name="slug"
+                                        placeholder="Enter Slug"
+                                        onChange={(e) => {
+                                            setSlugInput(e.target.value);
+                                        }}
+                                    />
+                                </div>
+                                <span
+                                    className={styles.edit_icon}
+                                    onClick={() => {
+                                        setEditSlug(false);
+                                        setData({ ...data, slug: slugInput });
                                     }}
-                                />
-                            </div>
-                            <span
-                                className={styles.edit_icon}
-                                onClick={() => {
-                                    setEditSlug(false);
-                                    setData({ ...data, slug: slugInput });
-                                }}
-                            >
-                                <Icon sx={{ color: '#000' }}>
-                                    check_circle_outline
-                                </Icon>
-                            </span>
-                            <Spacer horizontal={'10px'} />
-                            <span
-                                className={styles.edit_icon}
-                                onClick={() => {
-                                    setEditSlug(false);
-                                }}
-                            >
-                                <Icon sx={{ color: '#000' }}>
-                                    cancel_outline
-                                </Icon>
-                            </span>
-                        </>
-                    ) : (
-                        <>
-                            <a
-                                className={styles.link}
-                                href={`${baseLink}/${data.slug}`}
-                                target="_blank"
-                            >
-                                {`${baseLink}/${data.slug}`}
-                            </a>
-                            <span
-                                className={styles.edit_icon}
-                                onClick={() => {
-                                    setEditSlug(!editSlug);
-                                    setSlugInput(data.slug);
-                                }}
-                            >
-                                <Icon>edit</Icon>
-                            </span>
-                        </>
-                    )}
-                </div>
+                                >
+                                    <Icon sx={{ color: '#000' }}>
+                                        check_circle_outline
+                                    </Icon>
+                                </span>
+                                <Spacer horizontal={'10px'} />
+                                <span
+                                    className={styles.edit_icon}
+                                    onClick={() => {
+                                        setEditSlug(false);
+                                    }}
+                                >
+                                    <Icon sx={{ color: '#000' }}>
+                                        cancel_outline
+                                    </Icon>
+                                </span>
+                            </>
+                        ) : (
+                            <>
+                                <a
+                                    className={styles.link}
+                                    href={`${baseLink}/${data.slug}`}
+                                    target="_blank"
+                                >
+                                    {`${baseLink}/${data.slug}`}
+                                </a>
+                                <span
+                                    className={styles.edit_icon}
+                                    onClick={() => {
+                                        setEditSlug(!editSlug);
+                                        setSlugInput(data.slug);
+                                    }}
+                                >
+                                    <Icon>edit</Icon>
+                                </span>
+                            </>
+                        )}
+                    </div>
+                )}
+
                 <div className={styles.buttons}>
                     <button className={styles.save_drafts}>Save Drafts</button>
                     <button className={styles.preview_changes}>
                         Preview Changes
                     </button>
                 </div>
+
                 <div className={styles.description_container}>
                     {/* <div className={styles.buttons}>
                         <button className={styles.form_buttons}>
@@ -343,7 +488,7 @@ const Edit = () => {
                         <span>{type} Description</span>
                     </div>
                     <Editor
-                        content={data?.description}
+                        content={data?.description || ''}
                         setContent={(html) =>
                             setData({ ...data, description: html })
                         }
@@ -625,7 +770,8 @@ const Edit = () => {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion className={styles.accordion_container}>
+                {/* Additional Settings */}
+                {/* <Accordion className={styles.accordion_container}>
                     <AccordionSummary
                         expandIcon={
                             <ArrowDropDownIcon
@@ -646,6 +792,7 @@ const Edit = () => {
                             <p className={styles.content_label}>Images</p>
                             <div>
                                 <FilePond
+                                    credits={false}
                                     files={data?.extraDetails?.images}
                                     onupdatefiles={(fileItems) =>
                                         setData({
@@ -938,7 +1085,7 @@ const Edit = () => {
                             </div>
                         </Box>
                     </AccordionDetails>
-                </Accordion>
+                </Accordion> */}
 
                 <Accordion
                     defaultExpanded
@@ -1059,13 +1206,9 @@ const Edit = () => {
                                                 setStatusInput(e.target.value)
                                             }
                                         >
-                                            <option value={''}>Pending</option>
-                                            {data?.id && (
-                                                <option value={1}>
-                                                    Published
-                                                </option>
-                                            )}
-                                            <option value={2}>Draft</option>
+                                            <option value={3}>Pending</option>(
+                                            <option value={1}>Published</option>
+                                            )<option value={2}>Draft</option>
                                         </select>
                                         <span
                                             className={styles.edit_icon}
@@ -1199,10 +1342,23 @@ const Edit = () => {
                                 }}
                                 className={styles.buttons}
                             >
-                                <button className={styles.action_button}>
+                                <button
+                                    className={styles.action_button}
+                                    style={
+                                        !data?.id
+                                            ? {
+                                                  opacity: 0.2,
+                                              }
+                                            : {}
+                                    }
+                                    disabled={!data?.id}
+                                >
                                     Move To Trash
                                 </button>
-                                <button className={styles.preview_changes}>
+                                <button
+                                    className={styles.preview_changes}
+                                    onClick={handleSubmit}
+                                >
                                     {data?.id ? 'Update' : 'Publish'}
                                 </button>
                             </div>
@@ -1467,7 +1623,7 @@ const Edit = () => {
                             </div>
                             <span
                                 className={styles.icon_name_info_container}
-                                style={{ marginTop: 0 }}
+                                style={{ marginTop: 0, marginBottom: '10px' }}
                             >
                                 <svg
                                     width="20"
@@ -1527,28 +1683,15 @@ const Edit = () => {
                             </div>
                             {suggestTag && (
                                 <div>
-                                    {[
-                                        {
-                                            id: 8,
-                                            name: 'Astrology',
-                                        },
-                                        {
-                                            id: 9,
-                                            name: 'Nakshatra Simplified Course',
-                                        },
-                                        {
-                                            id: 10,
-                                            name: 'Vimshottari Dasha Workshop',
-                                        },
-                                    ]?.map((tag) => (
+                                    {tags?.slice(0, 3)?.map((tag) => (
                                         <div
-                                            key={tag.id}
+                                            key={tag.Id}
                                             className={styles.tag_link}
                                             onClick={() =>
-                                                handleTagsChange(tag?.name)
+                                                handleTagsChange(tag?.Name)
                                             }
                                         >
-                                            <span>{tag?.name}</span>
+                                            <span>{tag?.Name}</span>
                                         </div>
                                     ))}
                                 </div>

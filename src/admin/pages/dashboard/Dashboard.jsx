@@ -78,18 +78,19 @@ const Dashboard = () => {
             <ContentBox className="analytics">
                 <Grid container spacing={3}>
                     <Grid item lg={12} md={12} sm={12} xs={12}>
-                        <StatCards />
-                        <h2>Users</h2>
-                        <UsersData
+                        <h2 style={{ textAlign: 'center' }}>Dashboard</h2>
+                        {/* <StatCards /> */}
+                        {/* <h2>Users</h2>
+                         <UsersData
                             total_registered_users={dashboardData?.totalUsers}
                             total_active_users={dashboardData?.totalActiveUsers}
                             total_blocked_users={
                                 dashboardData?.totalBlockedUsers
                             }
                             loading={loading}
-                        />
+                        /> */}
 
-                        <Grid item lg={12} md={12} sm={12} xs={12}>
+                        {/*    <Grid item lg={12} md={12} sm={12} xs={12}>
                             <Card
                                 sx={{
                                     px: 3,
@@ -100,7 +101,7 @@ const Dashboard = () => {
                             >
                                 <CardHeader>
                                     <Title>User Data Analytics</Title>
-                                    {/* <Box>
+                                    <Box>
                     <Select
                       sx={{ mr: 2 }}
                       size="small"
@@ -118,7 +119,7 @@ const Dashboard = () => {
                     >
                       {yearMenuItem()}
                     </Select>
-                  </Box> */}
+                  </Box> 
                                 </CardHeader>
                                 <LineChart
                                     dataX={[
@@ -147,7 +148,7 @@ const Dashboard = () => {
                                     name="User Registered"
                                 />
                             </Card>
-                        </Grid>
+                        </Grid>*/}
                     </Grid>
                 </Grid>
             </ContentBox>

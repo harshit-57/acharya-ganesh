@@ -3,8 +3,8 @@ import axios from 'axios';
 const useLocalHostApi = true;
 
 const BASE_URL_PROD = 'https://';
-// const BASE_URL_LOCAL = 'http://localhost:4200';
-const BASE_URL_LOCAL = 'http://34.131.192.173:4200';
+const BASE_URL_LOCAL = 'http://localhost:4200';
+// const BASE_URL_LOCAL = 'http://34.131.192.173:4200';
 
 const getBaseUrl = () => (useLocalHostApi ? BASE_URL_LOCAL : BASE_URL_PROD);
 
@@ -29,7 +29,7 @@ const getApi =
         await axiosHelper('GET', endpoint, params, {}, token);
 
 const postApi =
-    async (endpoint, token) =>
+    async (endpoint) =>
     async (data = {}, token) =>
         await axiosHelper('POST', endpoint, {}, data, token);
 
@@ -56,4 +56,7 @@ export const APIHelper = Object.freeze({
 export const ADMINAPIHELPER = Object.freeze({
     login: await postApi('v1/admin/login'),
     getAdminPermission: await getApi('v1/admin/get-admin-permission'),
+
+    createCourse: await postApi('v1/admin/create-course'),
+    updateCourse: await postApi('v1/admin/update-course'),
 });
