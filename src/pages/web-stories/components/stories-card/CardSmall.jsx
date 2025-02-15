@@ -8,7 +8,9 @@ export const CardSmall = ({ blog, onClick, style, className }) => {
                 {blog?.CoverImageUrl && (
                     <img src={blog?.CoverImageUrl} alt={'Thumbnail'} />
                 )}
-                <p>{blog?.CategoryName}</p>
+                <p>
+                    {blog?.Categories?.map((c) => c?.CategoryName)?.join(', ')}
+                </p>
             </div>
             <div className={css.content_container}>
                 <h2

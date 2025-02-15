@@ -92,7 +92,7 @@ export default () => {
                     element={<WebStoriesList />}
                 />
                 <Route
-                    path="/web-stories/:category/:slug"
+                    path="/web-stories/detail/:slug"
                     element={<WebStoriesView />}
                 />
                 <Route path="/contact" element={<Contact />} />
@@ -102,7 +102,10 @@ export default () => {
                     path="/bookConsultation"
                     element={<BookConsultation />}
                 />
-                <Route path = "/bookConsultationForm" element = {<FormConsultation/>}/>
+                <Route
+                    path="/bookConsultationForm"
+                    element={<FormConsultation />}
+                />
                 <Route path="*" element={<Navigate to={'/'} />} />
 
                 {/* Admin Routes */}

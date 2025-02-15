@@ -5,7 +5,9 @@ export const BlogCardSmall = ({ blog, onClick, style, className }) => {
         <div className={[css.container, className].join(' ')}>
             <div className={css.thumbnail_wrapper}>
                 {blog?.Image && <img src={blog?.Image} alt={'Thumbnail'} />}
-                <p>{blog?.CategoryName}</p>
+                <p>
+                    {blog?.Categories?.map((c) => c?.CategoryName)?.join(', ')}
+                </p>
             </div>
             <div className={css.content_container}>
                 <h2

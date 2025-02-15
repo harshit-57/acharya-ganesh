@@ -178,7 +178,7 @@ const PaginationTable = ({
                                         }}
                                         onClick={() =>
                                             navigate(
-                                                `/web-stories/${story.CategorySlug}/${story.Id}`
+                                                `/web-stories/detail/${story.Id}`
                                             )
                                         }
                                     >
@@ -188,8 +188,10 @@ const PaginationTable = ({
                                     </Link>
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {story?.CategoryName
-                                        ? story.CategoryName
+                                    {story?.Categories?.length
+                                        ? story.Categories?.map(
+                                              (c) => c?.CategoryName
+                                          )?.join(', ')
                                         : 'NA'}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">

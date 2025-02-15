@@ -9,7 +9,9 @@ export const ArticleCard = ({ onClick, article, style, className }) => {
             style={style}
             className={[className, css.container].join(' ')}
         >
-            <p className={css.category}>{article?.CategoryName}</p>
+            <p className={css.category}>
+                {article?.Categories?.map((c) => c?.CategoryName)?.join(', ')}
+            </p>
             <Spacer vertical={'24px'} />
             <h3
                 className={`content-two-line ${css.title}`}

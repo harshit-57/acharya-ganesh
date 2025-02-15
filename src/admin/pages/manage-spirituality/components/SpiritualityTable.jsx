@@ -197,8 +197,10 @@ const PaginationTable = ({
                                         : 'NA'}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {spirituality?.CategoryName
-                                        ? spirituality.CategoryName
+                                    {spirituality?.Categories?.length
+                                        ? spirituality.Categories?.map(
+                                              (c) => c?.CategoryName
+                                          )?.join(', ')
                                         : 'NA'}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">

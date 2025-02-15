@@ -193,8 +193,10 @@ const PaginationTable = ({
                                     {blog?.Slug ? blog?.Slug : 'NA'}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {blog?.CategoryName
-                                        ? blog.CategoryName
+                                    {blog?.Categories?.length
+                                        ? blog.Categories?.map(
+                                              (c) => c?.CategoryName
+                                          )?.join(', ')
                                         : 'NA'}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">

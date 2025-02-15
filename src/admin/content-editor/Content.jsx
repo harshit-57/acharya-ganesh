@@ -218,14 +218,11 @@ const Edit = () => {
                                 ? new Date(response?.PublishedOn)
                                 : new Date(),
 
-                            categories: response?.CategoryId
-                                ? [
-                                      {
-                                          id: response?.CategoryId,
-                                          name: response?.CategoryName,
-                                      },
-                                  ]
-                                : [],
+                            categories:
+                                response?.Categories?.map((item) => ({
+                                    id: item?.CategoryId,
+                                    name: item?.CategoryName,
+                                })) || [],
                             tags:
                                 response?.Tags?.map((item) => ({
                                     id: item?.TagId,
@@ -279,14 +276,11 @@ const Edit = () => {
                                 ? new Date(response?.PublishedOn)
                                 : new Date(),
 
-                            categories: response?.CategoryId
-                                ? [
-                                      {
-                                          id: response?.CategoryId,
-                                          name: response?.CategoryName,
-                                      },
-                                  ]
-                                : [],
+                            categories:
+                                response?.Categories?.map((item) => ({
+                                    id: item?.CategoryId,
+                                    name: item?.CategoryName,
+                                })) || [],
                             tags:
                                 response?.Tags?.map((item) => ({
                                     id: item?.TagId,
@@ -788,8 +782,8 @@ const Edit = () => {
                 : type === 'spirtuality'
                 ? `${window?.location?.origin}/spirtuality/detail`
                 : type === 'story'
-                ? `${window?.location?.origin}/web-stories`
-                : `${window?.location?.origin}/${type}`,
+                ? `${window?.location?.origin}/web-stories/detail`
+                : `${window?.location?.origin}/${type}/detail`,
         [type]
     );
 

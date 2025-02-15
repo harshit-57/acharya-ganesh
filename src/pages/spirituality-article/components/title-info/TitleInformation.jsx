@@ -45,7 +45,11 @@ export const TitleInformation = ({ article }) => {
             />
             <div className={css.title_container}>
                 <div className={css.category_container}>
-                    <p className={css.category}>{article?.CategoryName}</p>
+                    <p className={css.category}>
+                        {article?.Categories?.map((c) => c?.CategoryName)?.join(
+                            ', '
+                        )}
+                    </p>
                 </div>
                 <h1 className={css.title}>{htmlToText(article?.Title)}</h1>
                 <div className={css.timestamp_container}>
