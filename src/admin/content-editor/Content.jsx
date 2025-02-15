@@ -21,9 +21,11 @@ import {
     Accordion,
     AccordionDetails,
     AccordionSummary,
+    Autocomplete,
     Box,
     Checkbox,
     Icon,
+    TextField,
     Typography,
     useTheme,
 } from '@mui/material';
@@ -59,7 +61,7 @@ const Edit = () => {
         metaSiteName:
             'Acharya Ganesh: Solutions for Life, Love, and Career Woes',
         metaDescription: '',
-        isShortDescription: ['course'].includes(type) ? true : false,
+        isShortDescription: ['course', 'blog'].includes(type) ? true : false,
         shortDescription: '',
         isTOP: false,
         status: 1,
@@ -172,6 +174,130 @@ const Edit = () => {
                 })();
                 break;
 
+            case 'blog':
+                (async () => {
+                    setIsLoading(true);
+                    const categoryResponse = await APIHelper.getBlogCategories(
+                        {}
+                    );
+                    setCategories(categoryResponse?.data);
+
+                    const tagResponse = await APIHelper.getBlogTags({
+                        pageSize: 3,
+                        filter: 'most_used',
+                    });
+                    setTags(tagResponse?.data);
+                    if (slug != 'new' && state?.Id) {
+                        const response = (
+                            await APIHelper.getBlogs({ slug: slug })
+                        )?.data?.data[0];
+                        setData({
+                            id: response?.Id,
+                            title: response?.Title,
+                            description: response?.Description,
+                            slug: response?.Slug,
+                            image: response?.Image || '',
+                            focusKeyphrase:
+                                response?.Focus_Keyphrase || response?.Title,
+                            metaTitle: response?.Meta_Title,
+                            metaSiteName: response?.Meta_SiteName,
+                            metaDescription: response?.Meta_Desc,
+                            isShortDescription: true,
+                            shortDescription: response?.ShortDescription,
+                            extraDetails: {
+                                images: response?.Extra_Images || [],
+                                link: response?.Extra_Link || '',
+                                icon: response?.Extra_Icon || '',
+                                size: response?.Extra_Size || '',
+                                textColor: response?.Extra_Text_Color || '',
+                                bgColor: response?.Extra_Bg_Color || '',
+                            },
+                            isTOP: response?.IsTop || false,
+                            status: response?.Status,
+                            publishedOn: response?.PublishedOn
+                                ? new Date(response?.PublishedOn)
+                                : new Date(),
+
+                            categories: response?.CategoryId
+                                ? [
+                                      {
+                                          id: response?.CategoryId,
+                                          name: response?.CategoryName,
+                                      },
+                                  ]
+                                : [],
+                            tags:
+                                response?.Tags?.map((item) => ({
+                                    id: item?.TagId,
+                                    name: item?.TagName,
+                                })) || [],
+                        });
+                    }
+                    setIsLoading(false);
+                })();
+                break;
+
+            case 'spirituality':
+                (async () => {
+                    setIsLoading(true);
+                    const categoryResponse =
+                        await APIHelper.getSpiritualityCategories({});
+                    setCategories(categoryResponse?.data);
+
+                    const tagResponse = await APIHelper.getSpiritualityTags({
+                        pageSize: 3,
+                        filter: 'most_used',
+                    });
+                    setTags(tagResponse?.data);
+                    if (slug != 'new' && state?.Id) {
+                        const response = (
+                            await APIHelper.getSpiritualities({ slug: slug })
+                        )?.data?.data[0];
+                        setData({
+                            id: response?.Id,
+                            title: response?.Title,
+                            description: response?.Description,
+                            slug: response?.Slug,
+                            image: response?.Image || '',
+                            focusKeyphrase:
+                                response?.Focus_Keyphrase || response?.Title,
+                            metaTitle: response?.Meta_Title,
+                            metaSiteName: response?.Meta_SiteName,
+                            metaDescription: response?.Meta_Desc,
+                            isShortDescription: false,
+                            extraDetails: {
+                                images: response?.Extra_Images || [],
+                                link: response?.Extra_Link || '',
+                                icon: response?.Extra_Icon || '',
+                                size: response?.Extra_Size || '',
+                                textColor: response?.Extra_Text_Color || '',
+                                bgColor: response?.Extra_Bg_Color || '',
+                            },
+                            isTOP: response?.IsTop || false,
+                            status: response?.Status,
+                            publishedOn: response?.PublishedOn
+                                ? new Date(response?.PublishedOn)
+                                : new Date(),
+
+                            categories: response?.CategoryId
+                                ? [
+                                      {
+                                          id: response?.CategoryId,
+                                          name: response?.CategoryName,
+                                      },
+                                  ]
+                                : [],
+                            tags:
+                                response?.Tags?.map((item) => ({
+                                    id: item?.TagId,
+                                    name: item?.TagName,
+                                })) || [],
+                        });
+                    }
+                    setIsLoading(false);
+                })();
+                break;
+
             default:
                 setIsLoading(false);
                 break;
@@ -244,8 +370,8 @@ const Edit = () => {
             return isValid;
         }
 
-        if (payload?.title?.length > 50) {
-            toast.error('Title should be less than 50 characters');
+        if (payload?.title?.length > 100) {
+            toast.error('Title should be less than 100 characters');
             isValid = false;
             return isValid;
         }
@@ -366,6 +492,89 @@ const Edit = () => {
                         });
                 }
                 break;
+
+            case 'blog':
+                setIsLoading(true);
+                if (payload?.id) {
+                    ADMINAPIHELPER.updateBlog(payload, token)
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success('Blog updated successfully');
+                                navigate(`/admin/blogs`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                } else {
+                    ADMINAPIHELPER.createBlog(payload, token)
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success('Blog created successfully');
+                                navigate(`/admin/blogs`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                }
+                break;
+
+            case 'spirituality':
+                setIsLoading(true);
+                if (payload?.id) {
+                    ADMINAPIHELPER.updateSpirituality(payload, token)
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success(
+                                    'Spirituality updated successfully'
+                                );
+                                navigate(`/admin/spiritualities`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                } else {
+                    ADMINAPIHELPER.createSpirituality(payload, token)
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success(
+                                    'Spirituality created successfully'
+                                );
+                                navigate(`/admin/spiritualities`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                }
+                break;
+
             default:
                 break;
         }
@@ -397,9 +606,176 @@ const Edit = () => {
                         });
                 }
                 break;
+            case 'blog':
+                if (data?.id) {
+                    setIsLoading(true);
+                    ADMINAPIHELPER.updateBlog(
+                        { id: data?.id, deletedOn: new Date() },
+                        token
+                    )
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success('Blog deleted successfully');
+                                navigate(`/admin/blogs`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                }
+                break;
+
+            case 'spirituality':
+                if (data?.id) {
+                    setIsLoading(true);
+                    ADMINAPIHELPER.updateSpirituality(
+                        { id: data?.id, deletedOn: new Date() },
+                        token
+                    )
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success(
+                                    'Spirituality deleted successfully'
+                                );
+                                navigate(`/admin/spiritualities`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                }
+                break;
+
             default:
                 setShowDeleteAlert(false);
                 break;
+        }
+    };
+
+    const handlePreview = async () => {
+        let previewData = {};
+        if (data?.title) {
+            switch (type) {
+                case 'course':
+                    previewData = {
+                        Name: data.title,
+                        Slug: data.slug,
+                        ProductDescription: data?.description,
+                        Focus_Keyphrase: data.focusKeyphrase,
+                        Meta_Title: data.metaTitle,
+                        Meta_SiteName: data.metaSiteName,
+                        Meta_Desc: data.metaDescription,
+                        Regular_Price: data.regularPrice,
+                        Sale_Price: data.salePrice,
+                        ProductURL: data.productUrl,
+                        ShortDescription: data.shortDescription,
+                        Buy_Text: data.buyText,
+                        PublishedOn: data.publishedOn,
+                        IsTop: data.isTOP,
+                        Status: data.status,
+                        Categories: data.categories?.map((category) => ({
+                            CategoryId: category.id,
+                            CategoryName: category.name,
+                        })),
+                        Tags: data.tags?.map((tag) => ({
+                            TagId: tag.id,
+                            TagName: tag.name,
+                        })),
+                        Images: data.productImages,
+                    };
+                    navigate(
+                        `/courses/${previewData?.Slug || 'new'}?preview=true`,
+                        { state: { data: previewData } }
+                    );
+                    break;
+
+                case 'blog':
+                    previewData = {
+                        Name: data.title,
+                        Slug: data.slug,
+                        ProductDescription: data?.description,
+                        Focus_Keyphrase: data.focusKeyphrase,
+                        Meta_Title: data.metaTitle,
+                        Meta_SiteName: data.metaSiteName,
+                        Meta_Desc: data.metaDescription,
+                        Regular_Price: data.regularPrice,
+                        Sale_Price: data.salePrice,
+                        ProductURL: data.productUrl,
+                        ShortDescription: data.shortDescription,
+                        Buy_Text: data.buyText,
+                        PublishedOn: data.publishedOn,
+                        IsTop: data.isTOP,
+                        Status: data.status,
+                        Categories: data.categories?.map((category) => ({
+                            CategoryId: category.id,
+                            CategoryName: category.name,
+                        })),
+                        Tags: data.tags?.map((tag) => ({
+                            TagId: tag.id,
+                            TagName: tag.name,
+                        })),
+                        Images: data.productImages,
+                    };
+
+                    navigate(
+                        `/blog/detail/${
+                            previewData?.Slug || 'new'
+                        }?preview=true`,
+                        { state: { data: previewData } }
+                    );
+                    break;
+
+                case 'spirituality':
+                    previewData = {
+                        Name: data.title,
+                        Slug: data.slug,
+                        ProductDescription: data?.description,
+                        Focus_Keyphrase: data.focusKeyphrase,
+                        Meta_Title: data.metaTitle,
+                        Meta_SiteName: data.metaSiteName,
+                        Meta_Desc: data.metaDescription,
+                        Regular_Price: data.regularPrice,
+                        Sale_Price: data.salePrice,
+                        ProductURL: data.productUrl,
+                        ShortDescription: data.shortDescription,
+                        Buy_Text: data.buyText,
+                        PublishedOn: data.publishedOn,
+                        IsTop: data.isTOP,
+                        Status: data.status,
+                        Categories: data.categories?.map((category) => ({
+                            CategoryId: category.id,
+                            CategoryName: category.name,
+                        })),
+                        Tags: data.tags?.map((tag) => ({
+                            TagId: tag.id,
+                            TagName: tag.name,
+                        })),
+                        Images: data.productImages,
+                    };
+
+                    navigate(
+                        `/spirituality/detail/${
+                            previewData?.Slug || 'new'
+                        }?preview=true`,
+                        { state: { data: previewData } }
+                    );
+                    break;
+
+                default:
+                    break;
+            }
         }
     };
 
@@ -517,42 +893,7 @@ const Edit = () => {
                     <button
                         className={styles.preview_changes}
                         onClick={() => {
-                            if (data?.title) {
-                                const previewData = {
-                                    Name: data.title,
-                                    Slug: data.slug,
-                                    ProductDescription: data?.description,
-                                    Focus_Keyphrase: data.focusKeyphrase,
-                                    Meta_Title: data.metaTitle,
-                                    Meta_SiteName: data.metaSiteName,
-                                    Meta_Desc: data.metaDescription,
-                                    Regular_Price: data.regularPrice,
-                                    Sale_Price: data.salePrice,
-                                    ProductURL: data.productUrl,
-                                    ShortDescription: data.shortDescription,
-                                    Buy_Text: data.buyText,
-                                    PublishedOn: data.publishedOn,
-                                    IsTop: data.isTOP,
-                                    Status: data.status,
-                                    Categories: data.categories?.map(
-                                        (category) => ({
-                                            CategoryId: category.id,
-                                            CategoryName: category.name,
-                                        })
-                                    ),
-                                    Tags: data.tags?.map((tag) => ({
-                                        TagId: tag.id,
-                                        TagName: tag.name,
-                                    })),
-                                    Images: data.productImages,
-                                };
-                                navigate(
-                                    `/courses/${
-                                        previewData?.Slug || 'new'
-                                    }?preview=true`,
-                                    { state: { data: previewData } }
-                                );
-                            }
+                            handlePreview();
                         }}
                     >
                         Preview Changes
@@ -1483,7 +1824,17 @@ const Edit = () => {
                                     required
                                     acceptedFileTypes={['image/*']}
                                     allowFileEncode
-                                    imagePreviewHeight={420}
+                                    imagePreviewHeight={
+                                        type == 'course'
+                                            ? 420
+                                            : type == 'blog'
+                                            ? 200
+                                            : type == 'spirtuality'
+                                            ? 200
+                                            : type == 'story'
+                                            ? 400
+                                            : 'auto'
+                                    }
                                     allowRemove={false}
                                     allowReplace={true}
                                     onaddfile={(error, file) => {
@@ -1698,6 +2049,28 @@ const Edit = () => {
                                     }
                                     placeholder={'Enter Tag'}
                                 />
+                                {/* <Autocomplete
+                                    options={tags?.map((option) => ({
+                                        id: option.Id,
+                                        label: option.Name,
+                                    }))}
+                                    // getOptionLabel={(option) => option.name}
+                                    onChange={(e, value) => {
+                                        setTagInput(value);
+                                    }}
+                                    renderInput={(params) => (
+                                        <InputField
+                                            {...params}
+                                            className={styles.input}
+                                            placeholder="Enter Tag"
+                                            // value={tagInput}
+                                            // onChange={(e) =>
+                                            //     setTagInput(e.target.value)
+                                            // }
+                                        />
+                                    )}
+                                /> */}
+
                                 <div className={styles.buttons}>
                                     <button
                                         className={styles.preview_changes}
@@ -1792,8 +2165,8 @@ const Edit = () => {
                 <AlertDialog
                     modal={showDeleteAlert}
                     toggle={() => setShowDeleteAlert(!showDeleteAlert)}
-                    title="Delete Course"
-                    description="Are you want to sure delete the course?"
+                    title={`Delete ${type}`}
+                    description={`Are you want to sure delete the ${type}?`}
                     confirmFunc={() => handleDelete()}
                 />
             )}

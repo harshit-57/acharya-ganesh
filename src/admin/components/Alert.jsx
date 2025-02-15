@@ -17,7 +17,12 @@ export default function AlertDialog(props) {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+                <DialogTitle
+                    id="alert-dialog-title"
+                    textTransform={'capitalize'}
+                >
+                    {title}
+                </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         {description}

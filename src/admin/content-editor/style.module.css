@@ -365,6 +365,8 @@
     flex-direction: column;
     gap: 10px;
     padding: 10px;
+    overflow: auto;
+    max-height: 425px;
     .category_item {
         display: flex;
         align-items: center;
