@@ -33,6 +33,7 @@ import ManageSpirituality from './admin/pages/manage-spirituality/ManageSpiritua
 import ManageStory from './admin/pages/manage-stories/ManageStory';
 import FormConsultation from './pages/consultation-booking-page/BookConsultationForm';
 import ManageTestimonial from './admin/pages/manage-testimonial/ManageTestimonial';
+import ManageSupport from './admin/pages/manage-support/ManageSupport';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
@@ -142,6 +143,7 @@ export default () => {
                     />
                     <Route path="/admin/stories" element={<ManageStory />} />
                     <Route path="/admin/testimonials" element={<ManageTestimonial />} />
+                    <Route path="/admin/support" element={<ManageSupport />} />
                 </Route>
             </Routes>
         </>

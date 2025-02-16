@@ -37,7 +37,7 @@ export const navigations = [
     { label: 'HELP', type: 'label' },
     {
         name: 'Support Management',
-        path: '/admin/login',
+        path: '/admin/support',
         icon: 'support_agent',
     },
 ];
