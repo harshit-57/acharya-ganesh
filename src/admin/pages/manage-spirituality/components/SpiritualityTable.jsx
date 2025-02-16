@@ -187,7 +187,7 @@ const PaginationTable = ({
                                         }
                                     >
                                         {spirituality?.Title
-                                            ? spirituality.Title
+                                            ? htmlToText(spirituality.Title)
                                             : 'NA'}
                                     </Link>
                                 </StyledTableCell>

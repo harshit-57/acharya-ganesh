@@ -24,7 +24,11 @@ const Article = () => {
     }, [slug]);
     const getArticle = async () => {
         try {
-            const response = await APIHelper.getBlogs({ slug: slug });
+            const response = await APIHelper.getBlogs({
+                slug: slug,
+                status: 1,
+                active: 1,
+            });
             setArticle(response.data.data[0]);
         } catch (e) {
             console.log(e);

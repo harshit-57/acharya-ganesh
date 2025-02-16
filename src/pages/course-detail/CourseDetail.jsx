@@ -37,6 +37,7 @@ const CourseDetail = () => {
             const response = await APIHelper.getCourses({
                 slug: slug,
                 status: 1,
+                active: 1,
             });
             if (!response?.data?.data?.length) {
                 navigate('/courses');

@@ -43,6 +43,7 @@ const CoursesList = () => {
                     page: currentPage,
                     pageSize: COURSE_PER_PAGE,
                     status: 1,
+                    active: 1,
                     search: searchQuery,
                     sort: order,
                     sortBy: sortBy,
@@ -52,6 +53,7 @@ const CoursesList = () => {
                     page: currentPage,
                     pageSize: COURSE_PER_PAGE,
                     status: 1,
+                    active: 1,
                     sort: order,
                     sortBy: sortBy,
                 });

@@ -6,6 +6,12 @@ const StyledLoading = styled('div')({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    '& .wrapper': {
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     '& img': {
         width: 'auto',
         height: '25px',
@@ -14,15 +20,15 @@ const StyledLoading = styled('div')({
         position: 'absolute',
         left: -7,
         right: 0,
-        top: 'calc(50% - 25px)',
+        top: 'calc(50% - 20px)',
     },
 });
 
-const Loading = () => {
+const Loading = ({ style }) => {
     return (
-        <StyledLoading>
-            <Box position="relative">
-                <img src="/assets/images/logo-circle.svg" alt="" />
+        <StyledLoading style={style || {}}>
+            <Box className="wrapper">
+                <img src="/src/assets/brand_logo.png" alt="" />
                 <CircularProgress
                     // sx={{ color: '#1B5293' }}
                     className="circleProgress"

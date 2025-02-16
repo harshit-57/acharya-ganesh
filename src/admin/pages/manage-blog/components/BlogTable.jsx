@@ -209,7 +209,7 @@ const PaginationTable = ({
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                     <p className="content-three-line">
-                                        {htmlToText(blog?.ShortDescription)}
+                                        {htmlToText(blog?.Description)}
                                     </p>
                                 </StyledTableCell>
                                 <StyledTableCell align="center">

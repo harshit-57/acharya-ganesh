@@ -21,7 +21,7 @@ export const ArticleCard = ({ onClick, article, style, className }) => {
             </h3>
             <Spacer vertical={'10px'} />
             <div className={`html-content content-four-line ${css.shortDesc}`}>
-                {parse(article?.ShortDescription || '')}
+                {htmlToText(article?.Description || '')}
             </div>
             <Spacer vertical={'10px'} />
             <p className={css.author}>

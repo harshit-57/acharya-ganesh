@@ -1,5 +1,5 @@
 import css from './style.module.css';
-import { useState } from 'react';
+import { act, useState } from 'react';
 import { useEffect } from 'react';
 
 import ImgSectionBg from '../../assets/course_section_bg.png';
@@ -56,6 +56,7 @@ export const CoursesCarousel = () => {
                 page: 1,
                 pageSize: 10,
                 status: 1,
+                active: 1,
                 category: 'upcoming,live-class,uncategorized,course',
             });
             setCourses(response?.data?.data);

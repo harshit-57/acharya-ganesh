@@ -23,7 +23,11 @@ const SArticle = () => {
     }, [slug]);
     const getArticle = async () => {
         try {
-            const response = await APIHelper.getSpiritualities({ slug: slug });
+            const response = await APIHelper.getSpiritualities({
+                slug: slug,
+                status: 1,
+                active: 1,
+            });
             setArticle(response.data.data[0]);
         } catch (e) {
             console.log(e);

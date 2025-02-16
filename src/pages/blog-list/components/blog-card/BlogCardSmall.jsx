@@ -19,9 +19,9 @@ export const BlogCardSmall = ({ blog, onClick, style, className }) => {
                 </h2>
                 <div
                     className={`html-content content-three-line`}
-                    title={htmlToText(blog?.ShortDescription)}
+                    // title={htmlToText(blog?.Description)}
                 >
-                    {htmlToText(blog?.ShortDescription || '')}
+                    {htmlToText(blog?.Description || '')}
                 </div>
                 <p>
                     {'- Acharya Ganesh'}

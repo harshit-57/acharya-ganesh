@@ -31,6 +31,8 @@ const SpiritualityList = () => {
             const response = await APIHelper.getSpiritualities({
                 page: currentPage,
                 pageSize: BLOG_PER_PAGE,
+                status: 1,
+                active: 1,
                 category: category || undefined,
             });
             setBlogs(response.data?.data);

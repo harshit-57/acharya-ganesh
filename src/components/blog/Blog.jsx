@@ -40,7 +40,12 @@ const Blog = () => {
 
     const getBlogs = async () => {
         try {
-            const response = await APIHelper.getBlogs({ page: 1, pageSize: 9 });
+            const response = await APIHelper.getBlogs({
+                page: 1,
+                pageSize: 9,
+                status: 1,
+                active: 1,
+            });
             setArticleList(response.data?.data);
         } catch (e) {
             console.error(e);

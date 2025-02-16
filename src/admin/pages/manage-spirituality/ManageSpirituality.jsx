@@ -17,28 +17,11 @@ import { PrintExcel, getRoleAndpermission } from '../../utils/utils';
 import moment from 'moment';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { APIHelper } from '../../../util/APIHelper';
+import { MatxLoading } from '../../components';
 
 const ContentBox = styled('div')(({ theme }) => ({
     margin: '30px',
     [theme.breakpoints.down('sm')]: { margin: '16px' },
-}));
-
-const CardHeader = styled(Box)(() => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-}));
-
-const Title = styled('span')(() => ({
-    fontSize: '1rem',
-    fontWeight: '500',
-    marginRight: '.5rem',
-    textTransform: 'capitalize',
-}));
-
-const SubTitle = styled('span')(({ theme }) => ({
-    fontSize: '1rem',
-    color: theme.palette.text.secondary,
 }));
 
 const H2 = styled('h2')(({ theme }) => ({
@@ -180,7 +163,7 @@ const ManageSpirituality = () => {
                                         py: 0.9,
                                     }}
                                 >
-                                    + Add Blog
+                                    + Add Spirituality
                                 </Button>
 
                                 <Button
@@ -228,6 +211,9 @@ const ManageSpirituality = () => {
                             </div>
                         </div>
                         <div style={{ marginTop: '20px' }}>
+                            {loading && (
+                                <MatxLoading style={{ margin: '20px' }} />
+                            )}
                             <PaginationTable
                                 data={spiritualities}
                                 totalItems={totalCount}

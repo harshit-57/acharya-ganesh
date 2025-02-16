@@ -16,7 +16,12 @@ export const RecentBlogs = () => {
 
     const getBlogs = async () => {
         try {
-            const response = await APIHelper.getBlogs({ page: 1, pageSize: 3 });
+            const response = await APIHelper.getBlogs({
+                page: 1,
+                pageSize: 3,
+                status: 1,
+                active: 1,
+            });
             setArticleList(response.data?.data);
         } catch (e) {}
     };

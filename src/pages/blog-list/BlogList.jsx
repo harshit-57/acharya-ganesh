@@ -31,6 +31,8 @@ const BlogList = () => {
             const response = await APIHelper.getBlogs({
                 page: currentPage,
                 pageSize: BLOG_PER_PAGE,
+                status: 1,
+                active: 1,
                 category: category || undefined,
             });
             setBlogs(response.data?.data);

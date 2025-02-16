@@ -61,19 +61,19 @@ const Edit = () => {
         metaSiteName:
             'Acharya Ganesh: Solutions for Life, Love, and Career Woes',
         metaDescription: '',
-        isShortDescription: ['course', 'blog'].includes(type) ? true : false,
+        isShortDescription: ['course'].includes(type) ? true : false,
         shortDescription: '',
-        isTOP: false,
+        isTOP: ['course'].includes(type) ? false : true,
         status: 1,
         publishedOn: new Date(),
         categories: [],
         tags: [],
-        isCourse: type === 'course' ? true : false,
-        productUrl: '',
-        buyText: 'Buy Now',
-        regularPrice: '',
-        salePrice: '',
-        productImages: [],
+        isCourse: type === 'course' ? true : undefined,
+        productUrl: type === 'course' ? '' : undefined,
+        buyText: type === 'course' ? 'Buy Now' : undefined,
+        regularPrice: type === 'course' ? '' : undefined,
+        salePrice: type === 'course' ? '' : undefined,
+        productImages: type === 'course' ? [] : undefined,
         extraDetails: {
             images: [],
             link: '',
@@ -202,8 +202,8 @@ const Edit = () => {
                             metaTitle: response?.Meta_Title,
                             metaSiteName: response?.Meta_SiteName,
                             metaDescription: response?.Meta_Desc,
-                            isShortDescription: true,
-                            shortDescription: response?.ShortDescription,
+                            // isShortDescription: true,
+                            // shortDescription: response?.ShortDescription,
                             extraDetails: {
                                 images: response?.Extra_Images || [],
                                 link: response?.Extra_Link || '',
@@ -212,7 +212,7 @@ const Edit = () => {
                                 textColor: response?.Extra_Text_Color || '',
                                 bgColor: response?.Extra_Bg_Color || '',
                             },
-                            isTOP: response?.IsTop || false,
+                            isTOP: response?.IsTop || true,
                             status: response?.Status,
                             publishedOn: response?.PublishedOn
                                 ? new Date(response?.PublishedOn)
@@ -270,7 +270,7 @@ const Edit = () => {
                                 textColor: response?.Extra_Text_Color || '',
                                 bgColor: response?.Extra_Bg_Color || '',
                             },
-                            isTOP: response?.IsTop || false,
+                            isTOP: response?.IsTop || true,
                             status: response?.Status,
                             publishedOn: response?.PublishedOn
                                 ? new Date(response?.PublishedOn)
@@ -779,8 +779,8 @@ const Edit = () => {
                 ? `${window?.location?.origin}/courses`
                 : type === 'blog'
                 ? `${window?.location?.origin}/blog/detail`
-                : type === 'spirtuality'
-                ? `${window?.location?.origin}/spirtuality/detail`
+                : type === 'spirituality'
+                ? `${window?.location?.origin}/spirituality/detail`
                 : type === 'story'
                 ? `${window?.location?.origin}/web-stories/detail`
                 : `${window?.location?.origin}/${type}/detail`,
@@ -1823,7 +1823,7 @@ const Edit = () => {
                                             ? 420
                                             : type == 'blog'
                                             ? 200
-                                            : type == 'spirtuality'
+                                            : type == 'spirituality'
                                             ? 200
                                             : type == 'story'
                                             ? 400
