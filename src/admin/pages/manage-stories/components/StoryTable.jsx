@@ -190,8 +190,8 @@ const PaginationTable = ({
                                 <StyledTableCell align="center">
                                     {story?.Categories?.length
                                         ? story.Categories?.map(
-                                              (c) => c?.CategoryName
-                                          )?.join(', ')
+                                            (c) => c?.CategoryName
+                                        )?.join(', ')
                                         : 'NA'}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
@@ -199,10 +199,10 @@ const PaginationTable = ({
                                         {story?.Tags?.filter((t) => t?.TagName)
                                             .length
                                             ? story?.Tags?.filter(
-                                                  (t) => t?.TagName
-                                              )
-                                                  ?.map((t) => t?.TagName)
-                                                  ?.join(', ')
+                                                (t) => t?.TagName
+                                            )
+                                                ?.map((t) => t?.TagName)
+                                                ?.join(', ')
                                             : 'NA'}
                                     </p>
                                 </StyledTableCell>
