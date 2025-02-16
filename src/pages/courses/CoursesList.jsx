@@ -56,6 +56,8 @@ const CoursesList = () => {
                     sortBy: sortBy,
                 });
             }
+            console.log(response.data.data);
+            
             setCourses(response.data?.data);
             const totalPage = Math.round(
                 (response.data?.total || 1) / COURSE_PER_PAGE

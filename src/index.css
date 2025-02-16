@@ -137,10 +137,12 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 a {
     text-decoration: none;
     color: inherit;
 }
+
 ul {
     list-style-type: none;
 }
@@ -151,6 +153,7 @@ button {
     border-radius: var(--default-button-border-radius);
     color: var(--color-white);
 }
+
 input,
 textarea {
     font-family: 'Work Sans', serif;
@@ -167,20 +170,25 @@ textarea {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .content-two-line {
     -webkit-line-clamp: 2;
 }
+
 .content-three-line {
     -webkit-line-clamp: 3;
 }
+
 .content-four-line {
     -webkit-line-clamp: 4;
 }
+
 .content-five-line {
     -webkit-line-clamp: 5;
 }
 
 .html-content {
+
     /* Original Website CSS */
     * {
         box-sizing: border-box;
@@ -307,6 +315,7 @@ textarea {
         resize: vertical;
     }
 
+
     input:not([type='submit']),
     select,
     textarea {
@@ -374,6 +383,56 @@ textarea {
 
     th {
         text-align: left;
+    }
+    .w-tabs-section{
+        padding-top: 36px;
+        
+    }
+    .w-tabs-section-header {
+        background-color: transparent;
+        text-align: start;
+    }
+
+    .w-tabs-section-title {
+        color: black;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: Work Sans;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 30px;
+        letter-spacing: 0%;
+        color: var(--Color-Scheme-Card-Bg, #23201D);
+
+
+    }
+
+    .w-tabs-section-title::after {
+        width: 20px;
+        height: 20px;
+        padding: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        content: "▼";
+        border-radius: 100%;
+        background: var(--Color-Scheme-Card-Bg, #23201D);
+        color: var(--Color-Scheme-Card-Text, #f2eae1);
+        font-size: 14px;
+    }
+
+
+    .w-tabs-section {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .w-tabs-section-content{
+        padding-bottom: 36px;
+        border-bottom: 1px solid var(--Color-Scheme-Card-Text, #CAC3BC)
+        
     }
 
     td,
@@ -455,11 +514,11 @@ textarea {
     h4:first-child,
     h5:first-child,
     h6:first-child,
-    h1 + h2,
-    h2 + h3,
-    h3 + h4,
-    h4 + h5,
-    h5 + h6 {
+    h1+h2,
+    h2+h3,
+    h3+h4,
+    h4+h5,
+    h5+h6 {
         padding-top: 0;
     }
 
@@ -474,7 +533,7 @@ textarea {
         margin-bottom: var(--h1-margin-bottom, 1.5rem);
     }
 
-    h1 > strong {
+    h1>strong {
         font-weight: var(--h1-bold-font-weight, bold);
     }
 
@@ -489,7 +548,7 @@ textarea {
         margin-bottom: var(--h2-margin-bottom, 1.5rem);
     }
 
-    h2 > strong {
+    h2>strong {
         font-weight: var(--h2-bold-font-weight, bold);
     }
 
@@ -504,7 +563,7 @@ textarea {
         margin-bottom: var(--h3-margin-bottom, 1.5rem);
     }
 
-    h3 > strong {
+    h3>strong {
         font-weight: var(--h3-bold-font-weight, bold);
     }
 
@@ -519,7 +578,7 @@ textarea {
         margin-bottom: var(--h4-margin-bottom, 1.5rem);
     }
 
-    h4 > strong {
+    h4>strong {
         font-weight: var(--h4-bold-font-weight, bold);
     }
 
@@ -534,7 +593,7 @@ textarea {
         margin-bottom: var(--h5-margin-bottom, 1.5rem);
     }
 
-    h5 > strong {
+    h5>strong {
         font-weight: var(--h5-bold-font-weight, bold);
     }
 
@@ -549,7 +608,7 @@ textarea {
         margin-bottom: var(--h6-margin-bottom, 1.5rem);
     }
 
-    h6 > strong {
+    h6>strong {
         font-weight: var(--h6-bold-font-weight, bold);
     }
 
@@ -587,8 +646,8 @@ textarea {
         margin: 0 0 0.5rem;
     }
 
-    li > ul,
-    li > ol {
+    li>ul,
+    li>ol {
         margin-bottom: 0.5rem;
         margin-top: 0.5rem;
     }
@@ -723,19 +782,13 @@ textarea {
     }
 
     select {
-        height: calc(
-            var(--inputs-height, 2em) + var(--inputs-border-width, 1px) * 2
-        );
+        height: calc(var(--inputs-height, 2em) + var(--inputs-border-width, 1px) * 2);
     }
 
     textarea {
         min-height: var(--inputs-height, 2em);
         height: calc(var(--inputs-height, 2em) * 3);
-        padding: calc(
-                var(--inputs-height, 2em) / 2 + var(--inputs-border-width, 1px) -
-                    0.7em
-            )
-            var(--inputs-padding, 0.6em);
+        padding: calc(var(--inputs-height, 2em) / 2 + var(--inputs-border-width, 1px) - 0.7em) var(--inputs-padding, 0.6em);
     }
 
     input[type='checkbox'],
@@ -933,6 +986,7 @@ textarea {
         color: var(--color-caption);
         line-height: 40px;
     }
+
     h3 {
         /* font-family: 'Work Sans'; */
         /* font-weight: 800; */

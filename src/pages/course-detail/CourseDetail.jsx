@@ -42,6 +42,8 @@ const CourseDetail = () => {
                 navigate('/courses');
             }
             setCourse(response.data.data[0]);
+            console.log(response);
+            
         } catch (e) {
             console.log(e);
         }
