@@ -51,12 +51,13 @@ export const APIHelper = Object.freeze({
     getWebStoryTags: await getApi('v1/GetDivine/getWebStoryTags'),
     getCourses: await getApi('v1/GetDivine/getCourses'),
     createLead: await postApi('v1/GetDivine/createLead'),
+    getLeads: await getApi('v1/GetDivine/getLeads'),
+
 });
 
 export const ADMINAPIHELPER = Object.freeze({
     login: await postApi('v1/admin/login'),
     getAdminPermission: await getApi('v1/admin/get-admin-permission'),
-
     createCourse: await postApi('v1/admin/create-course'),
     updateCourse: await postApi('v1/admin/update-course'),
     createBlog: await postApi('v1/admin/create-blog'),

@@ -94,43 +94,25 @@ const PaginationTable = ({
                                 align="left"
                                 style={{ paddingLeft: '40px', width: '100px' }}
                             >
-                                <Icon>image</Icon>
+                                Id
                             </StyledTableHead>
                             <StyledTableHead align="center">
-                                Web Story Name
+                                Name
                             </StyledTableHead>
                             <StyledTableHead align="center">
-                                Categories
+                                Email
                             </StyledTableHead>
                             <StyledTableHead align="center">
-                                Tags
+                                Phone
                             </StyledTableHead>
                             <StyledTableHead align="center">
-                                Short Description
+                                Service
                             </StyledTableHead>
                             <StyledTableHead align="center">
-                                Published On
-                                {sort === 'desc' ? (
-                                    <IconButton onClick={() => setSort('asc')}>
-                                        <Icon sx={{ color: 'white' }}>
-                                            <Tooltip title="Sort Date">
-                                                <Icon color="secondary">
-                                                    arrow_downward
-                                                </Icon>
-                                            </Tooltip>
-                                        </Icon>
-                                    </IconButton>
-                                ) : (
-                                    <IconButton onClick={() => setSort('desc')}>
-                                        <Icon sx={{ color: 'white' }}>
-                                            <Tooltip title="Sort Date">
-                                                <Icon color="secondary">
-                                                    arrow_upward
-                                                </Icon>
-                                            </Tooltip>
-                                        </Icon>
-                                    </IconButton>
-                                )}
+                                Message
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
+                                Created At
                             </StyledTableHead>
                             <StyledTableHead align="center">
                                 Action
@@ -138,83 +120,46 @@ const PaginationTable = ({
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map((story, index) => (
+                        {data.map((support, index) => (
                             <TableRow key={index}>
-                                {story?.CoverImageUrl ? (
-                                    <StyledTableCell
-                                        align="left"
-                                        style={{
-                                            paddingLeft: '30px',
-                                            width: '100px',
-                                        }}
-                                    >
-                                        <img
-                                            src={story.CoverImageUrl}
-                                            alt={story.Title}
-                                            style={{
-                                                width: '50px',
-                                                height: '50px',
-                                                objectFit: 'cover',
-                                                borderRadius: '50%',
-                                            }}
-                                        />
-                                    </StyledTableCell>
-                                ) : (
-                                    <StyledTableCell
-                                        align="left"
-                                        style={{
-                                            paddingLeft: '40px',
-                                            width: '100px',
-                                        }}
-                                    >
-                                        <Icon>photo</Icon>
-                                    </StyledTableCell>
-                                )}
+
                                 <StyledTableCell align="center">
-                                    <Link
-                                        sx={{
-                                            cursor: 'pointer',
-                                            wordBreak: 'break-word',
-                                        }}
-                                        onClick={() =>
-                                            navigate(
-                                                `/web-stories/detail/${story.Id}`
-                                            )
+
+                                    {
+                                        index + 1
+                                    }
+
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {support.Name}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    <p className="content-three-line">
+                                        {
+                                            support.Email
                                         }
-                                    >
-                                        {story?.Title
-                                            ? htmlToText(story.Title)
-                                            : 'NA'}
-                                    </Link>
-                                </StyledTableCell>
-                                <StyledTableCell align="center">
-                                    {story?.Categories?.length
-                                        ? story.Categories?.map(
-                                            (c) => c?.CategoryName
-                                        )?.join(', ')
-                                        : 'NA'}
-                                </StyledTableCell>
-                                <StyledTableCell align="center">
-                                    <p className="content-three-line">
-                                        {story?.Tags?.filter((t) => t?.TagName)
-                                            .length
-                                            ? story?.Tags?.filter(
-                                                (t) => t?.TagName
-                                            )
-                                                ?.map((t) => t?.TagName)
-                                                ?.join(', ')
-                                            : 'NA'}
                                     </p>
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                     <p className="content-three-line">
-                                        {htmlToText(story?.ShortDescription)}
+                                        {support.Phone}
                                     </p>
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {moment(story.PublishedOn).format('ll')}
+                                    <p className="content-three-line">
+                                        {support.Service}
+                                    </p>
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    <p className="content-three-line">
+                                        {support.Message}
+                                    </p>
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {moment(support.PublishedOn).format('ll')}
                                 </StyledTableCell>
                                 <TableCell align="center">
+
                                     <IconButton
                                         // disabled={
                                         //     !getRoleAndpermission(
@@ -225,8 +170,8 @@ const PaginationTable = ({
                                         // }
                                         onClick={() => {
                                             navigate(
-                                                `/admin/content-editor/story/${story.Slug}`,
-                                                { state: story }
+                                                `/admin/content-editor/support/${support.Name}`,
+                                                { state: support }
                                             );
                                         }}
                                     >
@@ -234,7 +179,6 @@ const PaginationTable = ({
                                             <Icon color="primary">edit</Icon>
                                         </Tooltip>
                                     </IconButton>
-
                                     {/* <IconButton
                 // onClick={() => {
              

@@ -31,13 +31,13 @@ export const navigations = [
     { label: 'REVIEWS', type: 'label' },
     {
         name: 'Testimonial Management',
-        path: '/admin/login',
+        path: '/admin/testimonials',
         icon: 'business',
     },
     { label: 'HELP', type: 'label' },
     {
         name: 'Support Management',
-        path: '/admin/login',
+        path: '/admin/support',
         icon: 'support_agent',
     },
 ];
