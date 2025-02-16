@@ -143,7 +143,7 @@ const ManageSupport = () => {
             <ContentBox className="analytics">
                 <Grid container spacing={3}>
                     <Grid item lg={12} md={12} sm={12} xs={12}>
-                        <H2>Manage Web Stories</H2>
+                        <H2>Manage Support</H2>
 
                         <div
                             style={{
