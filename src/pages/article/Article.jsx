@@ -1,5 +1,5 @@
 import css from './style.module.css';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { PageContainer } from '../../components/page-container/PageContainer';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
@@ -17,10 +17,15 @@ import { useEffect, useState } from 'react';
 import { APIHelper } from '../../util/APIHelper';
 const Article = () => {
     const { slug } = useParams();
+    const [searchParams] = useSearchParams();
+    const { state } = useLocation();
     const [article, setArticle] = useState(null);
     useEffect(() => {
+        if (searchParams?.get('preview')) {
+            setArticle(state?.data);
+            return;
+        }
         getArticle();
-        window.scrollTo(0, 0);
     }, [slug]);
     const getArticle = async () => {
         try {

@@ -7,7 +7,7 @@ export const TableOfContent = ({ article }) => {
     if (!article) return null;
     const getTableContents = useMemo(() => {
         const toc = [];
-        parse(article.Description, {
+        parse(article?.Description, {
             replace: (node) => {
                 if (
                     node.type === 'tag' &&
@@ -37,6 +37,8 @@ export const TableOfContent = ({ article }) => {
         }
     };
 
+    if (!getTableContents?.length) return null;
+
     return (
         <div className={css.container}>
             <h3>Table of contents</h3>
@@ -51,30 +53,6 @@ export const TableOfContent = ({ article }) => {
                     </a>
                 </div>
             ))}
-            {/* <div className={css.content_table_link}>
-                <img src={IcChevronIcon} alt={''} />
-                <p>Introduction to Lakshmi Puja</p>
-            </div>
-            <div className={css.content_table_link}>
-                <img src={IcChevronIcon} alt={''} />
-                <p>The Significance of Lakshmi Puja</p>
-            </div>
-            <div className={css.content_table_link}>
-                <img src={IcChevronIcon} alt={''} />
-                <p>Preparing for Lakshmi Puja 2025</p>
-            </div>
-            <div className={css.content_table_link}>
-                <img src={IcChevronIcon} alt={''} />
-                <p>The Rituals of Lakshmi Puja</p>
-            </div>
-            <div className={css.content_table_link}>
-                <img src={IcChevronIcon} alt={''} />
-                <p>Preparing for Lakshmi Puja 2025</p>
-            </div>
-            <div className={css.content_table_link}>
-                <img src={IcChevronIcon} alt={''} />
-                <p>Conclusion</p>
-            </div> */}
         </div>
     );
 };

@@ -8,7 +8,7 @@ export const TableOfContent = ({ article }) => {
     if (!article) return null;
     const getTableContents = useMemo(() => {
         const toc = [];
-        parse(article.Description, {
+        parse(article?.Description, {
             replace: (node) => {
                 if (
                     node.type === 'tag' &&
@@ -37,6 +37,8 @@ export const TableOfContent = ({ article }) => {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     };
+
+    if (!getTableContents?.length) return null;
 
     return (
         <div className={css.container}>

@@ -697,18 +697,14 @@ const Edit = () => {
 
                 case 'blog':
                     previewData = {
-                        Name: data.title,
+                        Title: data.title,
                         Slug: data.slug,
-                        ProductDescription: data?.description,
+                        Description: data?.description,
                         Focus_Keyphrase: data.focusKeyphrase,
                         Meta_Title: data.metaTitle,
                         Meta_SiteName: data.metaSiteName,
                         Meta_Desc: data.metaDescription,
-                        Regular_Price: data.regularPrice,
-                        Sale_Price: data.salePrice,
-                        ProductURL: data.productUrl,
                         ShortDescription: data.shortDescription,
-                        Buy_Text: data.buyText,
                         PublishedOn: data.publishedOn,
                         IsTop: data.isTOP,
                         Status: data.status,
@@ -720,7 +716,7 @@ const Edit = () => {
                             TagId: tag.id,
                             TagName: tag.name,
                         })),
-                        Images: data.productImages,
+                        Image: data.image,
                     };
 
                     navigate(
@@ -733,18 +729,14 @@ const Edit = () => {
 
                 case 'spirituality':
                     previewData = {
-                        Name: data.title,
+                        Title: data.title,
                         Slug: data.slug,
-                        ProductDescription: data?.description,
+                        Description: data?.description,
                         Focus_Keyphrase: data.focusKeyphrase,
                         Meta_Title: data.metaTitle,
                         Meta_SiteName: data.metaSiteName,
                         Meta_Desc: data.metaDescription,
-                        Regular_Price: data.regularPrice,
-                        Sale_Price: data.salePrice,
-                        ProductURL: data.productUrl,
                         ShortDescription: data.shortDescription,
-                        Buy_Text: data.buyText,
                         PublishedOn: data.publishedOn,
                         IsTop: data.isTOP,
                         Status: data.status,
@@ -756,7 +748,7 @@ const Edit = () => {
                             TagId: tag.id,
                             TagName: tag.name,
                         })),
-                        Images: data.productImages,
+                        Image: data.image,
                     };
 
                     navigate(
