@@ -28,6 +28,11 @@ export const navigations = [
         path: '/admin/stories',
         icon: 'psychology_alt',
     },
+    {
+        name: 'Citation Management',
+        path: '/admin/citations',
+        icon: 'psychology_alt',
+    },
     { label: 'REVIEWS', type: 'label' },
     {
         name: 'Testimonial Management',

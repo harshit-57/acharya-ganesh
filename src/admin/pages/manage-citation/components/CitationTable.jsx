@@ -84,7 +84,6 @@ const PaginationTable = ({
             <Box width="100%" overflow="auto">
                 <StyledTable
                     style={{
-                        width: '2000px',
                         overflowX: 'auto',
                         wordBreak: 'break-word',
                     }}
@@ -95,20 +94,13 @@ const PaginationTable = ({
                                 align="left"
                                 style={{ paddingLeft: '40px', width: '100px' }}
                             >
-                                <Icon>image</Icon>
+                                Id
                             </StyledTableHead>
                             <StyledTableHead align="center">
-                                Spirituality Name
-                            </StyledTableHead>
-
-                            <StyledTableHead align="center">
-                                Spirituality Slug
+                                Title
                             </StyledTableHead>
                             <StyledTableHead align="center">
-                                Categories
-                            </StyledTableHead>
-                            <StyledTableHead align="center">
-                                Tags
+                                Slug
                             </StyledTableHead>
                             <StyledTableHead align="center">
                                 Description
@@ -143,38 +135,11 @@ const PaginationTable = ({
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map((spirituality, index) => (
+                        {data.map((citation, index) => (
                             <TableRow key={index}>
-                                {spirituality?.Image ? (
-                                    <StyledTableCell
-                                        align="left"
-                                        style={{
-                                            paddingLeft: '30px',
-                                            width: '100px',
-                                        }}
-                                    >
-                                        <img
-                                            src={spirituality.Image}
-                                            alt={spirituality.Name}
-                                            style={{
-                                                width: '50px',
-                                                height: '50px',
-                                                objectFit: 'cover',
-                                                borderRadius: '50%',
-                                            }}
-                                        />
-                                    </StyledTableCell>
-                                ) : (
-                                    <StyledTableCell
-                                        align="left"
-                                        style={{
-                                            paddingLeft: '40px',
-                                            width: '100px',
-                                        }}
-                                    >
-                                        <Icon>photo</Icon>
-                                    </StyledTableCell>
-                                )}
+                                <StyledTableCell align="center">
+                                    {citation?.Id}
+                                </StyledTableCell>
                                 <StyledTableCell align="center">
                                     <Link
                                         sx={{
@@ -183,47 +148,23 @@ const PaginationTable = ({
                                         }}
                                         onClick={() =>
                                             navigate(
-                                                `/spirituality/detail/${spirituality.Slug}`
+                                                `/citation/${citation.Slug}`
                                             )
                                         }
                                     >
-                                        {spirituality?.Title
-                                            ? htmlToText(spirituality.Title)
-                                            : 'NA'}
+                                        {citation.Title}
                                     </Link>
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {spirituality?.Slug
-                                        ? spirituality?.Slug
-                                        : 'NA'}
+                                    {citation.Slug}
                                 </StyledTableCell>
-                                <StyledTableCell align="center">
-                                    {spirituality?.Categories?.length
-                                        ? spirituality.Categories?.map(
-                                              (c) => c?.CategoryName
-                                          )?.join(', ')
-                                        : 'NA'}
-                                </StyledTableCell>
-                                <StyledTableCell align="center">
-                                    {spirituality?.Tags?.filter(
-                                        (t) => t?.TagName
-                                    ).length
-                                        ? spirituality?.Tags?.filter(
-                                              (t) => t?.TagName
-                                          )
-                                              ?.map((t) => t?.TagName)
-                                              ?.join(', ')
-                                        : 'NA'}
-                                </StyledTableCell>
-                                <StyledTableCell align="center">
+                                <StyledTableCell align="start">
                                     <p className="content-three-line">
-                                        {htmlToText(spirituality?.Description)}
+                                        {htmlToText(citation?.Description)}
                                     </p>
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {moment(spirituality.PublishedOn).format(
-                                        'll'
-                                    )}
+                                    {moment(citation.PublishedOn).format('ll')}
                                 </StyledTableCell>
                                 <TableCell align="center">
                                     <IconButton
@@ -236,8 +177,8 @@ const PaginationTable = ({
                                         // }
                                         onClick={() => {
                                             navigate(
-                                                `/admin/content-editor/spirituality/${spirituality.Slug}`,
-                                                { state: spirituality }
+                                                `/admin/content-editor/citation/${citation.Slug}`,
+                                                { state: citation }
                                             );
                                         }}
                                     >
@@ -245,7 +186,6 @@ const PaginationTable = ({
                                             <Icon color="primary">edit</Icon>
                                         </Tooltip>
                                     </IconButton>
-
                                     <IconButton
                                         // disabled={
                                         //     !getRoleAndpermission(
@@ -255,7 +195,7 @@ const PaginationTable = ({
                                         //     )
                                         // }
                                         onClick={() => {
-                                            setSelectedData(spirituality);
+                                            setSelectedData(citation);
                                             setShowDeleteAlert(
                                                 !showDeleteAlert
                                             );

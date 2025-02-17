@@ -67,7 +67,7 @@ const PaginationTable = ({
     }));
 
     const handleChangePage = (_, newPage) => {
-        setPage(newPage);
+        setPage(newPage + 1);
     };
 
     const handleChangeRowsPerPage = (event) => {
@@ -250,21 +250,10 @@ const PaginationTable = ({
                                             );
                                         }}
                                     >
-                                        <Tooltip title="Edit Company">
+                                        <Tooltip title="Edit">
                                             <Icon color="primary">edit</Icon>
                                         </Tooltip>
                                     </IconButton>
-
-                                    {/* <IconButton
-                // onClick={() => {
-             
-                    //   setAlertDeleteModal(!alertDeleteModal);
-                //   setCompanyId(course.id);
-                // }}
-                > <Tooltip title="View Transactions">
-                    <PaidIcon />
-                  </Tooltip>
-                </IconButton> */}
 
                                     <IconButton
                                         // disabled={
@@ -293,7 +282,7 @@ const PaginationTable = ({
             </Box>
             <TablePagination
                 sx={{ px: 2 }}
-                page={page}
+                page={page - 1}
                 component="div"
                 rowsPerPage={rowsPerPage}
                 count={totalItems}

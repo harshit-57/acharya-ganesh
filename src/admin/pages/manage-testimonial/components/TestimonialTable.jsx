@@ -31,6 +31,7 @@ const PaginationTable = ({
     setSortBy,
     showDeleteAlert,
     setShowDeleteAlert,
+    setSelectedData,
 }) => {
     const theme = useTheme();
     const primaryColor = theme?.palette?.primary?.main;
@@ -66,7 +67,7 @@ const PaginationTable = ({
     }));
 
     const handleChangePage = (_, newPage) => {
-        setPage(newPage);
+        setPage(newPage + 1);
     };
 
     const handleChangeRowsPerPage = (event) => {
@@ -83,7 +84,7 @@ const PaginationTable = ({
             <Box width="100%" overflow="auto">
                 <StyledTable
                     style={{
-                        width: '2000px',
+                        // width: '2000px',
                         overflowX: 'auto',
                         wordBreak: 'break-word',
                     }}
@@ -106,6 +107,30 @@ const PaginationTable = ({
                                 Description
                             </StyledTableHead>
                             <StyledTableHead align="center">
+                                Published On
+                                {sort === 'desc' ? (
+                                    <IconButton onClick={() => setSort('asc')}>
+                                        <Icon sx={{ color: 'white' }}>
+                                            <Tooltip title="Sort Date">
+                                                <Icon color="secondary">
+                                                    arrow_downward
+                                                </Icon>
+                                            </Tooltip>
+                                        </Icon>
+                                    </IconButton>
+                                ) : (
+                                    <IconButton onClick={() => setSort('desc')}>
+                                        <Icon sx={{ color: 'white' }}>
+                                            <Tooltip title="Sort Date">
+                                                <Icon color="secondary">
+                                                    arrow_upward
+                                                </Icon>
+                                            </Tooltip>
+                                        </Icon>
+                                    </IconButton>
+                                )}
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
                                 Action
                             </StyledTableHead>
                         </TableRow>
@@ -113,22 +138,15 @@ const PaginationTable = ({
                     <TableBody>
                         {data.map((testimonial, index) => (
                             <TableRow key={index}>
-                                
                                 <StyledTableCell align="center">
-                                    
-                                        {
-                                            index+1
-                                        }
-                                    
+                                    {index + 1}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                     {testimonial.UserName}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                     <p className="content-three-line">
-                                        {
-                                            testimonial.Rating
-                                        }
+                                        {testimonial.Rating}
                                     </p>
                                 </StyledTableCell>
                                 <StyledTableCell align="start">
@@ -136,21 +154,31 @@ const PaginationTable = ({
                                         {htmlToText(testimonial?.Description)}
                                     </p>
                                 </StyledTableCell>
-                                
+                                <StyledTableCell align="center">
+                                    {moment(testimonial.PublishedOn).format(
+                                        'll'
+                                    )}
+                                </StyledTableCell>
                                 <TableCell align="center">
-
-
-                                    {/* <IconButton
-                // onClick={() => {
-             
-                    //   setAlertDeleteModal(!alertDeleteModal);
-                //   setCompanyId(story.id);
-                // }}
-                > <Tooltip title="View Transactions">
-                    <PaidIcon />
-                  </Tooltip>
-                </IconButton> */}
-
+                                    <IconButton
+                                        // disabled={
+                                        //     !getRoleAndpermission(
+                                        //         roleAndPermission,
+                                        //         'Company Management',
+                                        //         'edit'
+                                        //     )
+                                        // }
+                                        onClick={() => {
+                                            navigate(
+                                                `/admin/content-editor/testimonial/${testimonial.Id}`,
+                                                { state: testimonial }
+                                            );
+                                        }}
+                                    >
+                                        <Tooltip title="Edit">
+                                            <Icon color="primary">edit</Icon>
+                                        </Tooltip>
+                                    </IconButton>
                                     <IconButton
                                         // disabled={
                                         //     !getRoleAndpermission(
@@ -160,6 +188,7 @@ const PaginationTable = ({
                                         //     )
                                         // }
                                         onClick={() => {
+                                            setSelectedData(testimonial);
                                             setShowDeleteAlert(
                                                 !showDeleteAlert
                                             );
@@ -177,7 +206,7 @@ const PaginationTable = ({
             </Box>
             <TablePagination
                 sx={{ px: 2 }}
-                page={page}
+                page={page - 1}
                 component="div"
                 rowsPerPage={rowsPerPage}
                 count={totalItems}

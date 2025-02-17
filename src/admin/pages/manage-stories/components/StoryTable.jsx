@@ -66,7 +66,7 @@ const PaginationTable = ({
     }));
 
     const handleChangePage = (_, newPage) => {
-        setPage(newPage);
+        setPage(newPage + 1);
     };
 
     const handleChangeRowsPerPage = (event) => {
@@ -190,8 +190,8 @@ const PaginationTable = ({
                                 <StyledTableCell align="center">
                                     {story?.Categories?.length
                                         ? story.Categories?.map(
-                                            (c) => c?.CategoryName
-                                        )?.join(', ')
+                                              (c) => c?.CategoryName
+                                          )?.join(', ')
                                         : 'NA'}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
@@ -199,10 +199,10 @@ const PaginationTable = ({
                                         {story?.Tags?.filter((t) => t?.TagName)
                                             .length
                                             ? story?.Tags?.filter(
-                                                (t) => t?.TagName
-                                            )
-                                                ?.map((t) => t?.TagName)
-                                                ?.join(', ')
+                                                  (t) => t?.TagName
+                                              )
+                                                  ?.map((t) => t?.TagName)
+                                                  ?.join(', ')
                                             : 'NA'}
                                     </p>
                                 </StyledTableCell>
@@ -230,22 +230,10 @@ const PaginationTable = ({
                                             );
                                         }}
                                     >
-                                        <Tooltip title="Edit Company">
+                                        <Tooltip title="Edit">
                                             <Icon color="primary">edit</Icon>
                                         </Tooltip>
                                     </IconButton>
-
-                                    {/* <IconButton
-                // onClick={() => {
-             
-                    //   setAlertDeleteModal(!alertDeleteModal);
-                //   setCompanyId(story.id);
-                // }}
-                > <Tooltip title="View Transactions">
-                    <PaidIcon />
-                  </Tooltip>
-                </IconButton> */}
-
                                     <IconButton
                                         // disabled={
                                         //     !getRoleAndpermission(
@@ -272,7 +260,7 @@ const PaginationTable = ({
             </Box>
             <TablePagination
                 sx={{ px: 2 }}
-                page={page}
+                page={page - 1}
                 component="div"
                 rowsPerPage={rowsPerPage}
                 count={totalItems}

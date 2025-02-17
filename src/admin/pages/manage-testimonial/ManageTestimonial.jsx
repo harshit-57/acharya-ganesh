@@ -17,29 +17,11 @@ import { toast } from 'react-toastify';
 import { PrintExcel, getRoleAndpermission } from '../../utils/utils';
 import moment from 'moment';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { APIHelper } from '../../../util/APIHelper';
+import { ADMINAPIHELPER, APIHelper } from '../../../util/APIHelper';
 
 const ContentBox = styled('div')(({ theme }) => ({
     margin: '30px',
     [theme.breakpoints.down('sm')]: { margin: '16px' },
-}));
-
-const CardHeader = styled(Box)(() => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-}));
-
-const Title = styled('span')(() => ({
-    fontSize: '1rem',
-    fontWeight: '500',
-    marginRight: '.5rem',
-    textTransform: 'capitalize',
-}));
-
-const SubTitle = styled('span')(({ theme }) => ({
-    fontSize: '1rem',
-    color: theme.palette.text.secondary,
 }));
 
 const H2 = styled('h2')(({ theme }) => ({
@@ -51,6 +33,7 @@ const H2 = styled('h2')(({ theme }) => ({
 }));
 
 const ManageTestimonial = () => {
+    const token = localStorage.getItem('accessToken');
     const [searchParams] = useSearchParams();
     const { palette } = useTheme();
     const navigate = useNavigate();
@@ -62,36 +45,26 @@ const ManageTestimonial = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [showFilterDropDown, setShowFilterDropDown] = useState(false);
     const [sort, setSort] = useState('desc');
-    const [sortBy, setSortBy] = useState('ws.PublishedOn');
+    const [sortBy, setSortBy] = useState('test.PublishedOn');
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+    const [selectedData, setSelectedData] = useState(null);
 
     useEffect(() => {
-        fetchStories();
+        fetchTestimonials();
     }, [currentPage, searchQuery, pageSize, sortBy, sort]);
-   
 
-    const fetchStories = async () => {
+    const fetchTestimonials = async () => {
         try {
             setLoading(true);
             let response;
-            if (searchQuery && searchQuery?.length >= 3) {
-                response = await APIHelper.getTestimonials({
-                    page: currentPage,
-                    pageSize: pageSize,
-                    search: searchQuery,
-                    sort: sort,
-                    sortBy: sortBy,
-                });
-                console.log(response);
-                
-            } else {
-                response = await APIHelper.getTestimonials({
-                    page: currentPage,
-                    pageSize: pageSize,
-                    search: searchQuery,
-                });
-                console.log(response);
-            }
+
+            response = await APIHelper.getTestimonials({
+                page: currentPage,
+                pageSize: pageSize,
+                search: searchQuery || undefined,
+                sort: sort,
+                sortBy: sortBy,
+            });
             setTestimonials(response.data?.data);
             setTotalCount(response.data?.total);
             setLoading(false);
@@ -114,7 +87,9 @@ const ManageTestimonial = () => {
             setExportLoading(false);
             PrintExcel(
                 res?.data?.data,
-                `TestimonialData-${moment(new Date()).format('YYYY-MM-DD')}.xlsx`
+                `TestimonialData-${moment(new Date()).format(
+                    'YYYY-MM-DD'
+                )}.xlsx`
             );
             toast.success('Exported successfully');
         } catch (err) {
@@ -125,16 +100,35 @@ const ManageTestimonial = () => {
 
     const handleDelete = async () => {
         try {
-           
+            setLoading(true);
+            if (selectedData?.Id)
+                ADMINAPIHELPER.updateTestimonial(
+                    { id: selectedData?.Id, deletedOn: new Date() },
+                    token
+                )
+                    ?.then((response) => {
+                        if (response?.data?.success) {
+                            toast.success('Testimonial deleted successfully');
+                            fetchTestimonials();
+                        } else {
+                            toast.error(response?.message);
+                        }
+                        setLoading(false);
+                    })
+                    .catch((error) => {
+                        toast.error(
+                            error?.response?.data?.message || error?.message
+                        );
+                        setLoading(false);
+                    });
             setShowDeleteAlert(false);
-            toast.success('Deleted successfully');
-            // fetchStories();
+            setSelectedData(null);
         } catch (err) {
+            console.log(err);
             setLoading(false);
             toast.error('Something went wrong');
         }
     };
-
     return (
         <Fragment>
             <ContentBox className="analytics">
@@ -150,7 +144,7 @@ const ManageTestimonial = () => {
                             }}
                         >
                             <Box sx={{ display: 'flex', gap: '15px' }}>
-                                {/* <Button
+                                <Button
                                     // disabled={
                                     //     !getRoleAndpermission(
                                     //         roleAndPermission,
@@ -162,7 +156,7 @@ const ManageTestimonial = () => {
                                     size="small"
                                     onClick={() =>
                                         navigate(
-                                            '/admin/content-editor/story/new',
+                                            '/admin/content-editor/testimonial/new',
                                             {
                                                 state: {},
                                             }
@@ -173,8 +167,8 @@ const ManageTestimonial = () => {
                                         py: 0.9,
                                     }}
                                 >
-                                    + Add Web Story
-                                </Button> */}
+                                    + Add Testimonial
+                                </Button>
 
                                 <Button
                                     // disabled={
@@ -230,6 +224,9 @@ const ManageTestimonial = () => {
                                 setRowsPerPage={setPageSize}
                                 showDeleteAlert={showDeleteAlert}
                                 setShowDeleteAlert={setShowDeleteAlert}
+                                sort={sort}
+                                setSort={setSort}
+                                setSelectedData={setSelectedData}
                             />
                         </div>
                     </Grid>
@@ -240,8 +237,8 @@ const ManageTestimonial = () => {
                 <AlertDialog
                     modal={showDeleteAlert}
                     toggle={() => setShowDeleteAlert(!showDeleteAlert)}
-                    title="Delete Web Story"
-                    description="Are you want to sure delete the web story?"
+                    title="Delete Testimonial"
+                    description="Are you want to sure delete the testimonial?"
                     confirmFunc={() => handleDelete()}
                 />
             )}

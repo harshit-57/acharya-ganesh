@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import css from './style.module.css';
 import ImgDiscoverDelhi from '../../assets/discover_delhi.png';
 import ImgDiscoverKolkata from '../../assets/discover_kolkata.png';
@@ -11,53 +11,39 @@ import ImgDiscoverAhemdabad from '../../assets/discover_ahemdabad.png';
 import { NavLink } from 'react-router-dom';
 import { PrimaryButton } from '../primary-button/PrimaryButton';
 import citationList from '../../data/citation-list';
+import { APIHelper } from '../../util/APIHelper';
 
 const CitationBox = () => {
+    const [citations, setCitations] = React.useState([]);
+
+    useEffect(() => {
+        fetchCitations();
+    }, []);
+
+    const fetchCitations = async (page) => {
+        try {
+            const res = await APIHelper.getCitations({
+                pageSize: 6,
+                status: 1,
+            });
+            setCitations(res.data?.data || []);
+        } catch (error) {
+            console.error('Error fetching citations:', error);
+        }
+    };
     return (
         <div className={[css.row, css.discover_cities_container].join(' ')}>
             <h3 className={css.discover_heading}>
                 Discover Best Astrologers in your City
             </h3>
-            {/* <div className={css.city_container}>
-                <NavLink to={`/citation/best-astrologers-in-delhi`}>
-                    <img src={ImgDiscoverDelhi} alt={'Discover city icon'} />
-                </NavLink>
-                <NavLink to={`/citation/best-astrologers-in-mumbai`}>
-                    <img src={ImgDiscoverMumbai} alt={'Discover city icon'} />
-                </NavLink>
-
-                <NavLink to={`/citation/best-astrologers-in-banglore`}>
-                    <img src={ImgDiscoverBanglore} alt={'Discover city icon'} />
-                </NavLink>
-                <NavLink to={`/citation/best-astrologers-in-chennai`}>
-                    <img src={ImgDiscoverChennai} alt={'Discover city icon'} />
-                </NavLink>
-                <NavLink to={`/citation/best-astrologers-in-hydrabad`}>
-                    <img src={ImgDiscoverHydrabad} alt={'Discover city icon'} />
-                </NavLink>
-                <NavLink to={`/citation/best-astrologers-in-pune`}>
-                    <img src={ImgDiscoverPune} alt={'Discover city icon'} />
-                </NavLink>
-                <NavLink
-                    to={`/citation/best-astrologers-in-ahemdabad/ahemdabad`}
-                >
-                    <img
-                        src={ImgDiscoverAhemdabad}
-                        alt={'Discover city icon'}
-                    />
-                </NavLink>
-                <NavLink to={`/citation/best-astrologers-in-kolkata/kolkata`}>
-                    <img src={ImgDiscoverKolkata} alt={'Discover city icon'} />
-                </NavLink>
-            </div> */}
             <div className={css.city_container}>
-                {citationList?.slice(0, 8)?.map((citation) => (
+                {citations?.map((citation) => (
                     <div className={css.city_wrapper}>
                         <NavLink
-                            to={`/citation/${citation?.route}`}
+                            to={`/citation/${citation?.Slug}`}
                             state={citation}
                         >
-                            <a>{citation?.name}</a>
+                            <a>{citation?.Title}</a>
                         </NavLink>
                     </div>
                 ))}

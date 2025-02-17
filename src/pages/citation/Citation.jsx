@@ -9,16 +9,17 @@ import { Navigation } from '../../components/navigation/Navigation';
 import { HorizontalBorder, Spacer } from '../../components/spacer/Spacer';
 import { Footer } from '../../components/footer/Footer';
 import { APIHelper } from '../../util/APIHelper';
-import ICStar from "../../assets/Star 4.png";
+import ICStar from '../../assets/Star 4.png';
 import Loader from './component/loading-animation/loader';
 
 const Citation = () => {
-    const [data, setData] = useState([]); 
-    const [visibleData, setVisibleData] = useState([]); 
+    const [data, setData] = useState([]);
+    const [visibleData, setVisibleData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [page, setPage] = useState(1); 
-    const [hasMore, setHasMore] = useState(true); 
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
+    const pageSize = 10;
 
     useEffect(() => {
         fetchCitations(page);
@@ -26,17 +27,19 @@ const Citation = () => {
 
     const fetchCitations = async (page) => {
         try {
-            const limit = 10; 
-            const res = await APIHelper.getCitations({ page, limit });
+            const res = await APIHelper.getCitations({
+                page,
+                pageSize,
+                status: 1,
+            });
             const newData = res.data.data;
-            
 
             if (!newData || newData.length === 0) {
-                setHasMore(false); 
+                setHasMore(false);
                 return;
             }
-            setVisibleData(prevVisibleData => [...data, ...newData]);
-            setData(prevData => [...visibleData, ...newData]);
+            setVisibleData((prevVisibleData) => [...data, ...newData]);
+            setData((prevData) => [...visibleData, ...newData]);
             setLoading(false);
         } catch (error) {
             console.error('Error fetching citations:', error);
@@ -46,7 +49,7 @@ const Citation = () => {
     };
 
     const handleShowMore = () => {
-        setPage(prevPage => prevPage + 1); 
+        setPage((prevPage) => prevPage + 1);
     };
 
     return (
@@ -78,7 +81,7 @@ const Citation = () => {
 
                 {loading ? (
                     <div className={css.loaderContainer}>
-                        <Loader/>
+                        <Loader />
                     </div>
                 ) : (
                     <>
@@ -88,7 +91,7 @@ const Citation = () => {
                                     to={`/citation/${citation?.Slug}`}
                                     state={citation}
                                     key={index}
-                                >                                
+                                >
                                     <div className={css.city_wrapper}>
                                         <a>{citation?.Title}</a>
                                     </div>
@@ -97,7 +100,10 @@ const Citation = () => {
                         </div>
 
                         {hasMore && (
-                            <button className={css.showMoreBtn} onClick={handleShowMore}>
+                            <button
+                                className={css.showMoreBtn}
+                                onClick={handleShowMore}
+                            >
                                 <img src={ICStar} alt={''} />
                                 Show More
                                 <img src={ICStar} alt={''} />

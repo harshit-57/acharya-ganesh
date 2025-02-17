@@ -54,20 +54,44 @@ const Edit = () => {
     const initalData = {
         title: '',
         description: '',
-        // slug: '',
-        image: '',
-        focusKeyphrase: '',
-        metaTitle: '',
-        metaSiteName:
-            'Acharya Ganesh: Solutions for Life, Love, and Career Woes',
-        metaDescription: '',
-        isShortDescription: ['course'].includes(type) ? true : false,
-        shortDescription: '',
-        isTOP: ['course'].includes(type) ? false : true,
+        image: ['course', 'blog', 'spirituality', 'story']?.includes(type)
+            ? ''
+            : undefined,
+        focusKeyphrase: ['course', 'blog', 'spirituality', 'story']?.includes(
+            type
+        )
+            ? ''
+            : undefined,
+        metaTitle: ['course', 'blog', 'spirituality', 'story']?.includes(type)
+            ? ''
+            : undefined,
+        metaSiteName: ['course', 'blog', 'spirituality', 'story']?.includes(
+            type
+        )
+            ? 'Acharya Ganesh: Solutions for Life, Love, and Career Woes'
+            : undefined,
+        metaDescription: ['course', 'blog', 'spirituality', 'story']?.includes(
+            type
+        )
+            ? ''
+            : undefined,
+        isShortDescription: ['course', 'story'].includes(type)
+            ? true
+            : undefined,
+        shortDescription: ['course', 'story']?.includes(type) ? '' : undefined,
+        isTOP: ['course'].includes(type)
+            ? false
+            : ['blog', 'spirituality']?.includes(type)
+            ? true
+            : undefined,
         status: 1,
         publishedOn: new Date(),
-        categories: [],
-        tags: [],
+        categories: ['course', 'blog', 'spirituality', 'story']?.includes(type)
+            ? []
+            : undefined,
+        tags: ['course', 'blog', 'spirituality', 'story']?.includes(type)
+            ? []
+            : undefined,
         isCourse: type === 'course' ? true : undefined,
         productUrl: type === 'course' ? '' : undefined,
         buyText: type === 'course' ? 'Buy Now' : undefined,
@@ -82,6 +106,7 @@ const Edit = () => {
             textColor: '',
             bgColor: '',
         },
+        rating: ['testimonial']?.includes(type) ? '' : undefined,
     };
 
     const [data, setData] = useState(initalData);
@@ -261,7 +286,6 @@ const Edit = () => {
                             metaTitle: response?.Meta_Title,
                             metaSiteName: response?.Meta_SiteName,
                             metaDescription: response?.Meta_Desc,
-                            isShortDescription: false,
                             extraDetails: {
                                 images: response?.Extra_Images || [],
                                 link: response?.Extra_Link || '',
@@ -286,6 +310,53 @@ const Edit = () => {
                                     id: item?.TagId,
                                     name: item?.TagName,
                                 })) || [],
+                        });
+                    }
+                    setIsLoading(false);
+                })();
+                break;
+
+            case 'citation':
+                (async () => {
+                    setIsLoading(true);
+                    if (slug != 'new' && state?.Id) {
+                        const response = (
+                            await APIHelper.getCitations({ slug: slug })
+                        )?.data?.data[0];
+                        setData({
+                            id: response?.Id,
+                            title: response?.Title,
+                            description: response?.Description,
+                            slug: response?.Slug,
+                            status: response?.Status,
+                            publishedOn: response?.PublishedOn
+                                ? new Date(response?.PublishedOn)
+                                : new Date(),
+                        });
+                    }
+                    setIsLoading(false);
+                })();
+                break;
+
+            case 'testimonial':
+                (async () => {
+                    setIsLoading(true);
+                    if (slug != 'new' && state?.Id) {
+                        const response = (
+                            await APIHelper.getTestimonials({ id: slug })
+                        )?.data?.data[0];
+                        setData({
+                            id: response?.Id,
+                            title: response?.UserName,
+                            description: response?.Description,
+                            rating:
+                                Math.ceil(response?.Rating) < 5
+                                    ? Math.ceil(response?.Rating)
+                                    : 5,
+                            status: response?.Status,
+                            publishedOn: response?.PublishedOn
+                                ? new Date(response?.PublishedOn)
+                                : new Date(),
                         });
                     }
                     setIsLoading(false);
@@ -377,6 +448,7 @@ const Edit = () => {
         }
 
         if (
+            !['testimonial']?.includes(type) &&
             payload?.status == 1 &&
             htmlToText(payload?.description)?.length < 200
         ) {
@@ -385,7 +457,11 @@ const Edit = () => {
             return isValid;
         }
 
-        if (payload?.status == 1 && !payload?.image) {
+        if (
+            ['course', 'story']?.includes(type) &&
+            payload?.status == 1 &&
+            !payload?.image
+        ) {
             toast.error('Image is required');
             isValid = false;
             return isValid;
@@ -406,7 +482,11 @@ const Edit = () => {
             }
         }
 
-        if (payload?.status == 1 && !payload?.categories?.length) {
+        if (
+            !['citation', 'testimonial']?.includes(type) &&
+            payload?.status == 1 &&
+            !payload?.categories?.length
+        ) {
             toast.error('Category is required');
             isValid = false;
             return isValid;
@@ -431,7 +511,7 @@ const Edit = () => {
         }
 
         if (payload?.id) {
-            if (!payload?.slug) {
+            if (!['testimonial']?.includes(type) && !payload?.slug) {
                 toast.error('Slug is required');
                 isValid = false;
                 return isValid;
@@ -569,6 +649,88 @@ const Edit = () => {
                 }
                 break;
 
+            case 'citation':
+                setIsLoading(true);
+                if (payload?.id) {
+                    ADMINAPIHELPER.updateCitation(payload, token)
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success('Citation updated successfully');
+                                navigate(`/admin/citations`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                } else {
+                    ADMINAPIHELPER.createCitation(payload, token)
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success('Citation created successfully');
+                                navigate(`/admin/citations`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                }
+                break;
+
+            case 'testimonial':
+                setIsLoading(true);
+                if (payload?.id) {
+                    ADMINAPIHELPER.updateTestimonial(payload, token)
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success(
+                                    'Testimonial updated successfully'
+                                );
+                                navigate(`/admin/testimonials`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                } else {
+                    ADMINAPIHELPER.createTestimonial(payload, token)
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success(
+                                    'Testimonial created successfully'
+                                );
+                                navigate(`/admin/testimonials`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                }
+                break;
+
             default:
                 break;
         }
@@ -624,7 +786,6 @@ const Edit = () => {
                         });
                 }
                 break;
-
             case 'spirituality':
                 if (data?.id) {
                     setIsLoading(true);
@@ -638,6 +799,56 @@ const Edit = () => {
                                     'Spirituality deleted successfully'
                                 );
                                 navigate(`/admin/spiritualities`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                }
+                break;
+            case 'citation':
+                if (data?.id) {
+                    setIsLoading(true);
+                    ADMINAPIHELPER.updateCitation(
+                        { id: data?.id, deletedOn: new Date() },
+                        token
+                    )
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success('Citation deleted successfully');
+                                navigate(`/admin/citations`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                }
+                break;
+            case 'testimonial':
+                if (data?.id) {
+                    setIsLoading(true);
+                    ADMINAPIHELPER.updateTestimonial(
+                        { id: data?.id, deletedOn: new Date() },
+                        token
+                    )
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success(
+                                    'Testimonial deleted successfully'
+                                );
+                                navigate(`/admin/testimonials`);
                             } else {
                                 toast.error(response?.message);
                             }
@@ -759,6 +970,20 @@ const Edit = () => {
                     );
                     break;
 
+                case 'citation':
+                    previewData = {
+                        Title: data.title,
+                        Slug: data.slug,
+                        Description: data?.description,
+                        PublishedOn: data.publishedOn,
+                        Status: data.status,
+                    };
+
+                    navigate(
+                        `/citation/${previewData?.Slug || 'new'}?preview=true`,
+                        { state: { data: previewData } }
+                    );
+                    break;
                 default:
                     break;
             }
@@ -775,6 +1000,8 @@ const Edit = () => {
                 ? `${window?.location?.origin}/spirituality/detail`
                 : type === 'story'
                 ? `${window?.location?.origin}/web-stories/detail`
+                : type === 'citation'
+                ? `${window?.location?.origin}/citation`
                 : `${window?.location?.origin}/${type}/detail`,
         [type]
     );
@@ -799,7 +1026,7 @@ const Edit = () => {
                     placeholder="Enter Title"
                     onChange={handleChangeData}
                 />
-                {data?.id && (
+                {data?.id && data?.slug !== undefined && (
                     <div className={styles.permalink}>
                         <label>Permalink:</label>
                         {editSlug || !data?.slug ? (
@@ -876,14 +1103,16 @@ const Edit = () => {
                     >
                         Save Drafts
                     </button>
-                    <button
-                        className={styles.preview_changes}
-                        onClick={() => {
-                            handlePreview();
-                        }}
-                    >
-                        Preview Changes
-                    </button>
+                    {!['testimonial']?.includes(type) && (
+                        <button
+                            className={styles.preview_changes}
+                            onClick={() => {
+                                handlePreview();
+                            }}
+                        >
+                            Preview Changes
+                        </button>
+                    )}
                 </div>
 
                 <div className={styles.description_container}>
@@ -908,6 +1137,84 @@ const Edit = () => {
                         }
                     />
                 </div>
+
+                {/* Rating for Testimonial */}
+                {data?.rating !== undefined && (
+                    <Accordion
+                        defaultExpanded
+                        className={styles.accordion_container}
+                    >
+                        <AccordionSummary
+                            expandIcon={
+                                <ArrowDropDownIcon
+                                    color="disabled"
+                                    sx={{ fontSize: '2rem' }}
+                                />
+                            }
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                            className={styles.additional_header}
+                        >
+                            <Typography component="div" variant="div">
+                                <span>{type} Ratings</span>
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Box className={styles.content_wrappper}>
+                                <p className={styles.content_label}>Ratings</p>
+                                <div className={styles.tab_container}>
+                                    {['', '1', '2', '3', '4', '5'].map(
+                                        (rating) => (
+                                            <button
+                                                key={rating}
+                                                onClick={() =>
+                                                    setData({
+                                                        ...data,
+                                                        rating: rating,
+                                                    })
+                                                }
+                                                className={
+                                                    data?.rating == rating
+                                                        ? styles.tab_button_active
+                                                        : styles.tab_button
+                                                }
+                                            >
+                                                {rating || 'None'}
+                                            </button>
+                                        )
+                                    )}
+                                </div>
+                                <span
+                                    className={styles.icon_name_info_container}
+                                >
+                                    <svg
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M10 12.8V10M10 7.2H10.007M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                                            stroke="#2C2520"
+                                            stroke-opacity="0.7"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
+                                    <span
+                                        className={
+                                            styles.icon_name_info_example
+                                        }
+                                    >
+                                        Null value will be considered as Best
+                                    </span>
+                                </span>
+                            </Box>
+                        </AccordionDetails>
+                    </Accordion>
+                )}
 
                 {data?.isCourse && (
                     <Accordion
@@ -1016,57 +1323,58 @@ const Edit = () => {
                     </Accordion>
                 )}
 
-                <Accordion
-                    defaultExpanded
-                    className={styles.accordion_container}
-                >
-                    <AccordionSummary
-                        expandIcon={
-                            <ArrowDropDownIcon
-                                color="disabled"
-                                sx={{ fontSize: '2rem' }}
-                            />
-                        }
-                        aria-controls="panel1-content"
-                        id="panel1-header"
-                        className={styles.additional_header}
+                {data?.focusKeyphrase !== undefined && (
+                    <Accordion
+                        defaultExpanded
+                        className={styles.accordion_container}
                     >
-                        <Typography component="div" variant="div">
-                            <span>SEO Meta Tags</span>
-                        </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Box className={styles.content_wrappper}>
-                            <div className={styles.focus_title_container}>
-                                <p className={styles.content_label}>
-                                    Focus Keyphrases
-                                    <svg
-                                        width="18"
-                                        height="18"
-                                        viewBox="0 0 18 18"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        style={{ marginLeft: '10px' }}
-                                    >
-                                        <path
-                                            d="M6.672 6.6C6.86008 6.06533 7.23132 5.61449 7.71996 5.32731C8.20861 5.04013 8.78312 4.93515 9.34174 5.03097C9.90037 5.12679 10.4071 5.41722 10.7721 5.85082C11.1371 6.28443 11.3368 6.83322 11.336 7.4C11.336 9 8.936 9.8 8.936 9.8M9 13H9.008M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z"
-                                            stroke="#23201D"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                        />
-                                    </svg>
-                                </p>
-                                <InputField
-                                    className={styles.input}
-                                    type="text"
-                                    value={data?.focusKeyphrase}
-                                    name="focusKeyphrase"
-                                    onChange={handleChangeData}
-                                    placeholder="Enter Focus Keyphrase"
-                                    style={{ textTransform: 'capitalize' }}
+                        <AccordionSummary
+                            expandIcon={
+                                <ArrowDropDownIcon
+                                    color="disabled"
+                                    sx={{ fontSize: '2rem' }}
                                 />
-                                {/* <div className={styles.button_group}>
+                            }
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                            className={styles.additional_header}
+                        >
+                            <Typography component="div" variant="div">
+                                <span>SEO Meta Tags</span>
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Box className={styles.content_wrappper}>
+                                <div className={styles.focus_title_container}>
+                                    <p className={styles.content_label}>
+                                        Focus Keyphrases
+                                        <svg
+                                            width="18"
+                                            height="18"
+                                            viewBox="0 0 18 18"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            style={{ marginLeft: '10px' }}
+                                        >
+                                            <path
+                                                d="M6.672 6.6C6.86008 6.06533 7.23132 5.61449 7.71996 5.32731C8.20861 5.04013 8.78312 4.93515 9.34174 5.03097C9.90037 5.12679 10.4071 5.41722 10.7721 5.85082C11.1371 6.28443 11.3368 6.83322 11.336 7.4C11.336 9 8.936 9.8 8.936 9.8M9 13H9.008M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z"
+                                                stroke="#23201D"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                        </svg>
+                                    </p>
+                                    <InputField
+                                        className={styles.input}
+                                        type="text"
+                                        value={data?.focusKeyphrase}
+                                        name="focusKeyphrase"
+                                        onChange={handleChangeData}
+                                        placeholder="Enter Focus Keyphrase"
+                                        style={{ textTransform: 'capitalize' }}
+                                    />
+                                    {/* <div className={styles.button_group}>
                                     <button className={styles.action_button}>
                                         Use AI
                                     </button>
@@ -1074,115 +1382,124 @@ const Edit = () => {
                                         Insert Variable
                                     </button>
                                 </div> */}
-                            </div>
+                                </div>
 
-                            <div className={styles.seo_title_container}>
-                                <p className={styles.content_label}>
-                                    Page Title
-                                </p>
-                                <InputField
-                                    className={styles.input}
-                                    type="text"
-                                    value={data?.metaSiteName}
-                                    name="metaSiteName"
-                                    onChange={handleChangeData}
-                                    placeholder="Enter Page Title"
-                                />
-                            </div>
+                                <div className={styles.seo_title_container}>
+                                    <p className={styles.content_label}>
+                                        Page Title
+                                    </p>
+                                    <InputField
+                                        className={styles.input}
+                                        type="text"
+                                        value={data?.metaSiteName}
+                                        name="metaSiteName"
+                                        onChange={handleChangeData}
+                                        placeholder="Enter Page Title"
+                                    />
+                                </div>
 
-                            <div className={styles.seo_title_container}>
-                                <p className={styles.content_label}>
-                                    SEO Title
-                                </p>
-                                <InputField
-                                    className={styles.input}
-                                    type="text"
-                                    value={data?.metaTitle}
-                                    name="metaTitle"
-                                    onChange={handleChangeData}
-                                    placeholder="Enter Meta Title"
-                                />
-                                <span
-                                    className={styles.icon_name_info_container}
-                                >
-                                    <svg
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M10 12.8V10M10 7.2H10.007M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                                            stroke="#2C2520"
-                                            stroke-opacity="0.7"
-                                            stroke-width="1.5"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                        />
-                                    </svg>
+                                <div className={styles.seo_title_container}>
+                                    <p className={styles.content_label}>
+                                        SEO Title
+                                    </p>
+                                    <InputField
+                                        className={styles.input}
+                                        type="text"
+                                        value={data?.metaTitle}
+                                        name="metaTitle"
+                                        onChange={handleChangeData}
+                                        placeholder="Enter Meta Title"
+                                    />
                                     <span
                                         className={
-                                            styles.icon_name_info_example
+                                            styles.icon_name_info_container
                                         }
                                     >
-                                        Leave blank to use the default.
-                                    </span>
-                                </span>
-                            </div>
-
-                            <div className={styles.seo_title_container}>
-                                <p className={styles.content_label}>
-                                    Meta Description
-                                </p>
-                                <textarea
-                                    className={styles.input}
-                                    type="text"
-                                    value={data?.metaDescription}
-                                    name="metaDescription"
-                                    onChange={handleChangeData}
-                                    placeholder="Enter Meta Description"
-                                    style={{
-                                        borderRadius: '10px',
-                                        resize: 'vertical',
-                                        minHeight: '100px',
-                                    }}
-                                    rows={5}
-                                />
-                                <span
-                                    className={styles.icon_name_info_container}
-                                >
-                                    <svg
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M10 12.8V10M10 7.2H10.007M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                                            stroke="#2C2520"
-                                            stroke-opacity="0.7"
-                                            stroke-width="1.5"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                        />
-                                    </svg>
-                                    <a
-                                        href={
-                                            'https://developers.google.com/search/docs/appearance/title-link'
-                                        }
-                                        target={'_blank'}
-                                    >
-                                        <span className={styles.icon_name_info}>
-                                            Learn More
+                                        <svg
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 20 20"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10 12.8V10M10 7.2H10.007M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                                                stroke="#2C2520"
+                                                stroke-opacity="0.7"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                        </svg>
+                                        <span
+                                            className={
+                                                styles.icon_name_info_example
+                                            }
+                                        >
+                                            Leave blank to use the default.
                                         </span>
-                                    </a>
-                                </span>
-                            </div>
-                        </Box>
-                    </AccordionDetails>
-                </Accordion>
+                                    </span>
+                                </div>
+
+                                <div className={styles.seo_title_container}>
+                                    <p className={styles.content_label}>
+                                        Meta Description
+                                    </p>
+                                    <textarea
+                                        className={styles.input}
+                                        type="text"
+                                        value={data?.metaDescription}
+                                        name="metaDescription"
+                                        onChange={handleChangeData}
+                                        placeholder="Enter Meta Description"
+                                        style={{
+                                            borderRadius: '10px',
+                                            resize: 'vertical',
+                                            minHeight: '100px',
+                                        }}
+                                        rows={5}
+                                    />
+                                    <span
+                                        className={
+                                            styles.icon_name_info_container
+                                        }
+                                    >
+                                        <svg
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 20 20"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10 12.8V10M10 7.2H10.007M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                                                stroke="#2C2520"
+                                                stroke-opacity="0.7"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                        </svg>
+                                        <a
+                                            href={
+                                                'https://developers.google.com/search/docs/appearance/title-link'
+                                            }
+                                            target={'_blank'}
+                                        >
+                                            <span
+                                                className={
+                                                    styles.icon_name_info
+                                                }
+                                            >
+                                                Learn More
+                                            </span>
+                                        </a>
+                                    </span>
+                                </div>
+                            </Box>
+                        </AccordionDetails>
+                    </Accordion>
+                )}
 
                 {/* Additional Settings */}
                 {/* <Accordion className={styles.accordion_container}>
@@ -1501,46 +1818,48 @@ const Edit = () => {
                     </AccordionDetails>
                 </Accordion> */}
 
-                <Accordion
-                    defaultExpanded
-                    className={styles.accordion_container}
-                >
-                    <AccordionSummary
-                        expandIcon={
-                            <ArrowDropDownIcon
-                                color="disabled"
-                                sx={{ fontSize: '2rem' }}
-                            />
-                        }
-                        aria-controls="panel1-content"
-                        id="panel1-header"
-                        className={styles.additional_header}
+                {data?.isTOP !== undefined && (
+                    <Accordion
+                        defaultExpanded
+                        className={styles.accordion_container}
                     >
-                        <Typography component="div" variant="div">
-                            <span>Disable TOP Table Of Contents</span>
-                        </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Box className={styles.content_wrappper}>
-                            <div className={styles.focus_title_container}>
-                                <div style={{ marginTop: '10px' }}>
-                                    <ToggleSwitch
-                                        label="Disable"
-                                        isChecked={data?.isTOP}
-                                        onToggle={() =>
-                                            setData({
-                                                ...data,
-                                                isTOP: !data?.isTOP,
-                                            })
-                                        }
-                                        onColor={primaryColor || '#000'}
-                                        offColor="#F3F3F3"
-                                    />
+                        <AccordionSummary
+                            expandIcon={
+                                <ArrowDropDownIcon
+                                    color="disabled"
+                                    sx={{ fontSize: '2rem' }}
+                                />
+                            }
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                            className={styles.additional_header}
+                        >
+                            <Typography component="div" variant="div">
+                                <span>Disable TOP Table Of Contents</span>
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Box className={styles.content_wrappper}>
+                                <div className={styles.focus_title_container}>
+                                    <div style={{ marginTop: '10px' }}>
+                                        <ToggleSwitch
+                                            label="Disable"
+                                            isChecked={data?.isTOP}
+                                            onToggle={() =>
+                                                setData({
+                                                    ...data,
+                                                    isTOP: !data?.isTOP,
+                                                })
+                                            }
+                                            onColor={primaryColor || '#000'}
+                                            offColor="#F3F3F3"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        </Box>
-                    </AccordionDetails>
-                </Accordion>
+                            </Box>
+                        </AccordionDetails>
+                    </Accordion>
+                )}
             </div>
 
             <div className={styles.right_content}>
@@ -1781,175 +2100,257 @@ const Edit = () => {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion
-                    defaultExpanded
-                    className={styles.accordion_container}
-                >
-                    <AccordionSummary
-                        expandIcon={
-                            <ArrowDropDownIcon
-                                color="disabled"
-                                sx={{ fontSize: '2rem' }}
-                            />
-                        }
-                        aria-controls="panel1-content"
-                        id="panel1-header"
-                        className={styles.additional_header}
+                {data?.image !== undefined && (
+                    <Accordion
+                        defaultExpanded
+                        className={styles.accordion_container}
                     >
-                        <Typography component="div" variant="div">
-                            <span>{type} Image</span>
-                        </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Box className={styles.content_wrappper}>
-                            <div>
-                                <FilePond
-                                    credits={false}
-                                    files={data?.image ? [data?.image] : []}
-                                    ref={imageUpload}
-                                    required
-                                    acceptedFileTypes={['image/*']}
-                                    allowFileEncode
-                                    imagePreviewHeight={
-                                        type == 'course'
-                                            ? 420
-                                            : type == 'blog'
-                                            ? 200
-                                            : type == 'spirituality'
-                                            ? 200
-                                            : type == 'story'
-                                            ? 400
-                                            : 'auto'
-                                    }
-                                    allowRemove={false}
-                                    allowReplace={true}
-                                    onaddfile={(error, file) => {
-                                        // console.log(error, file);
-                                        if (file)
+                        <AccordionSummary
+                            expandIcon={
+                                <ArrowDropDownIcon
+                                    color="disabled"
+                                    sx={{ fontSize: '2rem' }}
+                                />
+                            }
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                            className={styles.additional_header}
+                        >
+                            <Typography component="div" variant="div">
+                                <span>{type} Image</span>
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Box className={styles.content_wrappper}>
+                                <div>
+                                    <FilePond
+                                        credits={false}
+                                        files={data?.image ? [data?.image] : []}
+                                        ref={imageUpload}
+                                        required
+                                        acceptedFileTypes={['image/*']}
+                                        allowFileEncode
+                                        imagePreviewHeight={
+                                            type == 'course'
+                                                ? 420
+                                                : type == 'blog'
+                                                ? 200
+                                                : type == 'spirituality'
+                                                ? 200
+                                                : type == 'story'
+                                                ? 400
+                                                : 'auto'
+                                        }
+                                        allowRemove={false}
+                                        allowReplace={true}
+                                        onaddfile={(error, file) => {
+                                            // console.log(error, file);
+                                            if (file)
+                                                setData({
+                                                    ...data,
+                                                    image: file,
+                                                });
+                                        }}
+                                        // instantUpload={false}
+                                        // server={'/api/upload'}
+                                        allowMultiple={false}
+                                        maxFiles={1}
+                                        name="files"
+                                        labelIdle={`Drag & Drop ${type} image or <span class="filepond--label-action">Browse</span>`}
+                                    />
+                                </div>
+                                <HorizontalBorder height="1px" color="#ddd" />
+                                {data?.image ? (
+                                    <div
+                                        className={styles.image_footer}
+                                        onClick={() => {
                                             setData({
                                                 ...data,
-                                                image: file,
+                                                image: null,
                                             });
-                                    }}
-                                    // instantUpload={false}
-                                    // server={'/api/upload'}
-                                    allowMultiple={false}
-                                    maxFiles={1}
-                                    name="files"
-                                    labelIdle={`Drag & Drop ${type} image or <span class="filepond--label-action">Browse</span>`}
-                                />
-                            </div>
-                            <HorizontalBorder height="1px" color="#ddd" />
-                            {data?.image ? (
-                                <div
-                                    className={styles.image_footer}
-                                    onClick={() => {
-                                        setData({
-                                            ...data,
-                                            image: null,
-                                        });
-                                    }}
-                                >
-                                    <span>Remove {type} Image</span>
-                                </div>
-                            ) : (
-                                <div
-                                    className={styles.image_footer}
-                                    onClick={() => {
-                                        imageUpload.current?.browse();
-                                    }}
-                                >
-                                    <span>Add {type} Image</span>
-                                </div>
-                            )}
-                        </Box>
-                    </AccordionDetails>
-                </Accordion>
-
-                <Accordion
-                    defaultExpanded
-                    className={styles.accordion_container}
-                >
-                    <AccordionSummary
-                        expandIcon={
-                            <ArrowDropDownIcon
-                                color="disabled"
-                                sx={{ fontSize: '2rem' }}
-                            />
-                        }
-                        aria-controls="panel1-content"
-                        id="panel1-header"
-                        className={styles.additional_header}
-                    >
-                        <Typography component="div" variant="div">
-                            <span>{type} Categories</span>
-                        </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Box className={styles.content_wrappper}>
-                            <div className={styles.tab_container}>
-                                <button
-                                    onClick={() => setCategoryTab('')}
-                                    className={
-                                        categoryTab === ''
-                                            ? styles.tab_button_active
-                                            : styles.tab_button
-                                    }
-                                >
-                                    All Categories
-                                </button>
-                                <button
-                                    onClick={() => setCategoryTab('most')}
-                                    className={
-                                        categoryTab === 'most'
-                                            ? styles.tab_button_active
-                                            : styles.tab_button
-                                    }
-                                >
-                                    Most Used
-                                </button>
-                            </div>
-                            <div className={styles.category_container}>
-                                {categories?.map((category) => (
-                                    <div
-                                        key={category.Id}
-                                        className={styles.category_item}
+                                        }}
                                     >
-                                        <Checkbox
-                                            checked={data?.categories
-                                                ?.map((c) => c.id)
-                                                ?.includes(category.Id)}
-                                            onChange={(e) => {
-                                                if (e.target.checked) {
-                                                    setData({
-                                                        ...data,
-                                                        categories: [
-                                                            ...data?.categories,
-                                                            {
-                                                                id: category.Id,
-                                                                name: category.Name,
-                                                            },
-                                                        ],
-                                                    });
-                                                } else {
-                                                    setData({
-                                                        ...data,
-                                                        categories:
-                                                            data?.categories?.filter(
-                                                                (c) =>
-                                                                    c.id !==
-                                                                    category.Id
-                                                            ),
-                                                    });
-                                                }
-                                            }}
-                                        />
-                                        <span>{category.Name}</span>
+                                        <span>Remove {type} Image</span>
                                     </div>
-                                ))}
-                            </div>
-                            <HorizontalBorder height="1px" color="#ddd" />
-                            {newCategory ? (
+                                ) : (
+                                    <div
+                                        className={styles.image_footer}
+                                        onClick={() => {
+                                            imageUpload.current?.browse();
+                                        }}
+                                    >
+                                        <span>Add {type} Image</span>
+                                    </div>
+                                )}
+                            </Box>
+                        </AccordionDetails>
+                    </Accordion>
+                )}
+
+                {data?.categories !== undefined && (
+                    <Accordion
+                        defaultExpanded
+                        className={styles.accordion_container}
+                    >
+                        <AccordionSummary
+                            expandIcon={
+                                <ArrowDropDownIcon
+                                    color="disabled"
+                                    sx={{ fontSize: '2rem' }}
+                                />
+                            }
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                            className={styles.additional_header}
+                        >
+                            <Typography component="div" variant="div">
+                                <span>{type} Categories</span>
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Box className={styles.content_wrappper}>
+                                <div className={styles.tab_container}>
+                                    <button
+                                        onClick={() => setCategoryTab('')}
+                                        className={
+                                            categoryTab === ''
+                                                ? styles.tab_button_active
+                                                : styles.tab_button
+                                        }
+                                    >
+                                        All Categories
+                                    </button>
+                                    <button
+                                        onClick={() => setCategoryTab('most')}
+                                        className={
+                                            categoryTab === 'most'
+                                                ? styles.tab_button_active
+                                                : styles.tab_button
+                                        }
+                                    >
+                                        Most Used
+                                    </button>
+                                </div>
+                                <div className={styles.category_container}>
+                                    {categories?.map((category) => (
+                                        <div
+                                            key={category.Id}
+                                            className={styles.category_item}
+                                        >
+                                            <Checkbox
+                                                checked={data?.categories
+                                                    ?.map((c) => c.id)
+                                                    ?.includes(category.Id)}
+                                                onChange={(e) => {
+                                                    if (e.target.checked) {
+                                                        setData({
+                                                            ...data,
+                                                            categories: [
+                                                                ...data?.categories,
+                                                                {
+                                                                    id: category.Id,
+                                                                    name: category.Name,
+                                                                },
+                                                            ],
+                                                        });
+                                                    } else {
+                                                        setData({
+                                                            ...data,
+                                                            categories:
+                                                                data?.categories?.filter(
+                                                                    (c) =>
+                                                                        c.id !==
+                                                                        category.Id
+                                                                ),
+                                                        });
+                                                    }
+                                                }}
+                                            />
+                                            <span>{category.Name}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <HorizontalBorder height="1px" color="#ddd" />
+                                {newCategory ? (
+                                    <div
+                                        className={
+                                            styles.publish_cell_edit_container
+                                        }
+                                    >
+                                        <InputField
+                                            className={styles.input}
+                                            type={'text'}
+                                            value={newCategoryInput}
+                                            onChange={(e) =>
+                                                setNewCategoryInput(
+                                                    e.target.value
+                                                )
+                                            }
+                                            placeholder={'Enter New Category'}
+                                        />
+                                        <span
+                                            className={styles.edit_icon}
+                                            onClick={() => {
+                                                setNewCategory(false);
+                                                toast.warn(
+                                                    'Need to create a api for this'
+                                                );
+                                            }}
+                                        >
+                                            <Icon sx={{ color: '#000' }}>
+                                                check_circle_outline
+                                            </Icon>
+                                        </span>
+                                        <span
+                                            className={styles.edit_icon}
+                                            onClick={() => {
+                                                setNewCategory(false);
+                                            }}
+                                        >
+                                            <Icon sx={{ color: '#000' }}>
+                                                cancel_outline
+                                            </Icon>
+                                        </span>
+                                    </div>
+                                ) : (
+                                    <div
+                                        className={styles.category_new}
+                                        onClick={() => {
+                                            setNewCategory(true);
+                                            setNewCategoryInput('');
+                                        }}
+                                    >
+                                        <Icon>add</Icon>
+                                        <span>Add New Category</span>
+                                    </div>
+                                )}
+                            </Box>
+                        </AccordionDetails>
+                    </Accordion>
+                )}
+
+                {data?.tags !== undefined && (
+                    <Accordion
+                        defaultExpanded
+                        className={styles.accordion_container}
+                    >
+                        <AccordionSummary
+                            expandIcon={
+                                <ArrowDropDownIcon
+                                    color="disabled"
+                                    sx={{ fontSize: '2rem' }}
+                                />
+                            }
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                            className={styles.additional_header}
+                        >
+                            <Typography component="div" variant="div">
+                                <span>{type} Tags</span>
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Box className={styles.content_wrappper}>
                                 <div
                                     className={
                                         styles.publish_cell_edit_container
@@ -1958,84 +2359,13 @@ const Edit = () => {
                                     <InputField
                                         className={styles.input}
                                         type={'text'}
-                                        value={newCategoryInput}
+                                        value={tagInput}
                                         onChange={(e) =>
-                                            setNewCategoryInput(e.target.value)
+                                            setTagInput(e.target.value)
                                         }
-                                        placeholder={'Enter New Category'}
+                                        placeholder={'Enter Tag'}
                                     />
-                                    <span
-                                        className={styles.edit_icon}
-                                        onClick={() => {
-                                            setNewCategory(false);
-                                            toast.warn(
-                                                'Need to create a api for this'
-                                            );
-                                        }}
-                                    >
-                                        <Icon sx={{ color: '#000' }}>
-                                            check_circle_outline
-                                        </Icon>
-                                    </span>
-                                    <span
-                                        className={styles.edit_icon}
-                                        onClick={() => {
-                                            setNewCategory(false);
-                                        }}
-                                    >
-                                        <Icon sx={{ color: '#000' }}>
-                                            cancel_outline
-                                        </Icon>
-                                    </span>
-                                </div>
-                            ) : (
-                                <div
-                                    className={styles.category_new}
-                                    onClick={() => {
-                                        setNewCategory(true);
-                                        setNewCategoryInput('');
-                                    }}
-                                >
-                                    <Icon>add</Icon>
-                                    <span>Add New Category</span>
-                                </div>
-                            )}
-                        </Box>
-                    </AccordionDetails>
-                </Accordion>
-
-                <Accordion
-                    defaultExpanded
-                    className={styles.accordion_container}
-                >
-                    <AccordionSummary
-                        expandIcon={
-                            <ArrowDropDownIcon
-                                color="disabled"
-                                sx={{ fontSize: '2rem' }}
-                            />
-                        }
-                        aria-controls="panel1-content"
-                        id="panel1-header"
-                        className={styles.additional_header}
-                    >
-                        <Typography component="div" variant="div">
-                            <span>{type} Tags</span>
-                        </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Box className={styles.content_wrappper}>
-                            <div className={styles.publish_cell_edit_container}>
-                                <InputField
-                                    className={styles.input}
-                                    type={'text'}
-                                    value={tagInput}
-                                    onChange={(e) =>
-                                        setTagInput(e.target.value)
-                                    }
-                                    placeholder={'Enter Tag'}
-                                />
-                                {/* <Autocomplete
+                                    {/* <Autocomplete
                                     options={tags?.map((option) => ({
                                         id: option.Id,
                                         label: option.Name,
@@ -2057,95 +2387,104 @@ const Edit = () => {
                                     )}
                                 /> */}
 
-                                <div className={styles.buttons}>
-                                    <button
-                                        className={styles.preview_changes}
-                                        onClick={() =>
-                                            handleTagsChange(tagInput)
-                                        }
-                                    >
-                                        {'Add'}
-                                    </button>
-                                </div>
-                            </div>
-                            <span
-                                className={styles.icon_name_info_container}
-                                style={{ marginTop: 0, marginBottom: '10px' }}
-                            >
-                                <svg
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 20 20"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M10 12.8V10M10 7.2H10.007M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                                        stroke="#2C2520"
-                                        stroke-opacity="0.7"
-                                        stroke-width="1.5"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    />
-                                </svg>
-                                <span className={styles.icon_name_info_example}>
-                                    Separate tags with commas
-                                </span>
-                            </span>
-                            <div className={styles.tag_container}>
-                                {data?.tags?.map((tag) => (
-                                    <div
-                                        key={tag.Id}
-                                        className={styles.tag_item}
-                                    >
-                                        <span>{tag.name}</span>
-                                        <Icon
-                                            sx={{
-                                                color: '#000',
-                                                cursor: 'pointer',
-                                            }}
-                                            onClick={() => {
-                                                setData({
-                                                    ...data,
-                                                    tags: data?.tags?.filter(
-                                                        (t) =>
-                                                            t.name !== tag.name
-                                                    ),
-                                                });
-                                            }}
-                                        >
-                                            cancel_outline
-                                        </Icon>
-                                    </div>
-                                ))}
-                            </div>
-                            <HorizontalBorder height="1px" color="#ddd" />
-                            <div
-                                className={styles.tag_most}
-                                onClick={() => {
-                                    setSuggestTag(!suggestTag);
-                                }}
-                            >
-                                <span>Choose from the most used tags</span>
-                            </div>
-                            {suggestTag && (
-                                <div>
-                                    {tags?.slice(0, 3)?.map((tag) => (
-                                        <div
-                                            key={tag.Id}
-                                            className={styles.tag_link}
+                                    <div className={styles.buttons}>
+                                        <button
+                                            className={styles.preview_changes}
                                             onClick={() =>
-                                                handleTagsChange(tag?.Name)
+                                                handleTagsChange(tagInput)
                                             }
                                         >
-                                            <span>{tag?.Name}</span>
+                                            {'Add'}
+                                        </button>
+                                    </div>
+                                </div>
+                                <span
+                                    className={styles.icon_name_info_container}
+                                    style={{
+                                        marginTop: 0,
+                                        marginBottom: '10px',
+                                    }}
+                                >
+                                    <svg
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M10 12.8V10M10 7.2H10.007M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                                            stroke="#2C2520"
+                                            stroke-opacity="0.7"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
+                                    <span
+                                        className={
+                                            styles.icon_name_info_example
+                                        }
+                                    >
+                                        Separate tags with commas
+                                    </span>
+                                </span>
+                                <div className={styles.tag_container}>
+                                    {data?.tags?.map((tag) => (
+                                        <div
+                                            key={tag.Id}
+                                            className={styles.tag_item}
+                                        >
+                                            <span>{tag.name}</span>
+                                            <Icon
+                                                sx={{
+                                                    color: '#000',
+                                                    cursor: 'pointer',
+                                                }}
+                                                onClick={() => {
+                                                    setData({
+                                                        ...data,
+                                                        tags: data?.tags?.filter(
+                                                            (t) =>
+                                                                t.name !==
+                                                                tag.name
+                                                        ),
+                                                    });
+                                                }}
+                                            >
+                                                cancel_outline
+                                            </Icon>
                                         </div>
                                     ))}
                                 </div>
-                            )}
-                        </Box>
-                    </AccordionDetails>
-                </Accordion>
+                                <HorizontalBorder height="1px" color="#ddd" />
+                                <div
+                                    className={styles.tag_most}
+                                    onClick={() => {
+                                        setSuggestTag(!suggestTag);
+                                    }}
+                                >
+                                    <span>Choose from the most used tags</span>
+                                </div>
+                                {suggestTag && (
+                                    <div>
+                                        {tags?.slice(0, 3)?.map((tag) => (
+                                            <div
+                                                key={tag.Id}
+                                                className={styles.tag_link}
+                                                onClick={() =>
+                                                    handleTagsChange(tag?.Name)
+                                                }
+                                            >
+                                                <span>{tag?.Name}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </Box>
+                        </AccordionDetails>
+                    </Accordion>
+                )}
             </div>
             {showDeleteAlert && (
                 <AlertDialog

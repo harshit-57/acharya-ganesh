@@ -7,25 +7,29 @@ import { Footer } from '../../components/footer/Footer';
 import { HorizontalBorder, Spacer } from '../../components/spacer/Spacer';
 import CitationBanner from '../../assets/citation-banner.png';
 import ImgConsultation from '../../assets/consultation_poster.jpg';
-import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import {
+    useLocation,
+    useNavigate,
+    useParams,
+    useSearchParams,
+} from 'react-router-dom';
 import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
 import ContactForm from '../../components/contact-form/ContactForm.jsx';
 import ArrowCircle from '../../assets/arrow_circle.png';
 import Blog from '../../components/blog/Blog.jsx';
 import parse from 'html-react-parser';
 import { APIHelper } from '../../util/APIHelper.js';
+import { htmlToText } from 'html-to-text';
 
 const CitationDetail = () => {
-
     const { slug } = useParams();
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const { state } = useLocation();
     const [citation, setCitation] = useState(null);
-    const [title , setTitle] = useState(" ");
     useEffect(() => {
         if (searchParams?.get('preview')) {
-            setCourse(state?.data);
+            setCitation(state?.data);
             return;
         }
         getCitation();
@@ -35,21 +39,16 @@ const CitationDetail = () => {
         try {
             const response = await APIHelper.getCitations({
                 slug: slug,
+                status: 1,
             });
             if (!response?.data?.data?.length) {
                 navigate('/citation');
             }
             setCitation(response.data.data[0]);
-            setTitle(response.data.data[0].Title);
-            console.log(response.data.data[0]);
-
         } catch (e) {
             console.log(e);
         }
     };
-
-
-
 
     // const faqList = [
     //     {
@@ -94,9 +93,7 @@ const CitationDetail = () => {
                 <Navigation />
                 <div className={css.header_text_container}>
                     <div className={css.header_text_wrapper}>
-                        <h3>
-                           {parse(title || " ")}
-                        </h3>
+                        <h3>{htmlToText(citation?.Title || ' ')}</h3>
                         <div className={css.stats_container}>
                             <p>
                                 15+{' '}
@@ -129,11 +126,9 @@ const CitationDetail = () => {
             <HorizontalBorder color={'#cebeb1'} />
             <div className={css.content}>
                 <div className={css.citation_detail_container}>
-
                     <div className={css.citation_detail_wrapper}>
-                        <div className='html-content'>
+                        <div className="html-content">
                             {parse(citation?.Description || '')}
-
                         </div>
                         {/* <div className={`html-content`}>
                         //     <h1>

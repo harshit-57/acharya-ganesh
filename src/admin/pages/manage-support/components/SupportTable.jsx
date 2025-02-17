@@ -66,7 +66,7 @@ const PaginationTable = ({
     }));
 
     const handleChangePage = (_, newPage) => {
-        setPage(newPage);
+        setPage(newPage + 1);
     };
 
     const handleChangeRowsPerPage = (event) => {
@@ -113,6 +113,27 @@ const PaginationTable = ({
                             </StyledTableHead>
                             <StyledTableHead align="center">
                                 Created At
+                                {sort === 'desc' ? (
+                                    <IconButton onClick={() => setSort('asc')}>
+                                        <Icon sx={{ color: 'white' }}>
+                                            <Tooltip title="Sort Date">
+                                                <Icon color="secondary">
+                                                    arrow_downward
+                                                </Icon>
+                                            </Tooltip>
+                                        </Icon>
+                                    </IconButton>
+                                ) : (
+                                    <IconButton onClick={() => setSort('desc')}>
+                                        <Icon sx={{ color: 'white' }}>
+                                            <Tooltip title="Sort Date">
+                                                <Icon color="secondary">
+                                                    arrow_upward
+                                                </Icon>
+                                            </Tooltip>
+                                        </Icon>
+                                    </IconButton>
+                                )}
                             </StyledTableHead>
                             <StyledTableHead align="center">
                                 Action
@@ -122,22 +143,15 @@ const PaginationTable = ({
                     <TableBody>
                         {data.map((support, index) => (
                             <TableRow key={index}>
-
                                 <StyledTableCell align="center">
-
-                                    {
-                                        index + 1
-                                    }
-
+                                    {index + 1}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                     {support.Name}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                     <p className="content-three-line">
-                                        {
-                                            support.Email
-                                        }
+                                        {support.Email}
                                     </p>
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
@@ -156,57 +170,17 @@ const PaginationTable = ({
                                     </p>
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {moment(support.PublishedOn).format('ll')}
+                                    {moment(support.CreatedAt).format('ll')}
                                 </StyledTableCell>
                                 <TableCell align="center">
-
-                                    <IconButton
-                                        // disabled={
-                                        //     !getRoleAndpermission(
-                                        //         roleAndPermission,
-                                        //         'Company Management',
-                                        //         'edit'
-                                        //     )
-                                        // }
-                                        onClick={() => {
-                                            navigate(
-                                                `/admin/content-editor/support/${support.Name}`,
-                                                { state: support }
-                                            );
-                                        }}
-                                    >
-                                        <Tooltip title="Edit Company">
-                                            <Icon color="primary">edit</Icon>
-                                        </Tooltip>
-                                    </IconButton>
-                                    {/* <IconButton
-                // onClick={() => {
-             
-                    //   setAlertDeleteModal(!alertDeleteModal);
-                //   setCompanyId(story.id);
-                // }}
-                > <Tooltip title="View Transactions">
-                    <PaidIcon />
-                  </Tooltip>
-                </IconButton> */}
-
-                                    <IconButton
-                                        // disabled={
-                                        //     !getRoleAndpermission(
-                                        //         roleAndPermission,
-                                        //         'Company Management',
-                                        //         'delete'
-                                        //     )
-                                        // }
-                                        onClick={() => {
-                                            setShowDeleteAlert(
-                                                !showDeleteAlert
-                                            );
-                                        }}
-                                    >
-                                        <Tooltip title="Delete">
-                                            <Icon color="primary">delete</Icon>
-                                        </Tooltip>
+                                    <IconButton>
+                                        <Link href={`mailto:${support?.Email}`}>
+                                            <Tooltip title="Reply">
+                                                <Icon color="primary">
+                                                    mail
+                                                </Icon>
+                                            </Tooltip>
+                                        </Link>
                                     </IconButton>
                                 </TableCell>
                             </TableRow>
@@ -216,7 +190,7 @@ const PaginationTable = ({
             </Box>
             <TablePagination
                 sx={{ px: 2 }}
-                page={page}
+                page={page - 1}
                 component="div"
                 rowsPerPage={rowsPerPage}
                 count={totalItems}

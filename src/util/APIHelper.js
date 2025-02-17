@@ -52,7 +52,6 @@ export const APIHelper = Object.freeze({
     getCourses: await getApi('v1/GetDivine/getCourses'),
     createLead: await postApi('v1/GetDivine/createLead'),
     getLeads: await getApi('v1/GetDivine/getLeads'),
-
 });
 
 export const ADMINAPIHELPER = Object.freeze({
@@ -64,4 +63,8 @@ export const ADMINAPIHELPER = Object.freeze({
     updateBlog: await postApi('v1/admin/update-blog'),
     createSpirituality: await postApi('v1/admin/create-spirituality'),
     updateSpirituality: await postApi('v1/admin/update-spirituality'),
+    createCitation: await postApi('v1/admin/create-citation'),
+    updateCitation: await postApi('v1/admin/update-citation'),
+    createTestimonial: await postApi('v1/admin/create-testimonial'),
+    updateTestimonial: await postApi('v1/admin/update-testimonial'),
 });

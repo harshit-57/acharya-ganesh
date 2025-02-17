@@ -17,28 +17,11 @@ import { PrintExcel, getRoleAndpermission } from '../../utils/utils';
 import moment from 'moment';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { APIHelper } from '../../../util/APIHelper';
+import { MatxLoading } from '../../components';
 
 const ContentBox = styled('div')(({ theme }) => ({
     margin: '30px',
     [theme.breakpoints.down('sm')]: { margin: '16px' },
-}));
-
-const CardHeader = styled(Box)(() => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-}));
-
-const Title = styled('span')(() => ({
-    fontSize: '1rem',
-    fontWeight: '500',
-    marginRight: '.5rem',
-    textTransform: 'capitalize',
-}));
-
-const SubTitle = styled('span')(({ theme }) => ({
-    fontSize: '1rem',
-    color: theme.palette.text.secondary,
 }));
 
 const H2 = styled('h2')(({ theme }) => ({
@@ -61,11 +44,11 @@ const ManageSupport = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [showFilterDropDown, setShowFilterDropDown] = useState(false);
     const [sort, setSort] = useState('desc');
-    const [sortBy, setSortBy] = useState('ws.PublishedOn');
+    const [sortBy, setSortBy] = useState('ld.createdAt');
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
 
     useEffect(() => {
-        fetchStories();
+        fetchData();
     }, [currentPage, searchQuery, pageSize, sortBy, sort]);
     const handleSortingFilter = (p1, p2) => {
         setSort(p1);
@@ -73,25 +56,17 @@ const ManageSupport = () => {
         setShowFilterDropDown(false);
     };
 
-    const fetchStories = async () => {
+    const fetchData = async () => {
         try {
             setLoading(true);
-            let response;
-            if (searchQuery && searchQuery?.length >= 3) {
-                response = await APIHelper.getLeads({
-                    page: currentPage,
-                    pageSize: pageSize,
-                    search: searchQuery,
-                    
-                });
-            } else {
-                response = await APIHelper.getLeads({
-                    page: currentPage,
-                    pageSize: pageSize,
-                   
-                });
-            }
-            setSupports(response.data?.data);    
+            let response = await APIHelper.getLeads({
+                page: currentPage,
+                pageSize: pageSize,
+                search: searchQuery || undefined,
+                sort: sort,
+                sortBy: sortBy,
+            });
+            setSupports(response.data?.data);
             setTotalCount(response.data?.total);
             setLoading(false);
         } catch (e) {
@@ -158,32 +133,6 @@ const ManageSupport = () => {
                                     //     !getRoleAndpermission(
                                     //         roleAndPermission,
                                     //         'Blog Management',
-                                    //         'add'
-                                    //     )
-                                    // }
-                                    variant="contained"
-                                    size="small"
-                                    onClick={() =>
-                                        navigate(
-                                            '/admin/content-editor/story/new',
-                                            {
-                                                state: {},
-                                            }
-                                        )
-                                    }
-                                    sx={{
-                                        px: 3,
-                                        py: 0.9,
-                                    }}
-                                >
-                                    + Add Support
-                                </Button>
-
-                                <Button
-                                    // disabled={
-                                    //     !getRoleAndpermission(
-                                    //         roleAndPermission,
-                                    //         'Blog Management',
                                     //         'export'
                                     //     )
                                     // }
@@ -224,6 +173,9 @@ const ManageSupport = () => {
                             </div>
                         </div>
                         <div style={{ marginTop: '20px' }}>
+                            {loading && (
+                                <MatxLoading style={{ margin: '20px' }} />
+                            )}
                             <PaginationTable
                                 data={support}
                                 totalItems={totalCount}

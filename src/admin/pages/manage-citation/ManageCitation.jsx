@@ -8,16 +8,16 @@ import {
     TextField,
     Icon,
 } from '@mui/material';
+
 import { Fragment } from 'react';
 import { useEffect, useState } from 'react';
-import PaginationTable from './components/SpiritualityTable';
+import PaginationTable from './components/CitationTable';
 import AlertDialog from '../../components/Alert';
 import { toast } from 'react-toastify';
 import { PrintExcel, getRoleAndpermission } from '../../utils/utils';
 import moment from 'moment';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ADMINAPIHELPER, APIHelper } from '../../../util/APIHelper';
-import { MatxLoading } from '../../components';
 
 const ContentBox = styled('div')(({ theme }) => ({
     margin: '30px',
@@ -32,12 +32,12 @@ const H2 = styled('h2')(({ theme }) => ({
     marginBottom: '30px',
 }));
 
-const ManageSpirituality = () => {
+const ManageCitation = () => {
     const token = localStorage.getItem('accessToken');
     const [searchParams] = useSearchParams();
     const { palette } = useTheme();
     const navigate = useNavigate();
-    const [spiritualities, setSpiritualities] = useState([]);
+    const [citations, setCitations] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(5);
     const [totalCount, setTotalCount] = useState(0);
@@ -45,40 +45,27 @@ const ManageSpirituality = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [showFilterDropDown, setShowFilterDropDown] = useState(false);
     const [sort, setSort] = useState('desc');
-    const [sortBy, setSortBy] = useState('sp.PublishedOn');
+    const [sortBy, setSortBy] = useState('ci.PublishedOn');
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
     const [selectedData, setSelectedData] = useState(null);
 
     useEffect(() => {
-        fetchBlogs();
+        fetchCitations();
     }, [currentPage, searchQuery, pageSize, sortBy, sort]);
-    const handleSortingFilter = (p1, p2) => {
-        setSort(p1);
-        setSortBy(p2);
-        setShowFilterDropDown(false);
-    };
 
-    const fetchBlogs = async () => {
+    const fetchCitations = async () => {
         try {
             setLoading(true);
             let response;
-            if (searchQuery && searchQuery?.length >= 3) {
-                response = await APIHelper.getSpiritualities({
-                    page: currentPage,
-                    pageSize: pageSize,
-                    search: searchQuery,
-                    sort: sort,
-                    sortBy: sortBy,
-                });
-            } else {
-                response = await APIHelper.getSpiritualities({
-                    page: currentPage,
-                    pageSize: pageSize,
-                    sort: sort,
-                    sortBy: sortBy,
-                });
-            }
-            setSpiritualities(response.data?.data);
+            response = await APIHelper.getCitations({
+                page: currentPage,
+                pageSize: pageSize,
+                search: searchQuery || undefined,
+                sort: sort,
+                sortBy: sortBy,
+            });
+
+            setCitations(response.data?.data);
             setTotalCount(response.data?.total);
             setLoading(false);
         } catch (e) {
@@ -92,7 +79,7 @@ const ManageSpirituality = () => {
     const exportData = async () => {
         setExportLoading(true);
         try {
-            const res = await APIHelper.getSpiritualities({
+            const res = await APIHelper.getCitations({
                 page: 1,
                 pageSize: totalCount,
             });
@@ -100,9 +87,7 @@ const ManageSpirituality = () => {
             setExportLoading(false);
             PrintExcel(
                 res?.data?.data,
-                `SpiritualityData-${moment(new Date()).format(
-                    'YYYY-MM-DD'
-                )}.xlsx`
+                `CitationData-${moment(new Date()).format('YYYY-MM-DD')}.xlsx`
             );
             toast.success('Exported successfully');
         } catch (err) {
@@ -115,14 +100,14 @@ const ManageSpirituality = () => {
         try {
             setLoading(true);
             if (selectedData?.Id)
-                ADMINAPIHELPER.updateSpirituality(
+                ADMINAPIHELPER.updateCitation(
                     { id: selectedData?.Id, deletedOn: new Date() },
                     token
                 )
                     ?.then((response) => {
                         if (response?.data?.success) {
-                            toast.success('Spirituality deleted successfully');
-                            fetchBlogs();
+                            toast.success('Citation deleted successfully');
+                            fetchCitations();
                         } else {
                             toast.error(response?.message);
                         }
@@ -148,7 +133,7 @@ const ManageSpirituality = () => {
             <ContentBox className="analytics">
                 <Grid container spacing={3}>
                     <Grid item lg={12} md={12} sm={12} xs={12}>
-                        <H2>Manage Spiritualities</H2>
+                        <H2>Manage Citation</H2>
 
                         <div
                             style={{
@@ -170,7 +155,7 @@ const ManageSpirituality = () => {
                                     size="small"
                                     onClick={() =>
                                         navigate(
-                                            '/admin/content-editor/spirituality/new',
+                                            '/admin/content-editor/citation/new',
                                             {
                                                 state: {},
                                             }
@@ -181,7 +166,7 @@ const ManageSpirituality = () => {
                                         py: 0.9,
                                     }}
                                 >
-                                    + Add Spirituality
+                                    + Add Citation
                                 </Button>
 
                                 <Button
@@ -229,22 +214,17 @@ const ManageSpirituality = () => {
                             </div>
                         </div>
                         <div style={{ marginTop: '20px' }}>
-                            {loading && (
-                                <MatxLoading style={{ margin: '20px' }} />
-                            )}
                             <PaginationTable
-                                data={spiritualities}
+                                data={citations}
                                 totalItems={totalCount}
                                 page={currentPage}
                                 setPage={setCurrentPage}
                                 rowsPerPage={pageSize}
                                 setRowsPerPage={setPageSize}
-                                sort={sort}
-                                setSort={setSort}
-                                sortBy={sortBy}
-                                setSortBy={setSortBy}
                                 showDeleteAlert={showDeleteAlert}
                                 setShowDeleteAlert={setShowDeleteAlert}
+                                sort={sort}
+                                setSort={setSort}
                                 setSelectedData={setSelectedData}
                             />
                         </div>
@@ -256,8 +236,8 @@ const ManageSpirituality = () => {
                 <AlertDialog
                     modal={showDeleteAlert}
                     toggle={() => setShowDeleteAlert(!showDeleteAlert)}
-                    title="Delete Spirituality"
-                    description="Are you want to sure delete the spirituality?"
+                    title="Delete Citation"
+                    description="Are you want to sure delete the citation?"
                     confirmFunc={() => handleDelete()}
                 />
             )}
@@ -265,4 +245,4 @@ const ManageSpirituality = () => {
     );
 };
 
-export default ManageSpirituality;
+export default ManageCitation;

@@ -2,6 +2,7 @@ import css from './style.module.css';
 import IcQuote from '../../../../../../assets/quotation_mark.png';
 import IcRatingStar from '../../../../../../assets/rating_star.png';
 import IcEllipse from '../../../../../../assets/ellipse.png';
+import { htmlToText } from 'html-to-text';
 export const TestimonialCard = ({ testimonial, style, className }) => {
     return (
         <div style={style} className={[className, css.container].join(' ')}>
@@ -23,7 +24,7 @@ export const TestimonialCard = ({ testimonial, style, className }) => {
                     <img key={i} src={IcRatingStar} alt={'Rating star icon'} />
                 ))}
             </div>
-            <p className={css.review}>{testimonial?.Description}</p>
+            <p className={css.review}>{htmlToText(testimonial?.Description)}</p>
         </div>
     );
 };
