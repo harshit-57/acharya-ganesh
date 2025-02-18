@@ -990,7 +990,9 @@ textarea {
         background-color: transparent;
         border: none;
         cursor: pointer;
-        margin: 0 0 1.5rem;
+        .w-tabs-section-title {
+            margin: 0 0 1.5rem;
+        }
     }
 }
 

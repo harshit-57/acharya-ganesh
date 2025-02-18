@@ -35,6 +35,7 @@ import FormConsultation from './pages/consultation-booking-page/BookConsultation
 import ManageTestimonial from './admin/pages/manage-testimonial/ManageTestimonial';
 import ManageSupport from './admin/pages/manage-support/ManageSupport';
 import ManageCitation from './admin/pages/manage-citation/ManageCitation';
+import ManageAdmin from './admin/pages/manage-admin/ManageAdmin';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
@@ -136,6 +137,7 @@ export default () => {
                         element={<Edit />}
                     />
                     <Route path="/admin/dashboard" element={<Dashboard />} />
+                    <Route path="/admin/management" element={<ManageAdmin />} />
                     <Route path="/admin/courses" element={<ManageCourses />} />
                     <Route path="/admin/blogs" element={<ManageBlogs />} />
                     <Route

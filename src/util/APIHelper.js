@@ -57,6 +57,11 @@ export const APIHelper = Object.freeze({
 export const ADMINAPIHELPER = Object.freeze({
     login: await postApi('v1/admin/login'),
     getAdminPermission: await getApi('v1/admin/get-admin-permission'),
+    getAdmins: await getApi('v1/admin/get-admins'),
+    getRoles: await getApi('v1/admin/get-roles'),
+    createAdmin: await postApi('v1/admin/create-admin'),
+    updateAdmin: await postApi('v1/admin/update-admin'),
+    deleteAdmin: await postApi('v1/admin/delete-admin'),
     createCourse: await postApi('v1/admin/create-course'),
     updateCourse: await postApi('v1/admin/update-course'),
     createBlog: await postApi('v1/admin/create-blog'),

@@ -1,12 +1,7 @@
 export const navigations = [
     { name: 'Dashboard', path: '/admin/dashboard', icon: 'dashboard' },
     { label: 'USER', type: 'label' },
-    { name: 'Manage User', path: '/admin/login', icon: 'group' },
-    {
-        name: 'Roles & Permissions',
-        path: '/admin/login',
-        icon: 'check_circle',
-    },
+    { name: 'Manage Admin', path: '/admin/management', icon: 'group' },
     { label: 'PAGES', type: 'label' },
     {
         name: 'Courses Management',
