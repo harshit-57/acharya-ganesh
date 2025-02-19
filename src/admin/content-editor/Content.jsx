@@ -39,6 +39,9 @@ import dayJs from 'dayjs';
 import { toast } from 'react-toastify';
 import { htmlToText } from 'html-to-text';
 import AlertDialog from '../components/Alert';
+// import { parse } from 'filepond';
+import parse from 'html-react-parser';
+
 
 // Register the plugins
 registerPlugin(FilePondPluginImagePreview);
@@ -393,10 +396,10 @@ const Edit = () => {
                             id: response?.Id,
                             title: response?.Title,
                             image: response?.CoverImageUrl || '',
-                            
+
                             isShortDescription: true,
                             shortDescription: response?.ShortDescription,
-                           
+
                             status: response?.Status,
                             publishedOn: response?.PublishedOn
                                 ? new Date(response?.PublishedOn)
@@ -412,8 +415,8 @@ const Edit = () => {
                                     id: item?.TagId,
                                     name: item?.TagName,
                                 })) || [],
-                           storyImages : response?.Images,
-                            timeDuration : response?.TimeDuration
+                            storyImages: response?.Images,
+                            timeDuration: response?.TimeDuration
                         });
                     }
                     setIsLoading(false);
@@ -1576,96 +1579,140 @@ const Edit = () => {
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            {data?.storyImages?.map((storyImage)=>(<div className={styles.Image_Accordian_container}>
-                                {/* Part 1: Top Section (Image Pond and Text Editor) */}
-                                <div className={styles.topSection}>
-                                    {/* Image Pond */}
-                                    <div className={styles.imagePondContainer}>
-                                        <FilePond
-                                            credits={false}
-                                            files={storyImage?.ImageUrl ? [storyImage?.ImageUrl] : []}
-                                            ref={imageUpload}
-                                            required
-                                            acceptedFileTypes={['image/*']}
-                                            allowFileEncode
-                                            imagePreviewHeight={400}
-                                            allowRemove={false}
-                                            allowReplace={true}
-                                            onaddfile={(error, file) => {
-                                                if (file)
-                                                    setData({
-                                                        ...data,
-                                                        image: file,
-                                                    });
-                                            }}
-                                            allowMultiple={false}
-                                            maxFiles={1}
-                                            name="files"
-                                            labelIdle={`Drag & Drop story image or <span class="filepond--label-action">Browse</span>`}
-                                        />
-                                        <HorizontalBorder height="1px" color="#ddd" />
-                                        {data?.image ? (
-                                            <div
-                                                className={styles.image_footer}
-                                                onClick={() => {
-                                                    setData({
-                                                        ...data,
-                                                        image: null,
-                                                    });
-                                                }}
-                                            >
-                                                <span>Remove Story Image</span>
+                            <div className={styles.story_Data}>
+
+
+                                {data?.storyImages?.map((storyImage) => (
+                                    <div className={styles.Image_Accordian_container}>
+                                        {/* Part 1: Top Section (Image Pond and Text Editor) */}
+                                        <div className={styles.topSection}>
+                                            {/* Image Pond */}
+                                            <div className={styles.imagePondContainer}>
+                                                <FilePond
+                                                    credits={false}
+                                                    files={storyImage?.ImageUrl ? [storyImage?.ImageUrl] : []}
+                                                    ref={imageUpload}
+                                                    required
+                                                    acceptedFileTypes={['image/*']}
+                                                    allowFileEncode
+                                                    imagePreviewHeight={400}
+                                                    allowRemove={false}
+                                                    allowReplace={true}
+                                                    // onaddfile={(error, file) => {
+                                                    //     if (file)
+                                                    //         setData({
+                                                    //             ...data,
+                                                    //             image: file,
+                                                    //         });
+                                                    // }}
+                                                    allowMultiple={false}
+                                                    maxFiles={1}
+                                                    name="files"
+                                                    labelIdle={`Drag & Drop story image or <span class="filepond--label-action">Browse</span>`}
+                                                />
+                                                <HorizontalBorder height="1px" color="#ddd" />
+                                                {data?.image ? (
+                                                    <div
+                                                        className={styles.image_footer}
+                                                        onClick={() => {
+                                                            setData({
+                                                                ...data,
+                                                                image: null,
+                                                            });
+                                                        }}
+                                                    >
+                                                        <span>Remove Story Image</span>
+                                                    </div>
+                                                ) : (
+                                                    <div
+                                                        className={styles.image_footer}
+                                                        onClick={() => {
+                                                            imageUpload.current?.browse();
+                                                        }}
+                                                    >
+                                                        <span>Add Story Image</span>
+                                                    </div>
+                                                )}
                                             </div>
-                                        ) : (
-                                            <div
-                                                className={styles.image_footer}
-                                                onClick={() => {
-                                                    imageUpload.current?.browse();
-                                                }}
-                                            >
-                                                <span>Add Story Image</span>
+
+                                            {/* Text Editor */}
+                                            <div className={styles.textEditorContainer}>
+                                                <Editor
+                                                    content={data?.description || ''}
+                                                    setContent={(html) =>
+                                                        setData({ ...data, description: html })
+                                                    }
+                                                />
                                             </div>
-                                        )}
+                                        </div>
+
+                                        {/* Part 2: Center Section (Preview) */}
+                                        <div className={styles.bottomSection}>
+
+                                            <div className={styles.previewContainer}>
+                                                {/* Dummy Images for Preview */}
+
+
+                                                <img
+                                                    className={
+                                                        storyImage.ImageUrl
+                                                            ? styles.story_media
+                                                            : styles.story_media_main
+                                                    }
+                                                    src={
+                                                        storyImage?.ImageUrl ||
+                                                        'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.2bJ9_f9aKoGCME7ZIff-ZwHaJ4%26pid%3DApi&f=1&ipt=8f5362c1ddb3ce7c507902636a92e2c0e8b20e015b03a062e0c0524ac47319d3&ipo=images'
+                                                    }
+                                                    alt={''}
+                                                />
+                                                {storyImage?.ImageText && (
+                                                    <div
+                                                        className={`${styles.story_text_container}`}
+                                                    >
+                                                        {/* <h2>Capricon</h2>
+                                                                             <p>
+                                                                                 Get your daily horoscope and discover what the
+                                                                                 stars have in store for you. From love and
+                                                                                 relationships to career and success, our daily
+                                                                                 horoscope has got you covered.
+                                                                             </p> */}
+                                                        {storyImage?.ImageText && (
+                                                            <div className={styles.story_text_overlay}>
+                                                                {parse(storyImage?.ImageText)}
+                                                            </div>
+                                                        )}
+
+                                                       
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                        </div>
+                                        {/* Part 3: end Section (Preview) */}
+
+                                        <div class={styles.Crousal_Web_stories}>
+                                            <div className={styles.Crousal_Web_stories_wrapper}>
+                                                <div class={styles.arrow}>
+                                                    &#9650;
+                                                </div>
+                                                <Tooltip title="Delete">
+                                                    <Icon color="primary">delete</Icon>
+                                                </Tooltip>
+                                                <div class={styles.arrow}>&#9660;</div>
+                                            </div>
+                                        </div>
+
                                     </div>
 
-                                    {/* Text Editor */}
-                                    <div className={styles.textEditorContainer}>
-                                        <Editor
-                                            content={storyImage?.ImageText || ''}
-                                            setContent={(html) =>
-                                                setData({ ...data, description: html })
-                                            }
-                                        />
-                                    </div>
+
+
+
+                                ))}
+                                <div className={styles.Web_stories_button_container}>
+                                    <button className={styles.Web_Stories_add_btn}>
+                                        Add
+                                    </button>
                                 </div>
-
-                                {/* Part 2: Bottom Section (Preview) */}
-                                <div className={styles.bottomSection}>
-
-                                    <div className={styles.previewContainer}>
-                                        {/* Dummy Images for Preview */}
-                                        <img
-                                            src={storyImage?.ImageUrl || ''}
-                                            alt="Dummy Preview 1"
-                                            className={styles.previewImage}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div class={styles.Crousal_Web_stories}>
-                                    <div class={styles.arrow}>
-                                        &#9650;
-                                    </div>
-                                    <Tooltip title="Delete">
-                                        <Icon color="primary">delete</Icon>
-                                    </Tooltip>
-                                    <div class={styles.arrow}>&#9660;</div>
-                                </div>
-                            </div>))}
-                            <div className={styles.Web_stories_button_container}>
-                                <button className={styles.Web_Stories_add_btn}>
-                                    Add
-                                </button>
                             </div>
                         </AccordionDetails>
 
