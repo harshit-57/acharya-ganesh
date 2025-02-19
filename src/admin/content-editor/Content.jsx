@@ -26,6 +26,7 @@ import {
     Checkbox,
     Icon,
     TextField,
+    Tooltip,
     Typography,
     useTheme,
 } from '@mui/material';
@@ -42,7 +43,10 @@ import AlertDialog from '../components/Alert';
 // Register the plugins
 registerPlugin(FilePondPluginImagePreview);
 
+
+
 const Edit = () => {
+
     const { updateSettings } = useSettings();
     const theme = useTheme();
     const primaryColor = theme?.palette?.primary?.main;
@@ -53,24 +57,24 @@ const Edit = () => {
 
     const initalData = {
         title: '',
-        description: '',
+        description: ['story']?.includes(type) ? "" : undefined,
         image: ['course', 'blog', 'spirituality', 'story']?.includes(type)
             ? ''
             : undefined,
-        focusKeyphrase: ['course', 'blog', 'spirituality', 'story']?.includes(
+        focusKeyphrase: ['course', 'blog', 'spirituality']?.includes(
             type
         )
             ? ''
             : undefined,
-        metaTitle: ['course', 'blog', 'spirituality', 'story']?.includes(type)
+        metaTitle: ['course', 'blog', 'spirituality']?.includes(type)
             ? ''
             : undefined,
-        metaSiteName: ['course', 'blog', 'spirituality', 'story']?.includes(
+        metaSiteName: ['course', 'blog', 'spirituality']?.includes(
             type
         )
             ? 'Acharya Ganesh: Solutions for Life, Love, and Career Woes'
             : undefined,
-        metaDescription: ['course', 'blog', 'spirituality', 'story']?.includes(
+        metaDescription: ['course', 'blog', 'spirituality']?.includes(
             type
         )
             ? ''
@@ -82,8 +86,8 @@ const Edit = () => {
         isTOP: ['course'].includes(type)
             ? false
             : ['blog', 'spirituality']?.includes(type)
-            ? true
-            : undefined,
+                ? true
+                : undefined,
         status: 1,
         publishedOn: new Date(),
         categories: ['course', 'blog', 'spirituality', 'story']?.includes(type)
@@ -107,7 +111,11 @@ const Edit = () => {
             bgColor: '',
         },
         rating: ['testimonial']?.includes(type) ? '' : undefined,
+        storyImages: ['story']?.includes(type) ? [] : undefined,
+        timeDuration: ['story']?.includes(type) ? 10 : undefined,
     };
+
+
 
     const [data, setData] = useState(initalData);
     const [categories, setCategories] = useState([]);
@@ -127,6 +135,8 @@ const Edit = () => {
     const [suggestTag, setSuggestTag] = useState(false);
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
     const imageUpload = useRef(null);
+
+
 
     const init = useCallback(() => {
         switch (type) {
@@ -362,7 +372,53 @@ const Edit = () => {
                     setIsLoading(false);
                 })();
                 break;
+            case 'story':
+                (async () => {
+                    setIsLoading(true);
+                    const categoryResponse = await APIHelper.getWebStoryCategories(
+                        {}
+                    );
+                    setCategories(categoryResponse?.data);
 
+                    const tagResponse = await APIHelper.getWebStoryTags({
+                        pageSize: 3,
+                        filter: 'most_used',
+                    });
+                    setTags(tagResponse?.data);
+                    if (slug != 'new' && state?.Id) {
+                        const response = (
+                            await APIHelper.getWebStories({ id: slug })
+                        )?.data?.data[0];
+                        setData({
+                            id: response?.Id,
+                            title: response?.Title,
+                            image: response?.CoverImageUrl || '',
+                            
+                            isShortDescription: true,
+                            shortDescription: response?.ShortDescription,
+                           
+                            status: response?.Status,
+                            publishedOn: response?.PublishedOn
+                                ? new Date(response?.PublishedOn)
+                                : new Date(),
+
+                            categories:
+                                response?.Categories?.map((item) => ({
+                                    id: item?.CategoryId,
+                                    name: item?.CategoryName,
+                                })) || [],
+                            tags:
+                                response?.Tags?.map((item) => ({
+                                    id: item?.TagId,
+                                    name: item?.TagName,
+                                })) || [],
+                           storyImages : response?.Images,
+                            timeDuration : response?.TimeDuration
+                        });
+                    }
+                    setIsLoading(false);
+                })();
+                break;
             default:
                 setIsLoading(false);
                 break;
@@ -931,8 +987,7 @@ const Edit = () => {
                     };
 
                     navigate(
-                        `/blog/detail/${
-                            previewData?.Slug || 'new'
+                        `/blog/detail/${previewData?.Slug || 'new'
                         }?preview=true`,
                         { state: { data: previewData } }
                     );
@@ -963,8 +1018,7 @@ const Edit = () => {
                     };
 
                     navigate(
-                        `/spirituality/detail/${
-                            previewData?.Slug || 'new'
+                        `/spirituality/detail/${previewData?.Slug || 'new'
                         }?preview=true`,
                         { state: { data: previewData } }
                     );
@@ -995,14 +1049,14 @@ const Edit = () => {
             type === 'course'
                 ? `${window?.location?.origin}/courses`
                 : type === 'blog'
-                ? `${window?.location?.origin}/blog/detail`
-                : type === 'spirituality'
-                ? `${window?.location?.origin}/spirituality/detail`
-                : type === 'story'
-                ? `${window?.location?.origin}/web-stories/detail`
-                : type === 'citation'
-                ? `${window?.location?.origin}/citation`
-                : `${window?.location?.origin}/${type}/detail`,
+                    ? `${window?.location?.origin}/blog/detail`
+                    : type === 'spirituality'
+                        ? `${window?.location?.origin}/spirituality/detail`
+                        : type === 'story'
+                            ? `${window?.location?.origin}/web-stories/detail`
+                            : type === 'citation'
+                                ? `${window?.location?.origin}/citation`
+                                : `${window?.location?.origin}/${type}/detail`,
         [type]
     );
 
@@ -1115,7 +1169,7 @@ const Edit = () => {
                     )}
                 </div>
 
-                <div className={styles.description_container}>
+                {data?.description != undefined && <div className={styles.description_container}>
                     {/* <div className={styles.buttons}>
                         <button className={styles.form_buttons}>
                             Add Media
@@ -1136,7 +1190,7 @@ const Edit = () => {
                             setData({ ...data, description: html })
                         }
                     />
-                </div>
+                </div>}
 
                 {/* Rating for Testimonial */}
                 {data?.rating !== undefined && (
@@ -1498,6 +1552,123 @@ const Edit = () => {
                                 </div>
                             </Box>
                         </AccordionDetails>
+                    </Accordion>
+                )}
+
+                {data?.image !== undefined && (
+                    <Accordion
+                        defaultExpanded
+                        className={styles.accordion_container}
+                    >
+                        <AccordionSummary
+                            expandIcon={
+                                <ArrowDropDownIcon
+                                    color="disabled"
+                                    sx={{ fontSize: '2rem' }}
+                                />
+                            }
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                            className={styles.additional_header}
+                        >
+                            <Typography component="div" variant="div">
+                                <span>Story Images</span>
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            {data?.storyImages?.map((storyImage)=>(<div className={styles.Image_Accordian_container}>
+                                {/* Part 1: Top Section (Image Pond and Text Editor) */}
+                                <div className={styles.topSection}>
+                                    {/* Image Pond */}
+                                    <div className={styles.imagePondContainer}>
+                                        <FilePond
+                                            credits={false}
+                                            files={storyImage?.ImageUrl ? [storyImage?.ImageUrl] : []}
+                                            ref={imageUpload}
+                                            required
+                                            acceptedFileTypes={['image/*']}
+                                            allowFileEncode
+                                            imagePreviewHeight={400}
+                                            allowRemove={false}
+                                            allowReplace={true}
+                                            onaddfile={(error, file) => {
+                                                if (file)
+                                                    setData({
+                                                        ...data,
+                                                        image: file,
+                                                    });
+                                            }}
+                                            allowMultiple={false}
+                                            maxFiles={1}
+                                            name="files"
+                                            labelIdle={`Drag & Drop story image or <span class="filepond--label-action">Browse</span>`}
+                                        />
+                                        <HorizontalBorder height="1px" color="#ddd" />
+                                        {data?.image ? (
+                                            <div
+                                                className={styles.image_footer}
+                                                onClick={() => {
+                                                    setData({
+                                                        ...data,
+                                                        image: null,
+                                                    });
+                                                }}
+                                            >
+                                                <span>Remove Story Image</span>
+                                            </div>
+                                        ) : (
+                                            <div
+                                                className={styles.image_footer}
+                                                onClick={() => {
+                                                    imageUpload.current?.browse();
+                                                }}
+                                            >
+                                                <span>Add Story Image</span>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Text Editor */}
+                                    <div className={styles.textEditorContainer}>
+                                        <Editor
+                                            content={storyImage?.ImageText || ''}
+                                            setContent={(html) =>
+                                                setData({ ...data, description: html })
+                                            }
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Part 2: Bottom Section (Preview) */}
+                                <div className={styles.bottomSection}>
+
+                                    <div className={styles.previewContainer}>
+                                        {/* Dummy Images for Preview */}
+                                        <img
+                                            src={storyImage?.ImageUrl || ''}
+                                            alt="Dummy Preview 1"
+                                            className={styles.previewImage}
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class={styles.Crousal_Web_stories}>
+                                    <div class={styles.arrow}>
+                                        &#9650;
+                                    </div>
+                                    <Tooltip title="Delete">
+                                        <Icon color="primary">delete</Icon>
+                                    </Tooltip>
+                                    <div class={styles.arrow}>&#9660;</div>
+                                </div>
+                            </div>))}
+                            <div className={styles.Web_stories_button_container}>
+                                <button className={styles.Web_Stories_add_btn}>
+                                    Add
+                                </button>
+                            </div>
+                        </AccordionDetails>
+
                     </Accordion>
                 )}
 
@@ -1992,8 +2163,8 @@ const Edit = () => {
                                             {data?.publishedOn > new Date()
                                                 ? 'Scheduled at'
                                                 : data?.id
-                                                ? 'Published On'
-                                                : 'Publish'}{' '}
+                                                    ? 'Published On'
+                                                    : 'Publish'}{' '}
                                             :{' '}
                                             {!editPublishedOn && (
                                                 <span
@@ -2080,8 +2251,8 @@ const Edit = () => {
                                     style={
                                         !data?.id
                                             ? {
-                                                  opacity: 0.2,
-                                              }
+                                                opacity: 0.2,
+                                            }
                                             : {}
                                     }
                                     disabled={!data?.id}
@@ -2098,7 +2269,7 @@ const Edit = () => {
                             </div>
                         </Box>
                     </AccordionDetails>
-                </Accordion>
+                </Accordion>))
 
                 {data?.image !== undefined && (
                     <Accordion
@@ -2134,12 +2305,12 @@ const Edit = () => {
                                             type == 'course'
                                                 ? 420
                                                 : type == 'blog'
-                                                ? 200
-                                                : type == 'spirituality'
-                                                ? 200
-                                                : type == 'story'
-                                                ? 400
-                                                : 'auto'
+                                                    ? 200
+                                                    : type == 'spirituality'
+                                                        ? 200
+                                                        : type == 'story'
+                                                            ? 400
+                                                            : 'auto'
                                         }
                                         allowRemove={false}
                                         allowReplace={true}

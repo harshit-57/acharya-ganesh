@@ -225,7 +225,7 @@ const PaginationTable = ({
                                         // }
                                         onClick={() => {
                                             navigate(
-                                                `/admin/content-editor/story/${story.Slug}`,
+                                                `/admin/content-editor/story/${story.Id}`,
                                                 { state: story }
                                             );
                                         }}
