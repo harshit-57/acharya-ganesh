@@ -14,7 +14,7 @@ import useBreakpoint from 'use-breakpoint';
 import { APIHelper } from '../../util/APIHelper';
 import { NavLink } from 'react-router-dom';
 import { PrimaryButton } from '../primary-button/PrimaryButton';
-const PER_FRAME_COURSE_COUNT_DESKTOP = 4;
+const PER_FRAME_COURSE_COUNT_DESKTOP = 3;
 const PER_FRAME_COURSE_COUNT_MOBILE = 1;
 const PER_FRAME_COURSE_COUNT_TABLET = 2;
 const BREAKPOINTS = { mobile: 0, tablet: 768, desktop: 1280 };
