@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 import { Paragraph, Span } from '../Typography';
 import MatxVerticalNavExpansionPanel from './MatxVerticalNavExpansionPanel';
 import useSettings from '../../hooks/useSettings';
+import useAuth from '../../hooks/useAuth';
+import { toast } from 'react-toastify';
 
 const ListLabel = styled(Paragraph)(({ theme, mode }) => ({
     fontSize: '12px',
@@ -76,6 +78,7 @@ const BadgeValue = styled('div')(() => ({
 const MatxVerticalNav = ({ items }) => {
     const { settings } = useSettings();
     const { mode } = settings.layout1Settings.leftSidebar;
+    const { permission } = useAuth();
 
     const renderLevels = (data) => {
         return data.map((item, index) => {
@@ -146,9 +149,16 @@ const MatxVerticalNav = ({ items }) => {
                 return (
                     <InternalLink key={index}>
                         <NavLink
-                            to={item.path}
+                            to={
+                                !item?.permissionName ||
+                                permission[item?.permissionName]
+                                    ? item.path
+                                    : null
+                            }
                             className={({ isActive }) =>
-                                isActive
+                                isActive &&
+                                (!item?.permissionName ||
+                                    permission[item?.permissionName])
                                     ? `navItemActive ${
                                           mode === 'compact' && 'compactNavItem'
                                       }`
@@ -156,6 +166,15 @@ const MatxVerticalNav = ({ items }) => {
                                           mode === 'compact' && 'compactNavItem'
                                       }`
                             }
+                            onClick={() => {
+                                if (
+                                    item?.permissionName &&
+                                    !permission[item?.permissionName]
+                                )
+                                    toast.error(
+                                        "You don't have permission to access this page"
+                                    );
+                            }}
                         >
                             <ButtonBase
                                 key={item.name}

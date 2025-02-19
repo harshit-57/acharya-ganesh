@@ -8,7 +8,7 @@ const initialState = {
     admin: null,
     isInitialised: false,
     isAuthenticated: false,
-    roleAndPermission: [],
+    permission: {},
 };
 
 const isValidToken = (accessToken) => {
@@ -43,8 +43,8 @@ const reducer = (state, action) => {
         case 'LOGOUT': {
             return { ...state, isAuthenticated: false, admin: null };
         }
-        case 'ROLE_AND_PERMISSION': {
-            return { ...state, roleAndPermission: action.payload };
+        case 'PERMISSION': {
+            return { ...state, permission: action.payload };
         }
 
         default:
@@ -66,10 +66,10 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password) => {
         const response = await ADMINAPIHELPER.login(email, password);
-        console.log(response?.data);
+        // console.log(response?.data);
         if (response?.data.success) {
             setSession(response?.data?.token);
-            // getAdminAndPermission();
+            getAdminAndPermission();
             dispatch({ type: 'LOGIN', payload: response?.data?.data });
         }
     };
@@ -83,8 +83,7 @@ export const AuthProvider = ({ children }) => {
         try {
             const accessToken = localStorage.getItem('accessToken');
             if (accessToken) {
-                const res = await ADMINAPIHELPER.getAdminPermission();
-                console.log(res);
+                const res = await ADMINAPIHELPER.getAdmin({}, accessToken);
 
                 if (res?.data?.data) {
                     localStorage.setItem(
@@ -99,8 +98,8 @@ export const AuthProvider = ({ children }) => {
                         },
                     });
                     dispatch({
-                        type: 'ROLE_AND_PERMISSION',
-                        payload: res?.data?.permissions,
+                        type: 'PERMISSION',
+                        payload: JSON.parse(res?.data?.data?.RolePermissions),
                     });
                 } else {
                     dispatch({
@@ -146,7 +145,7 @@ export const AuthProvider = ({ children }) => {
                             admin,
                         },
                     });
-                    // getAdminAndPermission();
+                    getAdminAndPermission();
                 } else {
                     dispatch({
                         type: 'INIT',
