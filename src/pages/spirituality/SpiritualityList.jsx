@@ -82,47 +82,81 @@ const SpiritualityList = () => {
                         />
                     ))}
             </div>
-            <div className={css.page_number_container}>
-                <p
-                    onClick={() => {
-                        if (currentPage > 1) setCurrentPage(currentPage - 1);
-                    }}
-                >
-                    Prev
-                </p>
-                {[...Array(3)].map((number, index) => (
+
+            {pageCount > 1 && (
+                <div className={css.page_number_container}>
+                    <p
+                        style={{
+                            opacity: currentPage <= 1 ? '0.5' : '1',
+                        }}
+                        onClick={() => {
+                            if (currentPage > 1)
+                                setCurrentPage(currentPage - 1);
+                        }}
+                    >
+                        Prev
+                    </p>
                     <p
                         style={{
                             backgroundColor:
-                                index + 1 == currentPage
+                                currentPage === 1
                                     ? 'var(--color-primary)'
                                     : 'transparent',
                         }}
-                        onClick={() => setCurrentPage(index + 1)}
+                        onClick={() => setCurrentPage(1)}
                     >
-                        {index + 1}
+                        1
                     </p>
-                ))}
-                <p>...</p>
-                <p
-                    style={{
-                        backgroundColor:
-                            pageCount == currentPage
-                                ? 'var(--color-primary)'
-                                : 'transparent',
-                    }}
-                    onClick={() => setCurrentPage(pageCount)}
-                >
-                    {pageCount}
-                </p>
-                <p
-                    onClick={() => {
-                        setCurrentPage(currentPage + 1);
-                    }}
-                >
-                    Next
-                </p>
-            </div>
+
+                    {currentPage > 4 && <p>...</p>}
+
+                    {[...Array(5)].map((_, index) => {
+                        const page = currentPage - 2 + index;
+                        if (page > 1 && page < pageCount) {
+                            return (
+                                <p
+                                    key={page}
+                                    style={{
+                                        backgroundColor:
+                                            page === currentPage
+                                                ? 'var(--color-primary)'
+                                                : 'transparent',
+                                    }}
+                                    onClick={() => setCurrentPage(page)}
+                                >
+                                    {page}
+                                </p>
+                            );
+                        }
+                        return null;
+                    })}
+
+                    {currentPage < pageCount - 3 && <p>...</p>}
+
+                    <p
+                        style={{
+                            backgroundColor:
+                                currentPage === pageCount
+                                    ? 'var(--color-primary)'
+                                    : 'transparent',
+                        }}
+                        onClick={() => setCurrentPage(pageCount)}
+                    >
+                        {pageCount}
+                    </p>
+                    <p
+                        style={{
+                            opacity: currentPage >= pageCount ? '0.5' : '1',
+                        }}
+                        onClick={() => {
+                            if (currentPage < pageCount)
+                                setCurrentPage(currentPage + 1);
+                        }}
+                    >
+                        Next
+                    </p>
+                </div>
+            )}
             <Spacer vertical={'72px'} />
             <Footer />
         </PageContainer>

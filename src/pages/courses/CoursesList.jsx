@@ -58,8 +58,7 @@ const CoursesList = () => {
                     sortBy: sortBy,
                 });
             }
-            console.log(response.data.data);
-            
+
             setCourses(response.data?.data);
             const totalPage = Math.round(
                 (response.data?.total || 1) / COURSE_PER_PAGE
@@ -238,56 +237,80 @@ const CoursesList = () => {
                         />
                     ))}
             </div>
-            <div className={css.page_number_container}>
-                <p
-                    style={{
-                        backgroundColor:
-                            currentPage === 1
-                                ? 'var(--color-primary)'
-                                : 'transparent',
-                    }}
-                    onClick={() => setCurrentPage(1)}
-                >
-                    1
-                </p>
+            {pageCount > 1 && (
+                <div className={css.page_number_container}>
+                    <p
+                        style={{
+                            opacity: currentPage <= 1 ? '0.5' : '1',
+                        }}
+                        onClick={() => {
+                            if (currentPage > 1)
+                                setCurrentPage(currentPage - 1);
+                        }}
+                    >
+                        Prev
+                    </p>
+                    <p
+                        style={{
+                            backgroundColor:
+                                currentPage === 1
+                                    ? 'var(--color-primary)'
+                                    : 'transparent',
+                        }}
+                        onClick={() => setCurrentPage(1)}
+                    >
+                        1
+                    </p>
 
-                {currentPage > 3 && <p>...</p>}
+                    {currentPage > 4 && <p>...</p>}
 
-                {[...Array(5)].map((_, index) => {
-                    const page = currentPage - 2 + index;
-                    if (page > 1 && page < pageCount) {
-                        return (
-                            <p
-                                key={page}
-                                style={{
-                                    backgroundColor:
-                                        page === currentPage
-                                            ? 'var(--color-primary)'
-                                            : 'transparent',
-                                }}
-                                onClick={() => setCurrentPage(page)}
-                            >
-                                {page}
-                            </p>
-                        );
-                    }
-                    return null;
-                })}
+                    {[...Array(5)].map((_, index) => {
+                        const page = currentPage - 2 + index;
+                        if (page > 1 && page < pageCount) {
+                            return (
+                                <p
+                                    key={page}
+                                    style={{
+                                        backgroundColor:
+                                            page === currentPage
+                                                ? 'var(--color-primary)'
+                                                : 'transparent',
+                                    }}
+                                    onClick={() => setCurrentPage(page)}
+                                >
+                                    {page}
+                                </p>
+                            );
+                        }
+                        return null;
+                    })}
 
-                {currentPage < pageCount - 2 && <p>...</p>}
+                    {currentPage < pageCount - 3 && <p>...</p>}
 
-                <p
-                    style={{
-                        backgroundColor:
-                            currentPage === pageCount
-                                ? 'var(--color-primary)'
-                                : 'transparent',
-                    }}
-                    onClick={() => setCurrentPage(pageCount)}
-                >
-                    {pageCount}
-                </p>
-            </div>
+                    <p
+                        style={{
+                            backgroundColor:
+                                currentPage === pageCount
+                                    ? 'var(--color-primary)'
+                                    : 'transparent',
+                        }}
+                        onClick={() => setCurrentPage(pageCount)}
+                    >
+                        {pageCount}
+                    </p>
+                    <p
+                        style={{
+                            opacity: currentPage >= pageCount ? '0.5' : '1',
+                        }}
+                        onClick={() => {
+                            if (currentPage < pageCount)
+                                setCurrentPage(currentPage + 1);
+                        }}
+                    >
+                        Next
+                    </p>
+                </div>
+            )}
 
             <Spacer vertical={'72px'} />
             <Footer />
