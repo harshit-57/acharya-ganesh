@@ -3,8 +3,8 @@ import axios from 'axios';
 const useLocalHostApi = true;
 
 const BASE_URL_PROD = 'https://';
-const BASE_URL_LOCAL = 'http://localhost:4200';
-// const BASE_URL_LOCAL = 'http://34.131.192.173:4200';
+// const BASE_URL_LOCAL = 'http://localhost:4200';
+const BASE_URL_LOCAL = 'http://34.131.192.173:4200';
 
 const getBaseUrl = () => (useLocalHostApi ? BASE_URL_LOCAL : BASE_URL_PROD);
 
