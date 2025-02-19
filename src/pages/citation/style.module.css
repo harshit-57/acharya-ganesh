@@ -12,11 +12,11 @@
     padding: 60px;
     justify-content: center;
 }
-.loaderContainer{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
+.loaderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .header_text_wrapper {
@@ -68,7 +68,7 @@
 .city_container {
     display: grid;
     gap: 50px;
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     text-align: center;
     .city_wrapper {
         padding: 20px;
@@ -97,20 +97,19 @@
     gap: 16px;
     border-radius: 100px;
     padding: 12px;
-    
+
     color: var(--color-caption);
     font-size: 16px;
     cursor: pointer;
     background-color: transparent;
-
-  }
+}
 
 @media only screen and (max-width: 768px) {
     .discover_heading {
         font-size: 28px;
         text-align: center;
     }
-    .city_container{
-    grid-template-columns: repeat(1, minmax(250px, 1fr));
+    .city_container {
+        grid-template-columns: repeat(1, minmax(250px, 1fr));
     }
 }

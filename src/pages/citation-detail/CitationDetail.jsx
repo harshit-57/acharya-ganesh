@@ -116,7 +116,12 @@ const CitationDetail = () => {
                                 </span>
                             </p>
                         </div>
-                        <PrimaryButton className={css.consult_button}>
+                        <PrimaryButton
+                            className={css.consult_button}
+                            onClick={() => {
+                                navigate('/bookConsultation');
+                            }}
+                        >
                             Consult Hanish Bagga TOday
                         </PrimaryButton>
                     </div>

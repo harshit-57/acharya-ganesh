@@ -19,7 +19,7 @@ const Citation = () => {
     const [error, setError] = useState(null);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
-    const pageSize = 10;
+    const pageSize = 100;
 
     useEffect(() => {
         fetchCitations(page);
