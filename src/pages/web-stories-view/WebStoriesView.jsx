@@ -167,7 +167,7 @@ export const WebStoriesView = () => {
                     stories={stories?.length ? stories : []}
                     defaultInterval={ws?.TimeDuration * 10}
                     width={432}
-                    height={768}
+                    height={'100%'}
                     preloadCount={1}
                     currentIndex={currentIndex}
                     onStoryStart={() => {

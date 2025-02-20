@@ -36,7 +36,12 @@ const Editor = ({ placeholder, content, setContent, style, className }) => {
                 { indent: '-1' },
                 { indent: '+1' },
             ],
-            ['color', 'background'],
+            [
+                {
+                    color: [],
+                },
+                { background: [] },
+            ],
             ['link', 'image', 'video', 'code-block'],
             [{ align: [] }],
             ['clean'],

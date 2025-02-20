@@ -68,6 +68,8 @@ export const ADMINAPIHELPER = Object.freeze({
     updateBlog: await postApi('v1/admin/update-blog'),
     createSpirituality: await postApi('v1/admin/create-spirituality'),
     updateSpirituality: await postApi('v1/admin/update-spirituality'),
+    createWebStory: await postApi('v1/admin/create-web-story'),
+    updateWebStory: await postApi('v1/admin/update-web-story'),
     createCitation: await postApi('v1/admin/create-citation'),
     updateCitation: await postApi('v1/admin/update-citation'),
     createTestimonial: await postApi('v1/admin/create-testimonial'),

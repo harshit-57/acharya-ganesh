@@ -480,12 +480,7 @@
         border-radius: 20px;
     }
     .previewContainer {
-        /* max-width: 100%; */
-        /* width: 100%; */
-        /* display: flex; */
-        /* flex-direction: column; */
-        /* gap: 10px; */
-
+        height: 100%;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
@@ -503,6 +498,12 @@
         height: auto;
         display: block;
         border-radius: 10px;
+    }
+
+    .story_no_media {
+        width: 100%;
+        height: 60%;
+        background-color: #f0f0f0;
     }
 
     .story_text_overlay {

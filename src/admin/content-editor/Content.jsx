@@ -56,7 +56,7 @@ const Edit = () => {
 
     const initalData = {
         title: '',
-        description: ['story']?.includes(type) ? '' : undefined,
+        description: !['story']?.includes(type) ? '' : undefined,
         image: ['course', 'blog', 'spirituality', 'story']?.includes(type)
             ? ''
             : undefined,
@@ -401,7 +401,13 @@ const Edit = () => {
                                     id: item?.TagId,
                                     name: item?.TagName,
                                 })) || [],
-                            storyImages: response?.Images,
+                            storyImages:
+                                response?.Images?.map((item, index) => ({
+                                    id: item?.id,
+                                    imageText: item?.ImageText,
+                                    imageUrl: item?.ImageUrl,
+                                    imageOrder: item?.ImageOrder || index + 1,
+                                })) || [],
                             timeDuration: response?.TimeDuration,
                         });
                     }
@@ -480,20 +486,24 @@ const Edit = () => {
             return isValid;
         }
 
-        if (payload?.title?.length > 100) {
-            toast.error('Title should be less than 100 characters');
+        if (payload?.title?.length > 200) {
+            toast.error('Title should be less than 200 characters');
             isValid = false;
             return isValid;
         }
 
-        if (payload?.status == 1 && !payload?.description) {
+        if (
+            !['story']?.includes(type) &&
+            payload?.status == 1 &&
+            !payload?.description
+        ) {
             toast.error('Description is required');
             isValid = false;
             return isValid;
         }
 
         if (
-            !['testimonial']?.includes(type) &&
+            !['story', 'testimonial']?.includes(type) &&
             payload?.status == 1 &&
             htmlToText(payload?.description)?.length < 200
         ) {
@@ -518,9 +528,9 @@ const Edit = () => {
                 isValid = false;
                 return isValid;
             }
-            if (htmlToText(payload?.shortDescription)?.length < 100) {
+            if (htmlToText(payload?.shortDescription)?.length > 200) {
                 toast.error(
-                    'Short Description should be more than 100 characters'
+                    'Short Description should not be more than 200 characters'
                 );
                 isValid = false;
                 return isValid;
@@ -556,7 +566,7 @@ const Edit = () => {
         }
 
         if (payload?.id) {
-            if (!['testimonial']?.includes(type) && !payload?.slug) {
+            if (!['story', 'testimonial']?.includes(type) && !payload?.slug) {
                 toast.error('Slug is required');
                 isValid = false;
                 return isValid;
@@ -680,6 +690,45 @@ const Edit = () => {
                                     'Spirituality created successfully'
                                 );
                                 navigate(`/admin/spiritualities`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                }
+                break;
+
+            case 'story':
+                setIsLoading(true);
+                if (payload?.id) {
+                    ADMINAPIHELPER.updateWebStory(payload, token)
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success('Web Story updated successfully');
+                                navigate(`/admin/stories`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                } else {
+                    ADMINAPIHELPER.createWebStory(payload, token)
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success('Web Story created successfully');
+                                navigate(`/admin/stories`);
                             } else {
                                 toast.error(response?.message);
                             }
@@ -1594,9 +1643,9 @@ const Edit = () => {
                                                         <FilePond
                                                             credits={false}
                                                             files={
-                                                                storyImage?.ImageUrl
+                                                                storyImage?.imageUrl
                                                                     ? [
-                                                                          storyImage?.ImageUrl,
+                                                                          storyImage?.imageUrl,
                                                                       ]
                                                                     : []
                                                             }
@@ -1630,7 +1679,7 @@ const Edit = () => {
                                                                 //                 item.id
                                                                 //                     ? {
                                                                 //                           ...storyImage,
-                                                                //                           ImageUrl:
+                                                                //                           imageUrl:
                                                                 //                               file,
                                                                 //                       }
                                                                 //                     : storyImage;
@@ -1649,7 +1698,7 @@ const Edit = () => {
                                                             height="1px"
                                                             color="#ddd"
                                                         />
-                                                        {storyImage?.ImageUrl ? (
+                                                        {storyImage?.imageUrl ? (
                                                             <div
                                                                 className={
                                                                     styles.image_footer
@@ -1690,7 +1739,7 @@ const Edit = () => {
                                                     >
                                                         <Editor
                                                             content={
-                                                                storyImage?.ImageText ||
+                                                                storyImage?.imageText ||
                                                                 ''
                                                             }
                                                             setContent={(
@@ -1702,13 +1751,14 @@ const Edit = () => {
                                                                         storyImages:
                                                                             p?.storyImages?.map(
                                                                                 (
-                                                                                    item
+                                                                                    item,
+                                                                                    i
                                                                                 ) =>
-                                                                                    item.id ==
-                                                                                    storyImage?.id
+                                                                                    i ==
+                                                                                    index
                                                                                         ? {
                                                                                               ...item,
-                                                                                              ImageText:
+                                                                                              imageText:
                                                                                                   html,
                                                                                           }
                                                                                         : item
@@ -1729,32 +1779,40 @@ const Edit = () => {
                                                             styles.previewContainer
                                                         }
                                                     >
-                                                        <img
-                                                            className={
-                                                                storyImage.ImageUrl
-                                                                    ? styles.story_media
-                                                                    : styles.story_media_main
-                                                            }
-                                                            src={
-                                                                storyImage?.ImageUrl ||
-                                                                null
-                                                            }
-                                                            alt={`storyImage-${
-                                                                index + 1
-                                                            }`}
-                                                        />
-                                                        {storyImage?.ImageText && (
+                                                        {storyImage.imageUrl ? (
+                                                            <img
+                                                                className={
+                                                                    storyImage.imageUrl
+                                                                        ? styles.story_media
+                                                                        : styles.story_media_main
+                                                                }
+                                                                src={
+                                                                    storyImage?.imageUrl ||
+                                                                    null
+                                                                }
+                                                                alt={`storyImage-${
+                                                                    index + 1
+                                                                }`}
+                                                            />
+                                                        ) : (
+                                                            <div
+                                                                className={
+                                                                    styles.story_no_media
+                                                                }
+                                                            ></div>
+                                                        )}
+                                                        {storyImage?.imageText && (
                                                             <div
                                                                 className={`${styles.story_text_container}`}
                                                             >
-                                                                {storyImage?.ImageText && (
+                                                                {storyImage?.imageText && (
                                                                     <div
                                                                         className={
                                                                             styles.story_text_overlay
                                                                         }
                                                                     >
                                                                         {parse(
-                                                                            storyImage?.ImageText
+                                                                            storyImage?.imageText
                                                                         )}
                                                                     </div>
                                                                 )}
@@ -1839,10 +1897,11 @@ const Edit = () => {
                                                                             storyImages:
                                                                                 p.storyImages.filter(
                                                                                     (
-                                                                                        e
+                                                                                        e,
+                                                                                        i
                                                                                     ) =>
-                                                                                        e.id !==
-                                                                                        storyImage.id
+                                                                                        i !==
+                                                                                        index
                                                                                 ),
                                                                         })
                                                                     );
@@ -1930,6 +1989,18 @@ const Edit = () => {
                                 >
                                     <button
                                         className={styles.Web_Stories_add_btn}
+                                        onClick={() => {
+                                            setData((prevData) => ({
+                                                ...prevData,
+                                                storyImages: [
+                                                    ...prevData.storyImages,
+                                                    {
+                                                        imageText: '',
+                                                        imageUrl: '',
+                                                    },
+                                                ],
+                                            }));
+                                        }}
                                     >
                                         Add
                                     </button>
