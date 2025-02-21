@@ -85,10 +85,12 @@
     }
 
     .article_slide_wrapper {
-        display: flex;
-        gap: 20px;
+        /* display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: center; */
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
         transition: transform 0.5s ease-in-out;
         will-change: transform;
 

@@ -178,7 +178,7 @@ const PaginationTable = ({
                                             wordBreak: 'break-word',
                                         }}
                                         onClick={() =>
-                                            navigate(`/courses/${course.Slug}`)
+                                            navigate(`/course/${course.Slug}`)
                                         }
                                     >
                                         {course?.Name ? course.Name : 'NA'}

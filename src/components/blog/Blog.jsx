@@ -134,7 +134,14 @@ const Blog = () => {
                                 key={index}
                                 article={article}
                                 onClick={() =>
-                                    navigate(`/blog/detail/${article?.Slug}`)
+                                    navigate(
+                                        `/blog/${
+                                            article?.Categories?.length
+                                                ? article?.Categories[0]
+                                                      ?.CategorySlug
+                                                : '-'
+                                        }/${article?.Slug}`
+                                    )
                                 }
                             />
                         ))}

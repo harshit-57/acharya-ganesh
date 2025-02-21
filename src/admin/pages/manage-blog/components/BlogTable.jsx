@@ -183,7 +183,12 @@ const PaginationTable = ({
                                         }}
                                         onClick={() =>
                                             navigate(
-                                                `/blog/detail/${blog.Slug}`
+                                                `/blog/${
+                                                    blog?.Categories?.length
+                                                        ? blog?.Categories[0]
+                                                              ?.CategorySlug
+                                                        : '-'
+                                                }/${blog.Slug}`
                                             )
                                         }
                                     >

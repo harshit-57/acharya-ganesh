@@ -77,18 +77,18 @@ export default () => {
                 />
                 <Route path="/blog" element={<BlogList />} />
                 <Route path="/blog/:category" element={<BlogList />} />
-                <Route path="/blog/detail/:slug" element={<Article />} />
+                <Route path="/blog/:category/:slug" element={<Article />} />
                 <Route path="/spirituality" element={<SpiritualityList />} />
                 <Route
                     path="/spirituality/:category"
                     element={<SpiritualityList />}
                 />
                 <Route
-                    path="/spirituality/detail/:slug"
+                    path="/spirituality/:category/:slug"
                     element={<SArticle />}
                 />
                 <Route path="/courses" element={<CoursesList />} />
-                <Route path="/courses/:slug" element={<CourseDetail />} />
+                <Route path="/course/:slug" element={<CourseDetail />} />
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/web-stories" element={<WebStoriesList />} />
                 <Route
@@ -96,7 +96,7 @@ export default () => {
                     element={<WebStoriesList />}
                 />
                 <Route
-                    path="/web-stories/detail/:slug"
+                    path="/web-stories/:category/:slug"
                     element={<WebStoriesView />}
                 />
                 <Route path="/contact" element={<Contact />} />

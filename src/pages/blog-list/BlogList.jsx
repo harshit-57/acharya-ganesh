@@ -77,7 +77,13 @@ const BlogList = () => {
                             key={blog?.Id || index}
                             blog={blog}
                             onClick={() =>
-                                navigate(`/blog/detail/${blog?.Slug}`)
+                                navigate(
+                                    `/blog/${
+                                        blog?.Categories?.length
+                                            ? blog?.Categories[0]?.CategorySlug
+                                            : '-'
+                                    }/${blog?.Slug}`
+                                )
                             }
                             className={css.blog_card}
                         />

@@ -170,6 +170,7 @@ const Edit = () => {
                                 response?.Categories?.map((item) => ({
                                     id: item?.CategoryId,
                                     name: item?.CategoryName,
+                                    slug: item?.CategorySlug,
                                 })) || [],
                             tags:
                                 response?.Tags?.map((item) => ({
@@ -238,6 +239,7 @@ const Edit = () => {
                                 response?.Categories?.map((item) => ({
                                     id: item?.CategoryId,
                                     name: item?.CategoryName,
+                                    slug: item?.CategorySlug,
                                 })) || [],
                             tags:
                                 response?.Tags?.map((item) => ({
@@ -295,6 +297,7 @@ const Edit = () => {
                                 response?.Categories?.map((item) => ({
                                     id: item?.CategoryId,
                                     name: item?.CategoryName,
+                                    slug: item?.CategorySlug,
                                 })) || [],
                             tags:
                                 response?.Tags?.map((item) => ({
@@ -383,6 +386,7 @@ const Edit = () => {
                                 response?.Categories?.map((item) => ({
                                     id: item?.CategoryId,
                                     name: item?.CategoryName,
+                                    slug: item?.CategorySlug,
                                 })) || [],
                             tags:
                                 response?.Tags?.map((item) => ({
@@ -975,6 +979,7 @@ const Edit = () => {
                         Categories: data.categories?.map((category) => ({
                             CategoryId: category.id,
                             CategoryName: category.name,
+                            CategorySlug: category.slug,
                         })),
                         Tags: data.tags?.map((tag) => ({
                             TagId: tag.id,
@@ -983,7 +988,7 @@ const Edit = () => {
                         Images: data.productImages,
                     };
                     navigate(
-                        `/courses/${previewData?.Slug || 'new'}?preview=true`,
+                        `/course/${previewData?.Slug || 'new'}?preview=true`,
                         { state: { data: previewData } }
                     );
                     break;
@@ -1004,6 +1009,7 @@ const Edit = () => {
                         Categories: data.categories?.map((category) => ({
                             CategoryId: category.id,
                             CategoryName: category.name,
+                            CategorySlug: category.slug,
                         })),
                         Tags: data.tags?.map((tag) => ({
                             TagId: tag.id,
@@ -1013,9 +1019,11 @@ const Edit = () => {
                     };
 
                     navigate(
-                        `/blog/detail/${
-                            previewData?.Slug || 'new'
-                        }?preview=true`,
+                        `/blog/${
+                            previewData?.Categories?.length
+                                ? previewData?.Categories[0]?.CategorySlug
+                                : '-'
+                        }/${previewData?.Slug || 'new'}?preview=true`,
                         { state: { data: previewData } }
                     );
                     break;
@@ -1036,6 +1044,7 @@ const Edit = () => {
                         Categories: data.categories?.map((category) => ({
                             CategoryId: category.id,
                             CategoryName: category.name,
+                            CategorySlug: category.slug,
                         })),
                         Tags: data.tags?.map((tag) => ({
                             TagId: tag.id,
@@ -1045,9 +1054,11 @@ const Edit = () => {
                     };
 
                     navigate(
-                        `/spirituality/detail/${
-                            previewData?.Slug || 'new'
-                        }?preview=true`,
+                        `/spirituality/${
+                            previewData?.Categories?.length
+                                ? previewData?.Categories[0]?.CategorySlug
+                                : '-'
+                        }/${previewData?.Slug || 'new'}?preview=true`,
                         { state: { data: previewData } }
                     );
                     break;
@@ -1083,17 +1094,25 @@ const Edit = () => {
     const baseLink = useMemo(
         () =>
             type === 'course'
-                ? `${window?.location?.origin}/courses`
+                ? `${window?.location?.origin}/course`
                 : type === 'blog'
-                ? `${window?.location?.origin}/blog/detail`
+                ? `${window?.location?.origin}/blog/${
+                      data?.categories?.length ? data?.categories[0]?.slug : '-'
+                  }`
                 : type === 'spirituality'
-                ? `${window?.location?.origin}/spirituality/detail`
+                ? `${window?.location?.origin}/spirituality/${
+                      data?.categories?.length ? data?.categories[0]?.slug : '-'
+                  }`
                 : type === 'story'
-                ? `${window?.location?.origin}/web-stories/detail`
+                ? `${window?.location?.origin}/web-stories/${
+                      data?.categories?.length ? data?.categories[0]?.slug : '-'
+                  }`
                 : type === 'citation'
                 ? `${window?.location?.origin}/citation`
-                : `${window?.location?.origin}/${type}/detail`,
-        [type]
+                : `${window?.location?.origin}/${type}/${
+                      data?.categories?.length ? data?.categories[0]?.slug : '-'
+                  }`,
+        [type, data]
     );
 
     const statusName = useMemo(() => {
@@ -2626,6 +2645,7 @@ const Edit = () => {
                                                                 {
                                                                     id: category.Id,
                                                                     name: category.Name,
+                                                                    slug: category.Slug,
                                                                 },
                                                             ],
                                                         });

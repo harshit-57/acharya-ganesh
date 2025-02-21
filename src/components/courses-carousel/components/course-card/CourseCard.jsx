@@ -18,7 +18,7 @@ export const CourseCard = ({ course, style, className }) => {
             >
                 <PrimaryButton>Buy now</PrimaryButton>
             </a>
-            <NavLink to={`/courses/${course?.Slug}`}>
+            <NavLink to={`/course/${course?.Slug}`}>
                 <div className={css.course_detail_container}>
                     <h3 className={css.course_label}>{course?.Name}</h3>
                     <p>

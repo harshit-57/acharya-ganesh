@@ -73,7 +73,13 @@ const WebStoriesList = () => {
                             key={blog?.Id || index}
                             blog={blog}
                             onClick={() =>
-                                navigate(`/web-stories/detail/${blog?.Id}`)
+                                navigate(
+                                    `/web-stories/${
+                                        blog?.Categories?.length
+                                            ? blog?.Categories[0]?.CategorySlug
+                                            : '-'
+                                    }/${blog?.Id}`
+                                )
                             }
                             className={css.blog_card}
                         />

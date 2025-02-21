@@ -233,7 +233,7 @@ const CoursesList = () => {
                             key={course?.Id || index}
                             course={course}
                             className={css.course_card}
-                            onClick={() => navigate(course?.Slug)}
+                            onClick={() => navigate(`/course/${course?.Slug}`)}
                         />
                     ))}
             </div>
