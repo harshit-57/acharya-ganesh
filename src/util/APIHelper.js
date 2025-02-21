@@ -3,6 +3,7 @@ import axios from 'axios';
 const useProd = true;
 
 const BASE_URL_PROD = 'http://34.131.192.173:4200';
+const UPLOAD_URL = 'http://34.131.192.173:4200';
 const BASE_URL_LOCAL = 'http://localhost:4200';
 
 const getBaseUrl = () => (useProd ? BASE_URL_PROD : BASE_URL_LOCAL);
@@ -79,7 +80,7 @@ export const UPLOADAPIHELPER = Object.freeze({
     upload: async (data) => {
         return await axios({
             method: 'POST',
-            url: getBaseUrl() + '/v1/upload',
+            url: UPLOAD_URL + '/v1/upload',
             data,
             headers: {
                 'Content-Type': 'multipart/form-data',

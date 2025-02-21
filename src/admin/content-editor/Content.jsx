@@ -1633,16 +1633,20 @@ const Edit = () => {
                                                         image={
                                                             storyImage?.imageUrl
                                                         }
-                                                        setImage={(img, i) =>
+                                                        setImage={(
+                                                            img,
+                                                            imageIndex
+                                                        ) =>
                                                             setData((prev) => {
                                                                 return {
                                                                     ...prev,
                                                                     storyImages:
                                                                         prev.storyImages.map(
                                                                             (
-                                                                                storyImage
+                                                                                storyImage,
+                                                                                i
                                                                             ) => {
-                                                                                return index ==
+                                                                                return imageIndex ==
                                                                                     i
                                                                                     ? {
                                                                                           ...storyImage,
@@ -1699,6 +1703,11 @@ const Edit = () => {
                                                     className={
                                                         styles.previewContainer
                                                     }
+                                                    style={{
+                                                        height: storyImage?.imageText
+                                                            ? '100%'
+                                                            : 'auto',
+                                                    }}
                                                 >
                                                     {storyImage.imageUrl ? (
                                                         <img
@@ -1726,17 +1735,15 @@ const Edit = () => {
                                                         <div
                                                             className={`${styles.story_text_container}`}
                                                         >
-                                                            {storyImage?.imageText && (
-                                                                <div
-                                                                    className={
-                                                                        styles.story_text_overlay
-                                                                    }
-                                                                >
-                                                                    {parse(
-                                                                        storyImage?.imageText
-                                                                    )}
-                                                                </div>
-                                                            )}
+                                                            <div
+                                                                className={
+                                                                    styles.story_text_overlay
+                                                                }
+                                                            >
+                                                                {parse(
+                                                                    storyImage?.imageText
+                                                                )}
+                                                            </div>
                                                         </div>
                                                     )}
                                                 </div>
