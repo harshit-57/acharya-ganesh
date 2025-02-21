@@ -6,10 +6,6 @@ import React, {
     useState,
 } from 'react';
 import styles from './style.module.css';
-import { FilePond, registerPlugin } from 'react-filepond';
-import 'filepond/dist/filepond.min.css';
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import ToggleSwitch from '../../components/toggle/ToggleSwitch';
 import { InputField } from '../../components/input-field/InputField';
@@ -21,11 +17,9 @@ import {
     Accordion,
     AccordionDetails,
     AccordionSummary,
-    Autocomplete,
     Box,
     Checkbox,
     Icon,
-    TextField,
     Tooltip,
     Typography,
     useTheme,
@@ -39,11 +33,8 @@ import dayJs from 'dayjs';
 import { toast } from 'react-toastify';
 import { htmlToText } from 'html-to-text';
 import AlertDialog from '../components/Alert';
-// import { parse } from 'filepond';
 import parse from 'html-react-parser';
-
-// Register the plugins
-registerPlugin(FilePondPluginImagePreview);
+import FilePondSingle from './component/file-pond/FilePond';
 
 const Edit = () => {
     const { updateSettings } = useSettings();
@@ -382,15 +373,12 @@ const Edit = () => {
                             id: response?.Id,
                             title: response?.Title,
                             image: response?.CoverImageUrl || '',
-
                             isShortDescription: true,
                             shortDescription: response?.ShortDescription,
-
                             status: response?.Status,
                             publishedOn: response?.PublishedOn
                                 ? new Date(response?.PublishedOn)
                                 : new Date(),
-
                             categories:
                                 response?.Categories?.map((item) => ({
                                     id: item?.CategoryId,
@@ -528,13 +516,13 @@ const Edit = () => {
                 isValid = false;
                 return isValid;
             }
-            if (htmlToText(payload?.shortDescription)?.length > 200) {
-                toast.error(
-                    'Short Description should not be more than 200 characters'
-                );
-                isValid = false;
-                return isValid;
-            }
+            // if (htmlToText(payload?.shortDescription)?.length > 500) {
+            //     toast.error(
+            //         'Short Description should not be more than 500 characters'
+            //     );
+            //     isValid = false;
+            //     return isValid;
+            // }
         }
 
         if (
@@ -1084,6 +1072,14 @@ const Edit = () => {
         }
     };
 
+    const handleImageChange = (image) => {
+        // if(['course', 'blog', 'spirituality', 'story', 'citation'].includes(type))
+        setData({
+            ...data,
+            image: image || '',
+        });
+    };
+
     const baseLink = useMemo(
         () =>
             type === 'course'
@@ -1619,369 +1615,288 @@ const Edit = () => {
                         </AccordionSummary>
                         <AccordionDetails>
                             <div className={styles.story_container}>
-                                {data?.storyImages
-                                    // ?.sort(
-                                    //     (a, b) => a?.ImageOrder - b?.ImageOrder
-                                    // )
-                                    ?.map((storyImage, index) => (
-                                        <>
+                                {data?.storyImages?.map((storyImage, index) => (
+                                    <>
+                                        <div
+                                            className={
+                                                styles.Image_Accordian_container
+                                            }
+                                        >
+                                            <div className={styles.leftSection}>
+                                                <div
+                                                    className={
+                                                        styles.imagePondContainer
+                                                    }
+                                                >
+                                                    <FilePondSingle
+                                                        index={index}
+                                                        image={
+                                                            storyImage?.imageUrl
+                                                        }
+                                                        setImage={(img, i) =>
+                                                            setData((prev) => {
+                                                                return {
+                                                                    ...prev,
+                                                                    storyImages:
+                                                                        prev.storyImages.map(
+                                                                            (
+                                                                                storyImage
+                                                                            ) => {
+                                                                                return index ==
+                                                                                    i
+                                                                                    ? {
+                                                                                          ...storyImage,
+                                                                                          imageUrl:
+                                                                                              img,
+                                                                                      }
+                                                                                    : storyImage;
+                                                                            }
+                                                                        ),
+                                                                };
+                                                            })
+                                                        }
+                                                        type={type}
+                                                    />
+                                                </div>
+
+                                                <div
+                                                    className={
+                                                        styles.textEditorContainer
+                                                    }
+                                                >
+                                                    <Editor
+                                                        content={
+                                                            storyImage?.imageText ||
+                                                            ''
+                                                        }
+                                                        setContent={(html) =>
+                                                            setData((p) => ({
+                                                                ...p,
+                                                                storyImages:
+                                                                    p?.storyImages?.map(
+                                                                        (
+                                                                            item,
+                                                                            i
+                                                                        ) =>
+                                                                            i ==
+                                                                            index
+                                                                                ? {
+                                                                                      ...item,
+                                                                                      imageText:
+                                                                                          html,
+                                                                                  }
+                                                                                : item
+                                                                    ),
+                                                            }))
+                                                        }
+                                                    />
+                                                </div>
+                                            </div>
                                             <div
-                                                className={
-                                                    styles.Image_Accordian_container
+                                                className={styles.rightSection}
+                                            >
+                                                <div
+                                                    className={
+                                                        styles.previewContainer
+                                                    }
+                                                >
+                                                    {storyImage.imageUrl ? (
+                                                        <img
+                                                            className={
+                                                                storyImage.imageUrl
+                                                                    ? styles.story_media
+                                                                    : styles.story_media_main
+                                                            }
+                                                            src={
+                                                                storyImage?.imageUrl ||
+                                                                null
+                                                            }
+                                                            alt={`storyImage-${
+                                                                index + 1
+                                                            }`}
+                                                        />
+                                                    ) : (
+                                                        <div
+                                                            className={
+                                                                styles.story_no_media
+                                                            }
+                                                        ></div>
+                                                    )}
+                                                    {storyImage?.imageText && (
+                                                        <div
+                                                            className={`${styles.story_text_container}`}
+                                                        >
+                                                            {storyImage?.imageText && (
+                                                                <div
+                                                                    className={
+                                                                        styles.story_text_overlay
+                                                                    }
+                                                                >
+                                                                    {parse(
+                                                                        storyImage?.imageText
+                                                                    )}
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div
+                                                class={
+                                                    styles.Crousal_Web_stories
                                                 }
                                             >
                                                 <div
                                                     className={
-                                                        styles.leftSection
+                                                        styles.Crousal_Web_stories_wrapper
                                                     }
                                                 >
                                                     <div
-                                                        className={
-                                                            styles.imagePondContainer
-                                                        }
+                                                        class={styles.button}
+                                                        style={{
+                                                            opacity:
+                                                                index > 0
+                                                                    ? 1
+                                                                    : 0.5,
+                                                        }}
+                                                        onClick={() => {
+                                                            if (index > 0)
+                                                                setData(
+                                                                    (
+                                                                        prevData
+                                                                    ) => ({
+                                                                        ...prevData,
+                                                                        storyImages:
+                                                                            prevData.storyImages.map(
+                                                                                (
+                                                                                    item,
+                                                                                    i
+                                                                                ) => {
+                                                                                    if (
+                                                                                        i ===
+                                                                                        index
+                                                                                    )
+                                                                                        return prevData
+                                                                                            .storyImages[
+                                                                                            index -
+                                                                                                1
+                                                                                        ];
+                                                                                    if (
+                                                                                        i ===
+                                                                                        index -
+                                                                                            1
+                                                                                    )
+                                                                                        return prevData
+                                                                                            .storyImages[
+                                                                                            index
+                                                                                        ];
+                                                                                    return item;
+                                                                                }
+                                                                            ),
+                                                                    })
+                                                                );
+                                                        }}
                                                     >
-                                                        <FilePond
-                                                            credits={false}
-                                                            files={
-                                                                storyImage?.imageUrl
-                                                                    ? [
-                                                                          storyImage?.imageUrl,
-                                                                      ]
-                                                                    : []
-                                                            }
-                                                            ref={
-                                                                storyImageUpload
-                                                            }
-                                                            required
-                                                            acceptedFileTypes={[
-                                                                'image/*',
-                                                            ]}
-                                                            allowFileEncode
-                                                            imagePreviewHeight={
-                                                                400
-                                                            }
-                                                            allowRemove={false}
-                                                            allowReplace={true}
-                                                            onaddfile={(
-                                                                error,
-                                                                file
-                                                            ) => {
-                                                                if (file) {
-                                                                }
-                                                                // setData({
-                                                                //     ...data,
-                                                                //     storyImages:
-                                                                //         data?.storyImages?.map(
-                                                                //             (
-                                                                //                 item
-                                                                //             ) => {
-                                                                //                 storyImage?.id ===
-                                                                //                 item.id
-                                                                //                     ? {
-                                                                //                           ...storyImage,
-                                                                //                           imageUrl:
-                                                                //                               file,
-                                                                //                       }
-                                                                //                     : storyImage;
-                                                                //             }
-                                                                //         ),
-                                                                // });
-                                                            }}
-                                                            allowMultiple={
-                                                                false
-                                                            }
-                                                            maxFiles={1}
-                                                            name="files"
-                                                            labelIdle={`Drag & Drop story image or <span class="filepond--label-action">Browse</span>`}
-                                                        />
-                                                        <HorizontalBorder
-                                                            height="1px"
-                                                            color="#ddd"
-                                                        />
-                                                        {storyImage?.imageUrl ? (
-                                                            <div
-                                                                className={
-                                                                    styles.image_footer
-                                                                }
-                                                                onClick={() => {
-                                                                    // setData({
-                                                                    //     ...data,
-                                                                    //     image: null,
-                                                                    // });
-                                                                }}
-                                                            >
-                                                                <span>
-                                                                    Remove Story
-                                                                    Image
-                                                                </span>
-                                                            </div>
-                                                        ) : (
-                                                            <div
-                                                                className={
-                                                                    styles.image_footer
-                                                                }
-                                                                onClick={() => {
-                                                                    storyImageUpload.current?.browse();
-                                                                }}
-                                                            >
-                                                                <span>
-                                                                    Add Story
-                                                                    Image
-                                                                </span>
-                                                            </div>
-                                                        )}
+                                                        {/* &#9650; */}
+                                                        <Icon>
+                                                            keyboard_arrow_up
+                                                        </Icon>
                                                     </div>
-
-                                                    <div
-                                                        className={
-                                                            styles.textEditorContainer
-                                                        }
-                                                    >
-                                                        <Editor
-                                                            content={
-                                                                storyImage?.imageText ||
-                                                                ''
+                                                    <Tooltip title="Delete">
+                                                        <div
+                                                            class={
+                                                                styles.button
                                                             }
-                                                            setContent={(
-                                                                html
-                                                            ) =>
+                                                            onClick={() => {
                                                                 setData(
                                                                     (p) => ({
                                                                         ...p,
                                                                         storyImages:
-                                                                            p?.storyImages?.map(
+                                                                            p.storyImages.filter(
+                                                                                (
+                                                                                    e,
+                                                                                    i
+                                                                                ) =>
+                                                                                    i !==
+                                                                                    index
+                                                                            ),
+                                                                    })
+                                                                );
+                                                            }}
+                                                        >
+                                                            <Icon color="primary">
+                                                                delete
+                                                            </Icon>
+                                                        </div>
+                                                    </Tooltip>
+                                                    <div
+                                                        class={styles.button}
+                                                        style={{
+                                                            opacity:
+                                                                index + 1 <
+                                                                data
+                                                                    ?.storyImages
+                                                                    ?.length
+                                                                    ? 1
+                                                                    : 0.5,
+                                                        }}
+                                                        onClick={() => {
+                                                            if (
+                                                                index + 1 <
+                                                                data
+                                                                    ?.storyImages
+                                                                    .length
+                                                            )
+                                                                setData(
+                                                                    (
+                                                                        prevData
+                                                                    ) => ({
+                                                                        ...prevData,
+                                                                        storyImages:
+                                                                            prevData.storyImages.map(
                                                                                 (
                                                                                     item,
                                                                                     i
-                                                                                ) =>
-                                                                                    i ==
-                                                                                    index
-                                                                                        ? {
-                                                                                              ...item,
-                                                                                              imageText:
-                                                                                                  html,
-                                                                                          }
-                                                                                        : item
-                                                                            ),
-                                                                    })
-                                                                )
-                                                            }
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    className={
-                                                        styles.rightSection
-                                                    }
-                                                >
-                                                    <div
-                                                        className={
-                                                            styles.previewContainer
-                                                        }
-                                                    >
-                                                        {storyImage.imageUrl ? (
-                                                            <img
-                                                                className={
-                                                                    storyImage.imageUrl
-                                                                        ? styles.story_media
-                                                                        : styles.story_media_main
-                                                                }
-                                                                src={
-                                                                    storyImage?.imageUrl ||
-                                                                    null
-                                                                }
-                                                                alt={`storyImage-${
-                                                                    index + 1
-                                                                }`}
-                                                            />
-                                                        ) : (
-                                                            <div
-                                                                className={
-                                                                    styles.story_no_media
-                                                                }
-                                                            ></div>
-                                                        )}
-                                                        {storyImage?.imageText && (
-                                                            <div
-                                                                className={`${styles.story_text_container}`}
-                                                            >
-                                                                {storyImage?.imageText && (
-                                                                    <div
-                                                                        className={
-                                                                            styles.story_text_overlay
-                                                                        }
-                                                                    >
-                                                                        {parse(
-                                                                            storyImage?.imageText
-                                                                        )}
-                                                                    </div>
-                                                                )}
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class={
-                                                        styles.Crousal_Web_stories
-                                                    }
-                                                >
-                                                    <div
-                                                        className={
-                                                            styles.Crousal_Web_stories_wrapper
-                                                        }
-                                                    >
-                                                        <div
-                                                            class={
-                                                                styles.button
-                                                            }
-                                                            style={{
-                                                                opacity:
-                                                                    index > 0
-                                                                        ? 1
-                                                                        : 0.5,
-                                                            }}
-                                                            onClick={() => {
-                                                                if (index > 0)
-                                                                    setData(
-                                                                        (
-                                                                            prevData
-                                                                        ) => ({
-                                                                            ...prevData,
-                                                                            storyImages:
-                                                                                prevData.storyImages.map(
-                                                                                    (
-                                                                                        item,
-                                                                                        i
-                                                                                    ) => {
-                                                                                        if (
-                                                                                            i ===
-                                                                                            index
-                                                                                        )
-                                                                                            return prevData
-                                                                                                .storyImages[
-                                                                                                index -
-                                                                                                    1
-                                                                                            ];
-                                                                                        if (
-                                                                                            i ===
-                                                                                            index -
-                                                                                                1
-                                                                                        )
-                                                                                            return prevData
-                                                                                                .storyImages[
-                                                                                                index
-                                                                                            ];
-                                                                                        return item;
-                                                                                    }
-                                                                                ),
-                                                                        })
-                                                                    );
-                                                            }}
-                                                        >
-                                                            {/* &#9650; */}
-                                                            <Icon>
-                                                                keyboard_arrow_up
-                                                            </Icon>
-                                                        </div>
-                                                        <Tooltip title="Delete">
-                                                            <div
-                                                                class={
-                                                                    styles.button
-                                                                }
-                                                                onClick={() => {
-                                                                    setData(
-                                                                        (
-                                                                            p
-                                                                        ) => ({
-                                                                            ...p,
-                                                                            storyImages:
-                                                                                p.storyImages.filter(
-                                                                                    (
-                                                                                        e,
-                                                                                        i
-                                                                                    ) =>
-                                                                                        i !==
+                                                                                ) => {
+                                                                                    if (
+                                                                                        i ===
                                                                                         index
-                                                                                ),
-                                                                        })
-                                                                    );
-                                                                }}
-                                                            >
-                                                                <Icon color="primary">
-                                                                    delete
-                                                                </Icon>
-                                                            </div>
-                                                        </Tooltip>
-                                                        <div
-                                                            class={
-                                                                styles.button
-                                                            }
-                                                            style={{
-                                                                opacity:
-                                                                    index + 1 <
-                                                                    data
-                                                                        ?.storyImages
-                                                                        ?.length
-                                                                        ? 1
-                                                                        : 0.5,
-                                                            }}
-                                                            onClick={() => {
-                                                                if (
-                                                                    index + 1 <
-                                                                    data
-                                                                        ?.storyImages
-                                                                        .length
-                                                                )
-                                                                    setData(
-                                                                        (
-                                                                            prevData
-                                                                        ) => ({
-                                                                            ...prevData,
-                                                                            storyImages:
-                                                                                prevData.storyImages.map(
-                                                                                    (
-                                                                                        item,
-                                                                                        i
-                                                                                    ) => {
-                                                                                        if (
-                                                                                            i ===
-                                                                                            index
-                                                                                        )
-                                                                                            return prevData
-                                                                                                .storyImages[
-                                                                                                index +
-                                                                                                    1
-                                                                                            ];
-                                                                                        if (
-                                                                                            i ===
+                                                                                    )
+                                                                                        return prevData
+                                                                                            .storyImages[
                                                                                             index +
                                                                                                 1
-                                                                                        )
-                                                                                            return prevData
-                                                                                                .storyImages[
-                                                                                                index
-                                                                                            ];
-                                                                                        return item;
-                                                                                    }
-                                                                                ),
-                                                                        })
-                                                                    );
-                                                            }}
-                                                        >
-                                                            {/* &#9660; */}
-                                                            <Icon>
-                                                                keyboard_arrow_down
-                                                            </Icon>
-                                                        </div>
+                                                                                        ];
+                                                                                    if (
+                                                                                        i ===
+                                                                                        index +
+                                                                                            1
+                                                                                    )
+                                                                                        return prevData
+                                                                                            .storyImages[
+                                                                                            index
+                                                                                        ];
+                                                                                    return item;
+                                                                                }
+                                                                            ),
+                                                                    })
+                                                                );
+                                                        }}
+                                                    >
+                                                        {/* &#9660; */}
+                                                        <Icon>
+                                                            keyboard_arrow_down
+                                                        </Icon>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <HorizontalBorder
-                                                height="1px"
-                                                color="#ddd"
-                                            />
-                                        </>
-                                    ))}
+                                        </div>
+                                        <HorizontalBorder
+                                            height="1px"
+                                            color="#ddd"
+                                        />
+                                    </>
+                                ))}
                                 <div
                                     className={
                                         styles.Web_stories_button_container
@@ -2631,65 +2546,12 @@ const Edit = () => {
                         <AccordionDetails>
                             <Box className={styles.content_wrappper}>
                                 <div>
-                                    <FilePond
-                                        credits={false}
-                                        files={data?.image ? [data?.image] : []}
-                                        ref={imageUpload}
-                                        required
-                                        acceptedFileTypes={['image/*']}
-                                        allowFileEncode
-                                        imagePreviewHeight={
-                                            type == 'course'
-                                                ? 420
-                                                : type == 'blog'
-                                                ? 200
-                                                : type == 'spirituality'
-                                                ? 200
-                                                : type == 'story'
-                                                ? 400
-                                                : 'auto'
-                                        }
-                                        allowRemove={false}
-                                        allowReplace={true}
-                                        onaddfile={(error, file) => {
-                                            // console.log(error, file);
-                                            if (file)
-                                                setData({
-                                                    ...data,
-                                                    image: file,
-                                                });
-                                        }}
-                                        // instantUpload={false}
-                                        // server={'/api/upload'}
-                                        allowMultiple={false}
-                                        maxFiles={1}
-                                        name="files"
-                                        labelIdle={`Drag & Drop ${type} image or <span class="filepond--label-action">Browse</span>`}
+                                    <FilePondSingle
+                                        image={data?.image}
+                                        setImage={handleImageChange}
+                                        type={type}
                                     />
                                 </div>
-                                <HorizontalBorder height="1px" color="#ddd" />
-                                {data?.image ? (
-                                    <div
-                                        className={styles.image_footer}
-                                        onClick={() => {
-                                            setData({
-                                                ...data,
-                                                image: null,
-                                            });
-                                        }}
-                                    >
-                                        <span>Remove {type} Image</span>
-                                    </div>
-                                ) : (
-                                    <div
-                                        className={styles.image_footer}
-                                        onClick={() => {
-                                            imageUpload.current?.browse();
-                                        }}
-                                    >
-                                        <span>Add {type} Image</span>
-                                    </div>
-                                )}
                             </Box>
                         </AccordionDetails>
                     </Accordion>

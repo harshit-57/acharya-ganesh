@@ -40,7 +40,7 @@ const Editor = ({ placeholder, content, setContent, style, className }) => {
                 {
                     color: [],
                 },
-                { background: [] },
+                // { background: [] },
             ],
             ['link', 'image', 'video', 'code-block'],
             [{ align: [] }],
@@ -76,39 +76,39 @@ const Editor = ({ placeholder, content, setContent, style, className }) => {
                     //         console.error('Failed to load ImageResize:', err)
                     //     );
 
-                    import('@xeger/quill-image-actions')
-                        .then((ImageActions) => {
-                            Quill.register(
-                                'modules/imageActions',
-                                ImageActions.default
-                            );
-                            setModules((prev) => ({
-                                ...prev,
-                                imageActions: {
-                                    modules: ['Resize', 'DisplaySize'],
-                                },
-                            }));
-                        })
-                        .catch((err) =>
-                            console.error('Failed to load ImageActions:', err)
-                        );
+                    // import('@xeger/quill-image-actions')
+                    //     .then((ImageActions) => {
+                    //         Quill.register(
+                    //             'modules/imageActions',
+                    //             ImageActions.default
+                    //         );
+                    //         setModules((prev) => ({
+                    //             ...prev,
+                    //             imageActions: {
+                    //                 modules: ['Resize', 'DisplaySize'],
+                    //             },
+                    //         }));
+                    //     })
+                    //     .catch((err) =>
+                    //         console.error('Failed to load ImageActions:', err)
+                    //     );
 
-                    import('@xeger/quill-image-formats')
-                        .then((ImageFormats) => {
-                            Quill.register(
-                                'modules/imageFormats',
-                                ImageFormats.default
-                            );
-                            setModules((prev) => ({
-                                ...prev,
-                                imageFormats: {
-                                    modules: ['Resize', 'DisplaySize'],
-                                },
-                            }));
-                        })
-                        .catch((err) =>
-                            console.error('Failed to load ImageFormats:', err)
-                        );
+                    // import('@xeger/quill-image-formats')
+                    //     .then((ImageFormats) => {
+                    //         Quill.register(
+                    //             'modules/imageFormats',
+                    //             ImageFormats.default
+                    //         );
+                    //         setModules((prev) => ({
+                    //             ...prev,
+                    //             imageFormats: {
+                    //                 modules: ['Resize', 'DisplaySize'],
+                    //             },
+                    //         }));
+                    //     })
+                    //     .catch((err) =>
+                    //         console.error('Failed to load ImageFormats:', err)
+                    //     );
 
                     setReactQuill(() => module.default);
                 })

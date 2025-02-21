@@ -1,12 +1,11 @@
 import axios from 'axios';
 
-const useLocalHostApi = true;
+const useProd = true;
 
-const BASE_URL_PROD = 'https://';
-// const BASE_URL_LOCAL = 'http://localhost:4200';
-const BASE_URL_LOCAL = 'http://34.131.192.173:4200';
+const BASE_URL_PROD = 'http://34.131.192.173:4200';
+const BASE_URL_LOCAL = 'http://localhost:4200';
 
-const getBaseUrl = () => (useLocalHostApi ? BASE_URL_LOCAL : BASE_URL_PROD);
+const getBaseUrl = () => (useProd ? BASE_URL_PROD : BASE_URL_LOCAL);
 
 const axiosHelper = async (method, url, params = {}, data = {}, token) => {
     data = { ...data };
@@ -74,4 +73,18 @@ export const ADMINAPIHELPER = Object.freeze({
     updateCitation: await postApi('v1/admin/update-citation'),
     createTestimonial: await postApi('v1/admin/create-testimonial'),
     updateTestimonial: await postApi('v1/admin/update-testimonial'),
+});
+
+export const UPLOADAPIHELPER = Object.freeze({
+    upload: async (data) => {
+        return await axios({
+            method: 'POST',
+            url: getBaseUrl() + '/v1/upload',
+            data,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+            responseType: 'json',
+        });
+    },
 });

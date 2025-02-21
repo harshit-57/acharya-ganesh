@@ -415,14 +415,6 @@
     text-transform: capitalize;
 }
 
-.image_footer {
-    margin-top: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: capitalize;
-}
-
 .story_container {
     /* max-height: 700px; */
     /* overflow: auto; */
