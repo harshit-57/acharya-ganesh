@@ -7,21 +7,28 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Grid, Icon, styled } from '@mui/material';
 import { InputField } from '../../../../components/input-field/InputField';
 import { ADMINAPIHELPER } from '../../../../util/APIHelper';
+import { toast } from 'react-toastify';
+import useAuth from '../../../hooks/useAuth';
 
 export default function AdminModal(props) {
     const token = localStorage.getItem('accessToken');
     const { modal, toggle, selectedData, setSelectedData, fetchAdmins } = props;
+    const { permission } = useAuth();
 
-    const ModalDialog = styled(Dialog)(({ theme }) => ({
-        '& .MuiDialogContent-root': {
-            padding: theme.spacing(2),
-        },
-        '& .MuiDialogActions-root': {
-            padding: theme.spacing(2),
-        },
-    }));
+    const ModalDialog = React.useMemo(
+        () =>
+            styled(Dialog)(({ theme }) => ({
+                '& .MuiDialogContent-root': {
+                    padding: theme.spacing(2),
+                },
+                '& .MuiDialogActions-root': {
+                    padding: theme.spacing(2),
+                },
+            })),
+        []
+    );
 
-    function ModalTitle(props) {
+    const ModalTitle = (props) => {
         const { children, onClose, ...other } = props;
 
         return (
@@ -43,7 +50,7 @@ export default function AdminModal(props) {
                 ) : null}
             </DialogTitle>
         );
-    }
+    };
 
     const [formData, setFormData] = React.useState({
         id: selectedData ? selectedData.id : undefined,
@@ -73,30 +80,45 @@ export default function AdminModal(props) {
 
     const handleValidation = () => {
         let error = false;
+        let err = errors;
         if (!formData.name) {
-            setErrors({ ...errors, name: 'Name is required' });
+            err = { ...err, name: 'Name is required' };
             error = true;
         }
         if (!formData.email) {
-            setErrors({ ...errors, email: 'Email is required' });
+            err = { ...err, email: 'Email is required' };
             error = true;
         }
-        // if (
-        //     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-        //         formData.email
-        //     )
-        // ) {
-        //     setErrors({ ...errors, email: 'Invalid email' });
-        //     error = true;
-        // }
+        if (
+            !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+                formData.email
+            )
+        ) {
+            err = { ...err, email: 'Email is invalid' };
+            error = true;
+        }
         if (!formData?.id && !formData.password) {
-            setErrors({ ...errors, password: 'Password is required' });
+            err = { ...err, password: 'Password is required' };
+            error = true;
+        }
+        if (
+            formData.password &&
+            !/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(
+                formData.password
+            )
+        ) {
+            err = {
+                ...err,
+                password:
+                    'Password must be a minimum of 6 characters and contain at least one uppercase letter, one number, and one special character',
+            };
             error = true;
         }
         if (!formData.role_id) {
-            setErrors({ ...errors, role_id: 'Role is required' });
+            err = { ...err, role_id: 'Role is required' };
             error = true;
         }
+        setErrors(err);
         return error;
     };
 
@@ -122,9 +144,12 @@ export default function AdminModal(props) {
                         setSelectedData(null);
                         toggle();
                         fetchAdmins();
+                    } else {
+                        toast.error(response.data?.message);
                     }
                 })
                 .catch((error) => {
+                    toast.error(error.response.data.message || error.message);
                     setIsLoading(false);
                 });
         } else
@@ -143,9 +168,12 @@ export default function AdminModal(props) {
                         setSelectedData(null);
                         toggle();
                         fetchAdmins();
+                    } else {
+                        toast.error(response.data.message);
                     }
                 })
                 .catch((error) => {
+                    toast.error(error.response.data.message || error.message);
                     setIsLoading(false);
                 });
     };
@@ -204,12 +232,28 @@ export default function AdminModal(props) {
                             name="role_id"
                         >
                             <option value="">Select Role</option>
-                            {roles.map((role) => (
-                                <option key={role.Id} value={role.Id}>
-                                    {role.Name}
-                                </option>
-                            ))}
+                            {roles
+                                ?.filter((role) =>
+                                    permission?.Owner ? true : role.Id != 1
+                                )
+                                .map((role) => (
+                                    <option key={role.Id} value={role.Id}>
+                                        {role.Name}
+                                    </option>
+                                ))}
                         </select>
+                        {errors.role_id && (
+                            <span
+                                style={{
+                                    color: 'red',
+                                    fontSize: '12px',
+                                    marginTop: '4px',
+                                    marginLeft: '12px',
+                                }}
+                            >
+                                {errors.role_id}
+                            </span>
+                        )}
                     </Grid>
                 </form>
             </DialogContent>

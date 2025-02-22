@@ -23,8 +23,9 @@
     align-items: center;
     display: flex;
     flex: 1;
-    padding: 80px;
     justify-content: center;
+    padding: 50px;
+    background: #00000025;
 }
 
 .header_text_wrapper {
@@ -143,6 +144,9 @@
 }
 
 @media only screen and (max-width: 768px) {
+    .header_text_container {
+        padding: 25px;
+    }
     .header_text_wrapper {
         h3 {
             font-size: 32px;

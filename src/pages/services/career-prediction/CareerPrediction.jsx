@@ -5,6 +5,8 @@ import { Spacer } from '../../../components/spacer/Spacer';
 import { TopBar } from '../../../components/top-bar/TopBar';
 import { Navigation } from '../../../components/navigation/Navigation';
 import { Footer } from '../../../components/footer/Footer';
+import Blog from '../../../components/blog/Blog';
+import CitationBox from '../../../components/citation-box/CitationBox';
 export const CareerPrediction = () => {
     return (
         <PageContainer className={css.container}>
@@ -482,9 +484,11 @@ export const CareerPrediction = () => {
                             alt=""
                         />
                     </div>
+                    <Blog />
+                    <CitationBox />
                 </div>
             </div>
-            <Spacer vertical={'72px'} />
+            <Spacer vertical={'20px'} />
             <Footer />
         </PageContainer>
     );

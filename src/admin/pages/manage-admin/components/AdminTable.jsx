@@ -17,6 +17,7 @@ import {
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import { htmlToText } from 'html-to-text';
+import useAuth from '../../../hooks/useAuth';
 
 const PaginationTable = ({
     data,
@@ -36,6 +37,7 @@ const PaginationTable = ({
     setShowAdminModal,
 }) => {
     const theme = useTheme();
+    const { permission } = useAuth();
     const primaryColor = theme?.palette?.primary?.main;
 
     const StyledTable = styled(Table)(() => ({
@@ -57,10 +59,10 @@ const PaginationTable = ({
         color: 'white',
         backgroundColor: primaryColor || 'inherit',
         '&:first-of-type': {
-            borderTopLeftRadius: '15px', // Curved edge on the top-left corner
+            borderTopLeftRadius: '15px',
         },
         '&:last-of-type': {
-            borderTopRightRadius: '15px', // Curved edge on the top-right corner
+            borderTopRightRadius: '15px',
         },
     }));
 
@@ -161,42 +163,42 @@ const PaginationTable = ({
                                     {moment(admin.PublishedOn).format('ll')}
                                 </StyledTableCell>
                                 <TableCell align="center">
-                                    <IconButton
-                                        // disabled={
-                                        //     !getRoleAndpermission(
-                                        //         roleAndPermission,
-                                        //         'Company Management',
-                                        //         'edit'
-                                        //     )
-                                        // }
-                                        onClick={() => {
-                                            setSelectedData(admin);
-                                            setShowAdminModal(!showAdminModal);
-                                        }}
-                                    >
-                                        <Tooltip title="Edit">
-                                            <Icon color="primary">edit</Icon>
-                                        </Tooltip>
-                                    </IconButton>
-                                    <IconButton
-                                        // disabled={
-                                        //     !getRoleAndpermission(
-                                        //         roleAndPermission,
-                                        //         'Company Management',
-                                        //         'delete'
-                                        //     )
-                                        // }
-                                        onClick={() => {
-                                            setSelectedData(admin);
-                                            setShowDeleteAlert(
-                                                !showDeleteAlert
-                                            );
-                                        }}
-                                    >
-                                        <Tooltip title="Delete">
-                                            <Icon color="primary">delete</Icon>
-                                        </Tooltip>
-                                    </IconButton>
+                                    {admin?.RoleId !== 1 ||
+                                    permission?.Owner ? (
+                                        <>
+                                            {' '}
+                                            <IconButton
+                                                onClick={() => {
+                                                    setSelectedData(admin);
+                                                    setShowAdminModal(
+                                                        !showAdminModal
+                                                    );
+                                                }}
+                                            >
+                                                <Tooltip title="Edit">
+                                                    <Icon color="primary">
+                                                        edit
+                                                    </Icon>
+                                                </Tooltip>
+                                            </IconButton>
+                                            <IconButton
+                                                onClick={() => {
+                                                    setSelectedData(admin);
+                                                    setShowDeleteAlert(
+                                                        !showDeleteAlert
+                                                    );
+                                                }}
+                                            >
+                                                <Tooltip title="Delete">
+                                                    <Icon color="primary">
+                                                        delete
+                                                    </Icon>
+                                                </Tooltip>
+                                            </IconButton>
+                                        </>
+                                    ) : (
+                                        <>-</>
+                                    )}
                                 </TableCell>
                             </TableRow>
                         ))}

@@ -5,6 +5,8 @@ import { Spacer } from '../../../components/spacer/Spacer';
 import { TopBar } from '../../../components/top-bar/TopBar';
 import { Navigation } from '../../../components/navigation/Navigation';
 import { Footer } from '../../../components/footer/Footer';
+import Blog from '../../../components/blog/Blog';
+import CitationBox from '../../../components/citation-box/CitationBox';
 export const Astrology = () => {
     return (
         <PageContainer className={css.container}>
@@ -403,127 +405,11 @@ export const Astrology = () => {
                             </h2>
                         </p>
                     </div>
-
-                    <div
-                        style={{
-                            background: '#2D2D2D ',
-                            padding: ' 2rem 10rem',
-                        }}
-                        className={css.column}
-                    >
-                        <h2
-                            style={{
-                                color: '#9a5c23',
-                                textAlign: 'center',
-                            }}
-                        >
-                            Discover Astrologers In Your City
-                        </h2>
-                        <Spacer vertical={'16px'} />
-                        <div className={css.row}>
-                            <div className={css.column}>
-                                <p>
-                                    <h2
-                                        style={{
-                                            color: '#9a5c23',
-                                            fontSize: '14px',
-                                            textAlign: 'left',
-                                        }}
-                                    >
-                                        Best Astrologer in Delhi
-                                    </h2>
-                                </p>
-                                <p>
-                                    <h2
-                                        style={{
-                                            color: '#9a5c23',
-                                            fontSize: '14px',
-                                            textAlign: 'left',
-                                        }}
-                                    >
-                                        Best Astrologer in Chennai
-                                    </h2>
-                                </p>
-                            </div>
-
-                            <div className={css.column}>
-                                <p>
-                                    <h2
-                                        style={{
-                                            color: '#9a5c23',
-                                            fontSize: '14px',
-                                            textAlign: 'left',
-                                        }}
-                                    >
-                                        Best Astrologer in Kolkata
-                                    </h2>
-                                </p>
-                                <p>
-                                    <h2
-                                        style={{
-                                            color: '#9a5c23',
-                                            fontSize: '14px',
-                                            textAlign: 'left',
-                                        }}
-                                    >
-                                        Best Astrologer in Hyderabad
-                                    </h2>
-                                </p>
-                            </div>
-
-                            <div className={css.column}>
-                                <p>
-                                    <h2
-                                        style={{
-                                            color: '#9a5c23',
-                                            fontSize: '14px',
-                                            textAlign: 'left',
-                                        }}
-                                    >
-                                        Best Astrologer in Mumbai
-                                    </h2>
-                                </p>
-                                <p>
-                                    <h2
-                                        style={{
-                                            color: '#9a5c23',
-                                            fontSize: '14px',
-                                            textAlign: 'left',
-                                        }}
-                                    >
-                                        Best Astrologer in Pune
-                                    </h2>
-                                </p>
-                            </div>
-
-                            <div className={css.column}>
-                                <p>
-                                    <h2
-                                        style={{
-                                            color: '#9a5c23',
-                                            fontSize: '14px',
-                                            textAlign: 'left',
-                                        }}
-                                    >
-                                        Best Astrologer in Bangalore
-                                    </h2>
-                                </p>
-                                <p>
-                                    <h2
-                                        style={{
-                                            color: '#9a5c23',
-                                            fontSize: '14px',
-                                            textAlign: 'left',
-                                        }}
-                                    >
-                                        Best Astrologer in Ahmedabad
-                                    </h2>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    <Blog />
+                    <CitationBox />
                 </div>
             </div>
+            <Spacer vertical={'20px'} />
             <Footer />
         </PageContainer>
     );

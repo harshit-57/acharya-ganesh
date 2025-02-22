@@ -9,8 +9,9 @@
     align-items: center;
     display: flex;
     flex: 1;
-    padding: 60px;
     justify-content: center;
+    padding: 50px;
+    background: #00000025;
 }
 .loaderContainer {
     display: flex;
@@ -105,6 +106,9 @@
 }
 
 @media only screen and (max-width: 768px) {
+    .header_text_container {
+        padding: 25px;
+    }
     .discover_heading {
         font-size: 28px;
         text-align: center;

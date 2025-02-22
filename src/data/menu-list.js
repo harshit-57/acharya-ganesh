@@ -77,7 +77,7 @@ export default [
         id: '',
         title: 'Divine Store',
         subMenus: null,
-        link: 'https://acharyaganesh.com/shop/',
+        link: 'https://acharyaganesh.shop/',
     },
     {
         route: '/web-stories',

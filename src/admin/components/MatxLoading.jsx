@@ -30,7 +30,7 @@ const Loading = ({ style }) => {
             <Box className="wrapper">
                 <img src="/src/assets/brand_logo.png" alt="" />
                 <CircularProgress
-                    // sx={{ color: '#1B5293' }}
+                    sx={{ color: '#9a5c23' }}
                     className="circleProgress"
                 />
             </Box>

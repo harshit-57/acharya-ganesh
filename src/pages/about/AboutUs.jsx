@@ -4,7 +4,7 @@ import IcChevronIcon from '../../assets/chevron-down.png';
 import IcStar from '../../assets/star_primary_dark.png';
 
 import ImgHeaderBg from '../../assets/about_header_bg.png';
-import ImgHanish from '../../assets/hanish.jpg';
+import ImgHanish from '../../assets/about_image.jpg';
 import ImgStatsBg from '../../assets/about_stats_bg.jpg';
 import ImgConsultationPoster from '../../assets/consultation_poster.jpg';
 import { Spacer } from '../../components/spacer/Spacer';
@@ -105,18 +105,18 @@ const AboutUs = () => {
                             <h4>Founder & Director at Acharya Ganesh</h4>
                             <Spacer vertical={'24px'} />
                             <p>
-                                Astrologer Hanish Bagga, the esteemed founder
-                                and director of Acharya Ganesh, is celebrated
-                                for his innovative work in astrology, Vastu, and
-                                related fields. With over a decade of
-                                experience, Jyotish Hanish Bagga transitioned
-                                from a successful corporate career to pursue his
-                                passion in astrology, driven by a deeper
-                                calling. Originating from Rajasthan, his
-                                upbringing infused him with a respect for
-                                ancient wisdom and cosmic influences, which he
-                                applies in guiding individuals toward
-                                enlightenment and growth.
+                                We have forgotten that we have been gifted the
+                                ability to consciously choose the direction of
+                                our life. However, Acharya Ganesh helps you to
+                                tap into your power through Astro Vastu. The
+                                wide range of services provided are aimed to
+                                relive you of your problems and to help you
+                                reach your desires. Our Astrologers truly wish
+                                to see you succeed and do everything in their
+                                ability to help you. Our supportive team
+                                provides prompt service so they are always ready
+                                to assist you on any matter that may be
+                                troublesome to you.
                             </p>
                             {readMore === 'Read More' && (
                                 <span
@@ -128,14 +128,18 @@ const AboutUs = () => {
                             )}
                             {readMore === 'Read Less' && (
                                 <p>
-                                    Specializing in Astro Vastu, he adeptly
-                                    combines Vedic astrology with Lal Kitab
-                                    remedies to enhance life’s prosperity and
-                                    happiness. As an educator, Astrologer Hanish
-                                    Bagga is dedicated to sharing his knowledge,
-                                    offering courses for all levels, and
-                                    initiating a free Lal Kitab astrology course
-                                    to give back to the community.
+                                    If you hold a desire to learn Astrology then
+                                    we also offer various teaching materials on
+                                    different areas. There are courses available
+                                    suited for both Beginners and Masters at
+                                    Astrology and Vastu. Moreover, our
+                                    supportive Teachers can be reached outside
+                                    of work hours to assist you with any
+                                    difficulties you may encounter during your
+                                    studies. If you are keen on becoming an
+                                    esteemed student of Acharya Ganesh then our
+                                    courses and contact details can be found on
+                                    our page.
                                 </p>
                             )}
                             {readMore === 'Read Less' && (

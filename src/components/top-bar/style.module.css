@@ -1,6 +1,7 @@
 .container {
     height: 120px;
     position: relative;
+    background: #00000025;
     .menu_icon {
         display: none;
     }

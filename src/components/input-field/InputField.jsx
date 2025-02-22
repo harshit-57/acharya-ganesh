@@ -10,6 +10,7 @@ export const InputField = ({
     error,
     value,
     readOnly,
+    maxLength,
 }) => {
     return (
         <div className={css.input_container}>
@@ -22,6 +23,7 @@ export const InputField = ({
                 className={[css.input, className].join(' ')}
                 value={value}
                 readOnly={readOnly}
+                maxLength={maxLength}
             />
             {error && <p className={css.error}>{error}</p>}
         </div>

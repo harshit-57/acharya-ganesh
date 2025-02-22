@@ -6,6 +6,7 @@ import { sidenavCompactWidth, sideNavWidth } from '../../../utils/constant';
 import Brand from '../../Brand';
 import Sidenav from '../../Sidenav';
 import useSettings from '../../../hooks/useSettings';
+import useAuth from '../../../hooks/useAuth';
 
 const SidebarNavRoot = styled(Box)(({ color, width, bg, image }) => ({
     position: 'fixed',
@@ -35,13 +36,14 @@ const SidebarNavRoot = styled(Box)(({ color, width, bg, image }) => ({
 }));
 
 const NavListBox = styled(Box)({
-    height: '100%',
+    height: '95%',
     display: 'flex',
     flexDirection: 'column',
 });
 
 const Layout1Sidenav = () => {
     const theme = useTheme();
+    const { admin } = useAuth();
     const { settings, updateSettings } = useSettings();
     const leftSidebar = settings?.layout1Settings?.leftSidebar;
     const { mode, bgImgURL } = leftSidebar;
@@ -90,6 +92,20 @@ const Layout1Sidenav = () => {
                 </Brand>
                 <Sidenav />
             </NavListBox>
+            <Box
+                sx={{
+                    margin: 'auto',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '90%',
+                    padding: '10px 0',
+                    borderTop: `1px solid ${theme.palette.divider}`,
+                    backgroundColor: theme.palette.background.default,
+                }}
+            >
+                {admin?.RoleName || 'Super Admin'}
+            </Box>
         </SidebarNavRoot>
     );
 };

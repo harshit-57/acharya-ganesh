@@ -45,11 +45,14 @@ const MainContactForm = () => {
             errors.email = 'Email is required';
             error = true;
         } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-            errors.email = 'Invalid email format';
+            errors.email = 'Email is invalid';
             error = true;
         }
         if (!formData.phone.trim()) {
             errors.phone = 'Phone number is required';
+            error = true;
+        } else if (!/^\d{10}$/.test(formData.phone)) {
+            errors.phone = 'Phone number is invalid';
             error = true;
         }
         if (!formData.service.trim()) {
@@ -139,6 +142,7 @@ const MainContactForm = () => {
                         name={'phone'}
                         onChange={handleChange}
                         error={errorData.phone}
+                        maxLength={10}
                     />
                     {/* <InputField
                                     className={css.input}

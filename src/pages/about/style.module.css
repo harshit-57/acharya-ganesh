@@ -9,8 +9,9 @@
     align-items: center;
     display: flex;
     flex: 1;
-    padding: 120px;
     justify-content: center;
+    padding: 50px;
+    background: #00000025;
 }
 
 .header_text_wrapper {
@@ -62,15 +63,17 @@
 
 .row {
     display: flex;
-    gap: 120px;
+    gap: 50px;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .person_image {
     flex: 1;
     aspect-ratio: 1;
     border-radius: 36px;
+    height: 100%;
+    width: 50%;
 }
 
 .read_more_link {
@@ -89,7 +92,9 @@
     padding: 48px;
     background-color: #f9eae0;
     min-height: 600px;
-    height: auto;
+    height: 100%;
+    width: 50%;
+    overflow: auto;
 
     h2 {
         color: var(--color-caption);
@@ -213,7 +218,7 @@
 
 @media only screen and (max-width: 768px) {
     .header_text_container {
-        padding: 50px;
+        padding: 25px;
     }
 
     .content_wrapper {

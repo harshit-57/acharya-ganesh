@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { IndicatorContainer } from '../indicator-container/IndicatorContainer';
 import LeftArrow from '../../assets/left-arrow.png';
 import useBreakpoint from 'use-breakpoint';
+import { MatxLoading } from '../../admin/components';
 
 const PER_FRAME_ARTICLE_COUNT_DESKTOP = 3;
 const PER_FRAME_ARTICLE_COUNT_TABLET = 2;
@@ -33,6 +34,7 @@ const Blog = () => {
     const [articleList, setArticleList] = useState([]);
     const [visibleArticles, setVisibleArticles] = useState([]);
     const [currentSlideOffset, setCurrentSlideOffset] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         getBlogs();
@@ -40,13 +42,16 @@ const Blog = () => {
 
     const getBlogs = async () => {
         try {
+            setLoading(true);
             const response = await APIHelper.getBlogs({
                 page: 1,
                 pageSize: 9,
                 status: 1,
                 active: 1,
             });
+            setLoading(false);
             setArticleList(response.data?.data);
+            setCurrentSlideOffset(0);
         } catch (e) {
             console.error(e);
         }
@@ -115,45 +120,55 @@ const Blog = () => {
             <h2 className={css.section_heading}>
                 Discover the Cosmos on Our Blog
             </h2>
-            <div className={css.article_slide_container}>
-                <button
-                    onClick={onPrev}
-                    className={css.prev_button}
-                    disabled={currentSlideOffset === 0}
-                    style={{ opacity: currentSlideOffset === 0 ? 0.5 : 1 }}
-                >
-                    <img src={LeftArrow} alt="Previous" />
-                </button>
-                <button onClick={onNext} className={css.next_button}>
-                    <img src={LeftArrow} alt="Next" />
-                </button>
-                <div className={css.article_slide_wrapper}>
-                    {Array.isArray(visibleArticles) &&
-                        visibleArticles.map((article, index) => (
-                            <ArticleCard
-                                key={index}
-                                article={article}
-                                onClick={() =>
-                                    navigate(
-                                        `/blog/${
-                                            article?.Categories?.length
-                                                ? article?.Categories[0]
-                                                      ?.CategorySlug
-                                                : '-'
-                                        }/${article?.Slug}`
-                                    )
-                                }
-                            />
-                        ))}
-                </div>
-            </div>
-            <IndicatorContainer
-                currentIndex={currentSlideOffset}
-                count={Math.ceil(
-                    articleList.length / getArticleCountPerFrame(breakpoint)
-                )}
-                onIndicatorClick={onIndicatorClick}
-            />
+            {!loading ? (
+                <>
+                    <div className={css.article_slide_container}>
+                        <button
+                            onClick={onPrev}
+                            className={css.prev_button}
+                            disabled={currentSlideOffset === 0}
+                            style={{
+                                opacity: currentSlideOffset === 0 ? 0.5 : 1,
+                            }}
+                        >
+                            <img src={LeftArrow} alt="Previous" />
+                        </button>
+                        <button onClick={onNext} className={css.next_button}>
+                            <img src={LeftArrow} alt="Next" />
+                        </button>
+
+                        <div className={css.article_slide_wrapper}>
+                            {Array.isArray(visibleArticles) &&
+                                visibleArticles.map((article, index) => (
+                                    <ArticleCard
+                                        key={index}
+                                        article={article}
+                                        onClick={() =>
+                                            navigate(
+                                                `/blog/${
+                                                    article?.Categories?.length
+                                                        ? article?.Categories[0]
+                                                              ?.CategorySlug
+                                                        : '-'
+                                                }/${article?.Slug}`
+                                            )
+                                        }
+                                    />
+                                ))}
+                        </div>
+                    </div>
+                    <IndicatorContainer
+                        currentIndex={currentSlideOffset}
+                        count={Math.ceil(
+                            articleList.length /
+                                getArticleCountPerFrame(breakpoint)
+                        )}
+                        onIndicatorClick={onIndicatorClick}
+                    />
+                </>
+            ) : (
+                <MatxLoading />
+            )}
         </PageContainer>
     );
 };

@@ -148,19 +148,6 @@ const Layout1Topbar = () => {
                             </UserMenu>
                         }
                     >
-                        {/* <StyledItem
-                            // disabled={
-                            //     !getRoleAndpermission(
-                            //         roleAndPermission,
-                            //         'Account Settings',
-                            //         'view'
-                            //     )
-                            // }
-                            onClick={() => navigate('/my-account')}
-                        >
-                            <Icon> account_circle </Icon>
-                            <Span> My Account </Span>
-                        </StyledItem> */}
                         <StyledItem onClick={logout}>
                             <Icon> power_settings_new </Icon>
                             <Span> Logout </Span>

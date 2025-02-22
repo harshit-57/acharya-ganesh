@@ -39,11 +39,13 @@ export const TitleInformation = ({ article }) => {
 
     return (
         <div className={css.container}>
-            <img
-                className={css.thumbnail}
-                src={article?.Image}
-                alt={'Thumbnail'}
-            />
+            {article?.Image && (
+                <img
+                    className={css.thumbnail}
+                    src={article?.Image}
+                    alt={'Thumbnail'}
+                />
+            )}
             <div className={css.title_container}>
                 <div className={css.category_container}>
                     <p className={css.category}>

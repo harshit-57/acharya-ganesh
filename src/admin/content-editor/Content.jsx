@@ -145,8 +145,7 @@ const Edit = () => {
                             image: response?.Images?.length
                                 ? response?.Images[0]
                                 : '',
-                            focusKeyphrase:
-                                response?.Focus_Keyphrase || response?.Name,
+                            focusKeyphrase: response?.Focus_Keyphrase || '',
                             metaTitle: response?.Meta_Title,
                             metaSiteName: response?.Meta_SiteName,
                             metaDescription: response?.Meta_Desc,
@@ -214,8 +213,7 @@ const Edit = () => {
                             description: response?.Description,
                             slug: response?.Slug,
                             image: response?.Image || '',
-                            focusKeyphrase:
-                                response?.Focus_Keyphrase || response?.Title,
+                            focusKeyphrase: response?.Focus_Keyphrase || '',
                             metaTitle: response?.Meta_Title,
                             metaSiteName: response?.Meta_SiteName,
                             metaDescription: response?.Meta_Desc,
@@ -274,8 +272,7 @@ const Edit = () => {
                             description: response?.Description,
                             slug: response?.Slug,
                             image: response?.Image || '',
-                            focusKeyphrase:
-                                response?.Focus_Keyphrase || response?.Title,
+                            focusKeyphrase: response?.Focus_Keyphrase || '',
                             metaTitle: response?.Meta_Title,
                             metaSiteName: response?.Meta_SiteName,
                             metaDescription: response?.Meta_Desc,
