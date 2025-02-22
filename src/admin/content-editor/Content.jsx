@@ -51,6 +51,9 @@ const Edit = () => {
         image: ['course', 'blog', 'spirituality', 'story']?.includes(type)
             ? ''
             : undefined,
+        imageAlt: ['course', 'blog', 'spirituality', 'story']?.includes(type)
+            ? ''
+            : undefined,
         focusKeyphrase: ['course', 'blog', 'spirituality']?.includes(type)
             ? ''
             : undefined,
@@ -145,6 +148,7 @@ const Edit = () => {
                             image: response?.Images?.length
                                 ? response?.Images[0]
                                 : '',
+                            // imageAlt: "",
                             focusKeyphrase: response?.Focus_Keyphrase || '',
                             metaTitle: response?.Meta_Title,
                             metaSiteName: response?.Meta_SiteName,
@@ -213,6 +217,7 @@ const Edit = () => {
                             description: response?.Description,
                             slug: response?.Slug,
                             image: response?.Image || '',
+                            imageAlt: response?.ImageAlt || '',
                             focusKeyphrase: response?.Focus_Keyphrase || '',
                             metaTitle: response?.Meta_Title,
                             metaSiteName: response?.Meta_SiteName,
@@ -272,6 +277,7 @@ const Edit = () => {
                             description: response?.Description,
                             slug: response?.Slug,
                             image: response?.Image || '',
+                            imageAlt: response?.ImageAlt || '',
                             focusKeyphrase: response?.Focus_Keyphrase || '',
                             metaTitle: response?.Meta_Title,
                             metaSiteName: response?.Meta_SiteName,
@@ -373,6 +379,7 @@ const Edit = () => {
                             id: response?.Id,
                             title: response?.Title,
                             image: response?.CoverImageUrl || '',
+                            imageAlt: response?.CoverImageAlt || '',
                             isShortDescription: true,
                             shortDescription: response?.ShortDescription,
                             status: response?.Status,
@@ -511,6 +518,12 @@ const Edit = () => {
             return isValid;
         }
 
+        if (payload?.image && !payload?.imageAlt) {
+            toast.error('Image Alt is required');
+            isValid = false;
+            return isValid;
+        }
+
         if (payload?.status == 1 && payload?.isShortDescription) {
             if (!payload?.shortDescription) {
                 toast.error('Short Description is required');
@@ -553,6 +566,28 @@ const Edit = () => {
                 return isValid;
             }
         }
+
+        if (type == 'story')
+            if (!data?.storyImages?.length) {
+                toast.error('Story Images are required');
+                isValid = false;
+                return isValid;
+            } else {
+                data?.storyImages?.forEach((item, index) => {
+                    if (!item?.imageUrl) {
+                        toast.error(`Story Image ${index + 1} is required`);
+                        isValid = false;
+                        return isValid;
+                    }
+                    if (!item?.imageText) {
+                        toast.error(
+                            `Story Image Text ${index + 1} is required`
+                        );
+                        isValid = false;
+                        return isValid;
+                    }
+                });
+            }
 
         if (payload?.id) {
             if (!['story', 'testimonial']?.includes(type) && !payload?.slug) {
@@ -958,6 +993,7 @@ const Edit = () => {
             switch (type) {
                 case 'course':
                     previewData = {
+                        Id: data.id || undefined,
                         Name: data.title,
                         Slug: data.slug,
                         ProductDescription: data?.description,
@@ -992,6 +1028,7 @@ const Edit = () => {
 
                 case 'blog':
                     previewData = {
+                        Id: data.id || undefined,
                         Title: data.title,
                         Slug: data.slug,
                         Description: data?.description,
@@ -1013,6 +1050,7 @@ const Edit = () => {
                             TagName: tag.name,
                         })),
                         Image: data.image,
+                        ImageAlt: data.imageAlt,
                     };
 
                     navigate(
@@ -1027,6 +1065,7 @@ const Edit = () => {
 
                 case 'spirituality':
                     previewData = {
+                        Id: data.id || undefined,
                         Title: data.title,
                         Slug: data.slug,
                         Description: data?.description,
@@ -1048,6 +1087,7 @@ const Edit = () => {
                             TagName: tag.name,
                         })),
                         Image: data.image,
+                        ImageAlt: data.imageAlt,
                     };
 
                     navigate(
@@ -1056,6 +1096,44 @@ const Edit = () => {
                                 ? previewData?.Categories[0]?.CategorySlug
                                 : '-'
                         }/${previewData?.Slug || 'new'}?preview=true`,
+                        { state: { data: previewData } }
+                    );
+                    break;
+
+                case 'story':
+                    previewData = {
+                        Id: data.id || undefined,
+                        Title: data.title,
+                        ShortDescription: data.shortDescription,
+                        PublishedOn: data.publishedOn,
+                        Status: data.status,
+                        Categories: data.categories?.map((category) => ({
+                            CategoryId: category.id,
+                            CategoryName: category.name,
+                            CategorySlug: category.slug,
+                        })),
+                        Tags: data.tags?.map((tag) => ({
+                            TagId: tag.id,
+                            TagName: tag.name,
+                        })),
+                        CoverImageUrl: data.image,
+                        CoverImageAlt: data.imageAlt,
+                        Images:
+                            data?.storyImages?.map((item, index) => ({
+                                id: item?.id,
+                                ImageText: item?.imageText,
+                                ImageUrl: item?.imageUrl,
+                                ImageOrder: index + 1,
+                            })) || [],
+                        TimeDuration: data?.timeDuration,
+                    };
+
+                    navigate(
+                        `/web-stories/${
+                            previewData?.Categories?.length
+                                ? previewData?.Categories[0]?.CategorySlug
+                                : '-'
+                        }/${previewData?.Id || 'new'}?preview=true`,
                         { state: { data: previewData } }
                     );
                     break;
@@ -1078,14 +1156,6 @@ const Edit = () => {
                     break;
             }
         }
-    };
-
-    const handleImageChange = (image) => {
-        // if(['course', 'blog', 'spirituality', 'story', 'citation'].includes(type))
-        setData({
-            ...data,
-            image: image || '',
-        });
     };
 
     const baseLink = useMemo(
@@ -1685,6 +1755,7 @@ const Edit = () => {
                                                     }
                                                 >
                                                     <Editor
+                                                        style={{}}
                                                         content={
                                                             storyImage?.imageText ||
                                                             ''
@@ -1749,7 +1820,7 @@ const Edit = () => {
                                                     )}
                                                     {storyImage?.imageText && (
                                                         <div
-                                                            className={`${styles.story_text_container}`}
+                                                            className={`${styles.story_text_container} html-content`}
                                                         >
                                                             <div
                                                                 className={
@@ -1949,7 +2020,8 @@ const Edit = () => {
                 )}
 
                 {/* Additional Settings */}
-                {/* <Accordion className={styles.accordion_container}>
+                <>
+                    {/* <Accordion className={styles.accordion_container}>
                     <AccordionSummary
                         expandIcon={
                             <ArrowDropDownIcon
@@ -2264,6 +2336,7 @@ const Edit = () => {
                         </Box>
                     </AccordionDetails>
                 </Accordion> */}
+                </>
 
                 {data?.isTOP !== undefined && (
                     <Accordion
@@ -2571,7 +2644,17 @@ const Edit = () => {
                                 <div>
                                     <FilePondSingle
                                         image={data?.image}
-                                        setImage={handleImageChange}
+                                        setImage={(image) =>
+                                            setData({
+                                                ...data,
+                                                image: image || '',
+                                            })
+                                        }
+                                        isAlt={true}
+                                        alt={data?.imageAlt || ''}
+                                        setAlt={(alt) =>
+                                            setData({ ...data, imageAlt: alt })
+                                        }
                                         type={type}
                                     />
                                 </div>

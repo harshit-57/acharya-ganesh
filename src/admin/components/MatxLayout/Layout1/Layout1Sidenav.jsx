@@ -92,20 +92,22 @@ const Layout1Sidenav = () => {
                 </Brand>
                 <Sidenav />
             </NavListBox>
-            <Box
-                sx={{
-                    margin: 'auto',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '90%',
-                    padding: '10px 0',
-                    borderTop: `1px solid ${theme.palette.divider}`,
-                    backgroundColor: theme.palette.background.default,
-                }}
-            >
-                {admin?.RoleName || 'Super Admin'}
-            </Box>
+            {leftSidebar?.mode === 'full' && (
+                <Box
+                    sx={{
+                        margin: 'auto',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '90%',
+                        padding: '10px 0',
+                        borderTop: `1px solid ${theme.palette.divider}`,
+                        backgroundColor: theme.palette.background.default,
+                    }}
+                >
+                    {admin?.RoleName || 'Super Admin'}
+                </Box>
+            )}
         </SidebarNavRoot>
     );
 };

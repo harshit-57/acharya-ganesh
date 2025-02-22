@@ -4,13 +4,19 @@ import Stories from 'react-insta-stories';
 import IcPlay from '../../assets/play.svg';
 import IcPause from '../../assets/pause.svg';
 import LeftArrow from '../../assets/left-arrow.png';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { APIHelper } from '../../util/APIHelper';
 import parse from 'html-react-parser';
 export const WebStoriesView = () => {
+    const [searchParams] = useSearchParams();
+    const { state } = useLocation();
     const { slug } = useParams();
     const [ws, setWs] = useState(null);
     useEffect(() => {
+        if (searchParams?.get('preview')) {
+            setWs(state?.data);
+            return;
+        }
         getCourse();
     }, [slug]);
     const getCourse = async () => {
@@ -47,10 +53,7 @@ export const WebStoriesView = () => {
                                               ? css.story_media
                                               : css.story_media_main
                                       }
-                                      src={
-                                          img?.ImageUrl ||
-                                          'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.2bJ9_f9aKoGCME7ZIff-ZwHaJ4%26pid%3DApi&f=1&ipt=8f5362c1ddb3ce7c507902636a92e2c0e8b20e015b03a062e0c0524ac47319d3&ipo=images'
-                                      }
+                                      src={img?.ImageUrl || ''}
                                       alt={''}
                                   />
                                   {img?.ImageText && (
@@ -70,15 +73,11 @@ export const WebStoriesView = () => {
                               </div>
                           );
                       },
-                      url:
-                          img?.ImageUrl ||
-                          'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.2bJ9_f9aKoGCME7ZIff-ZwHaJ4%26pid%3DApi&f=1&ipt=8f5362c1ddb3ce7c507902636a92e2c0e8b20e015b03a062e0c0524ac47319d3&ipo=images',
+                      url: img?.ImageUrl || ws?.CoverImageUrl || '',
                   };
               }
           )
         : [
-              // ws?.CoverImageUrl ||
-              //     'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.2bJ9_f9aKoGCME7ZIff-ZwHaJ4%26pid%3DApi&f=1&ipt=8f5362c1ddb3ce7c507902636a92e2c0e8b20e015b03a062e0c0524ac47319d3&ipo=images',
               {
                   content: ({ action, isPaused }) => {
                       return (
@@ -97,18 +96,13 @@ export const WebStoriesView = () => {
                               />
                               <img
                                   className={css.story_media_main}
-                                  src={
-                                      ws?.CoverImageUrl ||
-                                      'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.2bJ9_f9aKoGCME7ZIff-ZwHaJ4%26pid%3DApi&f=1&ipt=8f5362c1ddb3ce7c507902636a92e2c0e8b20e015b03a062e0c0524ac47319d3&ipo=images'
-                                  }
+                                  src={ws?.CoverImageUrl || ''}
                                   alt={''}
                               />
                           </div>
                       );
                   },
-                  url:
-                      ws?.CoverImageUrl ||
-                      'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.2bJ9_f9aKoGCME7ZIff-ZwHaJ4%26pid%3DApi&f=1&ipt=8f5362c1ddb3ce7c507902636a92e2c0e8b20e015b03a062e0c0524ac47319d3&ipo=images',
+                  url: ws?.CoverImageUrl || '',
               },
           ];
 
@@ -188,15 +182,4 @@ export const WebStoriesView = () => {
             </div>
         </div>
     );
-};
-const renderer = ({ story, action, isPaused, config }) => {
-    return <div>Hello!</div>;
-};
-
-const tester = (story) => {
-    return {
-        // Use this renderer only when the story type is video
-        condition: story.type === 'video',
-        priority: 3,
-    };
 };

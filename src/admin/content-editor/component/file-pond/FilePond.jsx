@@ -6,11 +6,19 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import { UPLOADAPIHELPER } from '../../../../util/APIHelper';
 import { HorizontalBorder } from '../../../../components/spacer/Spacer';
 import styles from './style.module.css';
+import { InputField } from '../../../../components/input-field/InputField';
 
-// Register the plugins
 registerPlugin(FilePondPluginImagePreview);
 
-const FilePondSingle = ({ image, setImage, type, index }) => {
+const FilePondSingle = ({
+    image,
+    setImage,
+    type,
+    index,
+    isAlt,
+    alt,
+    setAlt,
+}) => {
     const imageUpload = useRef(null);
     const [files, setFiles] = useState([]);
     const [initialImageLoaded, setInitialImageLoaded] = useState(false);
@@ -18,6 +26,9 @@ const FilePondSingle = ({ image, setImage, type, index }) => {
     useEffect(() => {
         if (image && typeof image === 'string' && !initialImageLoaded) {
             setFiles([{ source: image, options: { type: 'local' } }]);
+            setInitialImageLoaded(true);
+        } else if (!image && !initialImageLoaded) {
+            setFiles([]);
             setInitialImageLoaded(true);
         }
     }, [image, initialImageLoaded]);
@@ -43,28 +54,21 @@ const FilePondSingle = ({ image, setImage, type, index }) => {
                     error('Upload failed');
                 });
 
-            return {
-                abort: () => {
-                    console.log('Upload aborted');
-                },
-            };
+            return { abort: () => console.log('Upload aborted') };
         },
         load: (source, load, error, progress, abort) => {
-            // Load existing image URL without re-uploading
             fetch(source)
                 .then((res) => res.blob())
-                .then((blob) => {
-                    load(blob);
-                })
+                .then((blob) => load(blob))
                 .catch((err) => {
                     console.log('Load error:', err);
                     error('Failed to load image');
                 });
         },
         revert: (uniqueFileId, load, error) => {
-            setImage(null, index); // Clear parent state
-            setFiles([]); // Clear FilePond files
-            load(); // Complete revert
+            setImage(null, index);
+            setFiles([]);
+            load();
         },
     };
 
@@ -91,7 +95,6 @@ const FilePondSingle = ({ image, setImage, type, index }) => {
                 allowRemove={true}
                 allowReplace={true}
                 onupdatefiles={(fileItems) => {
-                    // Only update files state for new uploads, not removals
                     if (fileItems.length > 0) {
                         setFiles(fileItems.map((fileItem) => fileItem.file));
                     }
@@ -108,6 +111,19 @@ const FilePondSingle = ({ image, setImage, type, index }) => {
                 name="files"
                 labelIdle={`Drag & Drop ${type} image or <span class="filepond--label-action">Browse</span>`}
             />
+            {isAlt && image && (
+                <div className={styles.alt_wrappper}>
+                    <p className={styles.alt_label}>Image Alt Text</p>
+                    <InputField
+                        className={styles.input}
+                        type="text"
+                        value={alt}
+                        name="alt"
+                        onChange={(e) => setAlt(e.target.value)}
+                        placeholder="Placeholder Text"
+                    />
+                </div>
+            )}
             <HorizontalBorder height="1px" color="#ddd" />
             {image ? (
                 <div
@@ -132,4 +148,5 @@ const FilePondSingle = ({ image, setImage, type, index }) => {
         </>
     );
 };
+
 export default FilePondSingle;
