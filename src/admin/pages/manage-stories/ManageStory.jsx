@@ -17,6 +17,7 @@ import { PrintExcel, getRoleAndpermission } from '../../utils/utils';
 import moment from 'moment';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { APIHelper } from '../../../util/APIHelper';
+import { MatxLoading } from '../../components';
 
 const ContentBox = styled('div')(({ theme }) => ({
     margin: '30px',
@@ -226,6 +227,9 @@ const ManageStory = () => {
                             </div>
                         </div>
                         <div style={{ marginTop: '20px' }}>
+                            {loading && (
+                                <MatxLoading style={{ margin: '20px' }} />
+                            )}
                             <PaginationTable
                                 data={stories}
                                 totalItems={totalCount}

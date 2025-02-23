@@ -7,11 +7,16 @@ import LeftArrow from '../../assets/left-arrow.png';
 import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { APIHelper } from '../../util/APIHelper';
 import parse from 'html-react-parser';
+import { htmlToText } from 'html-to-text';
+import { Icon, Link } from '@mui/material';
+import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
+
 export const WebStoriesView = () => {
     const [searchParams] = useSearchParams();
     const { state } = useLocation();
     const { slug } = useParams();
     const [ws, setWs] = useState(null);
+
     useEffect(() => {
         if (searchParams?.get('preview')) {
             setWs(state?.data);
@@ -19,6 +24,7 @@ export const WebStoriesView = () => {
         }
         getCourse();
     }, [slug]);
+
     const getCourse = async () => {
         try {
             const response = await APIHelper.getWebStories({ id: slug });
@@ -29,71 +35,94 @@ export const WebStoriesView = () => {
     };
 
     const stories = ws?.Images?.length
-        ? ws?.Images?.sort((a, b) => a.ImageOrder - b.ImageOrder)?.map(
-              (img) => {
-                  return {
-                      content: ({ action, isPaused }) => {
-                          return (
-                              <div
-                                  className={`${css.story_content_container} ${css.zoom_out}`}
-                              >
-                                  <img
-                                      className={css.story_play_pause_button}
-                                      src={isPaused ? IcPlay : IcPause}
-                                      alt={''}
-                                      onClick={() =>
-                                          isPaused
-                                              ? action('play')
-                                              : action('pause')
-                                      }
-                                  />
-                                  <img
-                                      className={
-                                          img?.ImageText
-                                              ? css.story_media
-                                              : css.story_media_main
-                                      }
-                                      src={img?.ImageUrl || ''}
-                                      alt={''}
-                                  />
-                                  {img?.ImageText && (
-                                      <div
-                                          className={`${css.story_text_container} ${css[currentAnimation]}`}
-                                      >
-                                          {/* <h2>Capricon</h2>
-                             <p>
-                                 Get your daily horoscope and discover what the
-                                 stars have in store for you. From love and
-                                 relationships to career and success, our daily
-                                 horoscope has got you covered.
-                             </p> */}
-                                          {parse(img?.ImageText)}
-                                      </div>
-                                  )}
-                              </div>
-                          );
-                      },
-                      url: img?.ImageUrl || ws?.CoverImageUrl || '',
-                  };
-              }
-          )
-        : [
-              {
+        ? ws?.Images
+              // ?.sort((a, b) => a.ImageOrder - b.ImageOrder)
+              ?.map((img) => ({
                   content: ({ action, isPaused }) => {
+                      const handlePlayPause = (e) => {
+                          e.stopPropagation();
+                          isPaused ? action('play') : action('pause');
+                      };
+
+                      const handleSeeMore = (e) => {
+                          e.stopPropagation();
+                          // Replace with your desired URL or action
+                          window.open('https://example.com', '_blank');
+                      };
+
                       return (
                           <div
                               className={`${css.story_content_container} ${css.zoom_out}`}
                           >
-                              <img
+                              <button
                                   className={css.story_play_pause_button}
-                                  src={isPaused ? IcPlay : IcPause}
-                                  alt={''}
-                                  onClick={() =>
-                                      isPaused
-                                          ? action('play')
-                                          : action('pause')
-                                  }
+                                  onClick={handlePlayPause}
+                                  style={{ zIndex: 1000 }}
+                              >
+                                  <img
+                                      src={isPaused ? IcPlay : IcPause}
+                                      alt={isPaused ? 'Play' : 'Pause'}
+                                  />
+                              </button>
+                              <img
+                                  className={css.story_media}
+                                  src={img?.ImageUrl || ''}
+                                  alt={`Story Image ${img?.Id}`}
                               />
+                              {htmlToText(img?.ImageText)?.trim() ? (
+                                  <div
+                                      className={`${css.story_text_container} ${css[currentAnimation]}`}
+                                  >
+                                      {parse(img?.ImageText)}
+                                  </div>
+                              ) : img?.ImageLink ? (
+                                  <div
+                                      className={`${css.story_link_container} ${css[currentAnimation]}`}
+                                  >
+                                      <Link
+                                          href={img?.ImageLink || ''}
+                                          // target={
+                                          //     '_blank'
+                                          // }
+                                      >
+                                          {/* <Icon className={css.link_icon}>
+                                              {img?.ImageLinkIcon || ''}
+                                          </Icon> */}
+                                          <KeyboardArrowUp
+                                              className={css.link_icon}
+                                          />
+                                          <p className={css.link_text}>
+                                              {img?.ImageLinkText || 'See More'}
+                                          </p>
+                                      </Link>
+                                  </div>
+                              ) : null}
+                          </div>
+                      );
+                  },
+                  url: img?.ImageUrl || ws?.CoverImageUrl || '',
+              }))
+        : [
+              {
+                  content: ({ action, isPaused }) => {
+                      const handlePlayPause = (e) => {
+                          e.stopPropagation();
+                          isPaused ? action('play') : action('pause');
+                      };
+
+                      return (
+                          <div
+                              className={`${css.story_content_container} ${css.zoom_out}`}
+                          >
+                              <button
+                                  className={css.story_play_pause_button}
+                                  onClick={handlePlayPause}
+                              >
+                                  <img
+                                      src={isPaused ? IcPlay : IcPause}
+                                      alt={isPaused ? 'Play' : 'Pause'}
+                                  />
+                              </button>
                               <img
                                   className={css.story_media_main}
                                   src={ws?.CoverImageUrl || ''}
@@ -113,11 +142,10 @@ export const WebStoriesView = () => {
             'slide_in_left',
             'slide_in_right',
             'bounce',
-            'rotate_in',
+            // 'rotate_in',
             'flip_in',
         ];
-        const randomIndex = Math.floor(Math.random() * animations.length);
-        return animations[randomIndex];
+        return animations[Math.floor(Math.random() * animations.length)];
     };
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -144,7 +172,9 @@ export const WebStoriesView = () => {
                 <button
                     onClick={onPrev}
                     className={css.prev_button}
-                    style={{ opacity: currentIndex <= 0 ? 0.2 : 1 }}
+                    style={{
+                        opacity: currentIndex <= 0 ? 0.2 : 1,
+                    }}
                 >
                     <img src={LeftArrow} alt={''} />
                 </button>
@@ -171,13 +201,8 @@ export const WebStoriesView = () => {
                         if (currentIndex < stories.length - 1)
                             setCurrentIndex(currentIndex + 1);
                     }}
-                    onNext={() => {
-                        if (currentIndex < stories.length - 1)
-                            setCurrentIndex(currentIndex + 1);
-                    }}
-                    onPrevious={() => {
-                        if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
-                    }}
+                    onNext={onNext}
+                    onPrevious={onPrev}
                 />
             </div>
         </div>

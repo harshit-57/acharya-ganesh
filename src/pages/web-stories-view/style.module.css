@@ -29,16 +29,12 @@
     width: 100%;
     height: 100%;
     position: relative;
-    .story_media_main {
+    z-index: 1000;
+
+    .story_media {
         width: 100%;
         height: 100%;
         object-fit: fill;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-    .story_media {
-        width: 100%;
         position: absolute;
         top: 0;
         left: 0;
@@ -49,19 +45,33 @@
         position: absolute;
         top: 15px;
         right: 15px;
-        z-index: 10000;
+        z-index: 1000;
         cursor: pointer;
         pointer-events: auto;
+        background-color: transparent;
+        /* background-color: #00000050; */
+        img {
+            width: 100%;
+            height: 100%;
+        }
     }
     .story_text_container {
         width: 100%;
-        height: 40%;
+        max-height: 40%;
         position: absolute;
-        top: 58%;
-        left: 0;
+        bottom: 0;
         font-size: 140%;
-        padding: 40px 30px;
-        /* background: linear-gradient(to bottom, #ffffff00, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff); */
+        padding: 10px 30px;
+        background: linear-gradient(
+            to bottom,
+            #ffffff00,
+            #ffffff20,
+            #ffffff40,
+            #ffffff50,
+            #ffffff60,
+            #ffffff80,
+            #ffffff
+        );
         flex-direction: column;
         display: flex;
         overflow: auto;
@@ -73,6 +83,52 @@
             font-size: 24px;
             font-weight: 500;
             letter-spacing: 0;
+        }
+    }
+    .story_link_container {
+        padding-bottom: 20px;
+        width: 100%;
+        max-height: 40%;
+        position: absolute;
+        bottom: 0;
+        font-size: 140%;
+        padding: 10px 30px;
+        background: linear-gradient(
+            to bottom,
+            #ffffff25,
+            #ffffff50,
+            #ffffff75,
+            #ffffff
+        );
+        flex-direction: column;
+        display: flex;
+        overflow: auto;
+
+        a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            /* gap: 10px; */
+            transition: all 0.3s ease-in-out;
+            font-size: 14px;
+            font-weight: 500;
+            &:hover {
+                padding-bottom: 40px;
+                padding-top: 20px;
+                text-decoration: none;
+                /* gap: 20px; */
+            }
+            .link_text {
+                background-color: var(--color-black);
+                border-radius: var(--default-button-border-radius);
+                color: var(--color-white);
+                padding: 5px 10px;
+            }
+            .link_icon {
+                color: var(--color-black);
+                fill: var(--color-black);
+            }
         }
     }
 }

@@ -20,6 +20,7 @@ import {
     Box,
     Checkbox,
     Icon,
+    Link,
     Tooltip,
     Typography,
     useTheme,
@@ -35,6 +36,7 @@ import { htmlToText } from 'html-to-text';
 import AlertDialog from '../components/Alert';
 import parse from 'html-react-parser';
 import FilePondSingle from './component/file-pond/FilePond';
+import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
 
 const Edit = () => {
     const { updateSettings } = useSettings();
@@ -99,7 +101,7 @@ const Edit = () => {
         },
         rating: ['testimonial']?.includes(type) ? '' : undefined,
         storyImages: ['story']?.includes(type) ? [] : undefined,
-        timeDuration: ['story']?.includes(type) ? 10 : undefined,
+        timeDuration: ['story']?.includes(type) ? 500 : undefined,
     };
 
     const [data, setData] = useState(initalData);
@@ -401,8 +403,16 @@ const Edit = () => {
                                 response?.Images?.map((item, index) => ({
                                     id: item?.id,
                                     imageText: item?.ImageText,
+                                    imageType: htmlToText(
+                                        item?.ImageText
+                                    )?.trim()
+                                        ? 'text'
+                                        : 'link',
                                     imageUrl: item?.ImageUrl,
                                     imageOrder: item?.ImageOrder || index + 1,
+                                    imageLink: item?.ImageLink || '',
+                                    imageLinkText: item?.ImageLinkText || '',
+                                    imageLinkIcon: item?.ImageLinkIcon || '',
                                 })) || [],
                             timeDuration: response?.TimeDuration,
                         });
@@ -579,9 +589,33 @@ const Edit = () => {
                         isValid = false;
                         return isValid;
                     }
-                    if (!item?.imageText) {
+                    if (item?.imageType === 'link') {
+                        if (!item?.imageLink) {
+                            toast.error(
+                                ` ${index + 1} Story Image Link is required`
+                            );
+                            isValid = false;
+                            return isValid;
+                        }
+                        if (!item?.imageLink?.match(/^(http|https):\/\//)) {
+                            toast.error(
+                                `${
+                                    index + 1
+                                } Story Image Link is not a valid URL`
+                            );
+                            isValid = false;
+                            return isValid;
+                        }
+                        if (!item?.imageLinkText) {
+                            toast.error(
+                                `${index + 1} Story Image Link Text is required`
+                            );
+                            isValid = false;
+                            return isValid;
+                        }
+                    } else if (!htmlToText(item?.imageText)) {
                         toast.error(
-                            `Story Image Text ${index + 1} is required`
+                            `${index + 1} Story Image Text is required`
                         );
                         isValid = false;
                         return isValid;
@@ -1124,6 +1158,9 @@ const Edit = () => {
                                 ImageText: item?.imageText,
                                 ImageUrl: item?.imageUrl,
                                 ImageOrder: index + 1,
+                                ImageLink: item?.imageLink,
+                                ImageLinkText: item?.imageLinkText,
+                                ImageLinkIcon: item?.imageLinkIcon,
                             })) || [],
                         TimeDuration: data?.timeDuration,
                     };
@@ -1411,7 +1448,7 @@ const Edit = () => {
                             className={styles.additional_header}
                         >
                             <Typography component="div" variant="div">
-                                <span>{type} data</span>
+                                <span>{type} Data</span>
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
@@ -1497,6 +1534,782 @@ const Edit = () => {
                                     setData({ ...data, shortDescription: html })
                                 }
                             />
+                        </AccordionDetails>
+                    </Accordion>
+                )}
+
+                {data?.timeDuration !== undefined && (
+                    <Accordion
+                        defaultExpanded
+                        className={styles.accordion_container}
+                    >
+                        <AccordionSummary
+                            expandIcon={
+                                <ArrowDropDownIcon
+                                    color="disabled"
+                                    sx={{ fontSize: '2rem' }}
+                                />
+                            }
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                            className={styles.additional_header}
+                        >
+                            <Typography component="div" variant="div">
+                                <span>{type} Data</span>
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Box
+                                className={styles.content_wrappper}
+                                style={{ maxWidth: '100%' }}
+                            >
+                                <p className={styles.content_label}>
+                                    Time Duration
+                                </p>
+                                <InputField
+                                    className={styles.input}
+                                    type="number"
+                                    value={data?.timeDuration}
+                                    name="timeDuration"
+                                    onChange={handleChangeData}
+                                    placeholder="Enter Time Duration"
+                                />
+                            </Box>
+                        </AccordionDetails>
+                    </Accordion>
+                )}
+
+                {data?.storyImages !== undefined && (
+                    <Accordion
+                        defaultExpanded
+                        className={styles.accordion_container}
+                    >
+                        <AccordionSummary
+                            expandIcon={
+                                <ArrowDropDownIcon
+                                    color="disabled"
+                                    sx={{ fontSize: '2rem' }}
+                                />
+                            }
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                            className={styles.additional_header}
+                        >
+                            <Typography component="div" variant="div">
+                                <span>Story Images</span>
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <div className={styles.story_container}>
+                                {data?.storyImages?.map((storyImage, index) => (
+                                    <>
+                                        <div
+                                            className={
+                                                styles.Web_stories_container
+                                            }
+                                        >
+                                            <div className={styles.leftSection}>
+                                                <Box
+                                                    className={
+                                                        styles.content_wrappper
+                                                    }
+                                                >
+                                                    <FilePondSingle
+                                                        index={index}
+                                                        image={
+                                                            storyImage?.imageUrl
+                                                        }
+                                                        setImage={(
+                                                            img,
+                                                            imageIndex
+                                                        ) =>
+                                                            setData((prev) => {
+                                                                return {
+                                                                    ...prev,
+                                                                    storyImages:
+                                                                        prev.storyImages.map(
+                                                                            (
+                                                                                storyImage,
+                                                                                i
+                                                                            ) => {
+                                                                                return imageIndex ==
+                                                                                    i
+                                                                                    ? {
+                                                                                          ...storyImage,
+                                                                                          imageUrl:
+                                                                                              img,
+                                                                                      }
+                                                                                    : storyImage;
+                                                                            }
+                                                                        ),
+                                                                };
+                                                            })
+                                                        }
+                                                        type={type}
+                                                    />
+
+                                                    <p
+                                                        className={
+                                                            styles.content_label
+                                                        }
+                                                        style={{
+                                                            marginTop: '20px',
+                                                        }}
+                                                    >
+                                                        Story Type
+                                                    </p>
+                                                    <div
+                                                        className={
+                                                            styles.tab_container
+                                                        }
+                                                    >
+                                                        {['text', 'link'].map(
+                                                            (imageType) => (
+                                                                <button
+                                                                    key={
+                                                                        imageType
+                                                                    }
+                                                                    onClick={() =>
+                                                                        setData(
+                                                                            {
+                                                                                ...data,
+                                                                                storyImages:
+                                                                                    data.storyImages?.map(
+                                                                                        (
+                                                                                            storyImage,
+                                                                                            i
+                                                                                        ) => {
+                                                                                            return index ===
+                                                                                                i
+                                                                                                ? {
+                                                                                                      ...storyImage,
+                                                                                                      imageType:
+                                                                                                          imageType,
+                                                                                                  }
+                                                                                                : storyImage;
+                                                                                        }
+                                                                                    ),
+                                                                            }
+                                                                        )
+                                                                    }
+                                                                    className={
+                                                                        (storyImage?.imageType ||
+                                                                            'text') ==
+                                                                        imageType
+                                                                            ? styles.tab_button_active
+                                                                            : styles.tab_button
+                                                                    }
+                                                                >
+                                                                    {imageType ||
+                                                                        'None'}
+                                                                </button>
+                                                            )
+                                                        )}
+                                                    </div>
+                                                </Box>
+                                            </div>
+                                            <div
+                                                className={styles.rightSection}
+                                            >
+                                                <div
+                                                    className={
+                                                        styles.previewContainer
+                                                    }
+                                                >
+                                                    {storyImage.imageUrl ? (
+                                                        <img
+                                                            className={
+                                                                styles.story_media
+                                                            }
+                                                            src={
+                                                                storyImage?.imageUrl ||
+                                                                null
+                                                            }
+                                                            alt={`storyImage-${
+                                                                index + 1
+                                                            }`}
+                                                        />
+                                                    ) : (
+                                                        <div
+                                                            className={
+                                                                styles.story_no_media
+                                                            }
+                                                        ></div>
+                                                    )}
+                                                    {storyImage?.imageType ===
+                                                    'link' ? (
+                                                        <div
+                                                            className={`${styles.story_link_container}`}
+                                                        >
+                                                            <Link
+                                                                href={
+                                                                    storyImage?.imageLink ||
+                                                                    ''
+                                                                }
+                                                                target={
+                                                                    '_blank'
+                                                                }
+                                                            >
+                                                                <Icon
+                                                                    className={
+                                                                        styles.link_icon
+                                                                    }
+                                                                >
+                                                                    {storyImage?.imageLinkIcon ||
+                                                                        ''}
+                                                                </Icon>
+                                                                <p
+                                                                    className={
+                                                                        styles.link_text
+                                                                    }
+                                                                >
+                                                                    {storyImage?.imageLinkText ||
+                                                                        'See More'}
+                                                                </p>
+                                                            </Link>
+                                                        </div>
+                                                    ) : (
+                                                        <div
+                                                            className={`${styles.story_text_container}`}
+                                                        >
+                                                            {parse(
+                                                                storyImage?.imageText
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div class={styles.lastSection}>
+                                                <div
+                                                    className={
+                                                        styles.ActionsContainer
+                                                    }
+                                                >
+                                                    <div
+                                                        class={styles.button}
+                                                        style={{
+                                                            opacity:
+                                                                index > 0
+                                                                    ? 1
+                                                                    : 0.5,
+                                                        }}
+                                                        onClick={() => {
+                                                            if (index > 0)
+                                                                setData(
+                                                                    (
+                                                                        prevData
+                                                                    ) => ({
+                                                                        ...prevData,
+                                                                        storyImages:
+                                                                            prevData.storyImages.map(
+                                                                                (
+                                                                                    item,
+                                                                                    i
+                                                                                ) => {
+                                                                                    if (
+                                                                                        i ===
+                                                                                        index
+                                                                                    )
+                                                                                        return prevData
+                                                                                            .storyImages[
+                                                                                            index -
+                                                                                                1
+                                                                                        ];
+                                                                                    if (
+                                                                                        i ===
+                                                                                        index -
+                                                                                            1
+                                                                                    )
+                                                                                        return prevData
+                                                                                            .storyImages[
+                                                                                            index
+                                                                                        ];
+                                                                                    return item;
+                                                                                }
+                                                                            ),
+                                                                    })
+                                                                );
+                                                        }}
+                                                    >
+                                                        <Icon>
+                                                            keyboard_arrow_up
+                                                        </Icon>
+                                                    </div>
+                                                    <Tooltip title="Delete">
+                                                        <div
+                                                            class={
+                                                                styles.button
+                                                            }
+                                                            onClick={() => {
+                                                                setData(
+                                                                    (p) => ({
+                                                                        ...p,
+                                                                        storyImages:
+                                                                            p.storyImages.filter(
+                                                                                (
+                                                                                    e,
+                                                                                    i
+                                                                                ) =>
+                                                                                    i !==
+                                                                                    index
+                                                                            ),
+                                                                    })
+                                                                );
+                                                            }}
+                                                        >
+                                                            <Icon color="primary">
+                                                                delete
+                                                            </Icon>
+                                                        </div>
+                                                    </Tooltip>
+                                                    <div
+                                                        class={styles.button}
+                                                        style={{
+                                                            opacity:
+                                                                index + 1 <
+                                                                data
+                                                                    ?.storyImages
+                                                                    ?.length
+                                                                    ? 1
+                                                                    : 0.5,
+                                                        }}
+                                                        onClick={() => {
+                                                            if (
+                                                                index + 1 <
+                                                                data
+                                                                    ?.storyImages
+                                                                    .length
+                                                            )
+                                                                setData(
+                                                                    (
+                                                                        prevData
+                                                                    ) => ({
+                                                                        ...prevData,
+                                                                        storyImages:
+                                                                            prevData.storyImages.map(
+                                                                                (
+                                                                                    item,
+                                                                                    i
+                                                                                ) => {
+                                                                                    if (
+                                                                                        i ===
+                                                                                        index
+                                                                                    )
+                                                                                        return prevData
+                                                                                            .storyImages[
+                                                                                            index +
+                                                                                                1
+                                                                                        ];
+                                                                                    if (
+                                                                                        i ===
+                                                                                        index +
+                                                                                            1
+                                                                                    )
+                                                                                        return prevData
+                                                                                            .storyImages[
+                                                                                            index
+                                                                                        ];
+                                                                                    return item;
+                                                                                }
+                                                                            ),
+                                                                    })
+                                                                );
+                                                        }}
+                                                    >
+                                                        <Icon>
+                                                            keyboard_arrow_down
+                                                        </Icon>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {storyImage?.imageType == 'link' ? (
+                                            <Box
+                                                className={
+                                                    styles.content_wrappper
+                                                }
+                                                style={{
+                                                    maxWidth: '100%',
+                                                    margin: '20px 0',
+                                                }}
+                                            >
+                                                <p
+                                                    className={
+                                                        styles.content_label
+                                                    }
+                                                >
+                                                    Story Link
+                                                </p>
+                                                <InputField
+                                                    className={styles.input}
+                                                    type="text"
+                                                    value={
+                                                        storyImage?.imageLink
+                                                    }
+                                                    name="imageLink"
+                                                    onChange={(e) =>
+                                                        setData((prevData) => ({
+                                                            ...prevData,
+                                                            storyImages:
+                                                                prevData.storyImages.map(
+                                                                    (
+                                                                        item,
+                                                                        i
+                                                                    ) => {
+                                                                        if (
+                                                                            i ===
+                                                                            index
+                                                                        )
+                                                                            return {
+                                                                                ...item,
+                                                                                imageLink:
+                                                                                    e
+                                                                                        .target
+                                                                                        .value,
+                                                                            };
+                                                                        return item;
+                                                                    }
+                                                                ),
+                                                        }))
+                                                    }
+                                                    placeholder="Enter Link"
+                                                />
+                                                <p
+                                                    className={
+                                                        styles.content_label
+                                                    }
+                                                >
+                                                    Story Link Text
+                                                </p>
+
+                                                <InputField
+                                                    className={styles.input}
+                                                    type="text"
+                                                    value={
+                                                        storyImage?.imageLinkText
+                                                    }
+                                                    name="imageLinkText"
+                                                    onChange={(e) =>
+                                                        setData((prevData) => ({
+                                                            ...prevData,
+                                                            storyImages:
+                                                                prevData.storyImages.map(
+                                                                    (
+                                                                        item,
+                                                                        i
+                                                                    ) => {
+                                                                        if (
+                                                                            i ===
+                                                                            index
+                                                                        )
+                                                                            return {
+                                                                                ...item,
+                                                                                imageLinkText:
+                                                                                    e
+                                                                                        .target
+                                                                                        .value,
+                                                                            };
+                                                                        return item;
+                                                                    }
+                                                                ),
+                                                        }))
+                                                    }
+                                                    placeholder="Enter Link Text"
+                                                />
+
+                                                <p
+                                                    className={
+                                                        styles.content_label
+                                                    }
+                                                >
+                                                    Story Link Icon
+                                                </p>
+                                                <div>
+                                                    <div
+                                                        style={{
+                                                            display: 'flex',
+                                                            justifyContent:
+                                                                'space-between',
+                                                            alignItems:
+                                                                'center',
+                                                        }}
+                                                    >
+                                                        <div
+                                                            style={{
+                                                                width: '45%',
+                                                            }}
+                                                        >
+                                                            <select
+                                                                style={{
+                                                                    borderRadius:
+                                                                        '9999px',
+                                                                    padding:
+                                                                        '15px 16px',
+                                                                    border: '1px solid #ccc',
+                                                                    fontSize:
+                                                                        '16px',
+                                                                    appearance:
+                                                                        'none',
+                                                                    background:
+                                                                        'white',
+                                                                    fontFamily:
+                                                                        'inherit',
+                                                                    outline:
+                                                                        'none',
+                                                                    width: '100%',
+                                                                }}
+                                                            >
+                                                                <option>
+                                                                    MUI Icons
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div
+                                                            style={{
+                                                                width: '45%',
+                                                            }}
+                                                        >
+                                                            <InputField
+                                                                className={
+                                                                    styles.input
+                                                                }
+                                                                type="text"
+                                                                value={
+                                                                    storyImage?.imageLinkIcon
+                                                                }
+                                                                placeholder="Enter Icon name"
+                                                                onChange={(e) =>
+                                                                    setData({
+                                                                        ...data,
+                                                                        storyImages:
+                                                                            data?.storyImages?.map(
+                                                                                (
+                                                                                    image,
+                                                                                    i
+                                                                                ) =>
+                                                                                    index ===
+                                                                                    i
+                                                                                        ? {
+                                                                                              ...image,
+                                                                                              imageLinkIcon:
+                                                                                                  e
+                                                                                                      .target
+                                                                                                      .value,
+                                                                                          }
+                                                                                        : image
+                                                                            ),
+                                                                    })
+                                                                }
+                                                            />
+                                                        </div>
+                                                        <div
+                                                            style={{
+                                                                width: '5%',
+                                                            }}
+                                                        >
+                                                            <span
+                                                                style={{
+                                                                    display:
+                                                                        'flex',
+                                                                    alignItems:
+                                                                        'center',
+                                                                    justifyContent:
+                                                                        'center',
+                                                                }}
+                                                            >
+                                                                {storyImage?.imageLinkIcon && (
+                                                                    <Icon>
+                                                                        {
+                                                                            storyImage?.imageLinkIcon
+                                                                        }
+                                                                    </Icon>
+                                                                )}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <span
+                                                            className={
+                                                                styles.icon_name_info_container
+                                                            }
+                                                        >
+                                                            <svg
+                                                                width="20"
+                                                                height="20"
+                                                                viewBox="0 0 20 20"
+                                                                fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                            >
+                                                                <path
+                                                                    d="M10 12.8V10M10 7.2H10.007M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                                                                    stroke="#2C2520"
+                                                                    stroke-opacity="0.7"
+                                                                    stroke-width="1.5"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round"
+                                                                />
+                                                            </svg>
+                                                            <span
+                                                                className={
+                                                                    styles.icon_name_info
+                                                                }
+                                                            >
+                                                                Enter icon name
+                                                                from the list.
+                                                            </span>
+                                                        </span>
+                                                        <span
+                                                            className={
+                                                                styles.icon_name_info_example
+                                                            }
+                                                            style={{
+                                                                cursor: 'pointer',
+                                                            }}
+                                                        >
+                                                            Examples:{' '}
+                                                            <u
+                                                                onClick={() =>
+                                                                    setData({
+                                                                        ...data,
+                                                                        storyImages:
+                                                                            data?.storyImages?.map(
+                                                                                (
+                                                                                    image,
+                                                                                    i
+                                                                                ) =>
+                                                                                    index ===
+                                                                                    i
+                                                                                        ? {
+                                                                                              ...image,
+                                                                                              imageLinkIcon:
+                                                                                                  'arrow_drop_up',
+                                                                                          }
+                                                                                        : image
+                                                                            ),
+                                                                    })
+                                                                }
+                                                            >
+                                                                arrow_drop_up
+                                                            </u>
+                                                            ,{' '}
+                                                            <u
+                                                                onClick={() =>
+                                                                    setData({
+                                                                        ...data,
+                                                                        storyImages:
+                                                                            data?.storyImages?.map(
+                                                                                (
+                                                                                    image,
+                                                                                    i
+                                                                                ) =>
+                                                                                    index ===
+                                                                                    i
+                                                                                        ? {
+                                                                                              ...image,
+                                                                                              imageLinkIcon:
+                                                                                                  'keyboard_arrow_up',
+                                                                                          }
+                                                                                        : image
+                                                                            ),
+                                                                    })
+                                                                }
+                                                            >
+                                                                keyboard_arrow_up
+                                                            </u>
+                                                            ,{' '}
+                                                            <u
+                                                                onClick={() =>
+                                                                    setData({
+                                                                        ...data,
+                                                                        storyImages:
+                                                                            data?.storyImages?.map(
+                                                                                (
+                                                                                    image,
+                                                                                    i
+                                                                                ) =>
+                                                                                    index ===
+                                                                                    i
+                                                                                        ? {
+                                                                                              ...image,
+                                                                                              imageLinkIcon:
+                                                                                                  'keyboard_double_arrow_up',
+                                                                                          }
+                                                                                        : image
+                                                                            ),
+                                                                    })
+                                                                }
+                                                            >
+                                                                keyboard_double_arrow_up
+                                                            </u>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </Box>
+                                        ) : (
+                                            <div
+                                                className={
+                                                    styles.textEditorContainer
+                                                }
+                                            >
+                                                <Editor
+                                                    style={{}}
+                                                    content={
+                                                        storyImage?.imageText ||
+                                                        ''
+                                                    }
+                                                    setContent={(html) =>
+                                                        setData((p) => ({
+                                                            ...p,
+                                                            storyImages:
+                                                                p?.storyImages?.map(
+                                                                    (item, i) =>
+                                                                        i ==
+                                                                        index
+                                                                            ? {
+                                                                                  ...item,
+                                                                                  imageText:
+                                                                                      html,
+                                                                              }
+                                                                            : item
+                                                                ),
+                                                        }))
+                                                    }
+                                                />
+                                            </div>
+                                        )}
+
+                                        <HorizontalBorder
+                                            height="1px"
+                                            color="#ddd"
+                                        />
+                                    </>
+                                ))}
+                                <div
+                                    className={
+                                        styles.Web_stories_button_container
+                                    }
+                                >
+                                    <button
+                                        className={styles.Web_Stories_add_btn}
+                                        onClick={() => {
+                                            setData((prevData) => ({
+                                                ...prevData,
+                                                storyImages: [
+                                                    ...prevData.storyImages,
+                                                    {
+                                                        imageText: '',
+                                                        imageUrl: '',
+                                                        imageLink: '',
+                                                    },
+                                                ],
+                                            }));
+                                        }}
+                                    >
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
                         </AccordionDetails>
                     </Accordion>
                 )}
@@ -1679,11 +2492,9 @@ const Edit = () => {
                     </Accordion>
                 )}
 
-                {data?.storyImages !== undefined && (
-                    <Accordion
-                        defaultExpanded
-                        className={styles.accordion_container}
-                    >
+                {/* Additional Settings */}
+                {/* <>
+                    <Accordion className={styles.accordion_container}>
                         <AccordionSummary
                             expandIcon={
                                 <ArrowDropDownIcon
@@ -1696,647 +2507,320 @@ const Edit = () => {
                             className={styles.additional_header}
                         >
                             <Typography component="div" variant="div">
-                                <span>Story Images</span>
+                                <span>Additional Settings</span>
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <div className={styles.story_container}>
-                                {data?.storyImages?.map((storyImage, index) => (
-                                    <>
-                                        <div
-                                            className={
-                                                styles.Image_Accordian_container
-                                            }
-                                        >
-                                            <div className={styles.leftSection}>
-                                                <div
-                                                    className={
-                                                        styles.imagePondContainer
-                                                    }
-                                                >
-                                                    <FilePondSingle
-                                                        index={index}
-                                                        image={
-                                                            storyImage?.imageUrl
-                                                        }
-                                                        setImage={(
-                                                            img,
-                                                            imageIndex
-                                                        ) =>
-                                                            setData((prev) => {
-                                                                return {
-                                                                    ...prev,
-                                                                    storyImages:
-                                                                        prev.storyImages.map(
-                                                                            (
-                                                                                storyImage,
-                                                                                i
-                                                                            ) => {
-                                                                                return imageIndex ==
-                                                                                    i
-                                                                                    ? {
-                                                                                          ...storyImage,
-                                                                                          imageUrl:
-                                                                                              img,
-                                                                                      }
-                                                                                    : storyImage;
-                                                                            }
-                                                                        ),
-                                                                };
-                                                            })
-                                                        }
-                                                        type={type}
-                                                    />
-                                                </div>
+                            <Box className={styles.content_wrappper}>
+                                <p className={styles.content_label}>Images</p>
+                                <div>
+                                    <FilePondSingle
+                                        image={data?.extraDetails?.image}
+                                        setImage={(image) =>
+                                            setData({
+                                                ...data,
+                                                extraDetails: {
+                                                    ...data.extra,
+                                                    image: image,
+                                                },
+                                            })
+                                        }
+                                    />
+                                </div>
+                                <p className={styles.content_label}>
+                                    Custom Link
+                                </p>
+                                <div className={styles.permalink}>
+                                    <input
+                                        type="text"
+                                        value={data?.extraDetails?.link}
+                                        onChange={(e) =>
+                                            setData({
+                                                ...data,
+                                                extraDetails: {
+                                                    ...data?.extra,
+                                                    link: e.target.value,
+                                                },
+                                            })
+                                        }
+                                        placeholder="Enter Custom Link"
+                                    />
+                                    <span className={styles.edit_icon}>
+                                        <i className="fas fa-edit"></i>
+                                    </span>
+                                </div>
 
-                                                <div
-                                                    className={
-                                                        styles.textEditorContainer
-                                                    }
-                                                >
-                                                    <Editor
-                                                        style={{}}
-                                                        content={
-                                                            storyImage?.imageText ||
-                                                            ''
-                                                        }
-                                                        setContent={(html) =>
-                                                            setData((p) => ({
-                                                                ...p,
-                                                                storyImages:
-                                                                    p?.storyImages?.map(
-                                                                        (
-                                                                            item,
-                                                                            i
-                                                                        ) =>
-                                                                            i ==
-                                                                            index
-                                                                                ? {
-                                                                                      ...item,
-                                                                                      imageText:
-                                                                                          html,
-                                                                                  }
-                                                                                : item
-                                                                    ),
-                                                            }))
-                                                        }
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div
-                                                className={styles.rightSection}
-                                            >
-                                                <div
-                                                    className={
-                                                        styles.previewContainer
-                                                    }
-                                                    style={{
-                                                        height: storyImage?.imageText
-                                                            ? '100%'
-                                                            : 'auto',
-                                                    }}
-                                                >
-                                                    {storyImage.imageUrl ? (
-                                                        <img
-                                                            className={
-                                                                storyImage.imageUrl
-                                                                    ? styles.story_media
-                                                                    : styles.story_media_main
-                                                            }
-                                                            src={
-                                                                storyImage?.imageUrl ||
-                                                                null
-                                                            }
-                                                            alt={`storyImage-${
-                                                                index + 1
-                                                            }`}
-                                                        />
-                                                    ) : (
-                                                        <div
-                                                            className={
-                                                                styles.story_no_media
-                                                            }
-                                                        ></div>
-                                                    )}
-                                                    {storyImage?.imageText && (
-                                                        <div
-                                                            className={`${styles.story_text_container} html-content`}
-                                                        >
-                                                            <div
-                                                                className={
-                                                                    styles.story_text_overlay
-                                                                }
-                                                            >
-                                                                {parse(
-                                                                    storyImage?.imageText
-                                                                )}
-                                                            </div>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </div>
-                                            <div
-                                                class={
-                                                    styles.Crousal_Web_stories
-                                                }
-                                            >
-                                                <div
-                                                    className={
-                                                        styles.Crousal_Web_stories_wrapper
-                                                    }
-                                                >
-                                                    <div
-                                                        class={styles.button}
-                                                        style={{
-                                                            opacity:
-                                                                index > 0
-                                                                    ? 1
-                                                                    : 0.5,
-                                                        }}
-                                                        onClick={() => {
-                                                            if (index > 0)
-                                                                setData(
-                                                                    (
-                                                                        prevData
-                                                                    ) => ({
-                                                                        ...prevData,
-                                                                        storyImages:
-                                                                            prevData.storyImages.map(
-                                                                                (
-                                                                                    item,
-                                                                                    i
-                                                                                ) => {
-                                                                                    if (
-                                                                                        i ===
-                                                                                        index
-                                                                                    )
-                                                                                        return prevData
-                                                                                            .storyImages[
-                                                                                            index -
-                                                                                                1
-                                                                                        ];
-                                                                                    if (
-                                                                                        i ===
-                                                                                        index -
-                                                                                            1
-                                                                                    )
-                                                                                        return prevData
-                                                                                            .storyImages[
-                                                                                            index
-                                                                                        ];
-                                                                                    return item;
-                                                                                }
-                                                                            ),
-                                                                    })
-                                                                );
-                                                        }}
-                                                    >
-                                                        {/* &#9650; */}
-                                                        <Icon>
-                                                            keyboard_arrow_up
-                                                        </Icon>
-                                                    </div>
-                                                    <Tooltip title="Delete">
-                                                        <div
-                                                            class={
-                                                                styles.button
-                                                            }
-                                                            onClick={() => {
-                                                                setData(
-                                                                    (p) => ({
-                                                                        ...p,
-                                                                        storyImages:
-                                                                            p.storyImages.filter(
-                                                                                (
-                                                                                    e,
-                                                                                    i
-                                                                                ) =>
-                                                                                    i !==
-                                                                                    index
-                                                                            ),
-                                                                    })
-                                                                );
-                                                            }}
-                                                        >
-                                                            <Icon color="primary">
-                                                                delete
-                                                            </Icon>
-                                                        </div>
-                                                    </Tooltip>
-                                                    <div
-                                                        class={styles.button}
-                                                        style={{
-                                                            opacity:
-                                                                index + 1 <
-                                                                data
-                                                                    ?.storyImages
-                                                                    ?.length
-                                                                    ? 1
-                                                                    : 0.5,
-                                                        }}
-                                                        onClick={() => {
-                                                            if (
-                                                                index + 1 <
-                                                                data
-                                                                    ?.storyImages
-                                                                    .length
-                                                            )
-                                                                setData(
-                                                                    (
-                                                                        prevData
-                                                                    ) => ({
-                                                                        ...prevData,
-                                                                        storyImages:
-                                                                            prevData.storyImages.map(
-                                                                                (
-                                                                                    item,
-                                                                                    i
-                                                                                ) => {
-                                                                                    if (
-                                                                                        i ===
-                                                                                        index
-                                                                                    )
-                                                                                        return prevData
-                                                                                            .storyImages[
-                                                                                            index +
-                                                                                                1
-                                                                                        ];
-                                                                                    if (
-                                                                                        i ===
-                                                                                        index +
-                                                                                            1
-                                                                                    )
-                                                                                        return prevData
-                                                                                            .storyImages[
-                                                                                            index
-                                                                                        ];
-                                                                                    return item;
-                                                                                }
-                                                                            ),
-                                                                    })
-                                                                );
-                                                        }}
-                                                    >
-                                                        {/* &#9660; */}
-                                                        <Icon>
-                                                            keyboard_arrow_down
-                                                        </Icon>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <HorizontalBorder
-                                            height="1px"
-                                            color="#ddd"
-                                        />
-                                    </>
-                                ))}
-                                <div
-                                    className={
-                                        styles.Web_stories_button_container
-                                    }
-                                >
-                                    <button
-                                        className={styles.Web_Stories_add_btn}
-                                        onClick={() => {
-                                            setData((prevData) => ({
-                                                ...prevData,
-                                                storyImages: [
-                                                    ...prevData.storyImages,
-                                                    {
-                                                        imageText: '',
-                                                        imageUrl: '',
-                                                    },
-                                                ],
-                                            }));
+                                <p className={styles.content_label}>Icon</p>
+                                <div>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center',
                                         }}
                                     >
-                                        Add
-                                    </button>
-                                </div>
-                            </div>
-                        </AccordionDetails>
-                    </Accordion>
-                )}
-
-                {/* Additional Settings */}
-                <>
-                    {/* <Accordion className={styles.accordion_container}>
-                    <AccordionSummary
-                        expandIcon={
-                            <ArrowDropDownIcon
-                                color="disabled"
-                                sx={{ fontSize: '2rem' }}
-                            />
-                        }
-                        aria-controls="panel1-content"
-                        id="panel1-header"
-                        className={styles.additional_header}
-                    >
-                        <Typography component="div" variant="div">
-                            <span>Additional Settings</span>
-                        </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Box className={styles.content_wrappper}>
-                            <p className={styles.content_label}>Images</p>
-                            <div>
-                                <FilePond
-                                    credits={false}
-                                    files={data?.extraDetails?.images}
-                                    onupdatefiles={(fileItems) =>
-                                        setData({
-                                            ...data,
-                                            extraDetails: {
-                                                ...data.extra,
-                                                images: fileItems.map(
-                                                    (item) => item.file
-                                                ),
-                                            },
-                                        })
-                                    }
-                                    allowMultiple={true}
-                                    maxFiles={1}
-                                    name="files"
-                                    labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
-                                />
-                            </div>
-                            <p className={styles.content_label}>Custom Link</p>
-                            <div className={styles.permalink}>
-                                <input
-                                    type="text"
-                                    value={data?.extraDetails?.link}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            extraDetails: {
-                                                ...data?.extra,
-                                                link: e.target.value,
-                                            },
-                                        })
-                                    }
-                                    placeholder="Enter Custom Link"
-                                />
-                                <span className={styles.edit_icon}>
-                                    <i className="fas fa-edit"></i>
-                                </span>
-                            </div>
-
-                            <p className={styles.content_label}>Icon</p>
-                            <div>
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        justifyContent: 'space-between',
-                                        alignItems: 'center',
-                                    }}
-                                >
-                                    <div style={{ width: '45%' }}>
-                                        <select
-                                            style={{
-                                                borderRadius: '9999px',
-                                                padding: '15px 16px',
-                                                border: '1px solid #ccc',
-                                                fontSize: '16px',
-                                                appearance: 'none',
-                                                background: 'white',
-                                                fontFamily: 'inherit',
-                                                outline: 'none',
-                                                width: '100%',
-                                            }}
-                                        >
-                                            <option>Font Awesome Solid</option>
-                                        </select>
+                                        <div style={{ width: '45%' }}>
+                                            <select
+                                                style={{
+                                                    borderRadius: '9999px',
+                                                    padding: '15px 16px',
+                                                    border: '1px solid #ccc',
+                                                    fontSize: '16px',
+                                                    appearance: 'none',
+                                                    background: 'white',
+                                                    fontFamily: 'inherit',
+                                                    outline: 'none',
+                                                    width: '100%',
+                                                }}
+                                            >
+                                                <option>MUI Icons</option>
+                                            </select>
+                                        </div>
+                                        <div style={{ width: '45%' }}>
+                                            <InputField
+                                                className={styles.input}
+                                                type="text"
+                                                value={data?.extraDetails?.icon}
+                                                placeholder="Enter Icon name"
+                                                onChange={(e) =>
+                                                    setData({
+                                                        ...data,
+                                                        extraDetails: {
+                                                            ...data?.extra,
+                                                            icon: e.target
+                                                                .value,
+                                                        },
+                                                    })
+                                                }
+                                            />
+                                        </div>
+                                        <div style={{ width: '5%' }}>
+                                            <span
+                                                style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                {data?.extraDetails?.icon && (
+                                                    <Icon>
+                                                        {
+                                                            data?.extraDetails
+                                                                ?.icon
+                                                        }
+                                                    </Icon>
+                                                )}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div style={{ width: '45%' }}>
-                                        <InputField
-                                            className={styles.input}
-                                            type="text"
-                                            value={data?.extraDetails?.icon}
-                                            placeholder="Enter Icon name"
-                                            onChange={(e) =>
+                                    <div>
+                                        <span
+                                            className={
+                                                styles.icon_name_info_container
+                                            }
+                                        >
+                                            <svg
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 20 20"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M10 12.8V10M10 7.2H10.007M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                                                    stroke="#2C2520"
+                                                    stroke-opacity="0.7"
+                                                    stroke-width="1.5"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                />
+                                            </svg>
+                                            <span
+                                                className={
+                                                    styles.icon_name_info
+                                                }
+                                            >
+                                                Enter icon name from the list.
+                                            </span>
+                                            <span
+                                                className={
+                                                    styles.icon_name_info_example
+                                                }
+                                                style={{
+                                                    cursor: 'pointer',
+                                                }}
+                                            >
+                                                Examples:{' '}
+                                                <u
+                                                    onClick={() =>
+                                                        setData({
+                                                            ...data,
+                                                            extraDetails: {
+                                                                ...data?.extraDetails,
+                                                                icon: 'star',
+                                                            },
+                                                        })
+                                                    }
+                                                >
+                                                    star
+                                                </u>
+                                                ,{' '}
+                                                <u
+                                                    onClick={() =>
+                                                        setData({
+                                                            ...data,
+                                                            extraDetails: {
+                                                                ...data?.extraDetails,
+                                                                icon: 'edit',
+                                                            },
+                                                        })
+                                                    }
+                                                >
+                                                    edit
+                                                </u>
+                                                ,{' '}
+                                                <u
+                                                    onClick={() =>
+                                                        setData({
+                                                            ...data,
+                                                            extraDetails: {
+                                                                ...data?.extraDetails,
+                                                                icon: 'code',
+                                                            },
+                                                        })
+                                                    }
+                                                >
+                                                    code
+                                                </u>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <p className={styles.content_label}>
+                                    Custom Size
+                                </p>
+                                <div className={styles.tab_container}>
+                                    {['', '2x1', '1x2', '2x2'].map((size) => (
+                                        <button
+                                            key={size}
+                                            onClick={() =>
                                                 setData({
                                                     ...data,
                                                     extraDetails: {
-                                                        ...data?.extra,
-                                                        icon: e.target.value,
+                                                        ...data?.extraDetails,
+                                                        size: size,
                                                     },
                                                 })
                                             }
-                                        />
-                                    </div>
-                                    <div style={{ width: '5%' }}>
-                                        <span
-                                            style={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                            }}
-                                        >
-                                            {data?.extraDetails?.icon && (
-                                                <Icon>
-                                                    {data?.extraDetails?.icon}
-                                                </Icon>
-                                            )}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <span
-                                        className={
-                                            styles.icon_name_info_container
-                                        }
-                                    >
-                                        <svg
-                                            width="20"
-                                            height="20"
-                                            viewBox="0 0 20 20"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                d="M10 12.8V10M10 7.2H10.007M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                                                stroke="#2C2520"
-                                                stroke-opacity="0.7"
-                                                stroke-width="1.5"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                            />
-                                        </svg>
-                                        <span className={styles.icon_name_info}>
-                                            Enter icon name from the list.
-                                        </span>
-                                        <span
                                             className={
-                                                styles.icon_name_info_example
+                                                data?.extraDetails?.size ===
+                                                size
+                                                    ? styles.tab_button_active
+                                                    : styles.tab_button
                                             }
-                                            style={{
-                                                cursor: 'pointer',
-                                            }}
                                         >
-                                            Examples:{' '}
-                                            <u
-                                                onClick={() =>
-                                                    setData({
-                                                        ...data,
-                                                        extraDetails: {
-                                                            ...data?.extraDetails,
-                                                            icon: 'star',
-                                                        },
-                                                    })
-                                                }
-                                            >
-                                                star
-                                            </u>
-                                            ,{' '}
-                                            <u
-                                                onClick={() =>
-                                                    setData({
-                                                        ...data,
-                                                        extraDetails: {
-                                                            ...data?.extraDetails,
-                                                            icon: 'edit',
-                                                        },
-                                                    })
-                                                }
-                                            >
-                                                edit
-                                            </u>
-                                            ,{' '}
-                                            <u
-                                                onClick={() =>
-                                                    setData({
-                                                        ...data,
-                                                        extraDetails: {
-                                                            ...data?.extraDetails,
-                                                            icon: 'code',
-                                                        },
-                                                    })
-                                                }
-                                            >
-                                                code
-                                            </u>
-                                        </span>
-                                    </span>
+                                            {size || 'None'}
+                                        </button>
+                                    ))}
                                 </div>
-                            </div>
 
-                            <p className={styles.content_label}>Custom Size</p>
-                            <div className={styles.tab_container}>
-                                {['', '2x1', '1x2', '2x2'].map((size) => (
-                                    <button
-                                        key={size}
-                                        onClick={() =>
+                                <p className={styles.content_label}>
+                                    Background Color
+                                </p>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '10px',
+                                        borderRadius: '12px',
+                                        padding: '8px 12px',
+                                        width: '100%',
+                                        boxSizing: 'border-box',
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            width: '60px',
+                                            height: '50px',
+                                            borderRadius: '8px',
+                                            backgroundColor:
+                                                data?.extraDetails?.bgColor ||
+                                                'transparent',
+                                            border: data?.extraDetails?.bgColor
+                                                ? 'none'
+                                                : '1px dashed #ccc',
+                                        }}
+                                    ></div>
+
+                                    <InputField
+                                        className={styles.input}
+                                        type="text"
+                                        value={
+                                            data?.extraDetails?.bgColor || ''
+                                        }
+                                        onChange={(e) =>
                                             setData({
                                                 ...data,
                                                 extraDetails: {
                                                     ...data?.extraDetails,
-                                                    size: size,
+                                                    bgColor: e.target.value,
                                                 },
                                             })
                                         }
-                                        className={
-                                            data?.extraDetails?.size === size
-                                                ? styles.tab_button_active
-                                                : styles.tab_button
+                                        placeholder="Transparent"
+                                    />
+                                </div>
+
+                                <p className={styles.content_label}>
+                                    Text Color
+                                </p>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '10px',
+                                        // border: '1px solid #DADADA',
+                                        borderRadius: '12px',
+                                        padding: '8px 12px',
+                                        width: '100%',
+                                        boxSizing: 'border-box',
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            width: '60px',
+                                            height: '50px',
+                                            borderRadius: '8px',
+                                            backgroundColor:
+                                                data?.extraDetails?.textColor ||
+                                                'transparent',
+                                            border: data?.extraDetails
+                                                ?.textColor
+                                                ? 'none'
+                                                : '1px dashed #ccc',
+                                        }}
+                                    ></div>
+                                    <InputField
+                                        className={styles.input}
+                                        type="text"
+                                        value={data?.extraDetails?.textColor}
+                                        onChange={(e) =>
+                                            setData({
+                                                ...data,
+                                                extraDetails: {
+                                                    ...data?.extraDetails,
+                                                    textColor: e.target.value,
+                                                },
+                                            })
                                         }
-                                    >
-                                        {size || 'None'}
-                                    </button>
-                                ))}
-                            </div>
-
-                            <p className={styles.content_label}>
-                                Background Color
-                            </p>
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '10px',
-                                    borderRadius: '12px',
-                                    padding: '8px 12px',
-                                    width: '100%',
-                                    boxSizing: 'border-box',
-                                }}
-                            >
-                                <div
-                                    style={{
-                                        width: '60px',
-                                        height: '50px',
-                                        borderRadius: '8px',
-                                        backgroundColor:
-                                            data?.extraDetails?.bgColor ||
-                                            'transparent',
-                                        border: data?.extraDetails?.bgColor
-                                            ? 'none'
-                                            : '1px dashed #ccc',
-                                    }}
-                                ></div>
-
-                                <InputField
-                                    className={styles.input}
-                                    type="text"
-                                    value={data?.extraDetails?.bgColor || ''}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            extraDetails: {
-                                                ...data?.extraDetails,
-                                                bgColor: e.target.value,
-                                            },
-                                        })
-                                    }
-                                    placeholder="Transparent"
-                                />
-                            </div>
-
-                            <p className={styles.content_label}>Text Color</p>
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '10px',
-                                    // border: '1px solid #DADADA',
-                                    borderRadius: '12px',
-                                    padding: '8px 12px',
-                                    width: '100%',
-                                    boxSizing: 'border-box',
-                                }}
-                            >
-                                <div
-                                    style={{
-                                        width: '60px',
-                                        height: '50px',
-                                        borderRadius: '8px',
-                                        backgroundColor:
-                                            data?.extraDetails?.textColor ||
-                                            'transparent',
-                                        border: data?.extraDetails?.textColor
-                                            ? 'none'
-                                            : '1px dashed #ccc',
-                                    }}
-                                ></div>
-                                <InputField
-                                    className={styles.input}
-                                    type="text"
-                                    value={data?.extraDetails?.textColor}
-                                    onChange={(e) =>
-                                        setData({
-                                            ...data,
-                                            extraDetails: {
-                                                ...data?.extraDetails,
-                                                textColor: e.target.value,
-                                            },
-                                        })
-                                    }
-                                    placeholder="Transparent"
-                                />
-                            </div>
-                        </Box>
-                    </AccordionDetails>
-                </Accordion> */}
-                </>
+                                        placeholder="Transparent"
+                                    />
+                                </div>
+                            </Box>
+                        </AccordionDetails>
+                    </Accordion>
+                </> */}
 
                 {data?.isTOP !== undefined && (
                     <Accordion
