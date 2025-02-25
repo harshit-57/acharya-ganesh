@@ -20,6 +20,7 @@ import Blog from '../../components/blog/Blog.jsx';
 import parse from 'html-react-parser';
 import { APIHelper } from '../../util/APIHelper.js';
 import { htmlToText } from 'html-to-text';
+import SEO from '../../Seo.jsx';
 
 const CitationDetail = () => {
     const { slug } = useParams();
@@ -41,15 +42,21 @@ const CitationDetail = () => {
                 slug: slug,
                 status: 1,
             });
+            
+            
+            
             if (!response?.data?.data?.length) {
                 navigate('/citation');
             }
             setCitation(response.data.data[0]);
+           
+            
         } catch (e) {
             console.log(e);
         }
     };
 
+    
     // const faqList = [
     //     {
     //         question: `How do I find a reliable ${citation?.type || '-'} in ${
@@ -83,8 +90,11 @@ const CitationDetail = () => {
     //     },
     // ];
 
+    const keywords = citation?.Slug;
+    const description = `View detailed citations and references for ${keywords} at acharya-ganesh. Trusted and verified sources for astrology, numerology, and spiritual guidance.`;
     return (
         <PageContainer className={css.container}>
+            <SEO keywords={keywords} description={description}/>
             <div
                 style={{ backgroundImage: `url(${CitationBanner})` }}
                 className={css.header}

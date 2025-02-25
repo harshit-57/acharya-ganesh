@@ -19,6 +19,8 @@ import { useEffect, useState } from 'react';
 import { APIHelper } from '../../util/APIHelper';
 import parse from 'html-react-parser';
 import { toast } from 'react-toastify';
+import { longFormatters } from 'date-fns';
+import SEO from '../../Seo';
 const CourseDetail = () => {
     const { slug } = useParams();
     const [searchParams] = useSearchParams();
@@ -32,6 +34,7 @@ const CourseDetail = () => {
         }
         getCourse();
     }, [slug]);
+
     const getCourse = async () => {
         try {
             const response = await APIHelper.getCourses({
@@ -43,15 +46,25 @@ const CourseDetail = () => {
                 navigate('/courses');
             }
             setCourse(response.data.data[0]);
-            console.log(response);
+            
+            console.log(
+                response
+            );
+            
+           
             
         } catch (e) {
             console.log(e);
         }
     };
 
+    const keywords = course?.Tags[0]?.TagName;
+    const description = course?.Meta_Desc;
+    
+    
     return (
         <PageContainer className={css.container}>
+            <SEO keywords={keywords} description={description}/>
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}

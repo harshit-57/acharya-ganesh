@@ -12,6 +12,7 @@ import { Navigation } from '../../components/navigation/Navigation';
 import { Footer } from '../../components/footer/Footer';
 import { APIHelper } from '../../util/APIHelper';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../../Seo';
 const BLOG_PER_PAGE = 9;
 const SpiritualityList = () => {
     const navigate = useNavigate();
@@ -20,9 +21,12 @@ const SpiritualityList = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [spritualitytags, setSpritualityTags] = useState([]);
+
 
     useEffect(() => {
         fetchBlogs();
+        fetchSpritualityTags();
     }, [currentPage, category]);
 
     const fetchBlogs = async () => {
@@ -46,8 +50,29 @@ const SpiritualityList = () => {
             setLoading(false);
         }
     };
+    const fetchSpritualityTags = async () => {
+        try {
+            
+            const response = await APIHelper.getSpiritualityTags({
+                status: 1,
+                
+            });
+            setSpritualityTags(response.data);
+            
+            
+            
+            
+            
+        } catch (e) {
+        } finally {
+            
+        }
+    };
+    const keywords = spritualitytags.map((e)=> e.Name).join(", ");
+    const description = "Discover spiritual practices, meditation techniques, and guidance at acharyaganesh. Enhance your spiritual journey with astrology, numerology, and kundali insights.";
     return (
         <PageContainer className={css.container}>
+            <SEO keywords={keywords} description={description}/>
             <div
                 style={{ backgroundImage: `url(${ImgBlogHeader})` }}
                 className={css.header}

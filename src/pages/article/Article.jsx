@@ -15,6 +15,7 @@ import IcStar from '../../assets/star_primary_dark.png';
 import parse from 'html-react-parser';
 import { useEffect, useState } from 'react';
 import { APIHelper } from '../../util/APIHelper';
+import SEO from '../../Seo';
 const Article = () => {
     const { slug } = useParams();
     const [searchParams] = useSearchParams();
@@ -35,12 +36,33 @@ const Article = () => {
                 active: 1,
             });
             setArticle(response.data.data[0]);
+            
+            
         } catch (e) {
             console.log(e);
         }
     };
+    const getArticleTags = async () => {
+        try {
+            
+            const response = await APIHelper.getBlogTags({
+                status: 1,
+                
+            });
+            setBlogsTags(response.data);
+            
+            
+            
+        } catch (e) {
+        } finally {
+            
+        }
+    };
+    const keywords = blogstags.map((e)=> e.Name).join(", ");
+    const description = "Explore in-depth articles on astrology, numerology, kundali matching, and daily horoscopes. Get expert insights and tips to enhance your spiritual and personal growth.";
     return (
         <PageContainer className={css.container}>
+            <SEO keywords={keywords} description={description}/>
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}

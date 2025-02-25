@@ -12,10 +12,14 @@ import { Navigation } from '../../components/navigation/Navigation';
 import { Footer } from '../../components/footer/Footer';
 import { Helmet } from 'react-helmet-async';
 import MainContactForm from '../../components/main-contact-form/Contact';
+import SEO from '../../Seo';
 const Contact = () => {
+    const keywords = "contact us, get in touch, customer support, astrology contact, numerology contact, spiritual guidance contact, kundali contact, horoscope contact";
+    const description = "Contact with acharyaganesh for astrology, numerology, kundali matching, and daily horoscopes. We're here to help you on your spiritual journey.";
     return (
         <PageContainer className={css.container}>
-            <Helmet>
+            <SEO keywords={keywords} description={description}/>
+            {/* <Helmet>
                 <script>var orgCountry = "IN";</script>
                 <title>Acharya Ganesh Astrology Academy</title>
                 <meta
@@ -64,7 +68,7 @@ const Contact = () => {
                     href="https://fonts.gstatic.com"
                     crossorigin
                 />
-            </Helmet>
+            </Helmet> */}
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}

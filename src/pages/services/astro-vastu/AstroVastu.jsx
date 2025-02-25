@@ -10,6 +10,7 @@ import CitationBox from '../../../components/citation-box/CitationBox';
 export const AstroVastu = () => {
     return (
         <PageContainer className={css.container}>
+            
             <div
                 style={{ backgroundImage: `url(${ImgBlogHeader})` }}
                 className={css.header}
