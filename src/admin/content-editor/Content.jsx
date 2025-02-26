@@ -129,10 +129,6 @@ const Edit = () => {
             case 'course':
                 (async () => {
                     setIsLoading(true);
-                    const categoryResponse =
-                        await APIHelper.getCourseCategories({});
-                    setCategories(categoryResponse?.data);
-
                     const tagResponse = await APIHelper.getCourseTags({
                         pageSize: 3,
                         filter: 'most_used',
@@ -199,11 +195,6 @@ const Edit = () => {
             case 'blog':
                 (async () => {
                     setIsLoading(true);
-                    const categoryResponse = await APIHelper.getBlogCategories(
-                        {}
-                    );
-                    setCategories(categoryResponse?.data);
-
                     const tagResponse = await APIHelper.getBlogTags({
                         pageSize: 3,
                         filter: 'most_used',
@@ -260,10 +251,6 @@ const Edit = () => {
             case 'spirituality':
                 (async () => {
                     setIsLoading(true);
-                    const categoryResponse =
-                        await APIHelper.getSpiritualityCategories({});
-                    setCategories(categoryResponse?.data);
-
                     const tagResponse = await APIHelper.getSpiritualityTags({
                         pageSize: 3,
                         filter: 'most_used',
@@ -361,13 +348,10 @@ const Edit = () => {
                     setIsLoading(false);
                 })();
                 break;
+
             case 'story':
                 (async () => {
                     setIsLoading(true);
-                    const categoryResponse =
-                        await APIHelper.getWebStoryCategories({});
-                    setCategories(categoryResponse?.data);
-
                     const tagResponse = await APIHelper.getWebStoryTags({
                         pageSize: 3,
                         filter: 'most_used',
@@ -440,9 +424,7 @@ const Edit = () => {
                 },
             });
         }, 100);
-
         init();
-
         return () => {
             updateSettings({
                 layout1Settings: {
@@ -453,6 +435,66 @@ const Edit = () => {
             });
         };
     }, []);
+
+    useEffect(() => {
+        getCategories();
+    }, [categoryTab]);
+
+    const getCategories = async () => {
+        let categoryResponse;
+        switch (type) {
+            case 'course':
+                categoryResponse = await APIHelper.getCourseCategories(
+                    categoryTab == 'most'
+                        ? {
+                              sortBy: 'Count',
+                              sort: 'DESC',
+                          }
+                        : {}
+                );
+                setCategories(categoryResponse?.data);
+                break;
+
+            case 'blog':
+                categoryResponse = await APIHelper.getBlogCategories(
+                    categoryTab == 'most'
+                        ? {
+                              sortBy: 'Count',
+                              sort: 'DESC',
+                          }
+                        : {}
+                );
+                setCategories(categoryResponse?.data);
+                break;
+
+            case 'spirituality':
+                categoryResponse = await APIHelper.getSpiritualityCategories(
+                    categoryTab == 'most'
+                        ? {
+                              sortBy: 'Count',
+                              sort: 'DESC',
+                          }
+                        : {}
+                );
+                setCategories(categoryResponse?.data);
+                break;
+
+            case 'story':
+                categoryResponse = await APIHelper.getWebStoryCategories(
+                    categoryTab == 'most'
+                        ? {
+                              sortBy: 'Count',
+                              sort: 'DESC',
+                          }
+                        : {}
+                );
+                setCategories(categoryResponse?.data);
+                break;
+
+            default:
+                break;
+        }
+    };
 
     const handleChangeData = (event) => {
         const { name, value } = event.target;
@@ -482,6 +524,43 @@ const Edit = () => {
             });
         });
         setTagInput('');
+    };
+
+    const handleCreateCategory = async () => {
+        try {
+            let payload = {
+                type,
+                name: newCategoryInput,
+            };
+
+            setIsLoading(true);
+            ADMINAPIHELPER.createCategory(payload, token)
+                ?.then((response) => {
+                    if (response?.data?.success) {
+                        toast.success('Category created successfully');
+                        setCategories([
+                            {
+                                Id: response?.data?.data?.Id,
+                                Name: response?.data?.data?.Name,
+                                Slug: response?.data?.data?.Slug,
+                            },
+                            ...categories,
+                        ]);
+                        setNewCategoryInput('');
+                    } else {
+                        toast.error(response?.message);
+                    }
+                    setIsLoading(false);
+                })
+                .catch((error) => {
+                    toast.error(
+                        error?.response?.data?.message || error?.message
+                    );
+                    setIsLoading(false);
+                });
+        } catch (error) {
+            console.error('Error creating category:', error);
+        }
     };
 
     const handleValidation = (payload) => {
@@ -3227,7 +3306,12 @@ const Edit = () => {
                                                     }
                                                 }}
                                             />
-                                            <span>{category.Name}</span>
+                                            <span>
+                                                {category.Name}{' '}
+                                                {/* {category.Count
+                                                    ? ` (${category.Count})`
+                                                    : ''} */}
+                                            </span>
                                         </div>
                                     ))}
                                 </div>
@@ -3251,12 +3335,7 @@ const Edit = () => {
                                         />
                                         <span
                                             className={styles.edit_icon}
-                                            onClick={() => {
-                                                setNewCategory(false);
-                                                toast.warn(
-                                                    'Need to create a api for this'
-                                                );
-                                            }}
+                                            onClick={handleCreateCategory}
                                         >
                                             <Icon sx={{ color: '#000' }}>
                                                 check_circle_outline

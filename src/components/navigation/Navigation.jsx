@@ -54,7 +54,9 @@ export const Navigation = () => {
 
     const getBlogCategories = async () => {
         try {
-            const response = await APIHelper.getBlogCategories();
+            const response = await APIHelper.getBlogCategories({
+                active: true,
+            });
             setBlogCategories(response.data);
         } catch (e) {
             console.log(e);
@@ -62,7 +64,9 @@ export const Navigation = () => {
     };
     const getSpiritualityCategories = async () => {
         try {
-            const response = await APIHelper.getSpiritualityCategories();
+            const response = await APIHelper.getSpiritualityCategories({
+                active: true,
+            });
             setSpiritualityCategories(response.data);
         } catch (e) {
             console.log(e);

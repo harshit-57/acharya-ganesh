@@ -74,6 +74,7 @@ export const ADMINAPIHELPER = Object.freeze({
     updateCitation: await postApi('v1/admin/update-citation'),
     createTestimonial: await postApi('v1/admin/create-testimonial'),
     updateTestimonial: await postApi('v1/admin/update-testimonial'),
+    createCategory: await postApi('v1/admin/create-category'),
 });
 
 export const UPLOADAPIHELPER = Object.freeze({
