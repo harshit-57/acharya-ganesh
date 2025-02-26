@@ -12,6 +12,7 @@ import { Navigation } from '../../components/navigation/Navigation';
 import { Footer } from '../../components/footer/Footer';
 import { APIHelper } from '../../util/APIHelper';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../../Seo';
 const STORIES_PER_PAGE = 9;
 const WebStoriesList = () => {
     const navigate = useNavigate();
@@ -20,9 +21,10 @@ const WebStoriesList = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
     const [loading, setLoading] = useState(false);
-
+    const [webstories , setWebStoriesTags] = useState([]);
     useEffect(() => {
         fetchStories();
+        fetchWebStoriesTags();
     }, [currentPage]);
 
     const fetchStories = async () => {
@@ -43,9 +45,31 @@ const WebStoriesList = () => {
             setLoading(false);
         }
     };
+    const fetchWebStoriesTags = async () => {
+        try {
+            
+            const response = await APIHelper.getWebStoryTags({
+                status: 1,
+                
+            });
+            setWebStoriesTags(response.data);
+            
+            
+            
+            
+            
+        } catch (e) {
+        } finally {
+            
+        }
+    };
+
+    const keywords = webstories.map((e)=> e.Name).join(", ");
+    const description = "Explore our interactive web stories on astrology, numerology, kundali matching, and daily horoscopes. Engaging and informative content for your spiritual journey.";
 
     return (
         <PageContainer className={css.container}>
+            <SEO keywords={keywords} description={description}/>
             <div
                 style={{ backgroundImage: `url(${ImgBlogHeader})` }}
                 className={css.header}

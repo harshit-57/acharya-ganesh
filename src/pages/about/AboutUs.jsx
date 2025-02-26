@@ -15,14 +15,19 @@ import { Navigation } from '../../components/navigation/Navigation';
 import { Footer } from '../../components/footer/Footer';
 import { Helmet } from 'react-helmet-async';
 import Gallery from '../../components/gallery/Gallery';
+import SEO from '../../Seo';
 const AboutUs = () => {
     const [images, setImages] = useState([]);
     const [readMore, setReadMore] = useState('Read More');
+    const keywords = "about us, our story, who we are, about acharyaganesh, astrology, numerology, spiritual guidance, kundali, horoscope, vedic astrology";
+    const description = "Learn about acharyaganesh, your trusted source for astrology, numerology, kundali matching, and daily horoscopes. Discover our mission, team, and how we can guide you on your spiritual journey.";
+    
 
     useEffect(() => setImages(imageList), []);
     return (
         <PageContainer>
-            <Helmet>
+            {/* <Helmet>
+                
                 <script>var orgCountry = "IN";</script>
                 <title>Acharya Ganesh Astrology Academy</title>
                 <meta
@@ -71,7 +76,8 @@ const AboutUs = () => {
                     href="https://fonts.gstatic.com"
                     crossorigin
                 />
-            </Helmet>
+            </Helmet> */}
+            <SEO keywords={keywords} description={description}/>
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}

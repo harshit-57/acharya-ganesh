@@ -5,15 +5,20 @@ import ImgHeaderBg from '../../assets/book_consultation_header.png';
 import React, { useState, useRef } from 'react';
 import { Footer } from "../../components/footer/Footer";
 import FormCompnent from "./component/form-component/FormComponent";
+import SEO from "../../Seo";
 
 
 
 
 
 const FormConsultation = () => {
+    const keywords = "consultation booking, appointment booking, online booking, astrology booking, numerology booking, kundali matching booking, horoscope reading booking";
+    const description = "Schedule your consultation with acharyaganesh for astrology, numerology, kundali matching, and horoscope readings. Easy and convenient online booking.";
 
     return (
+        
         <PageContainer className={css.container}>
+            <SEO keywords={keywords} description={description}/>
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}

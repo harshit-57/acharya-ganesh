@@ -12,10 +12,12 @@ import { Navigation } from '../../components/navigation/Navigation';
 import { Footer } from '../../components/footer/Footer';
 import { APIHelper } from '../../util/APIHelper';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../../Seo';
 const BLOG_PER_PAGE = 9;
 const BlogList = () => {
     const navigate = useNavigate();
     const [blogs, setBlogs] = useState([]);
+    const [blogstags, setBlogsTags] = useState([]);
     const { category } = useParams();
     const [currentPage, setCurrentPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
@@ -23,6 +25,7 @@ const BlogList = () => {
 
     useEffect(() => {
         fetchBlogs();
+        fetchBlogsTags();
     }, [currentPage, category]);
 
     const fetchBlogs = async () => {
@@ -46,9 +49,30 @@ const BlogList = () => {
             setLoading(false);
         }
     };
+    const fetchBlogsTags = async () => {
+        try {
+            
+            const response = await APIHelper.getBlogTags({
+                status: 1,
+                
+            });
+            setBlogsTags(response.data);
+            
+            
+            
+        } catch (e) {
+        } finally {
+            
+        }
+    };
+    const keywords = blogstags.map((e)=> e.Name).join(", ");
+    const description = "Browse our latest blog posts on astrology, numerology, kundali matching, and daily horoscopes. Stay updated with expert advice and spiritual guidance.";
 
     return (
         <PageContainer className={css.container}>
+
+            <SEO keywords={keywords} description={description}/>
+            
             <div
                 style={{ backgroundImage: `url(${ImgBlogHeader})` }}
                 className={css.header}

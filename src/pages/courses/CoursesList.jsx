@@ -13,11 +13,13 @@ import { Footer } from '../../components/footer/Footer';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { APIHelper } from '../../util/APIHelper';
+import SEO from '../../Seo';
 const COURSE_PER_PAGE = 8;
 const CoursesList = () => {
     const navigate = useNavigate();
     const [courses, setCourses] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [coursetags, setCourseTags] = useState([]);
     const [pageCount, setPageCount] = useState(0);
     const [loading, setLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -26,6 +28,7 @@ const CoursesList = () => {
     const [sortBy, setSortBy] = useState('pr.PublishedOn');
 
     useEffect(() => {
+        fetchCourseTags();
         fetchCourses();
     }, [currentPage, searchQuery, sortBy, order]);
     const handleSortingFilter = (p1, p2) => {
@@ -70,8 +73,29 @@ const CoursesList = () => {
             setLoading(false);
         }
     };
+
+    const fetchCourseTags = async () => {
+        try {
+            
+            const response = await APIHelper.getBlogTags({
+                status: 1,
+                
+            });
+            setCourseTags(response.data);
+            
+            
+            
+            
+        } catch (e) {
+        } finally {
+            
+        }
+    };
+    const keywords = coursetags.map((e)=> e.Name).join(", ");
+    const description = "Discover our wide range of courses on astrology, numerology, kundali matching, and daily horoscopes. Enhance your knowledge and skills with expert-led training.";
     return (
         <PageContainer className={css.container}>
+            <SEO keywords={keywords} description={description}/>
             <Helmet>
                 <script>var orgCountry = "IN";</script>
                 <title>Acharya Ganesh Astrology Academy</title>

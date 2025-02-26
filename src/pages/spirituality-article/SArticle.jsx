@@ -15,6 +15,7 @@ import IcStar from '../../assets/star_primary_dark.png';
 import parse from 'html-react-parser';
 import { useEffect, useState } from 'react';
 import { APIHelper } from '../../util/APIHelper';
+import SEO from '../../Seo';
 const SArticle = () => {
     const { slug } = useParams();
     const [searchParams] = useSearchParams();
@@ -35,12 +36,20 @@ const SArticle = () => {
                 active: 1,
             });
             setArticle(response.data.data[0]);
+            
+            
         } catch (e) {
             console.log(e);
         }
     };
+
+    const keywords = article?.Meta_Desc;
+    const description = article?.Tags;
+
     return (
+        
         <PageContainer className={css.container}>
+            <SEO keywords={keywords} description={description}/>
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}
