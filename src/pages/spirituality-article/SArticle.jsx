@@ -36,20 +36,17 @@ const SArticle = () => {
                 active: 1,
             });
             setArticle(response.data.data[0]);
-            
-            
         } catch (e) {
             console.log(e);
         }
     };
 
-    const keywords = article?.Meta_Desc;
+    const keywords = article?.Tags?.map((e) => e.TagName).join(', ');
     const description = article?.Tags;
 
     return (
-        
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description}/>
+            <SEO keywords={keywords} description={description} />
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}

@@ -35,7 +35,6 @@ const Citation = () => {
             });
             const newData = res.data.data;
 
-            
             if (!newData || newData.length === 0) {
                 setHasMore(false);
                 return;
@@ -54,13 +53,14 @@ const Citation = () => {
         setPage((prevPage) => prevPage + 1);
     };
 
-    const keywords = data.map((e)=> e.Slug).join(", ");
+    const keywords = data.map((e) => e.Slug).join(', ');
 
-    const description = "Explore our citations and references for astrology, numerology, kundali matching, and daily horoscopes. Trusted sources for accurate and reliable information.";
+    const description =
+        'Explore our citations and references for astrology, numerology, kundali matching, and daily horoscopes. Trusted sources for accurate and reliable information.';
 
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description}/>
+            <SEO keywords={keywords} description={description} />
             <div
                 style={{ backgroundImage: `url(${CitationBanner})` }}
                 className={css.header}

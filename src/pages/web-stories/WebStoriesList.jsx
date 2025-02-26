@@ -21,7 +21,7 @@ const WebStoriesList = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
     const [loading, setLoading] = useState(false);
-    const [webstories , setWebStoriesTags] = useState([]);
+    const [webstoriesTags, setWebStoriesTags] = useState([]);
     useEffect(() => {
         fetchStories();
         fetchWebStoriesTags();
@@ -47,29 +47,22 @@ const WebStoriesList = () => {
     };
     const fetchWebStoriesTags = async () => {
         try {
-            
             const response = await APIHelper.getWebStoryTags({
                 status: 1,
-                
             });
             setWebStoriesTags(response.data);
-            
-            
-            
-            
-            
         } catch (e) {
         } finally {
-            
         }
     };
 
-    const keywords = webstories.map((e)=> e.Name).join(", ");
-    const description = "Explore our interactive web stories on astrology, numerology, kundali matching, and daily horoscopes. Engaging and informative content for your spiritual journey.";
+    const keywords = webstoriesTags.map((e) => e.Name).join(', ');
+    const description =
+        'Explore our interactive web stories on astrology, numerology, kundali matching, and daily horoscopes. Engaging and informative content for your spiritual journey.';
 
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description}/>
+            <SEO keywords={keywords} description={description} />
             <div
                 style={{ backgroundImage: `url(${ImgBlogHeader})` }}
                 className={css.header}

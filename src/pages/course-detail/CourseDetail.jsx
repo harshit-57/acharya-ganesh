@@ -46,25 +46,19 @@ const CourseDetail = () => {
                 navigate('/courses');
             }
             setCourse(response.data.data[0]);
-            
-            console.log(
-                response
-            );
-            
-           
-            
+
+            console.log(response);
         } catch (e) {
             console.log(e);
         }
     };
 
-    const keywords = course?.Tags[0]?.TagName;
+    const keywords = course?.Tags?.map((e) => e.TagName).join(', ');
     const description = course?.Meta_Desc;
-    
-    
+
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description}/>
+            <SEO keywords={keywords} description={description} />
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}
