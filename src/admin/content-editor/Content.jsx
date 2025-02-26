@@ -613,13 +613,14 @@ const Edit = () => {
                             isValid = false;
                             return isValid;
                         }
-                    } else if (!htmlToText(item?.imageText)) {
-                        toast.error(
-                            `${index + 1} Story Image Text is required`
-                        );
-                        isValid = false;
-                        return isValid;
                     }
+                    //  else if (!htmlToText(item?.imageText)) {
+                    //     toast.error(
+                    //         `${index + 1} Story Image Text is required`
+                    //     );
+                    //     isValid = false;
+                    //     return isValid;
+                    // }
                 });
             }
 
