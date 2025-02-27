@@ -19,9 +19,10 @@ import SEO from '../../Seo';
 const AboutUs = () => {
     const [images, setImages] = useState([]);
     const [readMore, setReadMore] = useState('Read More');
-    const keywords = "about us, our story, who we are, about acharyaganesh, astrology, numerology, spiritual guidance, kundali, horoscope, vedic astrology";
-    const description = "Learn about acharyaganesh, your trusted source for astrology, numerology, kundali matching, and daily horoscopes. Discover our mission, team, and how we can guide you on your spiritual journey.";
-    
+    const keywords =
+        'about us, our story, who we are, about acharyaganesh, astrology, numerology, spiritual guidance, kundali, horoscope, vedic astrology';
+    const description =
+        'Learn about acharyaganesh, your trusted source for astrology, numerology, kundali matching, and daily horoscopes. Discover our mission, team, and how we can guide you on your spiritual journey.';
 
     useEffect(() => setImages(imageList), []);
     return (
@@ -77,7 +78,7 @@ const AboutUs = () => {
                     crossorigin
                 />
             </Helmet> */}
-            <SEO keywords={keywords} description={description}/>
+            <SEO keywords={keywords} description={description} />
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}
@@ -124,7 +125,7 @@ const AboutUs = () => {
                                 to assist you on any matter that may be
                                 troublesome to you.
                             </p>
-                            {readMore === 'Read More' && (
+                            {/* {readMore === 'Read More' && (
                                 <span
                                     className={css.read_more_link}
                                     onClick={() => setReadMore('Read Less')}
@@ -132,22 +133,21 @@ const AboutUs = () => {
                                     {readMore}
                                 </span>
                             )}
-                            {readMore === 'Read Less' && (
-                                <p>
-                                    If you hold a desire to learn Astrology then
-                                    we also offer various teaching materials on
-                                    different areas. There are courses available
-                                    suited for both Beginners and Masters at
-                                    Astrology and Vastu. Moreover, our
-                                    supportive Teachers can be reached outside
-                                    of work hours to assist you with any
-                                    difficulties you may encounter during your
-                                    studies. If you are keen on becoming an
-                                    esteemed student of Acharya Ganesh then our
-                                    courses and contact details can be found on
-                                    our page.
-                                </p>
-                            )}
+                            {readMore === 'Read Less' && ( */}
+                            <p>
+                                If you hold a desire to learn Astrology then we
+                                also offer various teaching materials on
+                                different areas. There are courses available
+                                suited for both Beginners and Masters at
+                                Astrology and Vastu. Moreover, our supportive
+                                Teachers can be reached outside of work hours to
+                                assist you with any difficulties you may
+                                encounter during your studies. If you are keen
+                                on becoming an esteemed student of Acharya
+                                Ganesh then our courses and contact details can
+                                be found on our page.
+                            </p>
+                            {/* )}
                             {readMore === 'Read Less' && (
                                 <span
                                     className={css.read_more_link}
@@ -155,7 +155,7 @@ const AboutUs = () => {
                                 >
                                     {readMore}
                                 </span>
-                            )}
+                            )} */}
                         </div>
                     </div>
                     <div

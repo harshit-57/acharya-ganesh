@@ -129,8 +129,9 @@
     p {
         display: flex;
         align-items: center;
-        font-family: 'Sorts Mill Goudy';
-        font-size: 64px;
+        /* font-family: 'Sorts Mill Goudy'; */
+        /* font-size: 64px; */
+        font-size: 60px;
         color: #fed1a7;
         gap: 16px;
 
