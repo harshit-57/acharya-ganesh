@@ -56,16 +56,30 @@ const Edit = () => {
         imageAlt: ['course', 'blog', 'spirituality', 'story']?.includes(type)
             ? ''
             : undefined,
-        focusKeyphrase: ['course', 'blog', 'spirituality']?.includes(type)
+        focusKeyphrase: [
+            'course',
+            'blog',
+            'spirituality',
+            'citation',
+        ]?.includes(type)
             ? ''
             : undefined,
-        metaTitle: ['course', 'blog', 'spirituality']?.includes(type)
+        metaTitle: ['course', 'blog', 'spirituality', 'citation']?.includes(
+            type
+        )
             ? ''
             : undefined,
-        metaSiteName: ['course', 'blog', 'spirituality']?.includes(type)
+        metaSiteName: ['course', 'blog', 'spirituality', 'citation']?.includes(
+            type
+        )
             ? 'Acharya Ganesh: Solutions for Life, Love, and Career Woes'
             : undefined,
-        metaDescription: ['course', 'blog', 'spirituality']?.includes(type)
+        metaDescription: [
+            'course',
+            'blog',
+            'spirituality',
+            'citation',
+        ]?.includes(type)
             ? ''
             : undefined,
         isShortDescription: ['course', 'story'].includes(type)
