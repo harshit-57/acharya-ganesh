@@ -315,6 +315,10 @@ const Edit = () => {
                             description: response?.Description,
                             slug: response?.Slug,
                             status: response?.Status,
+                            focusKeyphrase: response?.Focus_Keyphrase || '',
+                            metaTitle: response?.Meta_Title,
+                            metaSiteName: response?.Meta_SiteName,
+                            metaDescription: response?.Meta_Desc,
                             publishedOn: response?.PublishedOn
                                 ? new Date(response?.PublishedOn)
                                 : new Date(),
@@ -1262,6 +1266,10 @@ const Edit = () => {
                         Description: data?.description,
                         PublishedOn: data.publishedOn,
                         Status: data.status,
+                        Focus_Keyphrase: data.focusKeyphrase,
+                        Meta_Title: data.metaTitle,
+                        Meta_SiteName: data.metaSiteName,
+                        Meta_Desc: data.metaDescription,
                     };
 
                     navigate(

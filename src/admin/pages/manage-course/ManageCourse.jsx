@@ -222,15 +222,15 @@ const ManageCourses = () => {
                                     {exportLoading ? 'Loading...' : 'Export'}
                                 </Button>
                             </Box>
-                            <div style={{ marginRight: '20px' }}>
+                            <div style={{ marginRight: '20px' , display: 'flex' , alignItems: 'center' , gap: "20px" }}>
                                 <Select
                                     value={status}
                                     onChange={(e) => setStatus(e.target.value)}
-                                    placeholder="Select Status"
+                                    displayEmpty 
+                                    renderValue={status !== "" ? undefined : () => "Select Status"} 
+                                    style={{height : "40px"}}
                                 >
-                                    <MenuItem value={''}>
-                                        Select Status
-                                    </MenuItem>
+                                    <MenuItem value={""}>Select Status</MenuItem>
                                     <MenuItem value={1}>Published</MenuItem>
                                     <MenuItem value={2}>Draft</MenuItem>
                                     <MenuItem value={3}>Pending</MenuItem>

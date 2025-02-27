@@ -7,6 +7,8 @@ import {
     InputAdornment,
     TextField,
     Icon,
+    MenuItem,
+    Select,
 } from '@mui/material';
 import { Fragment } from 'react';
 import { useEffect, useState } from 'react';
@@ -64,10 +66,12 @@ const ManageStory = () => {
     const [sort, setSort] = useState('desc');
     const [sortBy, setSortBy] = useState('ws.PublishedOn');
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+    const [status, setStatus] = useState('');
+
 
     useEffect(() => {
         fetchStories();
-    }, [currentPage, searchQuery, pageSize, sortBy, sort]);
+    }, [currentPage, searchQuery, pageSize, sortBy, sort , status]);
     const handleSortingFilter = (p1, p2) => {
         setSort(p1);
         setSortBy(p2);
@@ -83,6 +87,7 @@ const ManageStory = () => {
                     page: currentPage,
                     pageSize: pageSize,
                     search: searchQuery,
+                    status: status || undefined,
                     sort: sort,
                     sortBy: sortBy,
                 });
@@ -90,6 +95,7 @@ const ManageStory = () => {
                 response = await APIHelper.getWebStories({
                     page: currentPage,
                     pageSize: pageSize,
+                    status: status || undefined,
                     sort: sort,
                     sortBy: sortBy,
                 });
@@ -201,7 +207,19 @@ const ManageStory = () => {
                                     {exportLoading ? 'Loading...' : 'Export'}
                                 </Button>
                             </Box>
-                            <div style={{ marginRight: '20px' }}>
+                            <div style={{ marginRight: '20px' , display: 'flex' , alignItems: 'center' , gap: "20px" }}>
+                                <Select
+                                    value={status}
+                                    onChange={(e) => setStatus(e.target.value)}
+                                    displayEmpty 
+                                    renderValue={status !== "" ? undefined : () => "Select Status"} 
+                                    style={{height : "40px"}}
+                                >
+                                    <MenuItem value={""}>Select Status</MenuItem>
+                                    <MenuItem value={1}>Published</MenuItem>
+                                    <MenuItem value={2}>Draft</MenuItem>
+                                    <MenuItem value={3}>Pending</MenuItem>
+                                </Select>
                                 <TextField
                                     id="search"
                                     type="search"

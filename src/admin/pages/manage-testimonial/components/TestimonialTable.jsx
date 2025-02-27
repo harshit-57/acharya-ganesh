@@ -1,5 +1,6 @@
 import {
     Box,
+    Chip,
     Icon,
     IconButton,
     Link,
@@ -107,6 +108,9 @@ const PaginationTable = ({
                                 Description
                             </StyledTableHead>
                             <StyledTableHead align="center">
+                                Status
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
                                 Published On
                                 {sort === 'desc' ? (
                                     <IconButton onClick={() => setSort('asc')}>
@@ -153,6 +157,21 @@ const PaginationTable = ({
                                     <p className="content-three-line">
                                         {htmlToText(testimonial?.Description)}
                                     </p>
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {testimonial?.Status === 1 ? (
+                                        <Chip
+                                            label={'Published'}
+                                            color="primary"
+                                        />
+                                    ) : testimonial?.Status === 2 ? (
+                                        <Chip
+                                            label={'Draft'}
+                                            color="secondary"
+                                        />
+                                    ) : (
+                                        <Chip label={'Pending'} color="info" />
+                                    )}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                     {moment(testimonial.PublishedOn).format(

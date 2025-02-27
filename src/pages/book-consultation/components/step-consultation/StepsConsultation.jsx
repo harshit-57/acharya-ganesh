@@ -45,7 +45,13 @@ const BookingSteps = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/bookConsultationForm');
+       
+        window.location.href = 'https://pages.razorpay.com/pl_PfNM4Uhu1DX5XG/view';
+    };
+
+    const handleClick2 = () => {
+       
+        window.location.href = 'https://pages.razorpay.com/pl_PfNU3x751fwMO9/view';
     };
     return (
         <div
@@ -69,7 +75,7 @@ const BookingSteps = () => {
                     MEET IN PERSON
                 </button>
 
-                <button className={styles.button} onClick={handleClick}>
+                <button className={styles.button} onClick={handleClick2}>
                     MEET ONLINE
                 </button>
             </div>
