@@ -116,7 +116,11 @@ const Editor = ({ placeholder, content, setContent, style, className }) => {
         }
     }, []);
     const handleChange = (html) => {
+        // const scrollPosition = window.scrollY; // Save current scroll position
         setContent && setContent(html);
+        // setTimeout(() => {
+        //     window.scrollTo(0, scrollPosition); // Restore scroll position
+        // }, 0);
     };
 
     if (!ReactQuill)

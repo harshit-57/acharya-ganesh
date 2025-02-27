@@ -7,6 +7,8 @@ import {
     InputAdornment,
     TextField,
     Icon,
+    Select,
+    MenuItem,
 } from '@mui/material';
 import { Fragment } from 'react';
 import { useEffect, useState } from 'react';
@@ -63,10 +65,12 @@ const ManageCourses = () => {
     const [sortBy, setSortBy] = useState('pr.id');
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
     const [selectedData, setSelectedData] = useState(null);
+    const [status, setStatus] = useState('');
 
     useEffect(() => {
         fetchCourses();
-    }, [currentPage, searchQuery, pageSize, sortBy, sort]);
+    }, [currentPage, searchQuery, pageSize, sortBy, sort, status]);
+
     const handleSortingFilter = (p1, p2) => {
         setSort(p1);
         setSortBy(p2);
@@ -82,6 +86,7 @@ const ManageCourses = () => {
                     page: currentPage,
                     pageSize: pageSize,
                     search: searchQuery,
+                    status: status || undefined,
                     sort: sort,
                     sortBy: sortBy,
                 });
@@ -89,6 +94,7 @@ const ManageCourses = () => {
                 response = await APIHelper.getCourses({
                     page: currentPage,
                     pageSize: pageSize,
+                    status: status || undefined,
                     sort: sort,
                     sortBy: sortBy,
                 });
@@ -217,6 +223,19 @@ const ManageCourses = () => {
                                 </Button>
                             </Box>
                             <div style={{ marginRight: '20px' }}>
+                                <Select
+                                    value={status}
+                                    onChange={(e) => setStatus(e.target.value)}
+                                    placeholder="Select Status"
+                                >
+                                    <MenuItem value={''}>
+                                        Select Status
+                                    </MenuItem>
+                                    <MenuItem value={1}>Published</MenuItem>
+                                    <MenuItem value={2}>Draft</MenuItem>
+                                    <MenuItem value={3}>Pending</MenuItem>
+                                </Select>
+
                                 <TextField
                                     id="search"
                                     type="search"

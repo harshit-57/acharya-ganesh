@@ -1,5 +1,6 @@
 import {
     Box,
+    Chip,
     Icon,
     IconButton,
     Link,
@@ -113,9 +114,9 @@ const PaginationTable = ({
                             <StyledTableHead align="center">
                                 Tags
                             </StyledTableHead>
-                            {/* <StyledTableHead align="center">
-                                Short Description
-                            </StyledTableHead> */}
+                            <StyledTableHead align="center">
+                                Status
+                            </StyledTableHead>
                             <StyledTableHead align="center">
                                 Published On
                                 {sort === 'desc' ? (
@@ -228,9 +229,21 @@ const PaginationTable = ({
                                               ?.join(', ')
                                         : 'NA'}
                                 </StyledTableCell>
-                                {/* <StyledTableCell align="center">
-                                    {htmlToText(course?.ShortDescription)}
-                                </StyledTableCell> */}
+                                <StyledTableCell align="center">
+                                    {course?.Status === 1 ? (
+                                        <Chip
+                                            label={'Published'}
+                                            color="primary"
+                                        />
+                                    ) : course?.Status === 2 ? (
+                                        <Chip
+                                            label={'Draft'}
+                                            color="secondary"
+                                        />
+                                    ) : (
+                                        <Chip label={'Pending'} color="info" />
+                                    )}
+                                </StyledTableCell>
                                 <StyledTableCell align="center">
                                     {moment(course.PublishedOn).format('ll')}
                                 </StyledTableCell>
