@@ -41,7 +41,7 @@ const ManageAdmin = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [showFilterDropDown, setShowFilterDropDown] = useState(false);
     const [sort, setSort] = useState('desc');
-    const [sortBy, setSortBy] = useState('ad.CreatedAt');
+    const [sortBy, setSortBy] = useState('ad."CreatedAt"');
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
     const [showAdminModal, setShowAdminModal] = useState(false);
     const [selectedData, setSelectedData] = useState(null);
@@ -77,8 +77,8 @@ const ManageAdmin = () => {
     const handleDelete = async () => {
         try {
             setLoading(true);
-            if (selectedData?.id)
-                ADMINAPIHELPER.deleteAdmin({ id: selectedData?.id }, token)
+            if (selectedData?.Id)
+                ADMINAPIHELPER.deleteAdmin({ id: selectedData?.Id }, token)
                     ?.then((response) => {
                         if (response?.data?.success) {
                             toast.success('Admin deleted successfully');

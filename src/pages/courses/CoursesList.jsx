@@ -25,7 +25,7 @@ const CoursesList = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [showFilterDropDown, setShowFilterDropDown] = useState(false);
     const [order, setOrder] = useState('desc');
-    const [sortBy, setSortBy] = useState('pr.PublishedOn');
+    const [sortBy, setSortBy] = useState('pr."PublishedOn"');
 
     useEffect(() => {
         fetchCourseTags();
@@ -76,26 +76,20 @@ const CoursesList = () => {
 
     const fetchCourseTags = async () => {
         try {
-            
             const response = await APIHelper.getBlogTags({
                 status: 1,
-                
             });
             setCourseTags(response.data);
-            
-            
-            
-            
         } catch (e) {
         } finally {
-            
         }
     };
-    const keywords = coursetags.map((e)=> e.Name).join(", ");
-    const description = "Discover our wide range of courses on astrology, numerology, kundali matching, and daily horoscopes. Enhance your knowledge and skills with expert-led training.";
+    const keywords = coursetags.map((e) => e.Name).join(', ');
+    const description =
+        'Discover our wide range of courses on astrology, numerology, kundali matching, and daily horoscopes. Enhance your knowledge and skills with expert-led training.';
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description}/>
+            <SEO keywords={keywords} description={description} />
             <Helmet>
                 <script>var orgCountry = "IN";</script>
                 <title>Acharya Ganesh Astrology Academy</title>
@@ -192,11 +186,11 @@ const CoursesList = () => {
                     >
                         <img src={ICFilter} alt={'Filter icon'} />
                         <p>
-                            {sortBy == 'pr.PublishedOn' && order == 'asc'
+                            {sortBy == 'pr."PublishedOn"' && order == 'asc'
                                 ? 'Older'
-                                : sortBy == 'pr.Sale_Price' && order == 'asc'
+                                : sortBy == 'pr."Sale_Price"' && order == 'asc'
                                 ? 'Price Low to High'
-                                : sortBy == 'pr.Sale_Price' && order == 'desc'
+                                : sortBy == 'pr."Sale_Price"' && order == 'desc'
                                 ? 'Price High to Low'
                                 : 'Latest'}
                         </p>
@@ -206,7 +200,7 @@ const CoursesList = () => {
                                     onClick={() =>
                                         handleSortingFilter(
                                             'desc',
-                                            'pr.PublishedOn'
+                                            'pr."PublishedOn"'
                                         )
                                     }
                                 >
@@ -216,7 +210,7 @@ const CoursesList = () => {
                                     onClick={() =>
                                         handleSortingFilter(
                                             'asc',
-                                            'pr.PublishedOn'
+                                            'pr."PublishedOn"'
                                         )
                                     }
                                 >
@@ -226,7 +220,7 @@ const CoursesList = () => {
                                     onClick={() =>
                                         handleSortingFilter(
                                             'asc',
-                                            'pr.Sale_Price'
+                                            'pr."Sale_Price"'
                                         )
                                     }
                                 >
@@ -236,7 +230,7 @@ const CoursesList = () => {
                                     onClick={() =>
                                         handleSortingFilter(
                                             'desc',
-                                            'pr.Sale_Price'
+                                            'pr."Sale_Price"'
                                         )
                                     }
                                 >

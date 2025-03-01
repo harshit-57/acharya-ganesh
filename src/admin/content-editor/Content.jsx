@@ -403,7 +403,7 @@ const Edit = () => {
                                 })) || [],
                             storyImages:
                                 response?.Images?.map((item, index) => ({
-                                    id: item?.id,
+                                    id: item?.Id,
                                     imageText: item?.ImageText,
                                     imageType: htmlToText(
                                         item?.ImageText
@@ -465,7 +465,7 @@ const Edit = () => {
                 categoryResponse = await APIHelper.getCourseCategories(
                     categoryTab == 'most'
                         ? {
-                              sortBy: 'Count',
+                              sortBy: '"Count"',
                               sort: 'DESC',
                           }
                         : {}
@@ -477,7 +477,7 @@ const Edit = () => {
                 categoryResponse = await APIHelper.getBlogCategories(
                     categoryTab == 'most'
                         ? {
-                              sortBy: 'Count',
+                              sortBy: '"Count"',
                               sort: 'DESC',
                           }
                         : {}
@@ -489,7 +489,7 @@ const Edit = () => {
                 categoryResponse = await APIHelper.getSpiritualityCategories(
                     categoryTab == 'most'
                         ? {
-                              sortBy: 'Count',
+                              sortBy: '"Count"',
                               sort: 'DESC',
                           }
                         : {}
@@ -501,7 +501,7 @@ const Edit = () => {
                 categoryResponse = await APIHelper.getWebStoryCategories(
                     categoryTab == 'most'
                         ? {
-                              sortBy: 'Count',
+                              sortBy: '"Count"',
                               sort: 'DESC',
                           }
                         : {}
@@ -1252,7 +1252,7 @@ const Edit = () => {
                         CoverImageAlt: data.imageAlt,
                         Images:
                             data?.storyImages?.map((item, index) => ({
-                                id: item?.id,
+                                Id: item?.id,
                                 ImageText: item?.imageText,
                                 ImageUrl: item?.imageUrl,
                                 ImageOrder: index + 1,

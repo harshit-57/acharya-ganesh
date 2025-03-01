@@ -47,14 +47,14 @@ const ManageSpirituality = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [showFilterDropDown, setShowFilterDropDown] = useState(false);
     const [sort, setSort] = useState('desc');
-    const [sortBy, setSortBy] = useState('sp.PublishedOn');
+    const [sortBy, setSortBy] = useState('sp."PublishedOn"');
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
     const [selectedData, setSelectedData] = useState(null);
     const [status, setStatus] = useState('');
 
     useEffect(() => {
         fetchBlogs();
-    }, [currentPage, searchQuery, pageSize, sortBy, sort , status]);
+    }, [currentPage, searchQuery, pageSize, sortBy, sort, status]);
     const handleSortingFilter = (p1, p2) => {
         setSort(p1);
         setSortBy(p2);
@@ -208,15 +208,28 @@ const ManageSpirituality = () => {
                                     {exportLoading ? 'Loading...' : 'Export'}
                                 </Button>
                             </Box>
-                            <div style={{ marginRight: '20px' , display: 'flex' , alignItems: 'center' , gap: "20px" }}>
+                            <div
+                                style={{
+                                    marginRight: '20px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '20px',
+                                }}
+                            >
                                 <Select
                                     value={status}
                                     onChange={(e) => setStatus(e.target.value)}
-                                    displayEmpty 
-                                    renderValue={status !== "" ? undefined : () => "Select Status"} 
-                                    style={{height : "40px"}}
+                                    displayEmpty
+                                    renderValue={
+                                        status !== ''
+                                            ? undefined
+                                            : () => 'Select Status'
+                                    }
+                                    style={{ height: '40px' }}
                                 >
-                                    <MenuItem value={""}>Select Status</MenuItem>
+                                    <MenuItem value={''}>
+                                        Select Status
+                                    </MenuItem>
                                     <MenuItem value={1}>Published</MenuItem>
                                     <MenuItem value={2}>Draft</MenuItem>
                                     <MenuItem value={3}>Pending</MenuItem>

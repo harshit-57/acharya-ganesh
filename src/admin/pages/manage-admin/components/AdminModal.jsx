@@ -53,7 +53,7 @@ export default function AdminModal(props) {
     };
 
     const [formData, setFormData] = React.useState({
-        id: selectedData ? selectedData.id : undefined,
+        id: selectedData ? selectedData.Id : undefined,
         name: selectedData ? selectedData.Name : '',
         email: selectedData ? selectedData.Email : '',
         password: '',

@@ -145,7 +145,7 @@ const PaginationTable = ({
                         {data.map((admin, index) => (
                             <TableRow key={index}>
                                 <StyledTableCell align="center">
-                                    {admin?.id}
+                                    {admin?.Id}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                     {admin.Name}
