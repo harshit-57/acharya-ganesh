@@ -1,12 +1,18 @@
 import axios from 'axios';
 
-const useProd = true;
+const REACT_APP_ENV = 'development';
 
-const BASE_URL_PROD = 'http://34.131.192.173:4200';
-const UPLOAD_URL = 'http://34.131.192.173:4200';
-const BASE_URL_LOCAL = 'http://localhost:4200';
+const REACT_APP_API_URL = 'http://localhost:4200/api';
+const REACT_APP_API_URL_DEV = 'http://34.131.192.173:4200/api';
+const REACT_APP_API_URL_PROD = 'http://147.93.104.111/:8000/api';
+const REACT_APP_UPLOAD_URL = 'http://34.131.192.173:4200/api';
 
-const getBaseUrl = () => (useProd ? BASE_URL_PROD : BASE_URL_LOCAL);
+const getBaseUrl = () =>
+    REACT_APP_ENV == 'production'
+        ? REACT_APP_API_URL_PROD
+        : REACT_APP_ENV == 'development'
+        ? REACT_APP_API_URL_DEV
+        : REACT_APP_API_URL;
 
 const axiosHelper = async (method, url, params = {}, data = {}, token) => {
     data = { ...data };
@@ -81,7 +87,7 @@ export const UPLOADAPIHELPER = Object.freeze({
     upload: async (data) => {
         return await axios({
             method: 'POST',
-            url: UPLOAD_URL + '/v1/upload',
+            url: REACT_APP_UPLOAD_URL + '/v1/upload',
             data,
             headers: {
                 'Content-Type': 'multipart/form-data',
