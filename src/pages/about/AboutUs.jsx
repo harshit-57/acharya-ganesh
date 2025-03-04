@@ -6,7 +6,7 @@ import IcStar from '../../assets/star_primary_dark.png';
 import ImgHeaderBg from '../../assets/about_header_bg.png';
 import ImgHanish from '../../assets/about_image.jpg';
 import ImgStatsBg from '../../assets/about_stats_bg.jpg';
-import ImgConsultationPoster from '../../assets/consultation_poster.jpg';
+import ImgConsultationPoster from '../../assets/consultation_call_website.jpg';
 import { Spacer } from '../../components/spacer/Spacer';
 import imageList from '../../data/gallery-images';
 import { useEffect, useState } from 'react';
@@ -315,13 +315,13 @@ const AboutUs = () => {
                                 </Bullet>
                             </div>
                         </div>
-                        <div className={css.column}>
-                            <img
-                                className={css.consultation_poster}
-                                src={ImgConsultationPoster}
-                                alt={'Consultation poster'}
-                            />
-                        </div>
+                        {/* <div className={css.column}> */}
+                        <img
+                            className={css.consultation_poster}
+                            src={ImgConsultationPoster}
+                            alt={'Consultation poster'}
+                        />
+                        {/* </div> */}
                     </div>
                     <div className={css.row}>
                         <div className={css.column}>

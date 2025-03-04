@@ -118,7 +118,7 @@ export const CoursesCarousel = () => {
             className={css.container}
         >
             <h2 className={css.section_heading}>
-                {'Explore Our Upcoming & Live Courses'}
+                {'Explore Our Recent Courses'}
             </h2>
             <div className={css.course_slide_container}>
                 <button

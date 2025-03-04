@@ -8,12 +8,12 @@
     flex-direction: column;
     gap: 24px;
 
-    .recent_blog {
+    .recent_shop {
         display: flex;
         gap: 12px;
-        cursor: pointer;
+        /* cursor: pointer; */
 
-        &:hover p {
+        &:hover a {
             color: var(--color-caption);
         }
 
@@ -23,9 +23,18 @@
             border-radius: 8px;
         }
         p {
-            font-size: 14px;
-            font-family: 'Sorts Mill Goudy';
+            font-size: 16px;
+            /* font-family: 'Sorts Mill Goudy'; */
             align-self: center;
+            margin-bottom: 10px;
+        }
+        .btn_shop {
+            margin-top: 10px;
+            background-color: var(--color-primary);
+            padding: 8px 12px;
+            border-radius: 8px;
+            color: black;
+            font-weight: 500;
         }
     }
 }

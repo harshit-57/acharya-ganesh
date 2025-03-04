@@ -32,14 +32,26 @@ const VideoReviews = () => {
                 {(showMore ? videos : videos?.slice(0, 4)).map(
                     (video, index) => (
                         <div key={index} className={css.videoWrapper}>
-                            <iframe
+                            <video
+                                controls
+                                loading="lazy"
+                                width="100%"
+                                height="200"
+                                allow="fullscreen"
+                                controlsList="nodownload"
+                                // className={css.video}
+                                // poster={`https://acharyaganesh.com/wp-content/uploads/2025/02/1.jpg`}
+                            >
+                                <source src={video} type="video/mp4" />
+                            </video>
+                            {/* <iframe
                                 src={video}
                                 width="100%"
                                 height="200"
                                 frameBorder="0"
                                 allow="fullscreen"
                                 allowFullScreen
-                            ></iframe>
+                            ></iframe> */}
                         </div>
                     )
                 )}

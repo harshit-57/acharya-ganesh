@@ -2,6 +2,7 @@ import css from './style.module.css';
 import IcChevronIcon from '../../../../assets/chevron-down.png';
 import { useMemo, useState } from 'react';
 import parse from 'html-react-parser';
+import { useNavigate } from 'react-router-dom';
 
 export const TableOfContent = ({ article }) => {
     if (!article) return null;
@@ -31,7 +32,6 @@ export const TableOfContent = ({ article }) => {
     }, [article]);
 
     const [show, setShow] = useState(false);
-
     const handleScroll = (id) => {
         const element = document.getElementById(id);
         if (element) {

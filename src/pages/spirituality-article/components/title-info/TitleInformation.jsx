@@ -1,12 +1,10 @@
 import css from './style.module.css';
-import ImgThumbnail from '../../../../assets/blog_thumbnail_janmashtami.jpg';
 import IcFacebook from '../../../../assets/ic_facebook_mono.png';
 import IcInstagram from '../../../../assets/ic_instagram_mono.png';
 import IcX from '../../../../assets/ic_x_mono.png';
 import IcPinterest from '../../../../assets/ic_pinterest_mono.png';
 import { useEffect, useMemo, useState } from 'react';
 import { getDaySuffix, getReadingTime } from '../../../../util/helper';
-import { LINKS } from '../../../../util/constants';
 import { htmlToText } from 'html-to-text';
 const months = [
     'January',
@@ -36,6 +34,9 @@ export const TitleInformation = ({ article }) => {
         () => getReadingTime(article?.Description),
         [article]
     );
+
+    const url = window?.location?.origin + window?.location?.pathname || '';
+
     return (
         <div className={css.container}>
             {article?.Image && (
@@ -66,22 +67,38 @@ export const TitleInformation = ({ article }) => {
                     </p>
                 </div>
                 <div className={css.socials_container}>
-                    <a href={LINKS.FACEBOOK_URL} target={'_blank'}>
+                    <a
+                        href={`https://www.facebook.com/sharer/sharer.php?u=${url}/&quote=${htmlToText(
+                            article?.Title
+                        )}`}
+                        target={'_blank'}
+                    >
                         <div className={css.social_button_wrapper}>
                             <img src={IcFacebook} alt={'Social icon'} />
                         </div>
                     </a>
-                    <a href={LINKS.INSTAGRAM_URL} target={'_blank'}>
+                    <a
+                        href={`https://twitter.com/intent/tweet?text=${htmlToText(
+                            article?.Title
+                        )}&url=${url}`}
+                        target={'_blank'}
+                    >
                         <div className={css.social_button_wrapper}>
                             <img src={IcInstagram} alt={'Social icon'} />
                         </div>
                     </a>
-                    <a href={LINKS.X_URL} target={'_blank'}>
+                    <a
+                        href={`https://www.linkedin.com/shareArticle?mini=true&url=${url}`}
+                        target={'_blank'}
+                    >
                         <div className={css.social_button_wrapper}>
                             <img src={IcX} alt={'Social icon'} />
                         </div>
                     </a>
-                    <a href={LINKS.PINTEREST_URL} target={'_blank'}>
+                    <a
+                        href={`https://www.pinterest.com/pin/create/button/?url=${url}&media=${article?.Image}?fit=1024,576&ssl=1&description=${article?.Title}`}
+                        target={'_blank'}
+                    >
                         <div className={css.social_button_wrapper}>
                             <img src={IcPinterest} alt={'Social icon'} />
                         </div>

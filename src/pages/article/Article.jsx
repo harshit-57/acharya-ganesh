@@ -10,7 +10,7 @@ import { CoursesCarousel } from '../../components/courses-carousel/CoursesCarous
 import { TitleInformation } from './components/title-info/TitleInformation';
 import { Footer } from '../../components/footer/Footer';
 import { TableOfContent } from './components/table-of-content/TableOfContent';
-import { RecentBlogs } from './components/recents/RecentBlogs';
+import { ArticleSidebar } from './components/sidebar/ArticleSidebar';
 import IcStar from '../../assets/star_primary_dark.png';
 import parse from 'html-react-parser';
 import { useEffect, useState } from 'react';
@@ -75,7 +75,7 @@ const Article = () => {
                             </div>
                         </div>
                     </div>
-                    <RecentBlogs />
+                    <ArticleSidebar />
                 </div>
                 <CoursesCarousel />
             </div>
