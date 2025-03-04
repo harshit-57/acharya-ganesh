@@ -58,10 +58,12 @@ const SArticle = () => {
             <HorizontalBorder color={'#cebeb1'} />
             <div className={css.content}>
                 <div className={css.article_container}>
-                    <TableOfContent article={article} />
-                    <div className={css.article_wrapper}>
-                        <div className={`html-content`}>
-                            {parse(article?.Description || '')}
+                    <div>
+                        <TableOfContent article={article} />
+                        <div className={css.article_wrapper}>
+                            <div className={`html-content`}>
+                                {parse(article?.Description || '')}
+                            </div>
                         </div>
                     </div>
                     <RecentBlogs />

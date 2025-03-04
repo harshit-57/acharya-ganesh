@@ -5,7 +5,7 @@
 }
 .sections_container {
     display: flex;
-    padding: 72px 60px;
+    padding: 55px 60px;
     gap: 150px;
 }
 .section {
@@ -19,7 +19,7 @@
     align-items: center;
 
     p {
-        text-align: center;
+        text-align: justify;
         font-size: 16px;
         color: var(--color-white);
     }
@@ -36,8 +36,8 @@
 .links {
     display: flex;
     flex-wrap: wrap;
-    column-gap: 48px;
-    row-gap: 30px;
+    column-gap: 20px;
+    row-gap: 15px;
 
     li {
         flex: 1 1 calc(50% - 48px);
@@ -46,7 +46,7 @@
         transition: 0.2s;
         cursor: pointer;
 
-        a{
+        a {
             color: var(--color-white);
             text-decoration: none;
         }

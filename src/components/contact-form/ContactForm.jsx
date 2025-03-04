@@ -41,21 +41,25 @@ const ContactForm = () => {
             errors.name = 'Name is required';
             error = true;
         }
-        if (!formData.email.trim()) {
-            errors.email = 'Email is required';
-            error = true;
-        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-            errors.email = 'Invalid email format';
+        // if (!formData.email.trim()) {
+        //     errors.email = 'Email is required';
+        //     error = true;
+        // } else
+        if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
+            errors.email = 'Email is invalid';
             error = true;
         }
         if (!formData.phone.trim()) {
             errors.phone = 'Phone number is required';
             error = true;
-        }
-        if (!formData.service.trim()) {
-            errors.service = 'Service is required';
+        } else if (!/^\d{10}$/.test(formData.phone)) {
+            errors.phone = 'Phone number is invalid';
             error = true;
         }
+        // if (!formData.service.trim()) {
+        //     errors.service = 'Service is required';
+        //     error = true;
+        // }
         if (!formData.message.trim()) {
             errors.message = 'Message is required';
             error = true;

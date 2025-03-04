@@ -147,26 +147,26 @@ const PaginationTable = ({
                                     {index + 1}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {support.Name}
+                                    {support.Name || '-'}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                     <p className="content-three-line">
-                                        {support.Email}
+                                        {support.Email || '-'}
                                     </p>
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                     <p className="content-three-line">
-                                        {support.Phone}
+                                        {support.Phone || '-'}
                                     </p>
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                     <p className="content-three-line">
-                                        {support.Service}
+                                        {support.Service || '-'}
                                     </p>
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                     <p className="content-three-line">
-                                        {support.Message}
+                                        {support.Message || '-'}
                                     </p>
                                 </StyledTableCell>
                                 <StyledTableCell align="center">

@@ -27,7 +27,12 @@ export const RecentBlogs = () => {
     };
     return (
         <div className={css.container}>
-            <img src={ImgConsultation} alt={'Consultation poster'} />
+            <img
+                src={ImgConsultation}
+                alt={'Consultation poster'}
+                style={{ cursor: 'pointer' }}
+                onClick={() => navigate('/contact')}
+            />
             <div className={css.recent_container}>
                 <h3>Recent Blogs</h3>
                 {articleList &&

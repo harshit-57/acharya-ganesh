@@ -1,6 +1,6 @@
 import css from './style.module.css';
 import IcChevronIcon from '../../../../assets/chevron-down.png';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import parse from 'html-react-parser';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,6 +31,7 @@ export const TableOfContent = ({ article }) => {
         return toc;
     }, [article]);
 
+    const [show, setShow] = useState(false);
     const handleScroll = (id) => {
         const element = document.getElementById(id);
         if (element) {
@@ -42,18 +43,26 @@ export const TableOfContent = ({ article }) => {
 
     return (
         <div className={css.container}>
-            <h3>Table of contents</h3>
-            {getTableContents?.map((item, index) => (
-                <div className={css.content_table_link}>
-                    <img src={IcChevronIcon} alt={''} />
-                    <a
-                        //  href={`#${item?.id}`}
-                        onClick={() => handleScroll(item?.id)}
-                    >
-                        <p>{item?.text}</p>
-                    </a>
-                </div>
-            ))}
+            <h3 onClick={() => setShow(!show)}>
+                <img
+                    src={IcChevronIcon}
+                    style={show ? { transform: 'rotate(0deg)' } : {}}
+                    alt={''}
+                />
+                Table of contents
+            </h3>
+            {show &&
+                getTableContents?.map((item, index) => (
+                    <div className={css.content_table_link}>
+                        {/* <img src={IcChevronIcon} alt={''} /> */}
+                        <a
+                            //  href={`#${item?.id}`}
+                            onClick={() => handleScroll(item?.id)}
+                        >
+                            <p>{item?.text}</p>
+                        </a>
+                    </div>
+                ))}
             {/* <div className={css.content_table_link}>
                 <img src={IcChevronIcon} alt={''} />
                 <p>Introduction to Lakshmi Puja</p>

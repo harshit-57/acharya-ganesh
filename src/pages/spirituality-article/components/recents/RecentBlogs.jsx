@@ -4,10 +4,17 @@ import { InputField } from '../../../../components/input-field/InputField';
 import { PrimaryButton } from '../../../../components/primary-button/PrimaryButton';
 import ImgPlaceholderThumbnail from '../../../../assets/recent_blog_thumbnail_placeholder.jpg';
 import ContactForm from '../../../../components/contact-form/ContactForm';
+import { useNavigate } from 'react-router-dom';
 export const RecentBlogs = () => {
+    const navigate = useNavigate();
     return (
         <div className={css.container}>
-            <img src={ImgConsultation} alt={'Consultation poster'} />
+            <img
+                src={ImgConsultation}
+                alt={'Consultation poster'}
+                style={{ cursor: 'pointer' }}
+                onClick={() => navigate('/contact')}
+            />
             <div className={css.recent_container}>
                 <h3>Recent Blogs</h3>
                 <div className={css.recent_blog}>
