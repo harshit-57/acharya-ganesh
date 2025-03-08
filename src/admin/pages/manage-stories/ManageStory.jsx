@@ -64,7 +64,7 @@ const ManageStory = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [showFilterDropDown, setShowFilterDropDown] = useState(false);
     const [sort, setSort] = useState('desc');
-    const [sortBy, setSortBy] = useState('ws."PublishedOn"');
+    const [sortBy, setSortBy] = useState('ws.PublishedOn');
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
     const [status, setStatus] = useState('');
 

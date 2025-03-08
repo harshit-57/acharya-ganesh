@@ -89,7 +89,7 @@ const Edit = () => {
         isTOP: ['course'].includes(type)
             ? false
             : ['blog', 'spirituality']?.includes(type)
-            ? true
+            ? 1
             : undefined,
         status: 1,
         publishedOn: new Date(),
@@ -175,7 +175,7 @@ const Edit = () => {
                                 textColor: response?.Extra_Text_Color || '',
                                 bgColor: response?.Extra_Bg_Color || '',
                             },
-                            isTOP: response?.IsTop || false,
+                            isTOP: response?.IsTop || 0,
                             status: response?.Status,
                             publishedOn: response?.PublishedOn
                                 ? new Date(response?.PublishedOn)
@@ -239,7 +239,7 @@ const Edit = () => {
                                 textColor: response?.Extra_Text_Color || '',
                                 bgColor: response?.Extra_Bg_Color || '',
                             },
-                            isTOP: response?.IsTop || true,
+                            isTOP: response?.IsTop || 1,
                             status: response?.Status,
                             publishedOn: response?.PublishedOn
                                 ? new Date(response?.PublishedOn)
@@ -293,7 +293,7 @@ const Edit = () => {
                                 textColor: response?.Extra_Text_Color || '',
                                 bgColor: response?.Extra_Bg_Color || '',
                             },
-                            isTOP: response?.IsTop || true,
+                            isTOP: response?.IsTop || 1,
                             status: response?.Status,
                             publishedOn: response?.PublishedOn
                                 ? new Date(response?.PublishedOn)
@@ -465,7 +465,7 @@ const Edit = () => {
                 categoryResponse = await APIHelper.getCourseCategories(
                     categoryTab == 'most'
                         ? {
-                              sortBy: '"Count"',
+                              sortBy: 'Count',
                               sort: 'DESC',
                           }
                         : {}
@@ -477,7 +477,7 @@ const Edit = () => {
                 categoryResponse = await APIHelper.getBlogCategories(
                     categoryTab == 'most'
                         ? {
-                              sortBy: '"Count"',
+                              sortBy: 'Count',
                               sort: 'DESC',
                           }
                         : {}
@@ -489,7 +489,7 @@ const Edit = () => {
                 categoryResponse = await APIHelper.getSpiritualityCategories(
                     categoryTab == 'most'
                         ? {
-                              sortBy: '"Count"',
+                              sortBy: 'Count',
                               sort: 'DESC',
                           }
                         : {}
@@ -501,7 +501,7 @@ const Edit = () => {
                 categoryResponse = await APIHelper.getWebStoryCategories(
                     categoryTab == 'most'
                         ? {
-                              sortBy: '"Count"',
+                              sortBy: 'Count',
                               sort: 'DESC',
                           }
                         : {}
