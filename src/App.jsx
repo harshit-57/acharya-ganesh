@@ -36,6 +36,8 @@ import ManageTestimonial from './admin/pages/manage-testimonial/ManageTestimonia
 import ManageSupport from './admin/pages/manage-support/ManageSupport';
 import ManageCitation from './admin/pages/manage-citation/ManageCitation';
 import ManageAdmin from './admin/pages/manage-admin/ManageAdmin';
+import Services from './pages/services/Services';
+import ServiceDetail from './pages/service-detail/ServiceDetail';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
@@ -52,7 +54,7 @@ export default () => {
             <RouteChangeDetector />
             <Routes>
                 <Route index path="/" element={<Home />} />
-                <Route path="/services/astro-vastu" element={<AstroVastu />} />
+                {/* <Route path="/services/astro-vastu" element={<AstroVastu />} />
                 <Route path="/services/astrology" element={<Astrology />} />
                 <Route path="/services/muhurat" element={<BirthChart />} />
                 <Route
@@ -74,7 +76,9 @@ export default () => {
                 <Route
                     path="/services/wealth-astrology"
                     element={<WealthAstrology />}
-                />
+                /> */}
+                <Route path="/services" element={<Services />} />
+                <Route path="/services/:slug" element={<ServiceDetail />} />
                 <Route path="/blog" element={<BlogList />} />
                 <Route path="/blog/:category" element={<BlogList />} />
                 <Route path="/blog/:category/:slug" element={<Article />} />

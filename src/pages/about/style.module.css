@@ -91,10 +91,10 @@
     border-radius: 36px;
     padding: 48px;
     background-color: #f9eae0;
-    min-height: 600px;
+    /* min-height: 600px; */
     height: 100%;
     width: 50%;
-    overflow: auto;
+    /* overflow: auto; */
 
     h2 {
         color: var(--color-caption);
@@ -239,13 +239,14 @@
     }
 
     .person_image {
-        flex: none;
+        /* flex: none; */
         width: 100%;
         aspect-ratio: 1;
         border-radius: 24px;
     }
 
     .about_description_container {
+        width: 100%;
         border-radius: 24px;
         padding: 36px 24px;
 

@@ -36,7 +36,7 @@ export const Footer = () => {
                             <NavLink to={'/courses'}>Courses</NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/'}>Services</NavLink>
+                            <NavLink to={'/services'}>Services</NavLink>
                         </li>
                         <li>
                             <a href={LINKS.SHOP_URL} target={'_blank'}>

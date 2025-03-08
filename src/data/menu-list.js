@@ -18,7 +18,7 @@ export default [
         subMenus: null,
     },
     {
-        route: null,
+        route: '/services',
         id: '',
         title: 'Services',
         subMenus: [

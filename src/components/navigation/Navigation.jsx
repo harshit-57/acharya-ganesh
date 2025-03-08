@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import IcXCircle from '../../assets/x-circle.png';
 import { useNav } from '../../hook/useNav';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { APIHelper } from '../../util/APIHelper.js';
 export const Navigation = () => {
     const navigate = useNavigate();
@@ -99,12 +99,14 @@ export const Navigation = () => {
                     <ul>
                         {menus &&
                             menuList.map((m, index) => (
-                                <li
+                                <NavLink
                                     key={index}
-                                    onClick={() => handleNavigate(m?.route)}
+                                    to={m?.link ? m?.link : m.route}
+                                    onClick={() => setShowNav(false)}
+                                    className={css.menu_button}
                                 >
                                     {m.title}
-                                </li>
+                                </NavLink>
                             ))}
                     </ul>
                 </div>

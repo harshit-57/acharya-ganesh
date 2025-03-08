@@ -2,7 +2,7 @@ import css from './style.module.css';
 import ImgConsultation from '../../../../assets/consult_with_astrologer.jpg';
 import { useNavigate } from 'react-router-dom';
 import ContactForm from '../../../../components/contact-form/ContactForm';
-import { RecentBlogs } from '../recents/RecentBlogs';
+import { RecentBlogs } from '../recents/RecentSpirituality';
 import { Socials } from '../socials/Socials';
 import { Shop } from '../shop/Shop';
 export const ArticleSidebar = () => {

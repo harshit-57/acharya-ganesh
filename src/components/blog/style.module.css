@@ -116,14 +116,16 @@
         gap: 30px;
     }
     .article_slide_container {
+        width: 90%;
+        margin: auto;
         button > img {
             width: 13px;
         }
         .prev_button {
-            left: -20px;
+            left: -50px;
         }
         .next_button {
-            right: -20px;
+            right: -50px;
         }
 
         .prev_button,

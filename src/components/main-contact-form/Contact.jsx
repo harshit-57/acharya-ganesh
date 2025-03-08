@@ -60,10 +60,10 @@ const MainContactForm = () => {
         //     errors.service = 'Service is required';
         //     error = true;
         // }
-        if (!formData.message.trim()) {
-            errors.message = 'Message is required';
-            error = true;
-        }
+        // if (!formData.message.trim()) {
+        //     errors.message = 'Message is required';
+        //     error = true;
+        // }
         setErrorData(errors);
         return error;
     };

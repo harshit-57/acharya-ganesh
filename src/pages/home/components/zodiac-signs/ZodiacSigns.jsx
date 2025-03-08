@@ -97,6 +97,11 @@ const ZodiacSigns = () => {
     useEffect(() => {
         const containerWidth = containerRef.current.offsetWidth;
         const wrapperWidth = wrapperRef.current.scrollWidth;
+        console.log(
+            containerWidth,
+            wrapperWidth,
+            Math.ceil(wrapperWidth / containerWidth)
+        );
         setIndicatorCount(Math.ceil(wrapperWidth / containerWidth));
     }, []);
 
@@ -185,7 +190,11 @@ const ZodiacSigns = () => {
             </div>
             <Spacer vertical={'48px'} />
             <IndicatorContainer
-                currentIndex={currentOffset}
+                currentIndex={
+                    currentOffset >= indicatorCount
+                        ? indicatorCount - 1
+                        : currentOffset
+                }
                 count={indicatorCount}
                 onIndicatorClick={(index) => {
                     const containerWidth = containerRef.current.offsetWidth;

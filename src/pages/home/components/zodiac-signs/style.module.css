@@ -91,13 +91,15 @@
         margin-top: 36px;
 
         .slides_wrapper {
-            gap: 36px;
+            gap: 20px;
+            width: 80%;
+            margin: 0 auto;
         }
         .prev_button {
-            left: 5px;
+            left: -20px;
         }
         .next_button {
-            right: 5px;
+            right: -20px;
         }
 
         .prev_button,
