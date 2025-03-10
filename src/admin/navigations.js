@@ -38,6 +38,13 @@ export const navigations = [
         icon: 'share_location',
         permissionName: 'ManageCitation',
     },
+    { label: 'CONSULTATIONS', type: 'label' },
+    {
+        name: 'Slots Management',
+        path: '/admin/booking/slots',
+        icon: 'headset_mic',
+        // permissionName: 'ManageBooking',
+    },
     { label: 'REVIEWS', type: 'label' },
     {
         name: 'Testimonial Management',

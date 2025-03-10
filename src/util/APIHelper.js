@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const REACT_APP_ENV = 'development';
+const REACT_APP_ENV = 'local';
 
 const REACT_APP_API_URL = 'http://localhost:4200/api';
 const REACT_APP_API_URL_DEV = 'http://34.131.192.173:4200/api';
@@ -58,6 +58,8 @@ export const APIHelper = Object.freeze({
     getCourses: await getApi('v1/GetDivine/getCourses'),
     createLead: await postApi('v1/GetDivine/createLead'),
     getLeads: await getApi('v1/GetDivine/getLeads'),
+
+    getSlots: await getApi('v1/GetDivine/getBookingSlots'),
 });
 
 export const ADMINAPIHELPER = Object.freeze({

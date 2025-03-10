@@ -38,6 +38,7 @@ import ManageCitation from './admin/pages/manage-citation/ManageCitation';
 import ManageAdmin from './admin/pages/manage-admin/ManageAdmin';
 import Services from './pages/services/Services';
 import ServiceDetail from './pages/service-detail/ServiceDetail';
+import ManageSlot from './admin/pages/manage-slot/ManageSlot';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
@@ -158,6 +159,11 @@ export default () => {
                         element={<ManageTestimonial />}
                     />
                     <Route path="/admin/support" element={<ManageSupport />} />
+
+                    <Route
+                        path="/admin/booking/slots"
+                        element={<ManageSlot />}
+                    />
                 </Route>
             </Routes>
         </>
