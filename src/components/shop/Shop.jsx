@@ -1,7 +1,7 @@
 import css from './style.module.css';
-import ImgGemstone from '../../../../assets/Gemstone.webp';
-import ImgPanna from '../../../../assets/Panna.webp';
-import ImgMukhi from '../../../../assets/Mukhi.webp';
+import ImgGemstone from '../../assets/Gemstone.webp';
+import ImgPanna from '../../assets/Panna.webp';
+import ImgMukhi from '../../assets/Mukhi.webp';
 
 export const Shop = () => {
     return (

@@ -9,14 +9,31 @@ import SEO from '../../Seo';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
 import { Footer } from '../../components/footer/Footer';
+import { APIHelper } from '../../util/APIHelper';
+import ImgService1 from '../../assets/service_bg_1.png';
+import ImgService2 from '../../assets/service_bg_2.png';
+import ImgService3 from '../../assets/service_bg_3.png';
+import ImgService4 from '../../assets/service_bg_4.png';
 
 const Services = () => {
     const [serviceList, setServiceList] = useState([]);
-    useEffect(
-        () => setServiceList(services),
+    useEffect(() => {
+        getServices();
+    }, []);
 
-        []
-    );
+    const getServices = async () => {
+        try {
+            const response = await APIHelper.getServices({
+                status: 1,
+                active: 1,
+            });
+            setServiceList(response.data.data);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const graphics = [ImgService1, ImgService2, ImgService3, ImgService4];
 
     const keywords =
         'our story, who we are, about acharyaganesh, astrology, numerology, spiritual guidance, kundali, horoscope, vedic astrology';
@@ -48,8 +65,12 @@ const Services = () => {
             <div className={css.content_wrapper}>
                 <div className={css.service_list_container}>
                     {Array.isArray(services) &&
-                        serviceList.map((s, index) => (
-                            <ServiceCard key={index} service={s} />
+                        serviceList?.map((s, index) => (
+                            <ServiceCard
+                                key={index}
+                                service={s}
+                                graphic={graphics[index % 4]}
+                            />
                         ))}
                 </div>
             </div>

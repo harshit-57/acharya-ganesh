@@ -96,16 +96,22 @@ const PaginationTable = ({
                                 align="left"
                                 style={{ paddingLeft: '40px', width: '100px' }}
                             >
-                                Id
+                                <Icon>image</Icon>
                             </StyledTableHead>
                             <StyledTableHead align="center">
-                                Title
+                                Name
                             </StyledTableHead>
                             <StyledTableHead align="center">
                                 Slug
                             </StyledTableHead>
                             <StyledTableHead align="center">
-                                Description
+                                Title
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
+                                SubTitle
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
+                                Parent Service
                             </StyledTableHead>
                             <StyledTableHead align="center">
                                 Status
@@ -140,11 +146,38 @@ const PaginationTable = ({
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map((citation, index) => (
+                        {data.map((service, index) => (
                             <TableRow key={index}>
-                                <StyledTableCell align="center">
-                                    {citation?.Id}
-                                </StyledTableCell>
+                                {service?.Image ? (
+                                    <StyledTableCell
+                                        align="left"
+                                        style={{
+                                            paddingLeft: '30px',
+                                            width: '100px',
+                                        }}
+                                    >
+                                        <img
+                                            src={service.Image}
+                                            alt={service.Name}
+                                            style={{
+                                                width: '50px',
+                                                height: '50px',
+                                                objectFit: 'cover',
+                                                borderRadius: '50%',
+                                            }}
+                                        />
+                                    </StyledTableCell>
+                                ) : (
+                                    <StyledTableCell
+                                        align="left"
+                                        style={{
+                                            paddingLeft: '40px',
+                                            width: '100px',
+                                        }}
+                                    >
+                                        <Icon>photo</Icon>
+                                    </StyledTableCell>
+                                )}
                                 <StyledTableCell align="center">
                                     <Link
                                         sx={{
@@ -153,28 +186,51 @@ const PaginationTable = ({
                                         }}
                                         onClick={() =>
                                             navigate(
-                                                `/citation/${citation.Slug}`
+                                                service?.ParentSlug
+                                                    ? `/service/${service?.ParentSlug}/${service.Slug}`
+                                                    : `/service/${service.Slug}`
                                             )
                                         }
                                     >
-                                        {citation.Title}
+                                        {service?.Name ? service.Name : 'NA'}
                                     </Link>
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {citation.Slug}
-                                </StyledTableCell>
-                                <StyledTableCell align="start">
-                                    <p className="content-three-line">
-                                        {htmlToText(citation?.Description)}
-                                    </p>
+                                    {service?.Slug ? service?.Slug : 'NA'}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {citation?.Status === 1 ? (
+                                    {service?.Title ? service?.Title : 'NA'}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {service?.SubTitle
+                                        ? service?.SubTitle
+                                        : 'NA'}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    <Link
+                                        sx={{
+                                            cursor: 'pointer',
+                                            wordBreak: 'break-word',
+                                        }}
+                                        onClick={() =>
+                                            service.ParentSlug &&
+                                            navigate(
+                                                `/service/${service.ParentSlug}`
+                                            )
+                                        }
+                                    >
+                                        {service?.ParentName
+                                            ? service.ParentName
+                                            : 'NA'}
+                                    </Link>
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {service?.Status === 1 ? (
                                         <Chip
                                             label={'Published'}
                                             color="primary"
                                         />
-                                    ) : citation?.Status === 2 ? (
+                                    ) : service?.Status === 2 ? (
                                         <Chip
                                             label={'Draft'}
                                             color="secondary"
@@ -184,7 +240,7 @@ const PaginationTable = ({
                                     )}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {moment(citation.PublishedOn).format('ll')}
+                                    {moment(service.PublishedOn).format('ll')}
                                 </StyledTableCell>
                                 <TableCell align="center">
                                     <IconButton
@@ -197,8 +253,8 @@ const PaginationTable = ({
                                         // }
                                         onClick={() => {
                                             navigate(
-                                                `/admin/content-editor/citation/${citation.Slug}`,
-                                                { state: citation }
+                                                `/admin/content-editor/service/${service.Slug}`,
+                                                { state: service }
                                             );
                                         }}
                                     >
@@ -215,7 +271,7 @@ const PaginationTable = ({
                                         //     )
                                         // }
                                         onClick={() => {
-                                            setSelectedData(citation);
+                                            setSelectedData(service);
                                             setShowDeleteAlert(
                                                 !showDeleteAlert
                                             );

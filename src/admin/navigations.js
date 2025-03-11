@@ -38,6 +38,12 @@ export const navigations = [
         icon: 'share_location',
         permissionName: 'ManageCitation',
     },
+    {
+        name: 'Service Management',
+        path: '/admin/services',
+        icon: 'newspaper',
+        // permissionName: 'ManageService',
+    },
     { label: 'REVIEWS', type: 'label' },
     {
         name: 'Testimonial Management',

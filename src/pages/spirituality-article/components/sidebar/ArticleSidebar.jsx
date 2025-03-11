@@ -3,8 +3,8 @@ import ImgConsultation from '../../../../assets/consult_with_astrologer.jpg';
 import { useNavigate } from 'react-router-dom';
 import ContactForm from '../../../../components/contact-form/ContactForm';
 import { RecentSpirituality } from '../recents/RecentSpirituality';
-import { Socials } from '../socials/Socials';
-import { Shop } from '../shop/Shop';
+import { Socials } from '../../../../components/socials/Socials';
+import { Shop } from '../../../../components/shop/Shop';
 export const ArticleSidebar = () => {
     const navigate = useNavigate();
     return (

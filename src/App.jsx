@@ -38,6 +38,7 @@ import ManageCitation from './admin/pages/manage-citation/ManageCitation';
 import ManageAdmin from './admin/pages/manage-admin/ManageAdmin';
 import Services from './pages/services/Services';
 import ServiceDetail from './pages/service-detail/ServiceDetail';
+import ManageService from './admin/pages/manage-service/ManageService';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
@@ -78,7 +79,11 @@ export default () => {
                     element={<WealthAstrology />}
                 /> */}
                 <Route path="/services" element={<Services />} />
-                <Route path="/services/:slug" element={<ServiceDetail />} />
+                <Route path="/service/:slug" element={<ServiceDetail />} />
+                <Route
+                    path="/service/:parent/:slug"
+                    element={<ServiceDetail />}
+                />
                 <Route path="/blog" element={<BlogList />} />
                 <Route path="/blog/:category" element={<BlogList />} />
                 <Route path="/blog/:category/:slug" element={<Article />} />
@@ -149,6 +154,7 @@ export default () => {
                         element={<ManageSpirituality />}
                     />
                     <Route path="/admin/stories" element={<ManageStory />} />
+                    <Route path="/admin/services" element={<ManageService />} />
                     <Route
                         path="/admin/citations"
                         element={<ManageCitation />}

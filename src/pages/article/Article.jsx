@@ -11,7 +11,6 @@ import { TitleInformation } from './components/title-info/TitleInformation';
 import { Footer } from '../../components/footer/Footer';
 import { TableOfContent } from './components/table-of-content/TableOfContent';
 import { ArticleSidebar } from './components/sidebar/ArticleSidebar';
-import IcStar from '../../assets/star_primary_dark.png';
 import parse from 'html-react-parser';
 import { useEffect, useState } from 'react';
 import { APIHelper } from '../../util/APIHelper';
