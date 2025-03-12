@@ -1,50 +1,66 @@
 import css from './style.module.css';
 import { PageContainer } from '../../components/page-container/PageContainer';
-import IcChevronIcon from '../../assets/chevron-down.png';
 import IcStar from '../../assets/star_primary_dark.png';
 import ImgHeaderBg from '../../assets/about_header_bg.png';
-import ImgConsultationPoster from '../../assets/consultation_call_website.jpg';
-import imageList from '../../data/gallery-images';
 import { useEffect, useState } from 'react';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
 import { Footer } from '../../components/footer/Footer';
 import SEO from '../../Seo';
-import services from '../../data/services';
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import {
+    NavLink,
+    useNavigate,
+    useParams,
+    useSearchParams,
+} from 'react-router-dom';
 import Blog from '../../components/blog/Blog';
 import CitationBox from '../../components/citation-box/CitationBox';
 import { Spacer } from '../../components/spacer/Spacer';
 import parse from 'html-react-parser';
+import { APIHelper } from '../../util/APIHelper';
+import { ServiceSidebar } from './components/sidebar/ServiceSidebar';
 import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
 
 const ServiceDetail = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
 
     const [service, setService] = useState(null);
 
     useEffect(() => {
-        // if (searchParams?.get('preview')) {
-        //     setService(state?.data);
-        //     return;
-        // }
+        if (searchParams?.get('preview')) {
+            setService(state?.data);
+            return;
+        }
         getService();
     }, [slug]);
 
     const getService = async () => {
         try {
-            const service = services.find((e) => e.Slug === slug);
-            if (!service) {
+            const response = await APIHelper.getServices({
+                slug: slug,
+                status: 1,
+                active: 1,
+            });
+            if (!response?.data?.data?.length) {
                 navigate('/services');
             }
-            setService(service);
+            setService(response.data.data[0]);
+
+            // const service = services.find((e) => e.Slug === slug);
+            // if (!service) {
+            //     navigate('/services');
+            // }
+            // setService(service);
         } catch (e) {
             console.log(e);
         }
     };
 
-    const keywords = service?.Tags?.map((e) => e.TagName).join(', ');
+    const keywords =
+        service?.Tags?.map((e) => e.TagName).join(', ') ||
+        'our story, who we are, about acharyaganesh, astrology, numerology, spiritual guidance, kundali, horoscope, vedic astrology';
     const description =
         service?.Meta_Desc ||
         'Learn about acharyaganesh, your trusted source for astrology, numerology, kundali matching, and daily horoscopes. Discover our mission, team, and how we can guide you on your spiritual journey.';
@@ -71,7 +87,7 @@ const ServiceDetail = () => {
                             </h6>
                         )}
                     </div>
-                    <div className={css.row}>
+                    {/* <div className={css.row}>
                         <div className={`html-content bullet ${css.card_desc}`}>
                             {parse(service?.Description || '')}
                         </div>
@@ -87,7 +103,25 @@ const ServiceDetail = () => {
                         <PrimaryButton>
                             {service?.LinkText || 'Book Consultation'}
                         </PrimaryButton>
-                    </NavLink>
+                    </NavLink> */}
+
+                    <div className={css.row}>
+                        <div className={css.card_desc}>
+                            <div className={`html-content bullet`}>
+                                {parse(service?.Description || '')}
+                            </div>
+                            <NavLink
+                                to={service?.Link || ''}
+                                className={css.button}
+                            >
+                                <PrimaryButton>
+                                    {service?.LinkText || 'Book Consultation'}
+                                </PrimaryButton>
+                            </NavLink>
+                        </div>
+                        <ServiceSidebar service={service} />
+                    </div>
+
                     <Blog />
                     <CitationBox />
                 </div>

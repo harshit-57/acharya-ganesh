@@ -1,5 +1,5 @@
 import css from './style.module.css';
-import { LINKS } from '../../../../util/constants';
+import { LINKS } from '../../util/constants';
 import IcFacebook from '../../../../assets/ic_facebook.png';
 import IcInstagram from '../../../../assets/ic_instagram.png';
 import IcX from '../../../../assets/ic_x.png';

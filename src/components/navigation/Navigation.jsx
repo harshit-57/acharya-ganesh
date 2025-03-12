@@ -14,6 +14,7 @@ export const Navigation = () => {
     const { showNav, setShowNav } = useNav();
     const [blogCategories, setBlogCategories] = useState([]);
     const [spiritualityCategories, setSpiritualityCategories] = useState([]);
+    const [services, setServices] = useState([]);
 
     useEffect(() => {
         const blogSubMenuTempList = [];
@@ -34,6 +35,16 @@ export const Navigation = () => {
                 subMenus: null,
             });
         });
+        const serviceSubMenuTempList = [];
+        services.forEach((service) => {
+            serviceSubMenuTempList.push({
+                route: `/service/${service?.Slug}`,
+                id: service?.Id,
+                title: service?.Name,
+                subMenus: null,
+            });
+        });
+
         const updatedMenus = menus.map((menu, index) => {
             if (menu.route === '/blog') {
                 let updatedMenu = {
@@ -47,10 +58,17 @@ export const Navigation = () => {
                     subMenus: spiritualitySubMenuTempList,
                 };
                 return updatedMenu;
+            } else if (menu.route === '/services') {
+                let updatedMenu = {
+                    ...menu,
+                    subMenus: serviceSubMenuTempList,
+                };
+                return updatedMenu;
             } else return menu;
         });
+
         setMenuList(updatedMenus);
-    }, [blogCategories]);
+    }, [blogCategories, spiritualityCategories, services]);
 
     const getBlogCategories = async () => {
         try {
@@ -73,17 +91,26 @@ export const Navigation = () => {
         }
     };
 
+    const getServices = async () => {
+        try {
+            const response = await APIHelper.getServices({
+                active: true,
+                isActive: true,
+            });
+            setServices(response?.data?.data);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
     useEffect(() => {
         if (!(menus && Array.isArray(menus))) return;
         getBlogCategories();
         getSpiritualityCategories();
+        getServices();
         setMenuList(menus);
     }, []);
 
-    const handleNavigate = (route) => {
-        navigate(route);
-        setShowNav(false);
-    };
     return (
         <>
             {showNav && (

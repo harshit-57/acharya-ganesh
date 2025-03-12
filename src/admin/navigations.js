@@ -38,6 +38,13 @@ export const navigations = [
         icon: 'share_location',
         permissionName: 'ManageCitation',
     },
+    {
+        name: 'Service Management',
+        path: '/admin/services',
+        icon: 'newspaper',
+        // permissionName: 'ManageService',
+    },
+
     { label: 'CONSULTATIONS', type: 'label' },
     {
         name: 'Slots Management',
@@ -45,6 +52,7 @@ export const navigations = [
         icon: 'headset_mic',
         // permissionName: 'ManageBooking',
     },
+
     { label: 'REVIEWS', type: 'label' },
     {
         name: 'Testimonial Management',

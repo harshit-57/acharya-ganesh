@@ -1,17 +1,17 @@
 import css from './style.module.css';
-import { LINKS } from '../../../../util/constants';
-import IcFacebook from '../../../../assets/ic_facebook.png';
-import IcInstagram from '../../../../assets/ic_instagram.png';
-import IcX from '../../../../assets/ic_x.png';
-import IcLinkedIn from '../../../../assets/ic_linkedin.png';
-import IcPinterest from '../../../../assets/ic_pinterest.png';
-import IcYoutube from '../../../../assets/ic_youtube.png';
-import IcFacebookMono from '../../../../assets/ic_facebook_mono.png';
-import IcInstagramMono from '../../../../assets/ic_instagram_mono.png';
-import IcXMono from '../../../../assets/ic_x_mono.png';
-import IcLinkedInMono from '../../../../assets/ic_linkedin_mono.png';
-import IcPinterestMono from '../../../../assets/ic_pinterest_mono.png';
-import IcYoutubeMono from '../../../../assets/ic_youtube_mono.png';
+import { LINKS } from '../../util/constants';
+import IcFacebook from '../../assets/ic_facebook.png';
+import IcInstagram from '../../assets/ic_instagram.png';
+import IcX from '../../assets/ic_x.png';
+import IcLinkedIn from '../../assets/ic_linkedin.png';
+import IcPinterest from '../../assets/ic_pinterest.png';
+import IcYoutube from '../../assets/ic_youtube.png';
+import IcFacebookMono from '../../assets/ic_facebook_mono.png';
+import IcInstagramMono from '../../assets/ic_instagram_mono.png';
+import IcXMono from '../../assets/ic_x_mono.png';
+import IcLinkedInMono from '../../assets/ic_linkedin_mono.png';
+import IcPinterestMono from '../../assets/ic_pinterest_mono.png';
+import IcYoutubeMono from '../../assets/ic_youtube_mono.png';
 export const Socials = () => {
     return (
         <div className={css.container}>
