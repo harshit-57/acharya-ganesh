@@ -86,6 +86,10 @@ export const ADMINAPIHELPER = Object.freeze({
     createCategory: await postApi('v1/admin/create-category'),
     createService: await postApi('v1/admin/create-service'),
     updateService: await postApi('v1/admin/update-service'),
+
+    createSlots: await postApi('v1/admin/create-slots'),
+    updateSlot: await postApi('v1/admin/update-slot'),
+    deleteSlot: await postApi('v1/admin/delete-slot'),
 });
 
 export const UPLOADAPIHELPER = Object.freeze({

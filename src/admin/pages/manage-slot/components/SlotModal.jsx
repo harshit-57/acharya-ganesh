@@ -4,15 +4,28 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Grid, Icon, styled } from '@mui/material';
+import {
+    Grid,
+    Icon,
+    IconButton,
+    InputLabel,
+    styled,
+    Typography,
+} from '@mui/material';
 import { InputField } from '../../../../components/input-field/InputField';
 import { ADMINAPIHELPER } from '../../../../util/APIHelper';
 import { toast } from 'react-toastify';
 import useAuth from '../../../hooks/useAuth';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayJs from 'dayjs';
+import moment from 'moment';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
-export default function AdminModal(props) {
+export default function SlotModal(props) {
     const token = localStorage.getItem('accessToken');
-    const { modal, toggle, selectedData, setSelectedData, fetchAdmins } = props;
+    const { modal, toggle, selectedData, setSelectedData, fetchSlots } = props;
     const { permission } = useAuth();
 
     const ModalDialog = React.useMemo(
@@ -54,22 +67,22 @@ export default function AdminModal(props) {
 
     const [formData, setFormData] = React.useState({
         id: selectedData ? selectedData.Id : undefined,
-        name: selectedData ? selectedData.Name : '',
-        email: selectedData ? selectedData.Email : '',
-        password: '',
-        role_id: selectedData ? selectedData.RoleId : '',
+        date: selectedData
+            ? dayJs(selectedData.Date).format('YYYY-MM-DD')
+            : undefined,
+        startDate: selectedData ? undefined : null,
+        endDate: selectedData ? undefined : null,
+        slots: selectedData
+            ? [
+                  {
+                      startTime: selectedData.StartTime,
+                      endTime: selectedData.EndTime,
+                  },
+              ]
+            : [],
     });
     const [errors, setErrors] = React.useState({});
     const [isLoading, setIsLoading] = React.useState(false);
-    const [roles, setRoles] = React.useState([]);
-
-    React.useEffect(() => {
-        const fetchRoles = async () => {
-            const response = await ADMINAPIHELPER.getRoles({}, token);
-            setRoles(response.data?.data || []);
-        };
-        fetchRoles();
-    }, []);
 
     const handleChangeData = (e) => {
         setFormData({
@@ -78,46 +91,91 @@ export default function AdminModal(props) {
         });
     };
 
+    const handleAddSlot = () => {
+        setFormData({
+            ...formData,
+            slots: [
+                ...formData.slots,
+                {
+                    startTime: '',
+                    endTime: '',
+                },
+            ],
+        });
+    };
+
+    const handleRemoveSlot = (index) => {
+        const slots = [...formData.slots];
+        slots.splice(index, 1);
+        setFormData({
+            ...formData,
+            slots,
+        });
+    };
+
+    const handleChangeSlot = (index, field, value) => {
+        const slots = [...formData.slots];
+        slots[index][field] = value;
+        setFormData({
+            ...formData,
+            slots,
+        });
+    };
+
     const handleValidation = () => {
         let error = false;
         let err = errors;
-        if (!formData.name) {
-            err = { ...err, name: 'Name is required' };
+        if (formData?.id && formData.date < moment().format('YYYY-MM-DD')) {
             error = true;
+            err.endDate = 'Date must be greater than today';
+            toast.error('Date must be greater than today');
         }
-        if (!formData.email) {
-            err = { ...err, email: 'Email is required' };
+        if (!formData?.id && !formData.startDate) {
             error = true;
-        }
-        if (
-            !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-                formData.email
-            )
-        ) {
-            err = { ...err, email: 'Email is invalid' };
-            error = true;
-        }
-        if (!formData?.id && !formData.password) {
-            err = { ...err, password: 'Password is required' };
-            error = true;
+            err.startDate = 'Start date is required';
+            toast.error('Start date is required');
         }
         if (
-            formData.password &&
-            !/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(
-                formData.password
-            )
+            !formData?.id &&
+            formData.startDate < moment().format('YYYY-MM-DD')
         ) {
-            err = {
-                ...err,
-                password:
-                    'Password must be a minimum of 6 characters and contain at least one uppercase letter, one number, and one special character',
-            };
             error = true;
+            err.endDate = 'Start date must be greater than today';
+            toast.error('Start date must be greater than today');
         }
-        if (!formData.role_id) {
-            err = { ...err, role_id: 'Role is required' };
+        if (!formData?.id && !formData.endDate) {
             error = true;
+            err.endDate = 'End date is required';
+            toast.error('End date is required');
         }
+        if (!formData?.id && formData.endDate < formData.startDate) {
+            error = true;
+            err.endDate = 'End date must be greater than start date';
+            toast.error('End date must be greater than start date');
+        }
+        if (!formData.slots.length) {
+            error = true;
+            err.slots = 'Slots are required';
+            toast.error('Slots are required');
+        }
+        if (formData.slots.length) {
+            formData.slots.forEach((slot, index) => {
+                if (!slot.startTime) {
+                    error = true;
+                    err.slots =
+                        'Start time is required for slot ' + (index + 1);
+                    toast.error(
+                        'Start time is required for slot ' + (index + 1)
+                    );
+                }
+                if (!slot.endTime) {
+                    error = true;
+                    err.slots = 'End time is required for slot ' + (index + 1);
+                    toast.error('End time is required for slot ' + (index + 1));
+                }
+            });
+        }
+        // if (error) toast.error('Please fill all the required fields');
         setErrors(err);
         return error;
     };
@@ -128,13 +186,13 @@ export default function AdminModal(props) {
         }
         setIsLoading(true);
         if (formData.id) {
-            ADMINAPIHELPER.updateAdmin(
+            ADMINAPIHELPER.updateSlot(
                 {
                     id: formData.id,
-                    name: formData.name,
-                    email: formData.email,
-                    password: formData.password || undefined,
-                    role_id: formData.role_id,
+                    date: formData.startDate,
+                    endDate: formData.endDate,
+                    startTime: formData.slots[0].startTime,
+                    endTime: formData.slots[0].endTime,
                 },
                 token
             )
@@ -143,7 +201,7 @@ export default function AdminModal(props) {
                     if (response.data?.data) {
                         setSelectedData(null);
                         toggle();
-                        fetchAdmins();
+                        fetchSlots();
                     } else {
                         toast.error(response.data?.message);
                     }
@@ -153,12 +211,11 @@ export default function AdminModal(props) {
                     setIsLoading(false);
                 });
         } else
-            ADMINAPIHELPER.createAdmin(
+            ADMINAPIHELPER.createSlots(
                 {
-                    name: formData.name,
-                    email: formData.email,
-                    password: formData.password,
-                    role_id: formData.role_id,
+                    startDate: formData.startDate,
+                    endDate: formData.endDate,
+                    slots: formData.slots,
                 },
                 token
             )
@@ -167,7 +224,7 @@ export default function AdminModal(props) {
                     if (response.data?.data) {
                         setSelectedData(null);
                         toggle();
-                        fetchAdmins();
+                        fetchSlots();
                     } else {
                         toast.error(response.data.message);
                     }
@@ -187,72 +244,213 @@ export default function AdminModal(props) {
             sx={{ width: '100%' }}
         >
             <ModalTitle id="modal-dialog-title" onClose={toggle}>
-                {selectedData ? 'Edit Admin' : 'Add Admin'}
+                {selectedData ? 'Edit Slot' : 'Add Slot'}
             </ModalTitle>
             <DialogContent>
                 <form>
-                    <Grid container padding={2}>
-                        <InputField
-                            style={styles.input}
-                            type="text"
-                            value={formData?.name}
-                            name="name"
-                            onChange={handleChangeData}
-                            placeholder="Enter Name"
-                            error={errors.name}
-                        />
-                    </Grid>
-                    <Grid container padding={2}>
-                        <InputField
-                            style={styles.input}
-                            type="text"
-                            value={formData?.email}
-                            name="email"
-                            onChange={handleChangeData}
-                            placeholder="Enter Email"
-                            error={errors.email}
-                        />
-                    </Grid>
-                    <Grid container padding={2}>
-                        <InputField
-                            style={styles.input}
-                            type="text"
-                            value={formData?.password}
-                            name="password"
-                            onChange={handleChangeData}
-                            placeholder="Enter Password"
-                            error={errors.password}
-                        />
-                    </Grid>
-                    <Grid container padding={2}>
-                        <select
-                            style={styles.select}
-                            value={formData.role_id}
-                            onChange={handleChangeData}
-                            name="role_id"
-                        >
-                            <option value="">Select Role</option>
-                            {roles
-                                ?.filter((role) =>
-                                    permission?.Owner ? true : role.Id != 1
-                                )
-                                .map((role) => (
-                                    <option key={role.Id} value={role.Id}>
-                                        {role.Name}
-                                    </option>
-                                ))}
-                        </select>
-                        {errors.role_id && (
-                            <span
-                                style={{
-                                    color: 'red',
-                                    fontSize: '12px',
-                                    marginTop: '4px',
-                                    marginLeft: '12px',
-                                }}
+                    <Grid>
+                        <InputLabel sx={styles.label}>Date</InputLabel>
+                        {formData?.id ? (
+                            <Grid
+                                container
+                                spacing={2}
+                                padding={2}
+                                alignItems={'center'}
                             >
-                                {errors.role_id}
-                            </span>
+                                <Grid item xs={12} sm={6} md={6}>
+                                    <LocalizationProvider
+                                        dateAdapter={AdapterDayjs}
+                                    >
+                                        <DatePicker
+                                            label="Date"
+                                            sx={styles.datePicker}
+                                            value={
+                                                formData?.date
+                                                    ? dayJs(formData?.date)
+                                                    : null
+                                            }
+                                            onChange={(value) => {
+                                                setFormData({
+                                                    ...formData,
+                                                    date: value?.format(
+                                                        'YYYY-MM-DD'
+                                                    ),
+                                                });
+                                            }}
+                                            minDate={dayJs()}
+                                        />
+                                    </LocalizationProvider>
+                                </Grid>
+                            </Grid>
+                        ) : (
+                            <Grid
+                                container
+                                spacing={2}
+                                padding={2}
+                                alignItems={'center'}
+                            >
+                                <Grid item xs={12} sm={6} md={6}>
+                                    <LocalizationProvider
+                                        dateAdapter={AdapterDayjs}
+                                    >
+                                        <DatePicker
+                                            label="From"
+                                            sx={styles.datePicker}
+                                            value={
+                                                formData?.startDate
+                                                    ? dayJs(formData?.startDate)
+                                                    : null
+                                            }
+                                            onChange={(value) => {
+                                                setFormData({
+                                                    ...formData,
+                                                    startDate:
+                                                        value?.format(
+                                                            'YYYY-MM-DD'
+                                                        ),
+                                                });
+                                            }}
+                                            minDate={dayJs()}
+                                        />
+                                    </LocalizationProvider>
+                                    {/* {errors?.startDate && (
+                                    <Typography
+                                        sx={{
+                                            color: 'red',
+                                            paddingLeft: '20px',
+                                        }}
+                                    >
+                                        {errors?.startDate}
+                                    </Typography>
+                                )} */}
+                                </Grid>
+                                <Grid item xs={12} sm={6} md={6}>
+                                    <LocalizationProvider
+                                        dateAdapter={AdapterDayjs}
+                                    >
+                                        <DatePicker
+                                            label="To"
+                                            sx={styles.datePicker}
+                                            value={
+                                                formData?.endDate
+                                                    ? dayJs(formData?.endDate)
+                                                    : null
+                                            }
+                                            onChange={(value) => {
+                                                setFormData({
+                                                    ...formData,
+                                                    endDate:
+                                                        value?.format(
+                                                            'YYYY-MM-DD'
+                                                        ),
+                                                });
+                                            }}
+                                            minDate={
+                                                formData?.startDate
+                                                    ? dayJs(formData?.startDate)
+                                                    : dayJs()
+                                            }
+                                        />
+                                    </LocalizationProvider>
+                                    {/* {errors?.endDate && (
+                                    <Typography
+                                        sx={{
+                                            color: 'red',
+                                            paddingLeft: '20px',
+                                        }}
+                                    >
+                                        {errors?.endDate}
+                                    </Typography>
+                                )} */}
+                                </Grid>
+                            </Grid>
+                        )}
+                    </Grid>
+                    <Grid>
+                        <InputLabel sx={styles.label}>Slots</InputLabel>
+
+                        {formData?.slots?.map((slot, index) => (
+                            <Grid
+                                container
+                                gap={2}
+                                padding={2}
+                                alignItems={'center'}
+                            >
+                                <Grid>
+                                    <LocalizationProvider
+                                        dateAdapter={AdapterDayjs}
+                                    >
+                                        <TimePicker
+                                            label="Start Time"
+                                            sx={styles.datePicker}
+                                            value={
+                                                slot?.startTime
+                                                    ? dayJs(
+                                                          slot?.startTime,
+                                                          'HH:mm:ss'
+                                                      )
+                                                    : null
+                                            }
+                                            onChange={(value) => {
+                                                handleChangeSlot(
+                                                    index,
+                                                    'startTime',
+                                                    value?.format('HH:mm:ss')
+                                                );
+                                            }}
+                                            minDate={dayJs()}
+                                        />
+                                    </LocalizationProvider>
+                                </Grid>
+                                <Grid>
+                                    <LocalizationProvider
+                                        dateAdapter={AdapterDayjs}
+                                    >
+                                        <TimePicker
+                                            label="End Time"
+                                            sx={styles.datePicker}
+                                            value={
+                                                slot?.endTime
+                                                    ? dayJs(
+                                                          slot?.endTime,
+                                                          'HH:mm:ss'
+                                                      )
+                                                    : null
+                                            }
+                                            onChange={(value) => {
+                                                handleChangeSlot(
+                                                    index,
+                                                    'endTime',
+                                                    value?.format('HH:mm:ss')
+                                                );
+                                            }}
+                                            minTime={
+                                                slot?.startTime
+                                                    ? dayJs(slot?.startTime)
+                                                    : dayJs()
+                                            }
+                                        />
+                                    </LocalizationProvider>
+                                </Grid>
+
+                                {!formData?.id && (
+                                    <IconButton
+                                        onClick={() => handleRemoveSlot(index)}
+                                    >
+                                        <Icon> delete </Icon>
+                                    </IconButton>
+                                )}
+                            </Grid>
+                        ))}
+
+                        {!formData?.id && (
+                            <IconButton
+                                sx={styles.addButton}
+                                onClick={handleAddSlot}
+                            >
+                                <Icon> add</Icon>
+                                <Typography>Add Slot</Typography>
+                            </IconButton>
                         )}
                     </Grid>
                 </form>
@@ -281,10 +479,31 @@ const styles = {
         color: '#000',
         // textTransform: 'capitalize',
     },
+    datePicker: {
+        width: '100%',
+        // minWidth: '500px',
+        boxSizing: 'border-box',
+        backgroundColor: 'transparent',
+        outline: 'none',
+        fontSize: '16px',
+        color: '#000',
+        ['fieldset']: {
+            borderRadius: '50px',
+        },
+    },
     button: {
         backgroundColor: 'var(--color-caption)',
         color: '#fff',
         border: '1px solid var(--color-caption)',
+    },
+    label: {
+        padding: '0px 20px',
+    },
+    addButton: {
+        borderRadius: '50px',
+        padding: '10px',
+        margin: '10px',
+        gap: 1,
     },
 
     select: {

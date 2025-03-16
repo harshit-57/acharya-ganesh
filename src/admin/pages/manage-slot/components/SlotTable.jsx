@@ -114,9 +114,6 @@ const PaginationTable = ({
                                 Booking Status
                             </StyledTableHead>
                             <StyledTableHead align="center">
-                                Status
-                            </StyledTableHead>
-                            <StyledTableHead align="center">
                                 Created At
                                 {sort === 'desc' ? (
                                     <IconButton onClick={() => setSort('asc')}>
@@ -183,21 +180,6 @@ const PaginationTable = ({
                                             color="success"
                                             variant="outlined"
                                         />
-                                    )}
-                                </StyledTableCell>
-                                <StyledTableCell align="center">
-                                    {slot?.Status === 1 ? (
-                                        <Chip
-                                            label={'Published'}
-                                            color="primary"
-                                        />
-                                    ) : slot?.Status === 2 ? (
-                                        <Chip
-                                            label={'Draft'}
-                                            color="secondary"
-                                        />
-                                    ) : (
-                                        <Chip label={'Pending'} color="info" />
                                     )}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">

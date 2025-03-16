@@ -16,6 +16,11 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { ADMINAPIHELPER, APIHelper } from '../../../util/APIHelper';
 import SlotModal from './components/SlotModal';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayJs from 'dayjs';
+import moment from 'moment';
 
 const ContentBox = styled('div')(({ theme }) => ({
     margin: '30px',
@@ -38,8 +43,7 @@ const ManageSlot = () => {
     const [pageSize, setPageSize] = useState(5);
     const [totalCount, setTotalCount] = useState(0);
     const [loading, setLoading] = useState(false);
-    const [searchQuery, setSearchQuery] = useState('');
-    const [showFilterDropDown, setShowFilterDropDown] = useState(false);
+    const [searchDate, setSearchDate] = useState(null);
     const [sort, setSort] = useState('ASC');
     const [sortBy, setSortBy] = useState('sl.Date');
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
@@ -48,7 +52,7 @@ const ManageSlot = () => {
 
     useEffect(() => {
         fetchSlots();
-    }, [currentPage, searchQuery, pageSize, sortBy, sort]);
+    }, [currentPage, searchDate, pageSize, sortBy, sort]);
 
     const fetchSlots = async () => {
         try {
@@ -58,7 +62,9 @@ const ManageSlot = () => {
                 {
                     page: currentPage,
                     pageSize: pageSize,
-                    search: searchQuery || undefined,
+                    date: searchDate
+                        ? moment(searchDate?.$d)?.add(1, 'day')?.toDate()
+                        : undefined,
                     sort: sort,
                     sortBy: sortBy,
                 },
@@ -141,7 +147,7 @@ const ManageSlot = () => {
                                 </Button>
                             </Box>
                             <div style={{ marginRight: '20px' }}>
-                                <TextField
+                                {/* <TextField
                                     id="search"
                                     type="search"
                                     // label="Search"
@@ -155,14 +161,31 @@ const ManageSlot = () => {
                                     InputProps={{
                                         endAdornment: (
                                             <InputAdornment position="end">
-                                                {/* <SearchIcon /> */}
                                                 <Icon color="primary">
                                                     search
                                                 </Icon>
                                             </InputAdornment>
                                         ),
                                     }}
-                                />
+                                /> */}
+                                <LocalizationProvider
+                                    dateAdapter={AdapterDayjs}
+                                >
+                                    <DatePicker
+                                        label="Search By Date"
+                                        sx={{
+                                            width: '100%',
+                                        }}
+                                        value={
+                                            searchDate
+                                                ? dayJs(searchDate)
+                                                : null
+                                        }
+                                        onChange={(value) => {
+                                            setSearchDate(value);
+                                        }}
+                                    />
+                                </LocalizationProvider>
                             </div>
                         </div>
                         <div style={{ marginTop: '20px' }}>
