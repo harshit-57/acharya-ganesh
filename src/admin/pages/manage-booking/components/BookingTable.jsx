@@ -17,6 +17,8 @@ import {
 } from '@mui/material';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import { htmlToText } from 'html-to-text';
+import { formatPrice } from '../../../../util/helper';
 
 const PaginationTable = ({
     data,
@@ -29,11 +31,6 @@ const PaginationTable = ({
     setSort,
     sortBy,
     setSortBy,
-    showDeleteAlert,
-    setShowDeleteAlert,
-    setSelectedData,
-    showSlotModal,
-    setShowSlotModal,
 }) => {
     const theme = useTheme();
     const primaryColor = theme?.palette?.primary?.main;
@@ -86,6 +83,7 @@ const PaginationTable = ({
             <Box width="100%" overflow="auto">
                 <StyledTable
                     style={{
+                        width: '3000px',
                         overflowX: 'auto',
                         wordBreak: 'break-word',
                     }}
@@ -111,6 +109,39 @@ const PaginationTable = ({
                                 Booking Status
                             </StyledTableHead>
                             <StyledTableHead align="center">
+                                Service
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
+                                Name
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
+                                Email
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
+                                Phone
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
+                                Address
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
+                                DOB
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
+                                Time
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
+                                State
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
+                                Gender
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
+                                Consultation Type
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
+                                Price
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
                                 Created At
                                 {sort === 'desc' ? (
                                     <IconButton onClick={() => setSort('asc')}>
@@ -134,50 +165,47 @@ const PaginationTable = ({
                                     </IconButton>
                                 )}
                             </StyledTableHead>
-                            <StyledTableHead align="center">
-                                Action
-                            </StyledTableHead>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map((slot, index) => (
+                        {data.map((booking, index) => (
                             <TableRow key={index}>
                                 <StyledTableCell align="center">
-                                    {slot?.Id}
+                                    {booking?.Id}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {moment(slot.Date).format('DD/MM/YYYY')}
+                                    {moment(booking.Date).format('DD/MM/YYYY')}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {slot?.StartTime
+                                    {booking?.StartTime
                                         ? moment(
-                                              slot.StartTime,
+                                              booking.StartTime,
                                               'HH:mm:ss'
                                           ).format('hh:mm A')
                                         : '-'}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {slot?.EndTime
+                                    {booking?.EndTime
                                         ? moment(
-                                              slot.EndTime,
+                                              booking.EndTime,
                                               'HH:mm:ss'
                                           ).format('hh:mm A')
                                         : '-'}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {slot?.BookingStatus == 0 ? (
+                                    {booking?.Status == 0 ? (
                                         <Chip
                                             label="Pending"
                                             color="info"
                                             variant="outlined"
                                         />
-                                    ) : slot?.BookingStatus == 1 ? (
+                                    ) : booking?.Status == 1 ? (
                                         <Chip
                                             label="Booked"
                                             color="warn"
                                             variant="outlined"
                                         />
-                                    ) : slot?.BookingStatus == 2 ? (
+                                    ) : booking?.Status == 2 ? (
                                         <Chip
                                             label="Rejected"
                                             color="danger"
@@ -191,33 +219,44 @@ const PaginationTable = ({
                                         />
                                     )}
                                 </StyledTableCell>
+
                                 <StyledTableCell align="center">
-                                    {moment(slot.CreatedAt).format('ll')}
+                                    {booking?.Service}
                                 </StyledTableCell>
-                                <TableCell align="center">
-                                    <IconButton
-                                        onClick={() => {
-                                            setSelectedData(slot);
-                                            setShowSlotModal(!showSlotModal);
-                                        }}
-                                    >
-                                        <Tooltip title="Edit">
-                                            <Icon color="primary">edit</Icon>
-                                        </Tooltip>
-                                    </IconButton>
-                                    <IconButton
-                                        onClick={() => {
-                                            setSelectedData(slot);
-                                            setShowDeleteAlert(
-                                                !showDeleteAlert
-                                            );
-                                        }}
-                                    >
-                                        <Tooltip title="Delete">
-                                            <Icon color="primary">delete</Icon>
-                                        </Tooltip>
-                                    </IconButton>
-                                </TableCell>
+                                <StyledTableCell align="center">
+                                    {booking?.Name}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {booking?.Email}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {booking?.Phone}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {booking?.Address}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {moment(booking.DOB).format('DD/MM/YYYY')}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {booking?.Time}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {booking?.State}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {booking?.Gender}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {booking?.ConsultType}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {formatPrice(booking?.Price)}
+                                </StyledTableCell>
+
+                                <StyledTableCell align="center">
+                                    {moment(booking.CreatedAt).format('ll')}
+                                </StyledTableCell>
                             </TableRow>
                         ))}
                     </TableBody>

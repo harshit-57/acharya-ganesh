@@ -47,9 +47,15 @@ export const navigations = [
 
     { label: 'CONSULTATIONS', type: 'label' },
     {
-        name: 'Slots Management',
+        name: 'Slot Management',
         path: '/admin/booking/slots',
         icon: 'headset_mic',
+        // permissionName: 'ManageBooking',
+    },
+    {
+        name: 'Booking Management',
+        path: '/admin/booking',
+        icon: 'book',
         // permissionName: 'ManageBooking',
     },
 

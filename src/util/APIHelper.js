@@ -91,6 +91,8 @@ export const ADMINAPIHELPER = Object.freeze({
     createSlots: await postApi('v1/admin/create-slots'),
     updateSlot: await postApi('v1/admin/update-slot'),
     deleteSlot: await postApi('v1/admin/delete-slot'),
+
+    getBookings: await getApi('v1/admin/get-bookings'),
 });
 
 export const UPLOADAPIHELPER = Object.freeze({

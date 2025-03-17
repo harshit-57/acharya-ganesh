@@ -40,6 +40,7 @@ import Services from './pages/services/Services';
 import ServiceDetail from './pages/service-detail/ServiceDetail';
 import ManageSlot from './admin/pages/manage-slot/ManageSlot';
 import ManageService from './admin/pages/manage-service/ManageService';
+import ManageBooking from './admin/pages/manage-booking/ManageBooking';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
@@ -170,6 +171,7 @@ export default () => {
                         path="/admin/booking/slots"
                         element={<ManageSlot />}
                     />
+                    <Route path="/admin/booking" element={<ManageBooking />} />
                 </Route>
             </Routes>
         </>
