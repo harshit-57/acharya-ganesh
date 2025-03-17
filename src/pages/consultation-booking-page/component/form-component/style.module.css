@@ -31,19 +31,26 @@
         border: 1px solid var(--Color-Scheme-Card-Text, #cac3bc);
         background: var(--Color-Scheme-Card-Bg, #23201d);
         font-size: 16px;
-        color: #b5afa8;
+        color: #fff;
+        &::placeholder {
+            color: #b5afa8;
+        }
     }
 
-    .formGroup input::placeholder,
-    .formGroup select {
-        color: #b5afa8;
-    }
-
-    .dateTimeContainer {
+    .dateContainer {
         position: relative;
+        &::after {
+            content: url('../../../../assets/book_consultation_form_dateIcon.png');
+            position: absolute;
+            right: 17px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: #ff0000;
+        }
     }
 
-    .dateTimeInput {
+    .bookingDate {
         width: 100%;
         padding: 10px;
         border: 1px solid var(--Color-Scheme-Card-Text, #cac3bc);
@@ -84,40 +91,6 @@
         color: #333;
     }
 
-    input[type='date'] {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        position: relative;
-    }
-
-    input[type='date']::after {
-        content: url('../../../../assets/book_consultation_form_dateIcon.png');
-        position: absolute;
-        right: 17px;
-        top: 50%;
-        transform: translateY(-50%);
-        pointer-events: none;
-        color: #ff0000;
-    }
-
-    input[type='datetime-local'] {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        position: relative;
-    }
-
-    input[type='datetime-local']::after {
-        content: url('../../../../assets/book_consultation_form_dateIcon.png');
-        position: absolute;
-        right: 17px;
-        top: 50%;
-        transform: translateY(-50%);
-        pointer-events: none;
-        color: #ff0000;
-    }
-
     input[type='time'] {
         appearance: none;
         -webkit-appearance: none;
@@ -133,5 +106,12 @@
         transform: translateY(-50%);
         pointer-events: none;
         color: #ff0000;
+    }
+
+    .error {
+        color: red;
+        font-size: 12px;
+        margin-top: 4px;
+        margin-left: 12px;
     }
 }

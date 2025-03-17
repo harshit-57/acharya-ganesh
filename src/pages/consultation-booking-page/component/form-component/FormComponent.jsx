@@ -1,44 +1,146 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './style.module.css';
 import ConsultationFormBg from '../../../../assets/book_consultatio_form.png';
+import { APIHelper } from '../../../../util/APIHelper';
+import moment from 'moment';
+import { formatPrice } from '../../../../util/helper';
+import { useNavigate } from 'react-router-dom';
 
-const FormCompnent = () => {
+const Pricing = {
+    online: 17700,
+    offline: 12980,
+};
+
+const FormCompnent = ({ state }) => {
+    const [services, setServices] = useState([]);
+    const navigate = useNavigate();
+    const [slots, setSlots] = useState([]);
     const [formData, setFormData] = useState({
-        dateAndTime: '',
+        date: '',
+        slot: '',
         name: '',
         email: '',
-        phoneNo: '',
-        placeOfBirth: '',
-        dateOfBirth: '',
-        stateOfBirthPlace: '',
-        timeOfBirth: '',
+        phone: '',
+        address: '',
+        dob: '',
+        state: '',
+        time: '',
         gender: '',
-        services: '',
-        consultationCallType: '',
+        service: '',
+        consultationType: state?.consultType || '',
+        price:
+            state?.consultType == 'online' ? Pricing.online : Pricing.offline,
     });
 
-    const dateTimeRef = useRef(null);
+    const [errors, setErrors] = useState({});
+
+    useEffect(() => {
+        const fetchServices = async () => {
+            try {
+                const response = await APIHelper.getServices();
+                setServices(response?.data?.data);
+            } catch (error) {
+                console.error('Error fetching services:', error);
+            }
+        };
+        fetchServices();
+    }, []);
+
+    useEffect(() => {
+        const fetchSlots = async () => {
+            try {
+                const response = await APIHelper.getSlots({
+                    date: formData.date,
+                    isAvailable: true,
+                });
+                setSlots(response?.data?.data);
+            } catch (error) {
+                console.error('Error fetching slots:', error);
+                return [];
+            }
+        };
+        if (formData.date) fetchSlots();
+    }, [formData.date]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+        setErrors({ ...errors, [name]: '' });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(formData);
-        // Handle form submission
-    };
+    const handleValidation = () => {
+        let error = false;
+        let errors = {};
 
-    const handleFocus = () => {
-        if (dateTimeRef.current) {
-            dateTimeRef.current.style.display = 'none';
+        if (!formData.date) {
+            errors.date = 'Date is required';
+            error = true;
         }
+        if (!formData.slot) {
+            errors.slot = 'Slot is required';
+            error = true;
+        }
+        if (!formData.service) {
+            errors.service = 'Service is required';
+            error = true;
+        }
+        if (!formData.name) {
+            errors.name = 'Name is required';
+            error = true;
+        }
+        // if (!formData.email) {
+        //     errors.email = 'Email is required';
+        //     error = true;
+        // }
+        if (!formData.phone) {
+            errors.phone = 'Phone is required';
+            error = true;
+        }
+        // if (!formData.address) {
+        //     errors.address = 'Address is required';
+        //     error = true;
+        // }
+        if (!formData.dob) {
+            errors.dob = 'Date of Birth is required';
+            error = true;
+        }
+        // if (!formData.state) {
+        //     errors.state = 'State is required';
+        //     error = true;
+        // }
+        if (!formData.time) {
+            errors.time = 'Time is required';
+            error = true;
+        }
+        // if (!formData.gender) {
+        //     errors.gender = 'Gender is required';
+        //     error = true;
+        // }
+        if (!formData.consultationType) {
+            errors.consultationType = 'Consultation Type is required';
+            error = true;
+        }
+        if (!formData.price) {
+            errors.price = 'Price is required';
+            error = true;
+        }
+
+        setErrors(errors);
+        return error;
     };
 
-    const handleBlur = () => {
-        if (dateTimeRef.current && !formData.dateAndTime) {
-            dateTimeRef.current.style.display = 'block';
+    const handleSubmit = async (e) => {
+        try {
+            e.preventDefault();
+            if (handleValidation()) return;
+            console.log(formData);
+
+            const response = await APIHelper.createBooking(formData);
+
+            alert('Booking successful');
+            navigate('/bookConsultation');
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -50,26 +152,72 @@ const FormCompnent = () => {
         >
             <div className={styles.formGroup}>
                 <select
-                    name="services"
-                    value={formData.services}
+                    name="service"
+                    value={formData.service}
                     onChange={handleChange}
                 >
                     <option value="">Services</option>
-                    <option value="service1">Service 1</option>
-                    <option value="service2">Service 2</option>
-                    <option value="service3">Service 3</option>
+                    {services.map((service) => (
+                        <option key={service.Id} value={service.Name}>
+                            {service.Name}
+                        </option>
+                    ))}
                 </select>
+                {errors.service && (
+                    <p className={styles.error}>{errors.service}</p>
+                )}
             </div>
             <div className={styles.formGroup}>
-                <div className={styles.dateTimeContainer}>
+                <div className={styles.dateContainer}>
                     <input
-                        type="datetime-local"
-                        name="dateAndTime"
-                        value={formData.dateAndTime}
-                        onChange={handleChange}
-                        className={styles.dateTimeInput}
+                        type={'text'}
+                        name="date"
+                        value={formData.date || ''}
+                        onChange={(e) => {
+                            setSlots([]);
+                            setFormData({
+                                ...formData,
+                                date: e.target.value,
+                                slot: '',
+                            });
+                            setErrors({ ...errors, date: '' });
+                        }}
+                        className={styles.bookingDate}
+                        placeholder="Booking Date"
+                        onFocus={(e) => (e.target.type = 'date')}
+                        onBlur={(e) =>
+                            !formData.date && (e.target.type = 'text')
+                        }
+                        min={new Date()?.toISOString().split('T')[0]}
                     />
+                    {errors.date && (
+                        <p className={styles.error}>{errors.date}</p>
+                    )}
                 </div>
+            </div>
+            <div className={styles.formGroup}>
+                <select
+                    name="slot"
+                    value={formData.slot}
+                    onChange={handleChange}
+                    disabled={!formData.date}
+                >
+                    <option value="">
+                        {!slots?.length && formData?.date
+                            ? 'No Slots Available'
+                            : 'Booking Slot'}
+                    </option>
+                    {slots.map((slot) => (
+                        <option key={slot.Id} value={slot.Id}>
+                            {moment(slot.StartTime, 'hh:mm:ss').format(
+                                'hh:mm A'
+                            )}{' '}
+                            -{' '}
+                            {moment(slot.EndTime, 'hh:mm:ss').format('hh:mm A')}
+                        </option>
+                    ))}
+                </select>
+                {errors.slot && <p className={styles.error}>{errors.slot}</p>}
             </div>
             <div className={styles.formGroup}>
                 <input
@@ -79,6 +227,7 @@ const FormCompnent = () => {
                     onChange={handleChange}
                     placeholder="Name"
                 />
+                {errors.name && <p className={styles.error}>{errors.name}</p>}
             </div>
             <div className={styles.formGroup}>
                 <input
@@ -88,51 +237,68 @@ const FormCompnent = () => {
                     onChange={handleChange}
                     placeholder="Email"
                 />
+                {errors.email && <p className={styles.error}>{errors.email}</p>}
             </div>
             <div className={styles.formGroup}>
                 <input
                     type="tel"
-                    name="phoneNo"
-                    value={formData.phoneNo}
+                    name="phone"
+                    value={formData.phone}
                     onChange={handleChange}
                     placeholder="Phone No"
                 />
+                {errors.phone && <p className={styles.error}>{errors.phone}</p>}
             </div>
             <div className={styles.formGroup}>
                 <input
                     type="text"
-                    name="placeOfBirth"
-                    value={formData.placeOfBirth}
+                    name="address"
+                    value={formData.address}
                     onChange={handleChange}
                     placeholder="Place of Birth"
                 />
+                {errors.address && (
+                    <p className={styles.error}>{errors.address}</p>
+                )}
             </div>
             <div className={styles.formGroup}>
-                <input
-                    type="date"
-                    name="dateOfBirth"
-                    value={formData.dateOfBirth}
-                    onChange={handleChange}
-                    placeholder="Date of Birth"
-                />
+                <div className={styles.dateContainer}>
+                    <input
+                        type="text"
+                        name="dob"
+                        value={formData.dob}
+                        className={styles.dobDate}
+                        onChange={handleChange}
+                        placeholder="Date of Birth"
+                        onFocus={(e) => (e.target.type = 'date')}
+                        onBlur={(e) =>
+                            !formData.dob && (e.target.type = 'text')
+                        }
+                    />
+                    {errors.dob && <p className={styles.error}>{errors.dob}</p>}
+                </div>
             </div>
             <div className={styles.formGroup}>
                 <input
                     type="text"
-                    name="stateOfBirthPlace"
-                    value={formData.stateOfBirthPlace}
+                    name="state"
+                    value={formData.state}
                     onChange={handleChange}
                     placeholder="State of Birth Place"
                 />
+                {errors.state && <p className={styles.error}>{errors.state}</p>}
             </div>
             <div className={styles.formGroup}>
                 <input
-                    type="time"
-                    name="timeOfBirth"
-                    value={formData.timeOfBirth}
+                    type={'text'}
+                    name="time"
+                    value={formData.time}
                     onChange={handleChange}
                     placeholder="Time of Birth"
+                    onFocus={(e) => (e.target.type = 'time')}
+                    onBlur={(e) => !formData.time && (e.target.type = 'text')}
                 />
+                {errors.time && <p className={styles.error}>{errors.time}</p>}
             </div>
             <div className={styles.formGroup}>
                 <select
@@ -145,22 +311,44 @@ const FormCompnent = () => {
                     <option value="female">Female</option>
                     <option value="other">Other</option>
                 </select>
+                {errors.gender && (
+                    <p className={styles.error}>{errors.gender}</p>
+                )}
+            </div>
+            <div className={styles.formGroup}>
+                <select
+                    name="consultationType"
+                    value={formData.consultationType}
+                    onChange={(e) => {
+                        setFormData({
+                            ...formData,
+                            consultationType: e.target.value,
+                            price:
+                                e.target.value == 'online'
+                                    ? Pricing.online
+                                    : Pricing.offline,
+                        });
+                    }}
+                >
+                    <option value="">Consultation Call Type</option>
+                    <option value="online">Meet Online</option>
+                    <option value="offline">Meet In Person</option>
+                </select>
+                {errors.consultationType && (
+                    <p className={styles.error}>{errors.consultationType}</p>
+                )}
             </div>
             <div className={styles.formGroup}>
                 <input
                     type="text"
-                    name="consultationCallType"
-                    value={formData.consultationCallType}
-                    onChange={handleChange}
-                    placeholder="Consultation Call Type/Phone Call"
-                />
-            </div>
-            <div className={styles.formGroup}>
-                <input type="text" disabled placeholder="12,980"></input>
+                    disabled
+                    value={formatPrice(formData.price)}
+                ></input>
+                {errors.price && <p className={styles.error}>{errors.price}</p>}
             </div>
             <button type="submit" className={styles.submitButton}>
                 <span>PROCEED TO PAY</span>
-                <span>₹&nbsp;12,980</span>
+                <span>{formatPrice(formData.price)}</span>
             </button>
         </form>
     );

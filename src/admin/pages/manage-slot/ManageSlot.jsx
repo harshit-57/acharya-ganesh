@@ -6,6 +6,8 @@ import {
     InputAdornment,
     TextField,
     Icon,
+    Select,
+    MenuItem,
 } from '@mui/material';
 
 import { Fragment } from 'react';
@@ -44,6 +46,7 @@ const ManageSlot = () => {
     const [totalCount, setTotalCount] = useState(0);
     const [loading, setLoading] = useState(false);
     const [searchDate, setSearchDate] = useState(null);
+    const [bookingStatus, setBookingStatus] = useState('');
     const [sort, setSort] = useState('ASC');
     const [sortBy, setSortBy] = useState('sl.Date');
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
@@ -52,7 +55,7 @@ const ManageSlot = () => {
 
     useEffect(() => {
         fetchSlots();
-    }, [currentPage, searchDate, pageSize, sortBy, sort]);
+    }, [currentPage, searchDate, bookingStatus, pageSize, sortBy, sort]);
 
     const fetchSlots = async () => {
         try {
@@ -65,6 +68,8 @@ const ManageSlot = () => {
                     date: searchDate
                         ? moment(searchDate?.$d)?.add(1, 'day')?.toDate()
                         : undefined,
+                    bookingStatus: bookingStatus,
+                    // isAvailable: bookingStatus === null ? true : undefined,
                     sort: sort,
                     sortBy: sortBy,
                 },
@@ -146,28 +151,34 @@ const ManageSlot = () => {
                                     + Add Slot
                                 </Button>
                             </Box>
-                            <div style={{ marginRight: '20px' }}>
-                                {/* <TextField
-                                    id="search"
-                                    type="search"
-                                    // label="Search"
-                                    placeholder="Search..."
-                                    size="small"
-                                    value={searchQuery}
+                            <div
+                                style={{
+                                    marginRight: '20px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '20px',
+                                }}
+                            >
+                                <Select
+                                    value={bookingStatus}
                                     onChange={(e) =>
-                                        setSearchQuery(e.target.value)
+                                        setBookingStatus(e.target.value)
                                     }
-                                    // sx={{ width: '50%' }}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <Icon color="primary">
-                                                    search
-                                                </Icon>
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                /> */}
+                                    displayEmpty
+                                    renderValue={
+                                        bookingStatus !== ''
+                                            ? undefined
+                                            : () => 'Select Status'
+                                    }
+                                >
+                                    <MenuItem value={''}>
+                                        Select Status
+                                    </MenuItem>
+                                    <MenuItem value={null}>Available</MenuItem>
+                                    <MenuItem value={0}>Pending</MenuItem>
+                                    <MenuItem value={1}>Booked</MenuItem>
+                                    <MenuItem value={2}>Rejected</MenuItem>
+                                </Select>
                                 <LocalizationProvider
                                     dateAdapter={AdapterDayjs}
                                 >

@@ -61,6 +61,7 @@ export const APIHelper = Object.freeze({
     getServices: await getApi('v1/GetDivine/getServices'),
 
     getSlots: await getApi('v1/GetDivine/getBookingSlots'),
+    createBooking: await postApi('v1/GetDivine/createBooking'),
 });
 
 export const ADMINAPIHELPER = Object.freeze({

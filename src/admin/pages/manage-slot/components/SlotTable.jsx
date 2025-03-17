@@ -168,10 +168,22 @@ const PaginationTable = ({
                                         : '-'}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {slot?.BookingStatus ? (
+                                    {slot?.BookingStatus == 0 ? (
+                                        <Chip
+                                            label="Pending"
+                                            color="info"
+                                            variant="outlined"
+                                        />
+                                    ) : slot?.BookingStatus == 1 ? (
                                         <Chip
                                             label="Booked"
-                                            color="success"
+                                            color="warn"
+                                            variant="outlined"
+                                        />
+                                    ) : slot?.BookingStatus == 2 ? (
+                                        <Chip
+                                            label="Rejected"
+                                            color="danger"
                                             variant="outlined"
                                         />
                                     ) : (
