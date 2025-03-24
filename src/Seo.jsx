@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async'; // Import Helmet and HelmetProvider
 import { useLocation } from 'react-router-dom';
 
-const SEO = ({ title, description, keywords, image, siteUrl }) => {
+const SEO = ({ title, description, keywords, image, siteUrl, checkout }) => {
     const location = useLocation();
     const currentUrl = `${siteUrl}${location.pathname}`;
 
@@ -29,6 +29,9 @@ const SEO = ({ title, description, keywords, image, siteUrl }) => {
                 href="https://fonts.gstatic.com"
                 crossOrigin="anonymous"
             />
+            {checkout ? (
+                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+            ) : null}
         </Helmet>
     );
 };

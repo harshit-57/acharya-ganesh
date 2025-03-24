@@ -5,6 +5,7 @@ import { APIHelper } from '../../../../util/APIHelper';
 import moment from 'moment';
 import { formatPrice } from '../../../../util/helper';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Pricing = {
     online: 17700,
@@ -133,14 +134,80 @@ const FormCompnent = ({ state }) => {
         try {
             e.preventDefault();
             if (handleValidation()) return;
-            console.log(formData);
-
             const response = await APIHelper.createBooking(formData);
+            // console.log('Response: ', response);
 
-            alert('Booking successful');
-            navigate('/bookConsultation');
+            if (response?.data?.data?.payment) {
+                const payment = response?.data?.data?.payment;
+                const paymentKey = response?.data?.data?.paymentKey;
+                const bookingId = response?.data?.data?.bookingId;
+
+                if (paymentKey) {
+                    const options = {
+                        key: paymentKey,
+                        amount: payment,
+                        currency: 'INR',
+                        name: 'Acharya Ganesh',
+                        description:
+                            formData?.consultationType == 'online'
+                                ? 'Book Your Zoom Consultation'
+                                : 'Book Your Consultation',
+                        order_id: payment?.id,
+                        handler: async function (rz) {
+                            const completePayload = {
+                                bookingId: bookingId,
+                                paymentId: rz.razorpay_payment_id,
+                                orderId: rz.razorpay_order_id,
+                                status: '1',
+                            };
+
+                            console.log('completePayload', rz);
+
+                            const result = await APIHelper.completeBooking(
+                                completePayload
+                            );
+                            toast.success(result?.data?.data?.message);
+                            alert(result?.data?.message || 'Payment Success');
+                            navigate('/bookConsultation');
+                        },
+                        modal: {
+                            ondismiss: async () => {
+                                console.log('Payment Modal Dismissed');
+                                const completePayload = {
+                                    bookingId: bookingId,
+                                    status: '2',
+                                };
+                                await APIHelper.completeBooking(
+                                    completePayload
+                                );
+                                toast.error('Payment Declined');
+                                alert('Payment Declined');
+                            },
+                        },
+                        prefill: {
+                            name: formData.name,
+                            email: formData.email,
+                            contact: formData.phone,
+                        },
+                        theme: {
+                            color: '#3399cc',
+                        },
+                    };
+
+                    const rzp = new window.Razorpay(options);
+                    rzp.open();
+                } else {
+                    toast.error(response?.data?.message || 'Payment Failed');
+                    alert(response?.data?.message || 'Payment Failed');
+                }
+            } else {
+                toast.error(response?.data?.message);
+                alert(response?.data?.message || 'Booking Failed');
+            }
         } catch (error) {
             console.log(error);
+            toast.error(error?.response?.data?.message || error?.message);
+            alert(error?.response?.data?.message || error?.message);
         }
     };
 

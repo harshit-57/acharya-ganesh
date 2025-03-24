@@ -18,7 +18,11 @@ const FormConsultation = () => {
 
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description} />
+            <SEO
+                keywords={keywords}
+                description={description}
+                checkout={true}
+            />
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}

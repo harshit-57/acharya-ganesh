@@ -168,20 +168,20 @@ const PaginationTable = ({
                                     {slot?.BookingStatus == 0 ? (
                                         <Chip
                                             label="Pending"
-                                            color="info"
+                                            color="primary"
                                             variant="outlined"
                                         />
                                     ) : slot?.BookingStatus == 1 ? (
                                         <Chip
                                             label="Booked"
-                                            color="warn"
-                                            variant="outlined"
+                                            color="primary"
+                                            variant="filled"
                                         />
                                     ) : slot?.BookingStatus == 2 ? (
                                         <Chip
                                             label="Rejected"
-                                            color="danger"
-                                            variant="outlined"
+                                            color="secondary"
+                                            variant="filled"
                                         />
                                     ) : (
                                         <Chip

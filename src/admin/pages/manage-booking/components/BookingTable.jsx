@@ -106,7 +106,13 @@ const PaginationTable = ({
                                 End Time
                             </StyledTableHead>
                             <StyledTableHead align="center">
+                                Order Id
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
                                 Booking Status
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
+                                Payment Id
                             </StyledTableHead>
                             <StyledTableHead align="center">
                                 Service
@@ -193,23 +199,26 @@ const PaginationTable = ({
                                         : '-'}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
+                                    {booking?.OrderId || '-'}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
                                     {booking?.Status == 0 ? (
                                         <Chip
                                             label="Pending"
-                                            color="info"
+                                            color="primary"
                                             variant="outlined"
                                         />
                                     ) : booking?.Status == 1 ? (
                                         <Chip
                                             label="Booked"
-                                            color="warn"
-                                            variant="outlined"
+                                            color="primary"
+                                            variant="filled"
                                         />
                                     ) : booking?.Status == 2 ? (
                                         <Chip
                                             label="Rejected"
-                                            color="danger"
-                                            variant="outlined"
+                                            color="secondary"
+                                            variant="filled"
                                         />
                                     ) : (
                                         <Chip
@@ -219,7 +228,9 @@ const PaginationTable = ({
                                         />
                                     )}
                                 </StyledTableCell>
-
+                                <StyledTableCell align="center">
+                                    {booking?.PaymentId || 'NA'}
+                                </StyledTableCell>
                                 <StyledTableCell align="center">
                                     {booking?.Service}
                                 </StyledTableCell>
