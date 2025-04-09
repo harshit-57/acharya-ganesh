@@ -47,6 +47,28 @@ const Edit = () => {
     const { type, slug } = useParams();
     const token = localStorage.getItem('accessToken');
 
+    const [serviceList, setServiceList] = useState([]);
+    useEffect(() => {
+        getServices();
+    }, []);
+
+    const getServices = async () => {
+        try {
+            const response = await APIHelper.getServices({
+                status: 1,
+                active: 1,
+            });
+            setServiceList(response.data.data);
+            console.log(response);
+
+
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+
+
     const initalData = {
         title: '',
         description: !['story']?.includes(type) ? '' : undefined,
@@ -107,8 +129,8 @@ const Edit = () => {
         isTOP: ['course'].includes(type)
             ? false
             : ['blog', 'spirituality']?.includes(type)
-            ? 1
-            : undefined,
+                ? 1
+                : undefined,
         status: 1,
         publishedOn: new Date(),
         categories: ['course', 'blog', 'spirituality', 'story']?.includes(type)
@@ -153,7 +175,11 @@ const Edit = () => {
     const [editSlug, setEditSlug] = useState(false);
     const [statusInput, setStatusInput] = useState('');
     const [editStatus, setEditStatus] = useState(false);
+
     const [publishedOnInput, setPublishedOnInput] = useState(new Date());
+    const [statusPService, setStatusParentService] = useState('');
+    const [editPService, SetEditPService] = useState(false);
+
     const [editPublishedOn, setEditPublishedOn] = useState(false);
     const [categoryTab, setCategoryTab] = useState('');
     const [newCategoryInput, setNewCategoryInput] = useState('');
@@ -503,9 +529,9 @@ const Edit = () => {
                 categoryResponse = await APIHelper.getCourseCategories(
                     categoryTab == 'most'
                         ? {
-                              sortBy: 'Count',
-                              sort: 'DESC',
-                          }
+                            sortBy: 'Count',
+                            sort: 'DESC',
+                        }
                         : {}
                 );
                 setCategories(categoryResponse?.data);
@@ -515,9 +541,9 @@ const Edit = () => {
                 categoryResponse = await APIHelper.getBlogCategories(
                     categoryTab == 'most'
                         ? {
-                              sortBy: 'Count',
-                              sort: 'DESC',
-                          }
+                            sortBy: 'Count',
+                            sort: 'DESC',
+                        }
                         : {}
                 );
                 setCategories(categoryResponse?.data);
@@ -527,9 +553,9 @@ const Edit = () => {
                 categoryResponse = await APIHelper.getSpiritualityCategories(
                     categoryTab == 'most'
                         ? {
-                              sortBy: 'Count',
-                              sort: 'DESC',
-                          }
+                            sortBy: 'Count',
+                            sort: 'DESC',
+                        }
                         : {}
                 );
                 setCategories(categoryResponse?.data);
@@ -539,9 +565,9 @@ const Edit = () => {
                 categoryResponse = await APIHelper.getWebStoryCategories(
                     categoryTab == 'most'
                         ? {
-                              sortBy: 'Count',
-                              sort: 'DESC',
-                          }
+                            sortBy: 'Count',
+                            sort: 'DESC',
+                        }
                         : {}
                 );
                 setCategories(categoryResponse?.data);
@@ -734,8 +760,7 @@ const Edit = () => {
                         }
                         if (!item?.imageLink?.match(/^(http|https):\/\//)) {
                             toast.error(
-                                `${
-                                    index + 1
+                                `${index + 1
                                 } Story Image Link is not a valid URL`
                             );
                             isValid = false;
@@ -1287,10 +1312,9 @@ const Edit = () => {
                     };
 
                     navigate(
-                        `/blog/${
-                            previewData?.Categories?.length
-                                ? previewData?.Categories[0]?.CategorySlug
-                                : '-'
+                        `/blog/${previewData?.Categories?.length
+                            ? previewData?.Categories[0]?.CategorySlug
+                            : '-'
                         }/${previewData?.Slug || 'new'}?preview=true`,
                         { state: { data: previewData } }
                     );
@@ -1324,10 +1348,9 @@ const Edit = () => {
                     };
 
                     navigate(
-                        `/spirituality/${
-                            previewData?.Categories?.length
-                                ? previewData?.Categories[0]?.CategorySlug
-                                : '-'
+                        `/spirituality/${previewData?.Categories?.length
+                            ? previewData?.Categories[0]?.CategorySlug
+                            : '-'
                         }/${previewData?.Slug || 'new'}?preview=true`,
                         { state: { data: previewData } }
                     );
@@ -1365,10 +1388,9 @@ const Edit = () => {
                     };
 
                     navigate(
-                        `/web-stories/${
-                            previewData?.Categories?.length
-                                ? previewData?.Categories[0]?.CategorySlug
-                                : '-'
+                        `/web-stories/${previewData?.Categories?.length
+                            ? previewData?.Categories[0]?.CategorySlug
+                            : '-'
                         }/${previewData?.Id || 'new'}?preview=true`,
                         { state: { data: previewData } }
                     );
@@ -1418,12 +1440,10 @@ const Edit = () => {
 
                     navigate(
                         previewData?.ParentSlug
-                            ? `/service/${previewData?.parentSlug}/${
-                                  previewData?.Slug || 'new'
-                              }?preview=true`
-                            : `/service/${
-                                  previewData?.Slug || 'new'
-                              }?preview=true`,
+                            ? `/service/${previewData?.parentSlug}/${previewData?.Slug || 'new'
+                            }?preview=true`
+                            : `/service/${previewData?.Slug || 'new'
+                            }?preview=true`,
                         { state: { data: previewData } }
                     );
                     break;
@@ -1439,25 +1459,21 @@ const Edit = () => {
             type === 'course'
                 ? `${window?.location?.origin}/course`
                 : type === 'blog'
-                ? `${window?.location?.origin}/blog/${
-                      data?.categories?.length ? data?.categories[0]?.slug : '-'
-                  }`
-                : type === 'spirituality'
-                ? `${window?.location?.origin}/spirituality/${
-                      data?.categories?.length ? data?.categories[0]?.slug : '-'
-                  }`
-                : type === 'story'
-                ? `${window?.location?.origin}/web-stories/${
-                      data?.categories?.length ? data?.categories[0]?.slug : '-'
-                  }`
-                : type === 'service'
-                ? `${window?.location?.origin}/service` +
-                  (data?.parentSlug ? `/${data?.parentSlug}` : '')
-                : type === 'citation'
-                ? `${window?.location?.origin}/citation`
-                : `${window?.location?.origin}/${type}/${
-                      data?.categories?.length ? data?.categories[0]?.slug : '-'
-                  }`,
+                    ? `${window?.location?.origin}/blog/${data?.categories?.length ? data?.categories[0]?.slug : '-'
+                    }`
+                    : type === 'spirituality'
+                        ? `${window?.location?.origin}/spirituality/${data?.categories?.length ? data?.categories[0]?.slug : '-'
+                        }`
+                        : type === 'story'
+                            ? `${window?.location?.origin}/web-stories/${data?.categories?.length ? data?.categories[0]?.slug : '-'
+                            }`
+                            : type === 'service'
+                                ? `${window?.location?.origin}/service` +
+                                (data?.parentSlug ? `/${data?.parentSlug}` : '')
+                                : type === 'citation'
+                                    ? `${window?.location?.origin}/citation`
+                                    : `${window?.location?.origin}/${type}/${data?.categories?.length ? data?.categories[0]?.slug : '-'
+                                    }`,
         [type, data]
     );
 
@@ -1467,6 +1483,17 @@ const Edit = () => {
         // else if (data.publishedOn > new Date()) return 'Scheduled';
         else return 'Pending';
     }, [data.status]);
+
+    const ParentService = useMemo(() => {
+        if (!serviceList || statusPService == null || statusPService === '') return 'NULL';
+
+        return serviceList[statusPService] ?? 'NULL';
+    }, [serviceList, statusPService]);
+
+
+
+
+
 
     return isLoading ? (
         <MatxLoading />
@@ -1948,10 +1975,10 @@ const Edit = () => {
                                                                                 return imageIndex ==
                                                                                     i
                                                                                     ? {
-                                                                                          ...storyImage,
-                                                                                          imageUrl:
-                                                                                              img,
-                                                                                      }
+                                                                                        ...storyImage,
+                                                                                        imageUrl:
+                                                                                            img,
+                                                                                    }
                                                                                     : storyImage;
                                                                             }
                                                                         ),
@@ -1995,10 +2022,10 @@ const Edit = () => {
                                                                                             return index ===
                                                                                                 i
                                                                                                 ? {
-                                                                                                      ...storyImage,
-                                                                                                      imageType:
-                                                                                                          imageType,
-                                                                                                  }
+                                                                                                    ...storyImage,
+                                                                                                    imageType:
+                                                                                                        imageType,
+                                                                                                }
                                                                                                 : storyImage;
                                                                                         }
                                                                                     ),
@@ -2008,7 +2035,7 @@ const Edit = () => {
                                                                     className={
                                                                         (storyImage?.imageType ||
                                                                             'text') ==
-                                                                        imageType
+                                                                            imageType
                                                                             ? styles.tab_button_active
                                                                             : styles.tab_button
                                                                     }
@@ -2038,9 +2065,8 @@ const Edit = () => {
                                                                 storyImage?.imageUrl ||
                                                                 null
                                                             }
-                                                            alt={`storyImage-${
-                                                                index + 1
-                                                            }`}
+                                                            alt={`storyImage-${index + 1
+                                                                }`}
                                                         />
                                                     ) : (
                                                         <div
@@ -2050,7 +2076,7 @@ const Edit = () => {
                                                         ></div>
                                                     )}
                                                     {storyImage?.imageType ===
-                                                    'link' ? (
+                                                        'link' ? (
                                                         <div
                                                             className={`${styles.story_link_container}`}
                                                         >
@@ -2126,12 +2152,12 @@ const Edit = () => {
                                                                                         return prevData
                                                                                             .storyImages[
                                                                                             index -
-                                                                                                1
+                                                                                            1
                                                                                         ];
                                                                                     if (
                                                                                         i ===
                                                                                         index -
-                                                                                            1
+                                                                                        1
                                                                                     )
                                                                                         return prevData
                                                                                             .storyImages[
@@ -2180,9 +2206,9 @@ const Edit = () => {
                                                         style={{
                                                             opacity:
                                                                 index + 1 <
-                                                                data
-                                                                    ?.storyImages
-                                                                    ?.length
+                                                                    data
+                                                                        ?.storyImages
+                                                                        ?.length
                                                                     ? 1
                                                                     : 0.5,
                                                         }}
@@ -2211,12 +2237,12 @@ const Edit = () => {
                                                                                         return prevData
                                                                                             .storyImages[
                                                                                             index +
-                                                                                                1
+                                                                                            1
                                                                                         ];
                                                                                     if (
                                                                                         i ===
                                                                                         index +
-                                                                                            1
+                                                                                        1
                                                                                     )
                                                                                         return prevData
                                                                                             .storyImages[
@@ -2402,14 +2428,14 @@ const Edit = () => {
                                                                                     i
                                                                                 ) =>
                                                                                     index ===
-                                                                                    i
+                                                                                        i
                                                                                         ? {
-                                                                                              ...image,
-                                                                                              imageLinkIcon:
-                                                                                                  e
-                                                                                                      .target
-                                                                                                      .value,
-                                                                                          }
+                                                                                            ...image,
+                                                                                            imageLinkIcon:
+                                                                                                e
+                                                                                                    .target
+                                                                                                    .value,
+                                                                                        }
                                                                                         : image
                                                                             ),
                                                                     })
@@ -2492,12 +2518,12 @@ const Edit = () => {
                                                                                     i
                                                                                 ) =>
                                                                                     index ===
-                                                                                    i
+                                                                                        i
                                                                                         ? {
-                                                                                              ...image,
-                                                                                              imageLinkIcon:
-                                                                                                  'arrow_drop_up',
-                                                                                          }
+                                                                                            ...image,
+                                                                                            imageLinkIcon:
+                                                                                                'arrow_drop_up',
+                                                                                        }
                                                                                         : image
                                                                             ),
                                                                     })
@@ -2517,12 +2543,12 @@ const Edit = () => {
                                                                                     i
                                                                                 ) =>
                                                                                     index ===
-                                                                                    i
+                                                                                        i
                                                                                         ? {
-                                                                                              ...image,
-                                                                                              imageLinkIcon:
-                                                                                                  'keyboard_arrow_up',
-                                                                                          }
+                                                                                            ...image,
+                                                                                            imageLinkIcon:
+                                                                                                'keyboard_arrow_up',
+                                                                                        }
                                                                                         : image
                                                                             ),
                                                                     })
@@ -2542,12 +2568,12 @@ const Edit = () => {
                                                                                     i
                                                                                 ) =>
                                                                                     index ===
-                                                                                    i
+                                                                                        i
                                                                                         ? {
-                                                                                              ...image,
-                                                                                              imageLinkIcon:
-                                                                                                  'keyboard_double_arrow_up',
-                                                                                          }
+                                                                                            ...image,
+                                                                                            imageLinkIcon:
+                                                                                                'keyboard_double_arrow_up',
+                                                                                        }
                                                                                         : image
                                                                             ),
                                                                     })
@@ -2578,12 +2604,12 @@ const Edit = () => {
                                                                 p?.storyImages?.map(
                                                                     (item, i) =>
                                                                         i ==
-                                                                        index
+                                                                            index
                                                                             ? {
-                                                                                  ...item,
-                                                                                  imageText:
-                                                                                      html,
-                                                                              }
+                                                                                ...item,
+                                                                                imageText:
+                                                                                    html,
+                                                                            }
                                                                             : item
                                                                 ),
                                                         }))
@@ -3309,8 +3335,8 @@ const Edit = () => {
                                             {data?.publishedOn > new Date()
                                                 ? 'Scheduled at'
                                                 : data?.id
-                                                ? 'Published On'
-                                                : 'Publish'}{' '}
+                                                    ? 'Published On'
+                                                    : 'Publish'}{' '}
                                             :{' '}
                                             {!editPublishedOn && (
                                                 <span
@@ -3384,6 +3410,80 @@ const Edit = () => {
                                     </div>
                                 )}
                             </div>
+                            {type === "service" && (
+                                <div style={{ marginBottom: '20px' }}>
+                                    <div className={styles.publish_cell_container}>
+                                        <span>
+                                            Parent :{' '}
+                                            {!editPService && (
+                                                <span className={styles.boldValue}>
+                                                    {ParentService !== 'NULL' ? ParentService.Name : 'NULL'}
+                                                </span>
+
+                                            )}
+                                        </span>
+                                        {!editPService && (
+                                            <span
+                                                className={styles.publish_cell_edit}
+                                                onClick={() =>
+                                                    SetEditPService(true)
+                                                }
+                                            >
+                                                Edit
+                                            </span>
+                                        )}
+                                    </div>
+                                    {editPService && (
+                                        <div
+                                            className={
+                                                styles.publish_cell_edit_container
+                                            }
+                                        >
+                                            <select
+                                                className={styles.input}
+                                                value={statusPService}
+                                                onChange={(e) => setStatusParentService(e.target.value)}
+                                            >
+                                                <option value="">Select a service</option>
+                                                {serviceList.map((service, index) => (
+                                                    <option key={index} value={service?.Name}>
+                                                        {service.Name}
+                                                    </option>
+                                                ))}
+                                            </select>
+
+
+                                            <span
+                                                className={styles.edit_icon}
+                                                onClick={() => {
+                                                    SetEditPService(false);
+                                                    setData({
+                                                        ...data,
+                                                        parentId: statusPService !== 'NULL' ? statusPService : null,
+                                                    });
+                                                }}
+                                            >
+                                                <Icon sx={{ color: '#000' }}>
+                                                    check_circle_outline
+                                                </Icon>
+                                            </span>
+                                            <span
+                                                className={styles.edit_icon}
+                                                onClick={() => {
+                                                    SetEditPService(false);
+                                                }}
+                                            >
+                                                <Icon sx={{ color: '#000' }}>
+                                                    cancel_outline
+                                                </Icon>
+                                            </span>
+                                        </div>
+                                    )}
+
+
+                                </div>
+
+                            )}
                             <HorizontalBorder height="1px" color="#ddd" />
                             <div
                                 style={{
@@ -3397,8 +3497,8 @@ const Edit = () => {
                                     style={
                                         !data?.id
                                             ? {
-                                                  opacity: 0.2,
-                                              }
+                                                opacity: 0.2,
+                                            }
                                             : {}
                                     }
                                     disabled={!data?.id}
