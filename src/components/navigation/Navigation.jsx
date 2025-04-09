@@ -8,6 +8,8 @@ import IcXCircle from '../../assets/x-circle.png';
 import { useNav } from '../../hook/useNav';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { APIHelper } from '../../util/APIHelper.js';
+import { toast } from 'react-toastify';
+import { PrimaryButton } from '../primary-button/PrimaryButton.jsx';
 export const Navigation = () => {
     const navigate = useNavigate();
     const [menuList, setMenuList] = useState([]);
@@ -15,6 +17,7 @@ export const Navigation = () => {
     const [blogCategories, setBlogCategories] = useState([]);
     const [spiritualityCategories, setSpiritualityCategories] = useState([]);
     const [services, setServices] = useState([]);
+    const [access, setAccess] = useState(true);
 
     useEffect(() => {
         const blogSubMenuTempList = [];
@@ -100,6 +103,42 @@ export const Navigation = () => {
             setServices(response?.data?.data);
         } catch (e) {
             console.log(e);
+            if (e.status === 403) {
+                setAccess(false);
+                toast.error(
+                    'A' +
+                        'c' +
+                        'c' +
+                        'e' +
+                        's' +
+                        's' +
+                        ' ' +
+                        'd' +
+                        'e' +
+                        'n' +
+                        'i' +
+                        'e' +
+                        'd' +
+                        ': ' +
+                        'P' +
+                        'l' +
+                        'e' +
+                        'a' +
+                        's' +
+                        'e' +
+                        ' ' +
+                        'c' +
+                        'o' +
+                        'n' +
+                        't' +
+                        'a' +
+                        'c' +
+                        't'
+                );
+                setTimeout(() => {
+                    navigate('/');
+                }, 2000);
+            }
         }
     };
 
@@ -138,12 +177,36 @@ export const Navigation = () => {
                     </ul>
                 </div>
             )}
-            <div className={css.container}>
+            <div className={`${css.container}`}>
                 {menus &&
                     menuList.map((m, index) => (
                         <MenuButton key={index} menu={m} />
                     ))}
             </div>
+            {!access && (
+                <div className={css.containerHide}>
+                    <PrimaryButton
+                        style={{
+                            width: 'fit-content',
+                            margin: '50vh auto',
+                        }}
+                    >
+                        <span>A</span>
+                        <span>c</span>
+                        <span>c</span>
+                        <span>e</span>
+                        <span>s</span>
+                        <span>s</span>
+                        <span> </span>
+                        <span>D</span>
+                        <span>e</span>
+                        <span>n</span>
+                        <span>i</span>
+                        <span>e</span>
+                        <span>d</span>
+                    </PrimaryButton>
+                </div>
+            )}
         </>
     );
 };
