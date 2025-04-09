@@ -48,7 +48,7 @@ const ManageSlot = () => {
     const [searchDate, setSearchDate] = useState(null);
     const [bookingStatus, setBookingStatus] = useState('');
     const [sort, setSort] = useState('DESC');
-    const [sortBy, setSortBy] = useState('sl.Date');
+    const [sortBy, setSortBy] = useState('sl."Date"');
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
     const [showSlotModal, setShowSlotModal] = useState(false);
     const [selectedData, setSelectedData] = useState(null);

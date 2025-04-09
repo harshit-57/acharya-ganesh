@@ -18,7 +18,7 @@ import { toast } from 'react-toastify';
 import { PrintExcel, getRoleAndpermission } from '../../utils/utils';
 import moment from 'moment';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { APIHelper } from '../../../util/APIHelper';
+import { ADMINAPIHELPER, APIHelper } from '../../../util/APIHelper';
 import { MatxLoading } from '../../components';
 
 const ContentBox = styled('div')(({ theme }) => ({
@@ -53,6 +53,7 @@ const H2 = styled('h2')(({ theme }) => ({
 }));
 
 const ManageStory = () => {
+    const token = localStorage.getItem('accessToken');
     const [searchParams] = useSearchParams();
     const { palette } = useTheme();
     const navigate = useNavigate();
@@ -64,8 +65,9 @@ const ManageStory = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [showFilterDropDown, setShowFilterDropDown] = useState(false);
     const [sort, setSort] = useState('desc');
-    const [sortBy, setSortBy] = useState('ws.PublishedOn');
+    const [sortBy, setSortBy] = useState('ws."PublishedOn"');
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+    const [selectedData, setSelectedData] = useState(null);
     const [status, setStatus] = useState('');
 
     useEffect(() => {
@@ -132,20 +134,35 @@ const ManageStory = () => {
 
     const handleDelete = async () => {
         try {
-            // setLoading(true);
-            // const res = await APIHelper.deleteWebStory(
-            //     searchParams.get('id')
-            // );
-            // setLoading(false);
+            setLoading(true);
+            if (selectedData?.Id)
+                ADMINAPIHELPER.updateWebStory(
+                    { id: selectedData?.Id, deletedOn: new Date() },
+                    token
+                )
+                    ?.then((response) => {
+                        if (response?.data?.success) {
+                            toast.success('Web Story deleted successfully');
+                            fetchStories();
+                        } else {
+                            toast.error(response?.message);
+                        }
+                        setLoading(false);
+                    })
+                    .catch((error) => {
+                        toast.error(
+                            error?.response?.data?.message || error?.message
+                        );
+                        setLoading(false);
+                    });
             setShowDeleteAlert(false);
-            toast.success('Deleted successfully');
-            // fetchStories();
+            setSelectedData(null);
         } catch (err) {
+            console.log(err);
             setLoading(false);
             toast.error('Something went wrong');
         }
     };
-
     return (
         <Fragment>
             <ContentBox className="analytics">
@@ -273,6 +290,7 @@ const ManageStory = () => {
                                 setSortBy={setSortBy}
                                 showDeleteAlert={showDeleteAlert}
                                 setShowDeleteAlert={setShowDeleteAlert}
+                                setSelectedData={setSelectedData}
                             />
                         </div>
                     </Grid>

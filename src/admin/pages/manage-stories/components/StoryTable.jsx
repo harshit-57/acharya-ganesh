@@ -32,6 +32,7 @@ const PaginationTable = ({
     setSortBy,
     showDeleteAlert,
     setShowDeleteAlert,
+    setSelectedData,
 }) => {
     const theme = useTheme();
     const primaryColor = theme?.palette?.primary?.main;
@@ -266,7 +267,9 @@ const PaginationTable = ({
                                         //         'delete'
                                         //     )
                                         // }
+
                                         onClick={() => {
+                                            setSelectedData(story);
                                             setShowDeleteAlert(
                                                 !showDeleteAlert
                                             );

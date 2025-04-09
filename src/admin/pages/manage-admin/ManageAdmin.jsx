@@ -41,7 +41,7 @@ const ManageAdmin = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [showFilterDropDown, setShowFilterDropDown] = useState(false);
     const [sort, setSort] = useState('desc');
-    const [sortBy, setSortBy] = useState('ad.CreatedAt');
+    const [sortBy, setSortBy] = useState('ad."CreatedAt"');
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
     const [showAdminModal, setShowAdminModal] = useState(false);
     const [selectedData, setSelectedData] = useState(null);

@@ -503,7 +503,7 @@ const Edit = () => {
                 categoryResponse = await APIHelper.getCourseCategories(
                     categoryTab == 'most'
                         ? {
-                              sortBy: 'Count',
+                              sortBy: '"Count"',
                               sort: 'DESC',
                           }
                         : {}
@@ -515,7 +515,7 @@ const Edit = () => {
                 categoryResponse = await APIHelper.getBlogCategories(
                     categoryTab == 'most'
                         ? {
-                              sortBy: 'Count',
+                              sortBy: '"Count"',
                               sort: 'DESC',
                           }
                         : {}
@@ -527,7 +527,7 @@ const Edit = () => {
                 categoryResponse = await APIHelper.getSpiritualityCategories(
                     categoryTab == 'most'
                         ? {
-                              sortBy: 'Count',
+                              sortBy: '"Count"',
                               sort: 'DESC',
                           }
                         : {}
@@ -539,7 +539,7 @@ const Edit = () => {
                 categoryResponse = await APIHelper.getWebStoryCategories(
                     categoryTab == 'most'
                         ? {
-                              sortBy: 'Count',
+                              sortBy: '"Count"',
                               sort: 'DESC',
                           }
                         : {}
@@ -1200,6 +1200,30 @@ const Edit = () => {
                             if (response?.data?.success) {
                                 toast.success('Service deleted successfully');
                                 navigate(`/admin/services`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                }
+                break;
+            case 'story':
+                if (data?.id) {
+                    setIsLoading(true);
+                    ADMINAPIHELPER.updateWebStory(
+                        { id: data?.id, deletedOn: new Date() },
+                        token
+                    )
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success('Web Story deleted successfully');
+                                navigate(`/admin/stories`);
                             } else {
                                 toast.error(response?.message);
                             }

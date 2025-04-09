@@ -47,7 +47,7 @@ const ManageSpirituality = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [showFilterDropDown, setShowFilterDropDown] = useState(false);
     const [sort, setSort] = useState('desc');
-    const [sortBy, setSortBy] = useState('sp.PublishedOn');
+    const [sortBy, setSortBy] = useState('sp."PublishedOn"');
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
     const [selectedData, setSelectedData] = useState(null);
     const [status, setStatus] = useState('');

@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 
 const ListLabel = styled(Paragraph)(({ theme, mode }) => ({
     fontSize: '12px',
-    marginTop: '20px',
+    marginTop: '15px',
     marginLeft: '15px',
     marginBottom: '10px',
     textTransform: 'uppercase',

@@ -99,7 +99,8 @@ export const AuthProvider = ({ children }) => {
                     });
                     dispatch({
                         type: 'PERMISSION',
-                        payload: JSON.parse(res?.data?.data?.RolePermissions),
+                        // payload: JSON.parse(res?.data?.data?.RolePermissions),
+                        payload: res?.data?.data?.RolePermissions,
                     });
                 } else {
                     dispatch({

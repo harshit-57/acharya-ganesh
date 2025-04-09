@@ -37,7 +37,7 @@ const ManageBooking = () => {
     const [searchDate, setSearchDate] = useState(null);
     const [bookingStatus, setBookingStatus] = useState('');
     const [sort, setSort] = useState('ASC');
-    const [sortBy, setSortBy] = useState('sl.Date');
+    const [sortBy, setSortBy] = useState('sl."Date"');
 
     useEffect(() => {
         fetchBookings();

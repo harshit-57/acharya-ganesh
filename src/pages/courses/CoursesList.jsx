@@ -28,7 +28,7 @@ const CoursesList = () => {
         category: false,
     });
     const [order, setOrder] = useState('desc');
-    const [sortBy, setSortBy] = useState('pr.PublishedOn');
+    const [sortBy, setSortBy] = useState('pr."PublishedOn"');
     const [category, setCategory] = useState(null);
 
     useEffect(() => {
@@ -186,11 +186,11 @@ const CoursesList = () => {
                     >
                         <img src={ICFilter} alt={'Filter icon'} />
                         <p>
-                            {sortBy == 'pr.PublishedOn' && order == 'asc'
+                            {sortBy == 'pr."PublishedOn"' && order == 'asc'
                                 ? 'Older'
-                                : sortBy == 'pr.Sale_Price' && order == 'asc'
+                                : sortBy == 'pr."Sale_Price"' && order == 'asc'
                                 ? 'Price Low to High'
-                                : sortBy == 'pr.Sale_Price' && order == 'desc'
+                                : sortBy == 'pr."Sale_Price"' && order == 'desc'
                                 ? 'Price High to Low'
                                 : 'Latest'}
                         </p>
@@ -200,7 +200,7 @@ const CoursesList = () => {
                                     onClick={() =>
                                         handleSortingFilter(
                                             'desc',
-                                            'pr.PublishedOn'
+                                            'pr."PublishedOn"'
                                         )
                                     }
                                 >
@@ -210,7 +210,7 @@ const CoursesList = () => {
                                     onClick={() =>
                                         handleSortingFilter(
                                             'asc',
-                                            'pr.PublishedOn'
+                                            'pr."PublishedOn"'
                                         )
                                     }
                                 >
@@ -220,7 +220,7 @@ const CoursesList = () => {
                                     onClick={() =>
                                         handleSortingFilter(
                                             'asc',
-                                            'pr.Sale_Price'
+                                            'pr."Sale_Price"'
                                         )
                                     }
                                 >
@@ -230,7 +230,7 @@ const CoursesList = () => {
                                     onClick={() =>
                                         handleSortingFilter(
                                             'desc',
-                                            'pr.Sale_Price'
+                                            'pr."Sale_Price"'
                                         )
                                     }
                                 >

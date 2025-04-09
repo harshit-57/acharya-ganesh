@@ -9,6 +9,7 @@ import { Footer } from '../../components/footer/Footer';
 import SEO from '../../Seo';
 import {
     NavLink,
+    useLocation,
     useNavigate,
     useParams,
     useSearchParams,
@@ -24,6 +25,7 @@ import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
 const ServiceDetail = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
+    const { state } = useLocation();
     const [searchParams] = useSearchParams();
 
     const [service, setService] = useState(null);
