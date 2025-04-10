@@ -17,6 +17,7 @@ export const Navigation = () => {
     const [blogCategories, setBlogCategories] = useState([]);
     const [spiritualityCategories, setSpiritualityCategories] = useState([]);
     const [services, setServices] = useState([]);
+    const [subServices, setSubServices] = useState([]);
     const [access, setAccess] = useState(true);
 
     useEffect(() => {
@@ -44,7 +45,17 @@ export const Navigation = () => {
                 route: `/service/${service?.Slug}`,
                 id: service?.Id,
                 title: service?.Name,
-                subMenus: null,
+                subMenus: subServices
+                    ?.filter((s) => s?.ParentId == service?.Id)
+                    ?.map((subService) => {
+                        return {
+                            route: `/service/${service?.Slug}/${subService?.Slug}`,
+                            id: subService?.Id,
+                            title: subService?.Name,
+                            subMenus: null,
+                            parentId: service?.Id,
+                        };
+                    }),
             });
         });
 
@@ -100,7 +111,12 @@ export const Navigation = () => {
                 active: true,
                 isActive: true,
             });
-            setServices(response?.data?.data);
+            setServices(
+                response?.data?.data?.filter((service) => !service?.ParentId)
+            );
+            setSubServices(
+                response?.data?.data?.filter((service) => service?.ParentId)
+            );
         } catch (e) {
             console.log(e);
             if (e.status === 403) {
