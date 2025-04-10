@@ -46,6 +46,23 @@ const Edit = () => {
     const navigate = useNavigate();
     const { type, slug } = useParams();
     const token = localStorage.getItem('accessToken');
+    const [serviceList, setServiceList] = useState([]);
+    useEffect(() => {
+        getServices();
+    }, []);
+
+    const getServices = async () => {
+        try {
+            const response = await APIHelper.getServices({
+                status: 1,
+                active: 1,
+            });
+            setServiceList(response.data.data);
+            console.log(response);
+        } catch (e) {
+            console.log(e);
+        }
+    };
 
     const initalData = {
         title: '',
@@ -154,6 +171,9 @@ const Edit = () => {
     const [statusInput, setStatusInput] = useState('');
     const [editStatus, setEditStatus] = useState(false);
     const [publishedOnInput, setPublishedOnInput] = useState(new Date());
+    const [statusPService, setStatusParentService] = useState('');
+    const [editPService, SetEditPService] = useState(false);
+
     const [editPublishedOn, setEditPublishedOn] = useState(false);
     const [categoryTab, setCategoryTab] = useState('');
     const [newCategoryInput, setNewCategoryInput] = useState('');
@@ -1491,6 +1511,12 @@ const Edit = () => {
         // else if (data.publishedOn > new Date()) return 'Scheduled';
         else return 'Pending';
     }, [data.status]);
+    const ParentService = useMemo(() => {
+        if (!serviceList || statusPService == null || statusPService === '')
+            return 'NULL';
+
+        return serviceList[statusPService] ?? 'NULL';
+    }, [serviceList, statusPService]);
 
     return isLoading ? (
         <MatxLoading />
@@ -3408,6 +3434,102 @@ const Edit = () => {
                                     </div>
                                 )}
                             </div>
+                            {type === 'service' && (
+                                <div style={{ marginBottom: '20px' }}>
+                                    <div
+                                        className={
+                                            styles.publish_cell_container
+                                        }
+                                    >
+                                        <span>
+                                            Parent :{' '}
+                                            {!editPService && (
+                                                <span
+                                                    className={styles.boldValue}
+                                                >
+                                                    {ParentService !== 'NULL'
+                                                        ? ParentService.Name
+                                                        : 'NULL'}
+                                                </span>
+                                            )}
+                                        </span>
+                                        {!editPService && (
+                                            <span
+                                                className={
+                                                    styles.publish_cell_edit
+                                                }
+                                                onClick={() =>
+                                                    SetEditPService(true)
+                                                }
+                                            >
+                                                Edit
+                                            </span>
+                                        )}
+                                    </div>
+                                    {editPService && (
+                                        <div
+                                            className={
+                                                styles.publish_cell_edit_container
+                                            }
+                                        >
+                                            <select
+                                                className={styles.input}
+                                                value={statusPService}
+                                                onChange={(e) =>
+                                                    setStatusParentService(
+                                                        e.target.value
+                                                    )
+                                                }
+                                            >
+                                                <option value="">
+                                                    Select a service
+                                                </option>
+                                                {serviceList.map(
+                                                    (service, index) => (
+                                                        <option
+                                                            key={index}
+                                                            value={
+                                                                service?.Name
+                                                            }
+                                                        >
+                                                            {service.Name}
+                                                        </option>
+                                                    )
+                                                )}
+                                            </select>
+
+                                            <span
+                                                className={styles.edit_icon}
+                                                onClick={() => {
+                                                    SetEditPService(false);
+                                                    setData({
+                                                        ...data,
+                                                        parentId:
+                                                            statusPService !==
+                                                            'NULL'
+                                                                ? statusPService
+                                                                : null,
+                                                    });
+                                                }}
+                                            >
+                                                <Icon sx={{ color: '#000' }}>
+                                                    check_circle_outline
+                                                </Icon>
+                                            </span>
+                                            <span
+                                                className={styles.edit_icon}
+                                                onClick={() => {
+                                                    SetEditPService(false);
+                                                }}
+                                            >
+                                                <Icon sx={{ color: '#000' }}>
+                                                    cancel_outline
+                                                </Icon>
+                                            </span>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                             <HorizontalBorder height="1px" color="#ddd" />
                             <div
                                 style={{
