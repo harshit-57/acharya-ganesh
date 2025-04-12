@@ -1,12 +1,7 @@
 import css from './style.module.css';
-import { act, useState } from 'react';
-import { useEffect } from 'react';
-
+import { useState, useEffect } from 'react';
 import ImgSectionBg from '../../assets/course_section_bg.png';
-
 import LeftArrow from '../../assets/left-arrow.png';
-
-// import coursesData from '../../data/courses-list';
 import { IndicatorContainer } from '../indicator-container/IndicatorContainer';
 import { PageContainer } from '../page-container/PageContainer';
 import { CourseCard } from './components/course-card/CourseCard';
@@ -23,30 +18,22 @@ const getCourseCountPerFrame = (device) => {
     switch (device) {
         case 'mobile':
             return PER_FRAME_COURSE_COUNT_MOBILE;
-            break;
         case 'tablet':
             return PER_FRAME_COURSE_COUNT_TABLET;
-            break;
         case 'desktop':
             return PER_FRAME_COURSE_COUNT_DESKTOP;
-            break;
         default:
             return PER_FRAME_COURSE_COUNT_DESKTOP;
     }
 };
 
 export const CoursesCarousel = () => {
-    const { breakpoint, maxWidth, minWidth } = useBreakpoint(
-        BREAKPOINTS,
-        'desktop'
-    );
-    // const [courseDetailList, setCourseDetailList] = useState([]);
+    const { breakpoint } = useBreakpoint(BREAKPOINTS, 'desktop');
     const [courses, setCourses] = useState([]);
     const [visibleCourses, setVisibleCourses] = useState([]);
-    const [currentSlideOffset, setCurrentSlideOffset] = useState(1);
+    const [currentSlideOffset, setCurrentSlideOffset] = useState(0);
 
     useEffect(() => {
-        // setCourseDetailList(coursesData);
         fetchCourses();
     }, []);
 
@@ -67,20 +54,36 @@ export const CoursesCarousel = () => {
 
     useEffect(() => {
         if (!courses?.length) return;
-        setVisibleCourses(
-            courses.slice(
-                currentSlideOffset * getCourseCountPerFrame(breakpoint),
-                currentSlideOffset * getCourseCountPerFrame(breakpoint) +
-                    getCourseCountPerFrame(breakpoint)
-            )
-        );
+
+        const coursesPerFrame = getCourseCountPerFrame(breakpoint);
+        const totalSlides = Math.ceil(courses.length / coursesPerFrame);
+        const startIndex = currentSlideOffset * coursesPerFrame;
+        const remainingCourses = courses.length - startIndex;
+
+        let newVisibleCourses = [];
+
+        if (remainingCourses >= coursesPerFrame) {
+            newVisibleCourses = courses.slice(
+                startIndex,
+                startIndex + coursesPerFrame
+            );
+        } else if (
+            currentSlideOffset === totalSlides - 1 &&
+            remainingCourses > 0
+        ) {
+            newVisibleCourses = [
+                ...courses.slice(startIndex, startIndex + remainingCourses), // Remaining courses
+                ...courses.slice(0, coursesPerFrame - remainingCourses), // Wrap around to start
+            ];
+        }
+
+        setVisibleCourses(newVisibleCourses);
     }, [courses, currentSlideOffset, breakpoint]);
 
     useEffect(() => {
         const totalSlides = Math.ceil(
             courses.length / getCourseCountPerFrame(breakpoint)
         );
-
         const interval = setInterval(() => {
             setCurrentSlideOffset((prev) => (prev + 1) % totalSlides);
         }, 5000);
@@ -89,27 +92,30 @@ export const CoursesCarousel = () => {
     }, [courses, breakpoint]);
 
     const onIndicatorClick = (index) => {
-        // setCurrentSlideOffset(1);
         if (
             index > -1 &&
             index <
                 Math.ceil(courses.length / getCourseCountPerFrame(breakpoint))
-        )
+        ) {
             setCurrentSlideOffset(index);
+        }
     };
 
     const onPrev = () => {
-        if (currentSlideOffset > 0)
+        if (currentSlideOffset > 0) {
             setCurrentSlideOffset(currentSlideOffset - 1);
+        }
     };
 
     const onNext = () => {
-        if (
-            currentSlideOffset <
-            Math.ceil(courses.length / getCourseCountPerFrame(breakpoint)) - 1
-        )
+        const totalSlides = Math.ceil(
+            courses.length / getCourseCountPerFrame(breakpoint)
+        );
+        if (currentSlideOffset < totalSlides - 1) {
             setCurrentSlideOffset(currentSlideOffset + 1);
-        else setCurrentSlideOffset(0);
+        } else {
+            setCurrentSlideOffset(0);
+        }
     };
 
     return (
@@ -124,10 +130,8 @@ export const CoursesCarousel = () => {
                 <button
                     onClick={onPrev}
                     className={css.prev_button}
-                    disabled={currentSlideOffset == 0}
-                    style={{
-                        opacity: currentSlideOffset == 0 ? 0.5 : 1,
-                    }}
+                    disabled={currentSlideOffset === 0}
+                    style={{ opacity: currentSlideOffset === 0 ? 0.5 : 1 }}
                 >
                     <img src={LeftArrow} alt={''} />
                 </button>
@@ -136,7 +140,7 @@ export const CoursesCarousel = () => {
                 </button>
                 <div className={css.course_slide_wrapper}>
                     {Array.isArray(visibleCourses) &&
-                        visibleCourses?.map((c, index) => (
+                        visibleCourses.map((c, index) => (
                             <CourseCard key={index} course={c} />
                         ))}
                 </div>
