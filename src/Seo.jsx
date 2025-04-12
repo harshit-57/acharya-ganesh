@@ -1,7 +1,25 @@
-import { Helmet } from 'react-helmet-async'; // Import Helmet and HelmetProvider
+import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 
-const SEO = ({ title, description, keywords, image, siteUrl, checkout }) => {
+const initProps = {
+    title: 'Acharya Ganesh Astrology Academy',
+    description:
+        'Discover your destiny with Acharya Ganesh Astrology Academy. Learn astrology, horoscope reading, and cosmic insights. Enroll now!',
+    keywords:
+        'astrology, horoscope, cosmic, Learn astrology, online astrology, online astro',
+    image: 'https://courses.acharyaganesh.com/logo.png?v=3',
+    siteUrl: 'http://34.131.192.173',
+    checkout: false,
+};
+
+const SEO = ({
+    title = initProps.title,
+    description = initProps.description,
+    keywords = initProps.keywords,
+    image = initProps.image,
+    siteUrl = initProps.siteUrl,
+    checkout = initProps.checkout,
+}) => {
     const location = useLocation();
     const currentUrl = `${siteUrl}${location.pathname}`;
 
@@ -34,16 +52,6 @@ const SEO = ({ title, description, keywords, image, siteUrl, checkout }) => {
             ) : null}
         </Helmet>
     );
-};
-
-SEO.defaultProps = {
-    title: 'Acharya Ganesh Astrology Academy',
-    description:
-        'Discover your destiny with Acharya Ganesh Astrology Academy. Learn astrology, horoscope reading, and cosmic insights. Enroll now!',
-    keywords:
-        'astrology, horoscope, cosmic, Learn astrology, online astrology, online astro',
-    image: 'https://courses.acharyaganesh.com/logo.png?v=3',
-    siteUrl: 'http://34.131.192.173', // Update this dynamically later if needed
 };
 
 export default SEO;
