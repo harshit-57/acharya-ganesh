@@ -29,7 +29,7 @@ export const RecentBlogs = () => {
                     <div
                         onClick={() =>
                             navigate(
-                                `/blog/${
+                                `/${
                                     article?.Categories?.length
                                         ? article?.Categories[0]?.CategorySlug
                                         : '-'

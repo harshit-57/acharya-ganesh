@@ -1332,7 +1332,7 @@ const Edit = () => {
                     };
 
                     navigate(
-                        `/blog/${
+                        `/${
                             previewData?.Categories?.length
                                 ? previewData?.Categories[0]?.CategorySlug
                                 : '-'
@@ -1484,7 +1484,7 @@ const Edit = () => {
             type === 'course'
                 ? `${window?.location?.origin}/course`
                 : type === 'blog'
-                ? `${window?.location?.origin}/blog/${
+                ? `${window?.location?.origin}/${
                       data?.categories?.length ? data?.categories[0]?.slug : '-'
                   }`
                 : type === 'spirituality'

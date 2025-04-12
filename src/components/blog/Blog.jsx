@@ -145,7 +145,7 @@ const Blog = () => {
                                         article={article}
                                         onClick={() =>
                                             navigate(
-                                                `/blog/${
+                                                `/${
                                                     article?.Categories?.length
                                                         ? article?.Categories[0]
                                                               ?.CategorySlug
