@@ -92,10 +92,10 @@ const Gallery = () => {
                     disabled={currentSlideOffset === 0}
                     style={{ opacity: currentSlideOffset === 0 ? 0.5 : 1 }}
                 >
-                    <img src={LeftArrow} alt="Previous" />
+                    <img src={LeftArrow} alt="<" />
                 </button>
                 <button onClick={onNext} className={css.next_button}>
-                    <img src={LeftArrow} alt="Next" />
+                    <img src={LeftArrow} alt=">" />
                 </button>
                 <div className={css.gallery_slide_wrapper}>
                     {Array.isArray(visibleImages) &&

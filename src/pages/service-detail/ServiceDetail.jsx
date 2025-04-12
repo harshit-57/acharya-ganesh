@@ -137,7 +137,7 @@ const ServiceDetail = () => {
 const Bullet = ({ children }) => {
     return (
         <div className={css.bullet}>
-            <img src={IcStar} alt={'Star icon'} />
+            <img src={IcStar} alt={'*'} />
             <p>{children}</p>
         </div>
     );

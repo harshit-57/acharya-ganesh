@@ -55,7 +55,7 @@ const Services = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img src={IcChevronIcon} alt={''} />
+                                <img src={IcChevronIcon} alt={'>'} />
                             </span>{' '}
                             <span>Services</span>
                         </p>

@@ -11,11 +11,11 @@ const ServiceCard = ({ service, className, graphic }) => {
         >
             {service.Name}
             <div className={css.view_label_wrapper}>
-                <img src={IcStar} alt={'Star icon'} />
+                <img src={IcStar} alt={'*'} />
                 <p>View</p>
-                <img src={IcStar} alt={'Star icon'} />
+                <img src={IcStar} alt={'*'} />
             </div>
-            <img className={css.bg} src={graphic} alt={''} />
+            <img className={css.bg} src={graphic} alt={'bg'} />
         </NavLink>
     );
 };

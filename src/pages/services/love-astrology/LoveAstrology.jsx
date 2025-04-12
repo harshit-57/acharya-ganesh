@@ -356,7 +356,7 @@ export const LoveAstrology = () => {
                             src={
                                 'https://i0.wp.com/acharyaganesh.com/wp-content/uploads/2025/01/service-love-astrology-1.webp?resize=600%2C600&ssl=1'
                             }
-                            alt={''}
+                            alt={'astrology'}
                         />
                     </div>
 

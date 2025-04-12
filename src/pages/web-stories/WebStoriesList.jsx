@@ -75,7 +75,7 @@ const WebStoriesList = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img src={IcChevronIcon} alt={''} />
+                                <img src={IcChevronIcon} alt={'>'} />
                             </span>
                         </p>
                     </div>

@@ -22,12 +22,12 @@ export const Socials = () => {
                         <img
                             className={css.social}
                             src={IcFacebookMono}
-                            alt={''}
+                            alt={'fb'}
                         />
                         <img
                             className={css.social_color}
                             src={IcFacebook}
-                            alt={''}
+                            alt={'fb'}
                         />
                     </a>
                 </div>
@@ -36,19 +36,19 @@ export const Socials = () => {
                         <img
                             className={css.social}
                             src={IcInstagramMono}
-                            alt={''}
+                            alt={'insta'}
                         />
                         <img
                             className={css.social_color}
                             src={IcInstagram}
-                            alt={''}
+                            alt={'insta'}
                         />
                     </a>
                 </div>
                 <div>
                     <a href={LINKS.X_URL} target={'_blank'}>
-                        <img className={css.social} src={IcXMono} alt={''} />
-                        <img className={css.social_color} src={IcX} alt={''} />
+                        <img className={css.social} src={IcXMono} alt={'x'} />
+                        <img className={css.social_color} src={IcX} alt={'x'} />
                     </a>
                 </div>
                 <div>
@@ -56,12 +56,12 @@ export const Socials = () => {
                         <img
                             className={css.social}
                             src={IcLinkedInMono}
-                            alt={''}
+                            alt={'linkedin'}
                         />
                         <img
                             className={css.social_color}
                             src={IcLinkedIn}
-                            alt={''}
+                            alt={'linkedin'}
                         />
                     </a>
                 </div>
@@ -70,12 +70,12 @@ export const Socials = () => {
                         <img
                             className={css.social}
                             src={IcPinterestMono}
-                            alt={''}
+                            alt={'pinterest'}
                         />
                         <img
                             className={css.social_color}
                             src={IcPinterest}
-                            alt={''}
+                            alt={'pinterest'}
                         />
                     </a>
                 </div>
@@ -84,12 +84,12 @@ export const Socials = () => {
                         <img
                             className={css.social}
                             src={IcYoutubeMono}
-                            alt={''}
+                            alt={'youtube'}
                         />
                         <img
                             className={css.social_color}
                             src={IcYoutube}
-                            alt={''}
+                            alt={'youtube'}
                         />
                     </a>
                 </div>

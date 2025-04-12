@@ -123,7 +123,7 @@ const CoursesList = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img src={IcChevronIcon} alt={''} />
+                                <img src={IcChevronIcon} alt={'>'} />
                             </span>{' '}
                             <span>Courses</span>
                         </p>
@@ -133,7 +133,7 @@ const CoursesList = () => {
             <div className={css.filter_container}>
                 <div className={css.filter_item_wrapper}>
                     <div>
-                        <img src={ICSearchMd} alt={'Search icon'} />
+                        <img src={ICSearchMd} alt={'Search'} />
                         <input
                             type={'text'}
                             value={searchQuery}
@@ -161,7 +161,7 @@ const CoursesList = () => {
                             })
                         }
                     >
-                        <img src={ICFilter} alt={'Filter icon'} />
+                        <img src={ICFilter} alt={'Filter'} />
                         <p>{category ? category?.Name : 'Select Category'}</p>
                         {showFilterDropDown?.category && (
                             <div className={css.filter_dropdown}>
@@ -184,7 +184,7 @@ const CoursesList = () => {
                             })
                         }
                     >
-                        <img src={ICFilter} alt={'Filter icon'} />
+                        <img src={ICFilter} alt={'Filter'} />
                         <p>
                             {sortBy == 'pr."PublishedOn"' && order == 'asc'
                                 ? 'Older'

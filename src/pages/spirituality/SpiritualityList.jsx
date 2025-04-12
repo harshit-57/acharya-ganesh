@@ -23,7 +23,6 @@ const SpiritualityList = () => {
     const [loading, setLoading] = useState(false);
     const [spritualitytags, setSpritualityTags] = useState([]);
 
-
     useEffect(() => {
         fetchBlogs();
         fetchSpritualityTags();
@@ -52,27 +51,20 @@ const SpiritualityList = () => {
     };
     const fetchSpritualityTags = async () => {
         try {
-            
             const response = await APIHelper.getSpiritualityTags({
                 status: 1,
-                
             });
             setSpritualityTags(response.data);
-            
-            
-            
-            
-            
         } catch (e) {
         } finally {
-            
         }
     };
-    const keywords = spritualitytags.map((e)=> e.Name).join(", ");
-    const description = "Discover spiritual practices, meditation techniques, and guidance at acharyaganesh. Enhance your spiritual journey with astrology, numerology, and kundali insights.";
+    const keywords = spritualitytags.map((e) => e.Name).join(', ');
+    const description =
+        'Discover spiritual practices, meditation techniques, and guidance at acharyaganesh. Enhance your spiritual journey with astrology, numerology, and kundali insights.';
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description}/>
+            <SEO keywords={keywords} description={description} />
             <div
                 style={{ backgroundImage: `url(${ImgBlogHeader})` }}
                 className={css.header}
@@ -85,7 +77,7 @@ const SpiritualityList = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img src={IcChevronIcon} alt={''} />
+                                <img src={IcChevronIcon} alt={'>'} />
                             </span>{' '}
                             <span>{category?.toUpperCase()} Spirituality</span>
                         </p>

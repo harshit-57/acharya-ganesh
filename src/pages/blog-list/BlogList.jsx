@@ -79,7 +79,7 @@ const BlogList = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img src={IcChevronIcon} alt={''} />
+                                <img src={IcChevronIcon} alt={'>'} />
                             </span>{' '}
                             <span>{category?.toUpperCase()} Blog</span>
                         </p>

@@ -80,7 +80,7 @@ export const CareerPrediction = () => {
                             src={
                                 'https://i0.wp.com/acharyaganesh.com/wp-content/uploads/2025/01/Career-Predictions-Service-Page-1.webp?w=1024&ssl=1'
                             }
-                            alt=""
+                            alt="career prediction"
                         />
                     </div>
                     <div className={css.row}>
@@ -481,7 +481,7 @@ export const CareerPrediction = () => {
                             src={
                                 'https://i0.wp.com/acharyaganesh.com/wp-content/uploads/2024/10/IMG_NAV-848x1024-1.webp?resize=300%2C362&ssl=1'
                             }
-                            alt=""
+                            alt="career-prediction-img"
                         />
                     </div>
                     <Blog />

@@ -33,7 +33,6 @@ export const WebStoriesView = () => {
             console.log(e);
         }
     };
-    
 
     const stories = ws?.Images?.length
         ? ws?.Images
@@ -127,7 +126,7 @@ export const WebStoriesView = () => {
                               <img
                                   className={css.story_media_main}
                                   src={ws?.CoverImageUrl || ''}
-                                  alt={''}
+                                  alt={ws?.CoverImageAlt || 'Story Image'}
                               />
                           </div>
                       );
@@ -177,7 +176,7 @@ export const WebStoriesView = () => {
                         opacity: currentIndex <= 0 ? 0.2 : 1,
                     }}
                 >
-                    <img src={LeftArrow} alt={''} />
+                    <img src={LeftArrow} alt={'<'} />
                 </button>
                 <button
                     onClick={onNext}
@@ -186,7 +185,7 @@ export const WebStoriesView = () => {
                         opacity: currentIndex >= stories.length - 1 ? 0.2 : 1,
                     }}
                 >
-                    <img src={LeftArrow} alt={''} />
+                    <img src={LeftArrow} alt={'>'} />
                 </button>
                 <Stories
                     stories={stories?.length ? stories : []}

@@ -28,7 +28,7 @@ const Loading = ({ style }) => {
     return (
         <StyledLoading style={style || {}}>
             <Box className="wrapper">
-                <img src="/src/assets/brand_logo.png" alt="" />
+                <img src="/src/assets/brand_logo.png" alt="loading" />
                 <CircularProgress
                     sx={{ color: '#9a5c23' }}
                     className="circleProgress"

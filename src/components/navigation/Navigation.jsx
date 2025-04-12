@@ -175,7 +175,7 @@ export const Navigation = () => {
                         <img
                             src={IcXCircle}
                             onClick={() => setShowNav(false)}
-                            alt={'Close icon'}
+                            alt={'Close'}
                         />
                     </div>
                     <ul>

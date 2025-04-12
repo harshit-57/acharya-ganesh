@@ -18,9 +18,12 @@ export const TopBar = () => {
             <img
                 className={css.menu_icon}
                 src={IcMenu}
+                alt={'Acharya Logo'}
                 onClick={() => setShowNav(true)}
             />
-            <Link to="/"><img className={css.logo} src={Logo} /></Link>
+            <Link to="/">
+                <img className={css.logo} src={Logo} />
+            </Link>
             <div className={css.info_n_action_button_container}>
                 <a href={`tel:${NUMBER_ALT_1}`}>
                     <ContactLabel icon={IcPhone}>{NUMBER_ALT_1}</ContactLabel>
@@ -39,7 +42,7 @@ export const TopBar = () => {
 const ContactLabel = ({ icon, className, children }) => {
     return (
         <div className={[className, css.contact_label].join(' ')}>
-            {icon && <img src={icon} alt={`${children} icon`} />}
+            {icon && <img src={icon} alt={`contact`} />}
             <p>{children}</p>
         </div>
     );
@@ -51,7 +54,7 @@ const ActionButton = ({ icon, className, onClick, children }) => {
             onClick={onClick}
             className={[className, css.action_button].join(' ')}
         >
-            {icon && <img src={icon} alt={`${children} icon`} />}
+            {icon && <img src={icon} alt={`log in`} />}
             <p>{children}</p>
         </div>
     );

@@ -73,7 +73,7 @@ const Citation = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img src={IcChevronIcon} alt={''} />
+                                <img src={IcChevronIcon} alt={'>'} />
                             </span>{' '}
                             <span> Citations</span>
                         </p>
@@ -111,9 +111,9 @@ const Citation = () => {
                                 className={css.showMoreBtn}
                                 onClick={handleShowMore}
                             >
-                                <img src={ICStar} alt={''} />
+                                <img src={ICStar} alt={'*'} />
                                 Show More
-                                <img src={ICStar} alt={''} />
+                                <img src={ICStar} alt={'*'} />
                             </button>
                         )}
                     </>

@@ -41,7 +41,11 @@ export const RecentSpirituality = () => {
                     >
                         <img
                             src={article?.Image || ImgPlaceholderThumbnail}
-                            alt={''}
+                            alt={
+                                article?.ImageAlt ||
+                                article?.Title?.slice(0, 10) ||
+                                'spirituality'
+                            }
                         />
                         <p>{article?.Title}</p>
                     </div>

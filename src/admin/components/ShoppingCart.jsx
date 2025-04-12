@@ -170,7 +170,7 @@ function ShoppingCart({ container }) {
                                     <Box mr={1}>
                                         <IMG
                                             src={product.imgUrl}
-                                            alt={product.title}
+                                            alt={product.title || 'product'}
                                         />
                                     </Box>
 

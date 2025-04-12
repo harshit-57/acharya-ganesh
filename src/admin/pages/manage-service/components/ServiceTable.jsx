@@ -158,7 +158,15 @@ const PaginationTable = ({
                                     >
                                         <img
                                             src={service.Image}
-                                            alt={service.Name}
+                                            alt={
+                                                service?.ImageAlt ||
+                                                service?.Name?.split(' ')
+                                                    ?.length
+                                                    ? service.Name?.split(
+                                                          ' '
+                                                      )[0]
+                                                    : 'service'
+                                            }
                                             style={{
                                                 width: '50px',
                                                 height: '50px',

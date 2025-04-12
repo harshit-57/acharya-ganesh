@@ -22,7 +22,7 @@ const MenuButton = ({ menu, className }) => {
                 className={[className, css.menu_button].join(' ')}
             >
                 <p>{menu.title}</p>
-                {subMenuAvailable && <img src={ChevronDown} alt="Down arrow" />}
+                {subMenuAvailable && <img src={ChevronDown} alt="down" />}
             </NavLink>
 
             {subMenuAvailable && (
@@ -52,7 +52,7 @@ const MenuButton = ({ menu, className }) => {
                                         subMenu?.subMenus.length > 0 && (
                                             <img
                                                 src={ChevronDown}
-                                                alt="Down arrow"
+                                                alt="Down"
                                                 className={
                                                     css.submenu_item_arrow
                                                 }

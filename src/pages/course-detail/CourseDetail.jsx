@@ -70,7 +70,7 @@ const CourseDetail = () => {
                 <PriceAndPurchaseSection course={course} />
                 <div className={css.description_container}>
                     <div className={css.section_label}>
-                        <img src={IcDescription} alt={'Description icon'} />
+                        <img src={IcDescription} alt={'Description'} />
                         <p>Description</p>
                     </div>
                     <div className={`html-content`}>

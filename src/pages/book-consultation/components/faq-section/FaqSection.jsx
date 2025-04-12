@@ -81,9 +81,9 @@ Collaboratively administrate empowered markets via plug-and-play networks. Dynam
                 className={styles.showMoreBtn}
                 onClick={() => setShowMore(!showMore)}
             >
-                <img src={IcStar} alt={''} />
+                <img src={IcStar} alt={'*'} />
                 {showMore ? 'Show Less' : 'Show More'}
-                <img src={IcStar} alt={''} />
+                <img src={IcStar} alt={'*'} />
             </button>
         </div>
     );

@@ -9,7 +9,7 @@ export const CourseCard = ({ course, style, className }) => {
             <img
                 className={css.course_poster}
                 src={course?.Images?.length ? course?.Images[0] : ''}
-                alt={''}
+                alt={course?.Name?.slice(0, 10) || 'course'}
             />
             <a
                 className={css.buy_now_button}

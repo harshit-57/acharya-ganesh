@@ -72,12 +72,12 @@ export const Footer = () => {
                                 <img
                                     className={css.social}
                                     src={IcFacebookMono}
-                                    alt={''}
+                                    alt={'fb'}
                                 />
                                 <img
                                     className={css.social_color}
                                     src={IcFacebook}
-                                    alt={''}
+                                    alt={'fb'}
                                 />
                             </a>
                         </div>
@@ -86,12 +86,12 @@ export const Footer = () => {
                                 <img
                                     className={css.social}
                                     src={IcInstagramMono}
-                                    alt={''}
+                                    alt={'insta'}
                                 />
                                 <img
                                     className={css.social_color}
                                     src={IcInstagram}
-                                    alt={''}
+                                    alt={'insta'}
                                 />
                             </a>
                         </div>
@@ -100,12 +100,12 @@ export const Footer = () => {
                                 <img
                                     className={css.social}
                                     src={IcXMono}
-                                    alt={''}
+                                    alt={'x'}
                                 />
                                 <img
                                     className={css.social_color}
                                     src={IcX}
-                                    alt={''}
+                                    alt={'x'}
                                 />
                             </a>
                         </div>
@@ -114,12 +114,12 @@ export const Footer = () => {
                                 <img
                                     className={css.social}
                                     src={IcLinkedInMono}
-                                    alt={''}
+                                    alt={'linkedin'}
                                 />
                                 <img
                                     className={css.social_color}
                                     src={IcLinkedIn}
-                                    alt={''}
+                                    alt={'linkedin'}
                                 />
                             </a>
                         </div>
@@ -128,12 +128,12 @@ export const Footer = () => {
                                 <img
                                     className={css.social}
                                     src={IcPinterestMono}
-                                    alt={''}
+                                    alt={'pinterest'}
                                 />
                                 <img
                                     className={css.social_color}
                                     src={IcPinterest}
-                                    alt={''}
+                                    alt={'pinterest'}
                                 />
                             </a>
                         </div>
@@ -142,12 +142,12 @@ export const Footer = () => {
                                 <img
                                     className={css.social}
                                     src={IcYoutubeMono}
-                                    alt={''}
+                                    alt={'youtube'}
                                 />
                                 <img
                                     className={css.social_color}
                                     src={IcYoutube}
-                                    alt={''}
+                                    alt={'youtube'}
                                 />
                             </a>
                         </div>
@@ -196,7 +196,7 @@ export const Footer = () => {
 const AddressItem = ({ icon, desc }) => {
     return (
         <div className={css.address_item}>
-            <img src={icon} alt={'Address icon'} />
+            <img src={icon} alt={'Address'} />
             <p>{desc}</p>
         </div>
     );

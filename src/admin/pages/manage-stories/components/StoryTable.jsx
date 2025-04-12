@@ -155,7 +155,12 @@ const PaginationTable = ({
                                     >
                                         <img
                                             src={story.CoverImageUrl}
-                                            alt={story.Title}
+                                            alt={
+                                                story?.CoverImageAlt ||
+                                                story?.Title?.split(' ')?.length
+                                                    ? story.Title?.split(' ')[0]
+                                                    : 'story'
+                                            }
                                             style={{
                                                 width: '50px',
                                                 height: '50px',

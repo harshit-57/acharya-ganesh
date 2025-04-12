@@ -47,14 +47,14 @@ export const TableOfContent = ({ article }) => {
                 <img
                     src={IcChevronIcon}
                     style={show ? { transform: 'rotate(0deg)' } : {}}
-                    alt={''}
+                    alt={'>'}
                 />
                 Table of contents
             </h3>
             {show &&
                 getTableContents?.map((item, index) => (
                     <div className={css.content_table_link}>
-                        {/* <img src={IcChevronIcon} alt={''} /> */}
+                        {/* <img src={IcChevronIcon} alt={'>'} /> */}
                         <a
                             //  href={`#${item?.id}`}
                             onClick={() => handleScroll(item?.id)}

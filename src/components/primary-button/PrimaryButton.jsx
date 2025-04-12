@@ -8,8 +8,8 @@ export const PrimaryButton = ({ className, style, children, onClick }) => (
         style={style}
         onClick={onClick}
     >
-        <img src={IcStar} alt={''} />
+        <img src={IcStar} alt={'*'} />
         <p>{children}</p>
-        <img src={IcStar} alt={''} />
+        <img src={IcStar} alt={'*'} />
     </div>
 );

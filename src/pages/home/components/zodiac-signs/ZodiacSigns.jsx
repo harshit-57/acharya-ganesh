@@ -164,7 +164,7 @@ const ZodiacSigns = () => {
                     disabled={currentOffset <= 0}
                     style={{ opacity: currentOffset <= 0 ? 0.2 : 1 }}
                 >
-                    <img src={LeftArrow} alt={''} />
+                    <img src={LeftArrow} alt={'<'} />
                 </button>
                 <button
                     onClick={onNext}
@@ -174,7 +174,7 @@ const ZodiacSigns = () => {
                         opacity: currentOffset >= indicatorCount - 1 ? 0.2 : 1,
                     }}
                 >
-                    <img src={LeftArrow} alt={''} />
+                    <img src={LeftArrow} alt={'>'} />
                 </button>
                 <div className={css.slides_wrapper} ref={wrapperRef}>
                     {Array.isArray(ZodiacSignList) &&
@@ -182,7 +182,7 @@ const ZodiacSigns = () => {
                             <img
                                 key={i}
                                 src={z.img}
-                                alt={'Zodiac image card'}
+                                alt={'Zodiac Sign'}
                                 onClick={() => openLink(z.route)}
                             />
                         ))}

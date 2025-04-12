@@ -43,7 +43,11 @@ export const TitleInformation = ({ article }) => {
                 <img
                     className={css.thumbnail}
                     src={article?.Image}
-                    alt={'Thumbnail'}
+                    alt={
+                        article?.ImageAlt ||
+                        article?.Title?.slice(0, 10) ||
+                        'spirituality'
+                    }
                 />
             )}
             <div className={css.title_container}>
@@ -74,7 +78,7 @@ export const TitleInformation = ({ article }) => {
                         target={'_blank'}
                     >
                         <div className={css.social_button_wrapper}>
-                            <img src={IcFacebook} alt={'Social icon'} />
+                            <img src={IcFacebook} alt={'fb'} />
                         </div>
                     </a>
                     <a
@@ -84,7 +88,7 @@ export const TitleInformation = ({ article }) => {
                         target={'_blank'}
                     >
                         <div className={css.social_button_wrapper}>
-                            <img src={IcInstagram} alt={'Social icon'} />
+                            <img src={IcInstagram} alt={'insta'} />
                         </div>
                     </a>
                     <a
@@ -92,7 +96,7 @@ export const TitleInformation = ({ article }) => {
                         target={'_blank'}
                     >
                         <div className={css.social_button_wrapper}>
-                            <img src={IcX} alt={'Social icon'} />
+                            <img src={IcX} alt={'x'} />
                         </div>
                     </a>
                     <a
@@ -100,7 +104,7 @@ export const TitleInformation = ({ article }) => {
                         target={'_blank'}
                     >
                         <div className={css.social_button_wrapper}>
-                            <img src={IcPinterest} alt={'Social icon'} />
+                            <img src={IcPinterest} alt={'pinterest'} />
                         </div>
                     </a>
                 </div>

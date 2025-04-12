@@ -64,7 +64,7 @@ export const HealthAstrology = () => {
                             src={
                                 'https://i0.wp.com/acharyaganesh.com/wp-content/uploads/2025/01/Health-Astrology-Service-Page-1.webp?resize=600%2C600&ssl=1'
                             }
-                            alt=""
+                            alt="health astrology"
                         />
                         <p
                             style={{
@@ -132,7 +132,7 @@ export const HealthAstrology = () => {
                             <img
                                 style={{ height: '120px', width: '120px' }}
                                 src="https://i0.wp.com/acharyaganesh.com/wp-content/uploads/2024/10/sun.webp?fit=128%2C128&ssl=1"
-                                alt=""
+                                alt="sun"
                             />
                             <h2 style={{ fontWeight: '500' }}>Sun</h2>
                             <p style={{ fontWeight: '400' }}>
@@ -154,7 +154,7 @@ export const HealthAstrology = () => {
                             <img
                                 style={{ height: '120px', width: '120px' }}
                                 src="https://i0.wp.com/acharyaganesh.com/wp-content/uploads/2024/10/moon.webp?fit=128%2C128&ssl=1"
-                                alt=""
+                                alt="moon"
                             />
                             <h2 style={{ fontWeight: '500' }}>Moon</h2>
                             <p style={{ fontWeight: '400' }}>
@@ -177,7 +177,7 @@ export const HealthAstrology = () => {
                             <img
                                 style={{ height: '120px', width: '120px' }}
                                 src="https://i0.wp.com/acharyaganesh.com/wp-content/uploads/2024/10/mars.webp?fit=128%2C128&ssl=1"
-                                alt=""
+                                alt="mars"
                             />
                             <h2 style={{ fontWeight: '500' }}>Mars</h2>
                             <p style={{ fontWeight: '400' }}>
@@ -200,7 +200,7 @@ export const HealthAstrology = () => {
                             <img
                                 style={{ height: '120px', width: '120px' }}
                                 src="https://i0.wp.com/acharyaganesh.com/wp-content/uploads/2024/10/mercury.webp?fit=128%2C128&ssl=1"
-                                alt=""
+                                alt="mercury"
                             />
                             <h2 style={{ fontWeight: '500' }}>Mercury</h2>
                             <p style={{ fontWeight: '400' }}>
@@ -222,7 +222,7 @@ export const HealthAstrology = () => {
                             <img
                                 style={{ height: '120px', width: '120px' }}
                                 src="https://i0.wp.com/acharyaganesh.com/wp-content/uploads/2024/10/jupiter.webp?fit=128%2C128&ssl=1"
-                                alt=""
+                                alt="jupiter"
                             />
                             <h2 style={{ fontWeight: '500' }}>Jupiter</h2>
                             <p style={{ fontWeight: '400' }}>
@@ -248,7 +248,7 @@ export const HealthAstrology = () => {
                             <img
                                 style={{ height: '120px', width: '120px' }}
                                 src="https://i0.wp.com/acharyaganesh.com/wp-content/uploads/2024/10/venus.webp?fit=128%2C128&ssl=1"
-                                alt=""
+                                alt="venus"
                             />
                             <h2 style={{ fontWeight: '500' }}>Venus</h2>
                             <p style={{ fontWeight: '400' }}>
@@ -270,7 +270,7 @@ export const HealthAstrology = () => {
                             <img
                                 style={{ height: '120px', width: '120px' }}
                                 src="https://i0.wp.com/acharyaganesh.com/wp-content/uploads/2024/10/saturn.webp?fit=128%2C128&ssl=1"
-                                alt=""
+                                alt="saturn"
                             />
                             <h2 style={{ fontWeight: '500' }}>Saturn</h2>
                             <p style={{ fontWeight: '400' }}>
@@ -292,7 +292,7 @@ export const HealthAstrology = () => {
                             <img
                                 style={{ height: '120px', width: '120px' }}
                                 src="https://i0.wp.com/acharyaganesh.com/wp-content/uploads/2024/10/rahu.webp?fit=128%2C128&ssl=1"
-                                alt=""
+                                alt="rahu"
                             />
                             <h2 style={{ fontWeight: '500' }}>Rahu</h2>
                             <p style={{ fontWeight: '400' }}>
@@ -313,7 +313,7 @@ export const HealthAstrology = () => {
                             <img
                                 style={{ height: '120px', width: '120px' }}
                                 src="https://i0.wp.com/acharyaganesh.com/wp-content/uploads/2024/10/ketu.webp?fit=64%2C64&ssl=1"
-                                alt=""
+                                alt="ketu"
                             />
                             <h2 style={{ fontWeight: '500' }}>Ketu</h2>
                             <p style={{ fontWeight: '400' }}>
