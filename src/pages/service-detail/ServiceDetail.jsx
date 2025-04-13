@@ -119,6 +119,7 @@ const ServiceDetail = () => {
                                 </PrimaryButton>
                             </NavLink>
                         </div>
+                        
                         <ServiceSidebar service={service} />
                     </div>
 
