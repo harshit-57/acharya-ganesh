@@ -73,7 +73,7 @@
         padding-right: 48px;
         padding-bottom: 24px;
         padding-left: 48px;
-        background: var(--Primary-Color-Color-Secondary-Button, #fed1a7);
+        background: var(--color-button-primary-bg);
         color: black;
 
         span {

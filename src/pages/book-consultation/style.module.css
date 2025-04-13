@@ -85,7 +85,7 @@ font-size: 42px;
 line-height: 50.4px;
 letter-spacing: -3%;
 text-align: center;
-color: var(--Primary-Color-Caption-Color, #9A5C23);
+color: var(--color-caption);
 }
 .row_info_heading{
     font-family: Work Sans;
@@ -122,7 +122,7 @@ text-align: start;
     padding: 48px;
     min-height: 534px;
     width: 50%;
-    background-color: #f9eae0;
+    background-color: var(--color-gradient-bg);
 
     h2 {
         font-family: Sorts Mill Goudy;
@@ -130,7 +130,7 @@ text-align: start;
         font-size: 42px;
         line-height: 50.4px;
         letter-spacing: -3%;
-        color: var(--Primary-Color-Caption-Color, #9A5C23);
+        color: var(--color-caption);
     }
 
     h4 {

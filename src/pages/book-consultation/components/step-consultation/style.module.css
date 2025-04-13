@@ -35,7 +35,7 @@
     padding-right: 48px;
     padding-bottom: 24px;
     padding-left: 48px;
-    background: var(--Primary-Color-Color-Secondary-Button, #fed1a7);
+    background: var(--color-primary);
     color: var(--Color-Scheme-Black, #000000);
     font-family: Work Sans;
     font-weight: 600;
@@ -61,7 +61,7 @@
     line-height: 17px;
     letter-spacing: 0%;
     text-align: center;
-    background: var(--Color-Scheme-Gradient-Bg, #fff3eb);
+    background: var(--color-gradient-bg);
     color: var(--Color-Scheme-Border-Color, #5c4228);
     border-width: 1px;
     border: 1px solid transparent;
@@ -69,17 +69,17 @@
 }
 
 .button:nth-child(1):hover {
-    color: var(--Color-Scheme-Bg-Icon, #fed1a7);
+    color: var(--color-primary);
     border-width: 1px;
     background: var(--Primary-Color-Button-Color, #2c2520);
-    border: 1px solid var(--Color-Scheme-Bg-Icon, #fed1a7);
+    border: 1px solid var(--color-primary);
     transition: 0.3s ease-in-out;
 }
 .button:nth-child(2):hover {
     color: var(--primary-color-white-button-text, #ffffff);
     border-width: 1px;
-    background: var(--Color-Scheme-Border-Color, #5c4228);
-    border: var(--Color-Scheme-Border-Color, #5c4228);
+    background: var(--color-header-menu-bg-hover);
+    border: var(--color-border-dark);
     transition: 0.3s ease-in-out;
 }
 

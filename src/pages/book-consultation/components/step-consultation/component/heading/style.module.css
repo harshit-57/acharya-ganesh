@@ -2,7 +2,7 @@
     font-size: 42px;
     font-weight: 400;
     text-align: center;
-    color: #FED1A7;
+    color: var(--color-primary);
     font-family: 'Sorts Mill Goudy';
   }
   

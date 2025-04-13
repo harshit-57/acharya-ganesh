@@ -13,7 +13,7 @@
     line-height: 50.4px;
     letter-spacing: -3%;
     text-align: center;
-    color: #9A5C23;
+    color: var(--color-caption);
   }
   
   .grid {
@@ -36,7 +36,7 @@
   .icon {
     width: 48px;
     height: 48px;
-    background: #FED1A780;
+    background: var(--color-primary);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -48,7 +48,7 @@
   .title {
     font-size: 20px;
     font-weight: 600;
-    color: #9A5C23;
+    color: var(--color-caption);
     letter-spacing: -0px;
     line-height: 32px;
     font-family: "Work Sans";
