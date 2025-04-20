@@ -44,7 +44,7 @@ const ManageSupport = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [showFilterDropDown, setShowFilterDropDown] = useState(false);
     const [sort, setSort] = useState('desc');
-    const [sortBy, setSortBy] = useState('ld."createdAt"');
+    const [sortBy, setSortBy] = useState('ld."CreatedAt"');
     const [showDeleteAlert, setShowDeleteAlert] = useState(false);
 
     useEffect(() => {

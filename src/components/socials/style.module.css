@@ -1,0 +1,50 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    h3 {
+        font-family: 'Sorts Mill Goudy';
+        font-size: 27px;
+        color: var(--color-caption);
+    }
+    .social_container {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        div {
+            width: 30px;
+            height: 30px;
+            position: relative;
+            padding: 5px;
+            border-radius: 20px;
+            background-color: black;
+            img {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                cursor: pointer;
+                transition: 0.2s;
+            }
+
+            .social:hover + .social_color {
+                visibility: visible;
+                opacity: 1;
+            }
+
+            .social_color {
+                visibility: hidden;
+                opacity: 0;
+
+                &:hover {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 768px) {
+    .container {
+        width: 100%;
+    }
+}

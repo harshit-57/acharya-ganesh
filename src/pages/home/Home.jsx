@@ -15,12 +15,15 @@ import { Helmet } from 'react-helmet-async';
 import CitationBox from '../../components/citation-box/CitationBox';
 import VideoReviews from './components/video-review/VideoReview';
 import SEO from '../../Seo';
+import { ToastContainer } from 'react-toastify';
 const Home = () => {
-    const keywords = "home, welcome, acharyaganesh, astrology, numerology, spiritual guidance, kundali, horoscope, vedic astrology, daily horoscope, zodiac signs";
-    const description = "Welcome to acharyaganesh, your trusted source for astrology, numerology, kundali matching, and daily horoscopes. Explore our services, courses, and expert guidance.";
+    const keywords =
+        'home, welcome, acharyaganesh, astrology, numerology, spiritual guidance, kundali, horoscope, vedic astrology, daily horoscope, zodiac signs';
+    const description =
+        'Welcome to acharyaganesh, your trusted source for astrology, numerology, kundali matching, and daily horoscopes. Explore our services, courses, and expert guidance.';
     return (
         <PageContainer>
-            <SEO keywords={keywords} description={description}/>
+            <SEO keywords={keywords} description={description} />
             {/* <Helmet>
                 <script>var orgCountry = "IN";</script>
                 <title>Acharya Ganesh Astrology Academy</title>
@@ -90,6 +93,7 @@ const Home = () => {
                 <CitationBox />
             </Section>
             <Footer />
+            <ToastContainer />
         </PageContainer>
     );
 };

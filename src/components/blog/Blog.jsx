@@ -131,10 +131,10 @@ const Blog = () => {
                                 opacity: currentSlideOffset === 0 ? 0.5 : 1,
                             }}
                         >
-                            <img src={LeftArrow} alt="Previous" />
+                            <img src={LeftArrow} alt="<" />
                         </button>
                         <button onClick={onNext} className={css.next_button}>
-                            <img src={LeftArrow} alt="Next" />
+                            <img src={LeftArrow} alt=">" />
                         </button>
 
                         <div className={css.article_slide_wrapper}>
@@ -145,7 +145,7 @@ const Blog = () => {
                                         article={article}
                                         onClick={() =>
                                             navigate(
-                                                `/blog/${
+                                                `/${
                                                     article?.Categories?.length
                                                         ? article?.Categories[0]
                                                               ?.CategorySlug

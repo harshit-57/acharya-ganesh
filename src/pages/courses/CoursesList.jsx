@@ -10,7 +10,6 @@ import { Spacer } from '../../components/spacer/Spacer';
 import { useEffect, useState } from 'react';
 import { CourseCard } from './components/course-card/CourseCard';
 import { Footer } from '../../components/footer/Footer';
-import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { APIHelper } from '../../util/APIHelper';
 import SEO from '../../Seo';
@@ -20,17 +19,26 @@ const CoursesList = () => {
     const [courses, setCourses] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [coursetags, setCourseTags] = useState([]);
+    const [courseCategories, setCourseCategories] = useState([]);
     const [pageCount, setPageCount] = useState(0);
     const [loading, setLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
-    const [showFilterDropDown, setShowFilterDropDown] = useState(false);
+    const [showFilterDropDown, setShowFilterDropDown] = useState({
+        sort: false,
+        category: false,
+    });
     const [order, setOrder] = useState('desc');
     const [sortBy, setSortBy] = useState('pr."PublishedOn"');
+    const [category, setCategory] = useState(null);
 
     useEffect(() => {
         fetchCourseTags();
+        fetchCourseCategories();
+    }, []);
+
+    useEffect(() => {
         fetchCourses();
-    }, [currentPage, searchQuery, sortBy, order]);
+    }, [currentPage, searchQuery, sortBy, order, category]);
     const handleSortingFilter = (p1, p2) => {
         setOrder(p1);
         setSortBy(p2);
@@ -50,6 +58,7 @@ const CoursesList = () => {
                     search: searchQuery,
                     sort: order,
                     sortBy: sortBy,
+                    category: category ? category?.Slug : undefined,
                 });
             } else {
                 response = await APIHelper.getCourses({
@@ -59,6 +68,7 @@ const CoursesList = () => {
                     active: 1,
                     sort: order,
                     sortBy: sortBy,
+                    category: category ? category?.Slug : undefined,
                 });
             }
 
@@ -81,7 +91,18 @@ const CoursesList = () => {
             });
             setCourseTags(response.data);
         } catch (e) {
-        } finally {
+            console.log(e);
+        }
+    };
+
+    const fetchCourseCategories = async () => {
+        try {
+            const response = await APIHelper.getCourseCategories({
+                status: 1,
+            });
+            setCourseCategories(response.data);
+        } catch (e) {
+            console.log(e);
         }
     };
     const keywords = coursetags.map((e) => e.Name).join(', ');
@@ -90,56 +111,6 @@ const CoursesList = () => {
     return (
         <PageContainer className={css.container}>
             <SEO keywords={keywords} description={description} />
-            <Helmet>
-                <script>var orgCountry = "IN";</script>
-                <title>Acharya Ganesh Astrology Academy</title>
-                <meta
-                    name="keywords"
-                    content="astrology, horoscope, cosmic, Learn astrology, online astrology, online astro"
-                />
-                <meta
-                    name="description"
-                    content="Discover your destiny with Acharya Ganesh Astrology Academy. Learn astrology, horoscope reading, and cosmic insights. Enroll now!"
-                />
-                <meta name="google-site-verification" content="" />
-
-                <link
-                    rel="canonical"
-                    href="https://courses.acharyaganesh.com/s/store"
-                />
-                <meta property="og:type" content="website" />
-                <meta
-                    property="og:title"
-                    content="Acharya Ganesh Astrology Academy"
-                />
-                <meta
-                    property="og:description"
-                    content="Discover your destiny with Acharya Ganesh Astrology Academy. Learn astrology, horoscope reading, and cosmic insights. Enroll now!"
-                />
-                <meta
-                    property="og:image"
-                    content="https://courses.acharyaganesh.com/logo.png?v=3"
-                />
-                <meta name="google" content="notranslate" />
-
-                <link
-                    rel="canonical"
-                    href="https://courses.acharyaganesh.com/"
-                />
-
-                <link
-                    rel="shortcut icon"
-                    href="/favicon.ico"
-                    type="image/x-icon"
-                />
-                <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link
-                    rel="preconnect"
-                    href="https://fonts.gstatic.com"
-                    crossorigin
-                />
-            </Helmet>
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}
@@ -152,7 +123,7 @@ const CoursesList = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img src={IcChevronIcon} alt={''} />
+                                <img src={IcChevronIcon} alt={'>'} />
                             </span>{' '}
                             <span>Courses</span>
                         </p>
@@ -162,7 +133,7 @@ const CoursesList = () => {
             <div className={css.filter_container}>
                 <div className={css.filter_item_wrapper}>
                     <div>
-                        <img src={ICSearchMd} alt={'Search icon'} />
+                        <img src={ICSearchMd} alt={'Search'} />
                         <input
                             type={'text'}
                             value={searchQuery}
@@ -178,13 +149,42 @@ const CoursesList = () => {
                         {pageCount * COURSE_PER_PAGE} Results
                     </p>
                 </div>
-                <div className={css.filter_item_wrapper}>
+                <div
+                    className={css.filter_item_wrapper}
+                    style={{ display: 'flex', gap: '10px' }}
+                >
                     <div
                         onClick={() =>
-                            setShowFilterDropDown(!showFilterDropDown)
+                            setShowFilterDropDown({
+                                sort: false,
+                                category: !showFilterDropDown?.category,
+                            })
                         }
                     >
-                        <img src={ICFilter} alt={'Filter icon'} />
+                        <img src={ICFilter} alt={'Filter'} />
+                        <p>{category ? category?.Name : 'Select Category'}</p>
+                        {showFilterDropDown?.category && (
+                            <div className={css.filter_dropdown}>
+                                <p onClick={() => setCategory(null)}>
+                                    Select Category
+                                </p>
+                                {courseCategories?.map((c) => (
+                                    <p onClick={() => setCategory(c)}>
+                                        {c?.Name}
+                                    </p>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                    <div
+                        onClick={() =>
+                            setShowFilterDropDown({
+                                category: false,
+                                sort: !showFilterDropDown?.sort,
+                            })
+                        }
+                    >
+                        <img src={ICFilter} alt={'Filter'} />
                         <p>
                             {sortBy == 'pr."PublishedOn"' && order == 'asc'
                                 ? 'Older'
@@ -194,7 +194,7 @@ const CoursesList = () => {
                                 ? 'Price High to Low'
                                 : 'Latest'}
                         </p>
-                        {showFilterDropDown && (
+                        {showFilterDropDown?.sort && (
                             <div className={css.filter_dropdown}>
                                 <p
                                     onClick={() =>

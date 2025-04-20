@@ -6,7 +6,11 @@ export const CourseCard = ({ course, style, className }) => {
         course?.price - Math.round((course?.price / 100) * course?.discount);
     return (
         <div style={style} className={[css.container, className].join(' ')}>
-            <img className={css.course_poster} src={course?.poster} alt={''} />
+            <img
+                className={css.course_poster}
+                src={course?.poster}
+                alt={'course'}
+            />
 
             <div className={css.course_detail_container}>
                 <h3 className={css.course_label}>{course?.label}</h3>

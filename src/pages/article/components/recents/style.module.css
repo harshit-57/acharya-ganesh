@@ -1,15 +1,4 @@
-.container {
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
-
-    & > img {
-        border-radius: 24px;
-    }
-}
-.recent_container h3,
-.contact_form_container h3 {
+.recent_container h3 {
     font-family: 'Sorts Mill Goudy';
     font-size: 27px;
     color: var(--color-caption);
@@ -36,47 +25,9 @@
         p {
             font-size: 14px;
             font-family: 'Sorts Mill Goudy';
-        }
-    }
-}
-.contact_form_container {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-
-    .input {
-        background-color: #f3f3f3;
-        color: var(--color-black);
-
-        &:focus {
-            color: rebeccapurple;
-            outline-color: var(--color-primary);
-        }
-        &::placeholder {
-            color: #b5afa8;
-        }
-    }
-    textarea {
-        padding: 16px 20px;
-        border-radius: 24px;
-        height: 180px;
-        font-size: 16px;
-        font-weight: 500;
-        background-color: var(--color-card-bg-dark);
-        resize: none;
-        border: 1px solid #cac3bc;
-        color: #ffffff;
-
-        &::placeholder {
-            font-size: 10px;
-            font-weight: 500;
-            font-size: 16px;
-            color: #b5afa8;
+            align-self: center;
         }
     }
 }
 @media only screen and (max-width: 768px) {
-    .container {
-        width: 100%;
-    }
 }

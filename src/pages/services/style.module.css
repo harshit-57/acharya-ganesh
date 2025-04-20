@@ -1,0 +1,127 @@
+.header {
+    background-color: #5c5c5c;
+    min-height: auto !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.header_text_container {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    padding: 50px;
+    background: #00000025;
+}
+
+.header_text_wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+        font-size: 45px;
+        margin-top: 24px;
+        color: var(--color-primary);
+        font-family: 'Sorts Mill Goudy', serif;
+    }
+
+    p {
+        font-size: 16px;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: var(--color-white);
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        justify-content: center;
+
+        span {
+            display: flex;
+        }
+
+        img {
+            width: 24px;
+            height: 24px;
+            align-self: center;
+            transform: rotate(270deg);
+        }
+    }
+}
+
+.content_wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 72px 60px;
+}
+
+.row {
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.section_heading {
+    font-family: 'Sorts Mill Goudy', serif;
+    font-size: 32px;
+    color: var(--color-caption);
+    font-weight: bold;
+}
+.service_list_container {
+    width: 100%;
+    /* display: flex;
+    flex-wrap: wrap; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-gap: 24px;
+    gap: 24px;
+    transition: all 0.3s ease-in-out;
+}
+.show_more_button {
+    margin: auto;
+    margin-top: 48px;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+}
+
+@media only screen and (max-width: 768px) {
+    .header_text_container {
+        padding: 25px;
+    }
+
+    .content_wrapper {
+        padding: 60px 24px;
+    }
+
+    .row {
+        display: flex;
+        gap: 50px;
+        flex-direction: column;
+    }
+    .column {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+    .section_heading {
+        font-size: 28px;
+        text-align: center;
+    }
+    .service_list_container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 24px;
+        margin-top: 36px;
+    }
+}

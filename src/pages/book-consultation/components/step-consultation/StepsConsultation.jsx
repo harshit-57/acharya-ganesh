@@ -45,13 +45,23 @@ const BookingSteps = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-       
-        window.location.href = 'https://pages.razorpay.com/pl_PfNM4Uhu1DX5XG/view';
+        // window.location.href =
+        //     'https://pages.razorpay.com/pl_PfNM4Uhu1DX5XG/view';
+        navigate('/bookConsultationForm', {
+            state: {
+                consultType: 'offline',
+            },
+        });
     };
 
     const handleClick2 = () => {
-       
-        window.location.href = 'https://pages.razorpay.com/pl_PfNU3x751fwMO9/view';
+        // window.location.href =
+        //     'https://pages.razorpay.com/pl_PfNU3x751fwMO9/view';
+        navigate('/bookConsultationForm', {
+            state: {
+                consultType: 'online',
+            },
+        });
     };
     return (
         <div

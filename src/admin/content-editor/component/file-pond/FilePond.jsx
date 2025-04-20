@@ -90,6 +90,8 @@ const FilePondSingle = ({
                         ? 200
                         : type === 'story'
                         ? 400
+                        : type === 'service'
+                        ? 200
                         : 'auto'
                 }
                 allowRemove={true}

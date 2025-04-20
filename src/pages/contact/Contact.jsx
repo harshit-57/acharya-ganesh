@@ -14,11 +14,13 @@ import { Helmet } from 'react-helmet-async';
 import MainContactForm from '../../components/main-contact-form/Contact';
 import SEO from '../../Seo';
 const Contact = () => {
-    const keywords = "contact us, get in touch, customer support, astrology contact, numerology contact, spiritual guidance contact, kundali contact, horoscope contact";
-    const description = "Contact with acharyaganesh for astrology, numerology, kundali matching, and daily horoscopes. We're here to help you on your spiritual journey.";
+    const keywords =
+        'contact us, get in touch, customer support, astrology contact, numerology contact, spiritual guidance contact, kundali contact, horoscope contact';
+    const description =
+        "Contact with acharyaganesh for astrology, numerology, kundali matching, and daily horoscopes. We're here to help you on your spiritual journey.";
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description}/>
+            <SEO keywords={keywords} description={description} />
             {/* <Helmet>
                 <script>var orgCountry = "IN";</script>
                 <title>Acharya Ganesh Astrology Academy</title>
@@ -81,7 +83,7 @@ const Contact = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img src={IcChevronIcon} alt={''} />
+                                <img src={IcChevronIcon} alt={'>'} />
                             </span>{' '}
                             <span>Contact</span>
                         </p>
@@ -144,7 +146,7 @@ const Contact = () => {
 const ContactInfo = ({ icon, title, description, children }) => {
     return (
         <div className={css.contact_info_row}>
-            <img src={icon} alt={'Contact info icon'} />
+            <img src={icon} alt={'Contact'} />
             <div className={css.contact_info}>
                 <h3>{title}</h3>
                 <p>{description || children}</p>

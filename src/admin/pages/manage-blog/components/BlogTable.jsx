@@ -159,7 +159,12 @@ const PaginationTable = ({
                                     >
                                         <img
                                             src={blog.Image}
-                                            alt={blog.Name}
+                                            alt={
+                                                blog.ImageAlt ||
+                                                blog.Title?.split(' ')?.length
+                                                    ? blog.Title?.split(' ')[0]
+                                                    : 'blog'
+                                            }
                                             style={{
                                                 width: '50px',
                                                 height: '50px',
@@ -187,7 +192,7 @@ const PaginationTable = ({
                                         }}
                                         onClick={() =>
                                             navigate(
-                                                `/blog/${
+                                                `/${
                                                     blog?.Categories?.length
                                                         ? blog?.Categories[0]
                                                               ?.CategorySlug

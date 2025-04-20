@@ -31,7 +31,7 @@ const Brand = ({ children }) => {
                         src={Logo}
                         width="30px"
                         // style={{ borderRadius: '50%' }}
-                        alt=""
+                        alt="logo"
                     />
                 </Link>
                 <StyledSpan mode={mode} className="sidenavHoverShow">

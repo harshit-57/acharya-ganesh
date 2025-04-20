@@ -1,105 +1,101 @@
 .container {
-  background-color: black;
-  color: white;
-  padding: 60px;
-  border-radius: 35px;
-  max-width: 1200px;
-  display: flex;
-  flex-direction: column;
-  gap: 72px;
-  margin: 40px auto;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+    background-color: black;
+    color: white;
+    padding: 60px;
+    border-radius: 35px;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+    margin: 40px auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 60px;
-  margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+    margin-bottom: 20px;
 }
 
 .buttonContainer {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  gap: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
 }
 
 .button:nth-child(1) {
-  width: 50%;
-  width: 468;
-
-  border-radius: 100px;
-
-  padding-top: 24px;
-  padding-right: 48px;
-  padding-bottom: 24px;
-  padding-left: 48px;
-  background: var(--Primary-Color-Color-Secondary-Button, #FED1A7);
-  color: var(--Color-Scheme-Black, #000000);
-  font-family: Work Sans;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  letter-spacing: 0%;
-  border-width: 1px;
-  border: 1px solid transparent;
+    width: 50%;
+    width: 468;
+    border-radius: 100px;
+    padding-top: 24px;
+    padding-right: 48px;
+    padding-bottom: 24px;
+    padding-left: 48px;
+    background: var(--Primary-Color-Color-Secondary-Button, #fed1a7);
+    color: var(--Color-Scheme-Black, #000000);
+    font-family: Work Sans;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0%;
+    border-width: 1px;
+    border: 1px solid transparent;
+    cursor: pointer;
 }
 
 .button:nth-child(2) {
-  width: 50%;
-  width: 468;
-
-  border-radius: 100px;
-
-  padding-top: 24px;
-  padding-right: 48px;
-  padding-bottom: 24px;
-  padding-left: 48px;
-  font-family: Work Sans;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  letter-spacing: 0%;
-  text-align: center;
-  background: var(--Color-Scheme-Gradient-Bg, #FFF3EB);
-  color: var(--Color-Scheme-Border-Color, #5C4228);
-  border-width: 1px;
-  border: 1px solid transparent;
+    width: 50%;
+    width: 468;
+    border-radius: 100px;
+    padding-top: 24px;
+    padding-right: 48px;
+    padding-bottom: 24px;
+    padding-left: 48px;
+    font-family: Work Sans;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0%;
+    text-align: center;
+    background: var(--Color-Scheme-Gradient-Bg, #fff3eb);
+    color: var(--Color-Scheme-Border-Color, #5c4228);
+    border-width: 1px;
+    border: 1px solid transparent;
+    cursor: pointer;
 }
 
 .button:nth-child(1):hover {
-  color: var(--Color-Scheme-Border-Color, #5C4228);
-  border-width: 1px;
-  background: var(--Primary-Color-Button-Color, #2C2520);
-  border: 1px solid var(--Color-Scheme-Bg-Icon, #FED1A7);
-  transition: 0.3s ease-in-out;
-
+    color: var(--Color-Scheme-Bg-Icon, #fed1a7);
+    border-width: 1px;
+    background: var(--Primary-Color-Button-Color, #2c2520);
+    border: 1px solid var(--Color-Scheme-Bg-Icon, #fed1a7);
+    transition: 0.3s ease-in-out;
 }
 .button:nth-child(2):hover {
-  color: var(--primary-color-white-button-text, #FFFFFF);
-  border-width: 1px;
-  background: var(--Color-Scheme-Border-Color, #5C4228);
-  border: var(--Color-Scheme-Border-Color, #5C4228);
-  transition: 0.3s ease-in-out;
+    color: var(--primary-color-white-button-text, #ffffff);
+    border-width: 1px;
+    background: var(--Color-Scheme-Border-Color, #5c4228);
+    border: var(--Color-Scheme-Border-Color, #5c4228);
+    transition: 0.3s ease-in-out;
 }
 
-
 @media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
+    .grid {
+        grid-template-columns: 1fr;
+    }
 
-  .buttonContainer {
-    display: flex;
-    flex-direction: column;
-  }
-  .button:nth-child(1){
-    width: 100%;
-  }
-  .button:nth-child(2){
-    width: 100%;
-  }
+    .buttonContainer {
+        display: flex;
+        flex-direction: column;
+    }
+    .button:nth-child(1) {
+        width: 100%;
+    }
+    .button:nth-child(2) {
+        width: 100%;
+    }
 }

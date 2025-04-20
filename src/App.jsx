@@ -9,14 +9,6 @@ import CourseDetail from './pages/course-detail/CourseDetail';
 import SpiritualityList from './pages/spirituality/SpiritualityList';
 import SArticle from './pages/spirituality-article/SArticle';
 import BookConsultation from './pages/book-consultation/BookConsultation';
-import { AstroVastu } from './pages/services/astro-vastu/AstroVastu';
-import { Astrology } from './pages/services/astrology/Astrology';
-import { BirthChart } from './pages/services/birth-chart/BirthChart';
-import { CareerPrediction } from './pages/services/career-prediction/CareerPrediction';
-import { HealthAstrology } from './pages/services/health-astrology/HealthAstrology';
-import { LoveAstrology } from './pages/services/love-astrology/LoveAstrology';
-import { MatchMaking } from './pages/services/match-making/MatchMaking';
-import { WealthAstrology } from './pages/services/wealth-astrology/WealthAstrology';
 import WebStoriesList from './pages/web-stories/WebStoriesList';
 import { WebStoriesView } from './pages/web-stories-view/WebStoriesView';
 import { useEffect } from 'react';
@@ -36,6 +28,11 @@ import ManageTestimonial from './admin/pages/manage-testimonial/ManageTestimonia
 import ManageSupport from './admin/pages/manage-support/ManageSupport';
 import ManageCitation from './admin/pages/manage-citation/ManageCitation';
 import ManageAdmin from './admin/pages/manage-admin/ManageAdmin';
+import Services from './pages/services/Services';
+import ServiceDetail from './pages/service-detail/ServiceDetail';
+import ManageSlot from './admin/pages/manage-slot/ManageSlot';
+import ManageService from './admin/pages/manage-service/ManageService';
+import ManageBooking from './admin/pages/manage-booking/ManageBooking';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
@@ -52,32 +49,15 @@ export default () => {
             <RouteChangeDetector />
             <Routes>
                 <Route index path="/" element={<Home />} />
-                <Route path="/services/astro-vastu" element={<AstroVastu />} />
-                <Route path="/services/astrology" element={<Astrology />} />
-                <Route path="/services/muhurat" element={<BirthChart />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/service/:slug" element={<ServiceDetail />} />
                 <Route
-                    path="/services/career-prediction"
-                    element={<CareerPrediction />}
-                />
-                <Route
-                    path="/services/health-astrology"
-                    element={<HealthAstrology />}
-                />
-                <Route
-                    path="/services/love-astrology"
-                    element={<LoveAstrology />}
-                />
-                <Route
-                    path="/services/match-making"
-                    element={<MatchMaking />}
-                />
-                <Route
-                    path="/services/wealth-astrology"
-                    element={<WealthAstrology />}
+                    path="/service/:parent/:slug"
+                    element={<ServiceDetail />}
                 />
                 <Route path="/blog" element={<BlogList />} />
                 <Route path="/blog/:category" element={<BlogList />} />
-                <Route path="/blog/:category/:slug" element={<Article />} />
+                <Route path="/:category/:slug" element={<Article />} />
                 <Route path="/spirituality" element={<SpiritualityList />} />
                 <Route
                     path="/spirituality/:category"
@@ -145,6 +125,7 @@ export default () => {
                         element={<ManageSpirituality />}
                     />
                     <Route path="/admin/stories" element={<ManageStory />} />
+                    <Route path="/admin/services" element={<ManageService />} />
                     <Route
                         path="/admin/citations"
                         element={<ManageCitation />}
@@ -154,6 +135,12 @@ export default () => {
                         element={<ManageTestimonial />}
                     />
                     <Route path="/admin/support" element={<ManageSupport />} />
+
+                    <Route
+                        path="/admin/booking/slots"
+                        element={<ManageSlot />}
+                    />
+                    <Route path="/admin/booking" element={<ManageBooking />} />
                 </Route>
             </Routes>
         </>

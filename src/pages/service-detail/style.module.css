@@ -1,0 +1,152 @@
+.header {
+    background-color: #5c5c5c;
+    min-height: auto !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.content_wrapper {
+    /* display: flex;
+    justify-content: center; */
+    padding: 72px 60px;
+}
+.content_container {
+    max-width: 1320px;
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+}
+.row {
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    /* gap: 24px; */
+}
+.card_desc {
+    flex: 1;
+    /* width: 50%; */
+    /* height: 100%; */
+    height: auto;
+    padding: 40px 30px;
+    border-radius: 36px;
+    background-color: #f9eae0;
+    li {
+        list-style-image: url('../../assets/star_primary_dark.png');
+        padding-inline-start: 1ch;
+    }
+}
+.button {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    margin-top: 32px;
+}
+.card_img_container {
+    flex: 1;
+    width: 50%;
+    height: 100%;
+    .card_img {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 1;
+        border-radius: 36px;
+    }
+}
+.heading {
+    font-size: 42px;
+    font-family: 'Sorts Mill Goudy';
+    color: var(--color-caption);
+    font-weight: bold;
+    text-align: center;
+}
+.sub_heading {
+    font-size: 22px;
+    font-weight: 500;
+    text-align: center;
+    color: #121212;
+}
+
+.bullet_container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .bullet {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+
+        img {
+            width: 16px;
+            height: 16px;
+            margin: 6px 0;
+        }
+        p {
+            font-size: 18px;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .header_text_container {
+        padding: 25px;
+    }
+
+    .content_wrapper {
+        padding: 60px 24px;
+    }
+
+    .row {
+        display: flex;
+        gap: 50px;
+        flex-direction: column;
+    }
+    .column {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+    .card_desc {
+        width: 100%;
+        padding: 36px 24px;
+        border-radius: 24px;
+        background-color: #f9eae0;
+    }
+    .card_img_container {
+        width: 100%;
+        aspect-ratio: 1;
+    }
+
+    .bullet_container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .bullet {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+
+            img {
+                width: 16px;
+                height: 16px;
+                margin: 6px 0;
+            }
+        }
+    }
+
+    .heading {
+        font-size: 32px;
+    }
+    .sub_heading {
+        font-size: 16px;
+    }
+}

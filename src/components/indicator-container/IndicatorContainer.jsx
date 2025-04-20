@@ -14,7 +14,7 @@ export const IndicatorContainer = ({
                     key={i}
                     onClick={() => onIndicatorClick(i)}
                     src={currentIndex === i ? IcStarSelected : IcStar}
-                    alt={'Star icon'}
+                    alt={'Star'}
                 />
             ))}
         </div>

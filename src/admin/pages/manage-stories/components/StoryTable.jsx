@@ -32,6 +32,7 @@ const PaginationTable = ({
     setSortBy,
     showDeleteAlert,
     setShowDeleteAlert,
+    setSelectedData,
 }) => {
     const theme = useTheme();
     const primaryColor = theme?.palette?.primary?.main;
@@ -154,7 +155,12 @@ const PaginationTable = ({
                                     >
                                         <img
                                             src={story.CoverImageUrl}
-                                            alt={story.Title}
+                                            alt={
+                                                story?.CoverImageAlt ||
+                                                story?.Title?.split(' ')?.length
+                                                    ? story.Title?.split(' ')[0]
+                                                    : 'story'
+                                            }
                                             style={{
                                                 width: '50px',
                                                 height: '50px',
@@ -266,7 +272,9 @@ const PaginationTable = ({
                                         //         'delete'
                                         //     )
                                         // }
+
                                         onClick={() => {
+                                            setSelectedData(story);
                                             setShowDeleteAlert(
                                                 !showDeleteAlert
                                             );

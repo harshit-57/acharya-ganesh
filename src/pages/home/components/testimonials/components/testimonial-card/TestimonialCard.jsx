@@ -8,7 +8,7 @@ export const TestimonialCard = ({ testimonial, style, className }) => {
         <div style={style} className={[className, css.container].join(' ')}>
             <div className={css.name_container}>
                 <h3>{testimonial?.UserName}</h3>
-                <img src={IcQuote} alt={''} />
+                <img src={IcQuote} alt={'qoute'} />
             </div>
             <div className={css.border_container}>
                 <img src={IcEllipse} alt={'Ellipse'} />

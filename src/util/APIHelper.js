@@ -58,6 +58,11 @@ export const APIHelper = Object.freeze({
     getCourses: await getApi('v1/GetDivine/getCourses'),
     createLead: await postApi('v1/GetDivine/createLead'),
     getLeads: await getApi('v1/GetDivine/getLeads'),
+    getServices: await getApi('v1/GetDivine/getServices'),
+
+    getSlots: await getApi('v1/GetDivine/getBookingSlots'),
+    createBooking: await postApi('v1/GetDivine/createBooking'),
+    completeBooking: await postApi('v1/GetDivine/completeBooking'),
 });
 
 export const ADMINAPIHELPER = Object.freeze({
@@ -81,6 +86,14 @@ export const ADMINAPIHELPER = Object.freeze({
     createTestimonial: await postApi('v1/admin/create-testimonial'),
     updateTestimonial: await postApi('v1/admin/update-testimonial'),
     createCategory: await postApi('v1/admin/create-category'),
+    createService: await postApi('v1/admin/create-service'),
+    updateService: await postApi('v1/admin/update-service'),
+
+    createSlots: await postApi('v1/admin/create-slots'),
+    updateSlot: await postApi('v1/admin/update-slot'),
+    deleteSlot: await postApi('v1/admin/delete-slot'),
+
+    getBookings: await getApi('v1/admin/get-bookings'),
 });
 
 export const UPLOADAPIHELPER = Object.freeze({

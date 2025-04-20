@@ -189,7 +189,10 @@ const MatxCustomizer = () => {
 
                                                     <IMG
                                                         src={layout.thumbnail}
-                                                        alt={layout.name}
+                                                        alt={
+                                                            layout.name ||
+                                                            'layout'
+                                                        }
                                                     />
                                                 </Card>
                                             </LayoutBox>

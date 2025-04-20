@@ -68,7 +68,7 @@ export const WealthAstrology = () => {
                             src={
                                 'https://i0.wp.com/acharyaganesh.com/wp-content/uploads/2024/10/website-post-wealth-astrology.webp?resize=600%2C600&ssl=1'
                             }
-                            alt=""
+                            alt="wealth-astrology"
                         />
                         <p
                             style={{

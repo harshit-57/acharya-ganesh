@@ -96,6 +96,7 @@
                 display: flex;
                 gap: 12px;
                 position: relative;
+                align-items: center;
                 .filter_dropdown {
                     position: absolute;
                     top: 100%;
@@ -159,5 +160,13 @@
         flex-direction: column;
         gap: 10px;
         align-items: center;
+        .filter_item_wrapper {
+            flex-direction: column;
+            &:nth-child(3) {
+                & > div {
+                    width: 100%;
+                }
+            }
+        }
     }
 }

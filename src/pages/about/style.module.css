@@ -91,10 +91,10 @@
     border-radius: 36px;
     padding: 48px;
     background-color: #f9eae0;
-    min-height: 600px;
+    /* min-height: 600px; */
     height: 100%;
     width: 50%;
-    overflow: auto;
+    /* overflow: auto; */
 
     h2 {
         color: var(--color-caption);
@@ -150,13 +150,19 @@
     gap: 24px;
 }
 .card_primary_bg {
+    flex: 1;
+    width: 50%;
+    height: 100%;
     padding: 48px;
     border-radius: 36px;
     background-color: #f9eae0;
 }
 .consultation_poster {
-    width: 100%;
+    flex: 1;
+    width: 50%;
+    height: 100%;
     aspect-ratio: 1;
+    border-radius: 36px;
 }
 .heading {
     font-size: 42px;
@@ -233,13 +239,14 @@
     }
 
     .person_image {
-        flex: none;
+        /* flex: none; */
         width: 100%;
         aspect-ratio: 1;
         border-radius: 24px;
     }
 
     .about_description_container {
+        width: 100%;
         border-radius: 24px;
         padding: 36px 24px;
 
@@ -284,6 +291,7 @@
         gap: 24px;
     }
     .card_primary_bg {
+        width: 100%;
         padding: 36px 24px;
         border-radius: 24px;
         background-color: #f9eae0;

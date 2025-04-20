@@ -115,7 +115,7 @@ const PaginationTable = ({
                                 Description
                             </StyledTableHead>
                             <StyledTableHead align="center">
-                            Status
+                                Status
                             </StyledTableHead>
                             <StyledTableHead align="center">
                                 Published On
@@ -159,7 +159,15 @@ const PaginationTable = ({
                                     >
                                         <img
                                             src={spirituality.Image}
-                                            alt={spirituality.Name}
+                                            alt={
+                                                spirituality?.ImageAlt ||
+                                                spirituality?.Name?.split(' ')
+                                                    ?.length
+                                                    ? spirituality.Name?.split(
+                                                          ' '
+                                                      )[0]
+                                                    : 'spirituality'
+                                            }
                                             style={{
                                                 width: '50px',
                                                 height: '50px',

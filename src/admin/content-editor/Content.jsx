@@ -46,14 +46,39 @@ const Edit = () => {
     const navigate = useNavigate();
     const { type, slug } = useParams();
     const token = localStorage.getItem('accessToken');
+    const [serviceList, setServiceList] = useState([]);
+    useEffect(() => {
+        getServices();
+    }, []);
+
+    const getServices = async () => {
+        try {
+            const response = await APIHelper.getServices({
+                status: 1,
+                active: 1,
+            });
+            setServiceList(response.data.data);
+            console.log(response);
+        } catch (e) {
+            console.log(e);
+        }
+    };
 
     const initalData = {
         title: '',
         description: !['story']?.includes(type) ? '' : undefined,
-        image: ['course', 'blog', 'spirituality', 'story']?.includes(type)
+        image: ['course', 'blog', 'spirituality', 'story', 'service']?.includes(
+            type
+        )
             ? ''
             : undefined,
-        imageAlt: ['course', 'blog', 'spirituality', 'story']?.includes(type)
+        imageAlt: [
+            'course',
+            'blog',
+            'spirituality',
+            'story',
+            'service',
+        ]?.includes(type)
             ? ''
             : undefined,
         focusKeyphrase: [
@@ -61,17 +86,26 @@ const Edit = () => {
             'blog',
             'spirituality',
             'citation',
+            'service',
         ]?.includes(type)
             ? ''
             : undefined,
-        metaTitle: ['course', 'blog', 'spirituality', 'citation']?.includes(
-            type
-        )
+        metaTitle: [
+            'course',
+            'blog',
+            'spirituality',
+            'citation',
+            'service',
+        ]?.includes(type)
             ? ''
             : undefined,
-        metaSiteName: ['course', 'blog', 'spirituality', 'citation']?.includes(
-            type
-        )
+        metaSiteName: [
+            'course',
+            'blog',
+            'spirituality',
+            'citation',
+            'service',
+        ]?.includes(type)
             ? 'Acharya Ganesh: Solutions for Life, Love, and Career Woes'
             : undefined,
         metaDescription: [
@@ -79,6 +113,7 @@ const Edit = () => {
             'blog',
             'spirituality',
             'citation',
+            'service',
         ]?.includes(type)
             ? ''
             : undefined,
@@ -89,7 +124,7 @@ const Edit = () => {
         isTOP: ['course'].includes(type)
             ? false
             : ['blog', 'spirituality']?.includes(type)
-            ? true
+            ? 1
             : undefined,
         status: 1,
         publishedOn: new Date(),
@@ -99,23 +134,31 @@ const Edit = () => {
         tags: ['course', 'blog', 'spirituality', 'story']?.includes(type)
             ? []
             : undefined,
+        // Course Data
         isCourse: type === 'course' ? true : undefined,
         productUrl: type === 'course' ? '' : undefined,
         buyText: type === 'course' ? 'Buy Now' : undefined,
         regularPrice: type === 'course' ? '' : undefined,
         salePrice: type === 'course' ? '' : undefined,
         productImages: type === 'course' ? [] : undefined,
-        extraDetails: {
-            images: [],
-            link: '',
-            icon: '',
-            size: '',
-            textColor: '',
-            bgColor: '',
-        },
+        // Testimonial Data
         rating: ['testimonial']?.includes(type) ? '' : undefined,
+        // Web story Data
         storyImages: ['story']?.includes(type) ? [] : undefined,
         timeDuration: ['story']?.includes(type) ? 500 : undefined,
+        // Service Data
+        header: ['service']?.includes(type) ? '' : undefined,
+        subHeader: ['service']?.includes(type) ? '' : undefined,
+        link: ['service']?.includes(type) ? '' : undefined,
+        linkText: ['service']?.includes(type) ? '' : undefined,
+        // extraDetails: {
+        //     images: [],
+        //     link: '',
+        //     icon: '',
+        //     size: '',
+        //     textColor: '',
+        //     bgColor: '',
+        // },
     };
 
     const [data, setData] = useState(initalData);
@@ -128,6 +171,9 @@ const Edit = () => {
     const [statusInput, setStatusInput] = useState('');
     const [editStatus, setEditStatus] = useState(false);
     const [publishedOnInput, setPublishedOnInput] = useState(new Date());
+    const [parent, setParent] = useState(null);
+    const [editPService, SetEditPService] = useState(false);
+
     const [editPublishedOn, setEditPublishedOn] = useState(false);
     const [categoryTab, setCategoryTab] = useState('');
     const [newCategoryInput, setNewCategoryInput] = useState('');
@@ -167,15 +213,7 @@ const Edit = () => {
                             metaDescription: response?.Meta_Desc,
                             isShortDescription: true,
                             shortDescription: response?.ShortDescription,
-                            extraDetails: {
-                                images: response?.Extra_Images || [],
-                                link: response?.Extra_Link || '',
-                                icon: response?.Extra_Icon || '',
-                                size: response?.Extra_Size || '',
-                                textColor: response?.Extra_Text_Color || '',
-                                bgColor: response?.Extra_Bg_Color || '',
-                            },
-                            isTOP: response?.IsTop || false,
+                            isTOP: response?.IsTop || 0,
                             status: response?.Status,
                             publishedOn: response?.PublishedOn
                                 ? new Date(response?.PublishedOn)
@@ -231,15 +269,7 @@ const Edit = () => {
                             metaDescription: response?.Meta_Desc,
                             // isShortDescription: true,
                             // shortDescription: response?.ShortDescription,
-                            extraDetails: {
-                                images: response?.Extra_Images || [],
-                                link: response?.Extra_Link || '',
-                                icon: response?.Extra_Icon || '',
-                                size: response?.Extra_Size || '',
-                                textColor: response?.Extra_Text_Color || '',
-                                bgColor: response?.Extra_Bg_Color || '',
-                            },
-                            isTOP: response?.IsTop || true,
+                            isTOP: response?.IsTop || 1,
                             status: response?.Status,
                             publishedOn: response?.PublishedOn
                                 ? new Date(response?.PublishedOn)
@@ -285,15 +315,7 @@ const Edit = () => {
                             metaTitle: response?.Meta_Title,
                             metaSiteName: response?.Meta_SiteName,
                             metaDescription: response?.Meta_Desc,
-                            extraDetails: {
-                                images: response?.Extra_Images || [],
-                                link: response?.Extra_Link || '',
-                                icon: response?.Extra_Icon || '',
-                                size: response?.Extra_Size || '',
-                                textColor: response?.Extra_Text_Color || '',
-                                bgColor: response?.Extra_Bg_Color || '',
-                            },
-                            isTOP: response?.IsTop || true,
+                            isTOP: response?.IsTop || 1,
                             status: response?.Status,
                             publishedOn: response?.PublishedOn
                                 ? new Date(response?.PublishedOn)
@@ -422,6 +444,43 @@ const Edit = () => {
                     setIsLoading(false);
                 })();
                 break;
+
+            case 'service':
+                (async () => {
+                    setIsLoading(true);
+                    if (slug != 'new' && state?.Id) {
+                        const response = (
+                            await APIHelper.getServices({ slug: slug })
+                        )?.data?.data[0];
+                        setData({
+                            id: response?.Id,
+                            title: response?.Name,
+                            description: response?.Description,
+                            slug: response?.Slug,
+                            header: response?.Title,
+                            subHeader: response?.SubTitle,
+                            image: response?.Image || '',
+                            imageAlt: response?.ImageAlt || '',
+                            link: response?.Link || '',
+                            linkText: response?.LinkText || '',
+                            focusKeyphrase: response?.Focus_Keyphrase || '',
+                            metaTitle: response?.Meta_Title,
+                            metaSiteName: response?.Meta_SiteName,
+                            metaDescription: response?.Meta_Desc,
+                            status: response?.Status,
+                            publishedOn: response?.PublishedOn
+                                ? new Date(response?.PublishedOn)
+                                : new Date(),
+                            parentId: response?.ParentId,
+                            parentSlug: response?.ParentSlug,
+                            parentName: response?.ParentName,
+                        });
+                        setParent(response?.ParentId || null);
+                    }
+                    setIsLoading(false);
+                })();
+                break;
+
             default:
                 setIsLoading(false);
                 break;
@@ -647,7 +706,7 @@ const Edit = () => {
         }
 
         if (
-            !['citation', 'testimonial']?.includes(type) &&
+            !['citation', 'testimonial', 'service']?.includes(type) &&
             payload?.status == 1 &&
             !payload?.categories?.length
         ) {
@@ -981,6 +1040,45 @@ const Edit = () => {
                 }
                 break;
 
+            case 'service':
+                setIsLoading(true);
+                if (payload?.id) {
+                    ADMINAPIHELPER.updateService(payload, token)
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success('Service updated successfully');
+                                navigate(`/admin/services`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                } else {
+                    ADMINAPIHELPER.createService(payload, token)
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success('Service created successfully');
+                                navigate(`/admin/services`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                }
+                break;
+
             default:
                 break;
         }
@@ -1112,6 +1210,54 @@ const Edit = () => {
                         });
                 }
                 break;
+            case 'service':
+                if (data?.id) {
+                    setIsLoading(true);
+                    ADMINAPIHELPER.updateService(
+                        { id: data?.id, deletedOn: new Date() },
+                        token
+                    )
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success('Service deleted successfully');
+                                navigate(`/admin/services`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                }
+                break;
+            case 'story':
+                if (data?.id) {
+                    setIsLoading(true);
+                    ADMINAPIHELPER.updateWebStory(
+                        { id: data?.id, deletedOn: new Date() },
+                        token
+                    )
+                        ?.then((response) => {
+                            if (response?.data?.success) {
+                                toast.success('Web Story deleted successfully');
+                                navigate(`/admin/stories`);
+                            } else {
+                                toast.error(response?.message);
+                            }
+                            setIsLoading(false);
+                        })
+                        .catch((error) => {
+                            toast.error(
+                                error?.response?.data?.message || error?.message
+                            );
+                            setIsLoading(false);
+                        });
+                }
+                break;
 
             default:
                 setShowDeleteAlert(false);
@@ -1186,7 +1332,7 @@ const Edit = () => {
                     };
 
                     navigate(
-                        `/blog/${
+                        `/${
                             previewData?.Categories?.length
                                 ? previewData?.Categories[0]?.CategorySlug
                                 : '-'
@@ -1291,6 +1437,42 @@ const Edit = () => {
                         { state: { data: previewData } }
                     );
                     break;
+
+                case 'service':
+                    previewData = {
+                        Id: data.id || undefined,
+                        Name: data.title,
+                        Slug: data.slug,
+                        Description: data?.description,
+                        Title: data?.header,
+                        SubTitle: data?.subHeader,
+                        Focus_Keyphrase: data.focusKeyphrase,
+                        Meta_Title: data.metaTitle,
+                        Meta_SiteName: data.metaSiteName,
+                        Meta_Desc: data.metaDescription,
+                        PublishedOn: data.publishedOn,
+                        Status: data.status,
+                        Image: data.image,
+                        ImageAlt: data.imageAlt,
+                        Link: data?.link,
+                        LinkText: data?.linkText,
+                        ParentId: data?.parentId,
+                        ParentName: data?.parentName,
+                        ParentSlug: data?.parentSlug,
+                    };
+
+                    navigate(
+                        previewData?.ParentSlug
+                            ? `/service/${previewData?.parentSlug}/${
+                                  previewData?.Slug || 'new'
+                              }?preview=true`
+                            : `/service/${
+                                  previewData?.Slug || 'new'
+                              }?preview=true`,
+                        { state: { data: previewData } }
+                    );
+                    break;
+
                 default:
                     break;
             }
@@ -1302,7 +1484,7 @@ const Edit = () => {
             type === 'course'
                 ? `${window?.location?.origin}/course`
                 : type === 'blog'
-                ? `${window?.location?.origin}/blog/${
+                ? `${window?.location?.origin}/${
                       data?.categories?.length ? data?.categories[0]?.slug : '-'
                   }`
                 : type === 'spirituality'
@@ -1313,6 +1495,9 @@ const Edit = () => {
                 ? `${window?.location?.origin}/web-stories/${
                       data?.categories?.length ? data?.categories[0]?.slug : '-'
                   }`
+                : type === 'service'
+                ? `${window?.location?.origin}/service` +
+                  (data?.parentSlug ? `/${data?.parentSlug}` : '')
                 : type === 'citation'
                 ? `${window?.location?.origin}/citation`
                 : `${window?.location?.origin}/${type}/${
@@ -1601,6 +1786,77 @@ const Edit = () => {
                                     name="salePrice"
                                     onChange={handleChangeData}
                                     placeholder="Enter Sale Price"
+                                />
+                            </Box>
+                        </AccordionDetails>
+                    </Accordion>
+                )}
+
+                {type === 'service' && (
+                    <Accordion
+                        defaultExpanded
+                        className={styles.accordion_container}
+                    >
+                        <AccordionSummary
+                            expandIcon={
+                                <ArrowDropDownIcon
+                                    color="disabled"
+                                    sx={{ fontSize: '2rem' }}
+                                />
+                            }
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                            className={styles.additional_header}
+                        >
+                            <Typography component="div" variant="div">
+                                <span>{type} Data</span>
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Box className={styles.content_wrappper}>
+                                <p className={styles.content_label}>Header</p>
+                                <InputField
+                                    className={styles.input}
+                                    type="text"
+                                    value={data?.header}
+                                    name="header"
+                                    onChange={handleChangeData}
+                                    placeholder="Enter Header"
+                                />
+                                <p className={styles.content_label}>
+                                    Sub Header
+                                </p>
+                                <InputField
+                                    className={styles.input}
+                                    type="text"
+                                    value={data?.subHeader}
+                                    name="subHeader"
+                                    onChange={handleChangeData}
+                                    placeholder="Enter Header"
+                                />
+
+                                <p className={styles.content_label}>
+                                    Button URL
+                                </p>
+                                <InputField
+                                    className={styles.input}
+                                    type="text"
+                                    value={data?.link}
+                                    name="link"
+                                    onChange={handleChangeData}
+                                    placeholder="Enter Button URL"
+                                />
+
+                                <p className={styles.content_label}>
+                                    Button Text
+                                </p>
+                                <InputField
+                                    className={styles.input}
+                                    type="text"
+                                    value={data?.linkText}
+                                    name="linkText"
+                                    onChange={handleChangeData}
+                                    placeholder="Enter Button Text"
                                 />
                             </Box>
                         </AccordionDetails>
@@ -3171,6 +3427,125 @@ const Edit = () => {
                                             </Icon>
                                         </span>
                                     </div>
+                                )}
+
+                                {type === 'service' && (
+                                    <>
+                                        <div
+                                            className={
+                                                styles.publish_cell_container
+                                            }
+                                        >
+                                            <div
+                                                className={styles.publish_cell}
+                                            >
+                                                <Icon sx={{ color: '#000' }}>
+                                                    segment
+                                                </Icon>
+                                                <span>
+                                                    Parent :{' '}
+                                                    {!editPService && (
+                                                        <span
+                                                            className={
+                                                                styles.boldValue
+                                                            }
+                                                        >
+                                                            {data?.parentName ||
+                                                                'N/A'}
+                                                        </span>
+                                                    )}
+                                                </span>
+                                            </div>
+                                            {!editPService && (
+                                                <span
+                                                    className={
+                                                        styles.publish_cell_edit
+                                                    }
+                                                    onClick={() =>
+                                                        SetEditPService(true)
+                                                    }
+                                                >
+                                                    Edit
+                                                </span>
+                                            )}
+                                        </div>
+                                        {editPService && (
+                                            <div
+                                                className={
+                                                    styles.publish_cell_edit_container
+                                                }
+                                            >
+                                                <select
+                                                    className={styles.input}
+                                                    value={parent}
+                                                    onChange={(e) =>
+                                                        setParent(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                >
+                                                    <option value="">
+                                                        Select a service
+                                                    </option>
+                                                    {serviceList.map(
+                                                        (service, index) => (
+                                                            <option
+                                                                key={index}
+                                                                value={
+                                                                    service.Id
+                                                                }
+                                                            >
+                                                                {service.Name}
+                                                            </option>
+                                                        )
+                                                    )}
+                                                </select>
+
+                                                <span
+                                                    className={styles.edit_icon}
+                                                    onClick={() => {
+                                                        SetEditPService(false);
+                                                        const service =
+                                                            serviceList.find(
+                                                                (x) =>
+                                                                    x.Id ==
+                                                                    parent
+                                                            );
+                                                        setData({
+                                                            ...data,
+                                                            parentId: service
+                                                                ? service?.Id
+                                                                : null,
+                                                            parentName: service
+                                                                ? service?.Name
+                                                                : null,
+                                                            parentSlug: service
+                                                                ? service?.Slug
+                                                                : null,
+                                                        });
+                                                    }}
+                                                >
+                                                    <Icon
+                                                        sx={{ color: '#000' }}
+                                                    >
+                                                        check_circle_outline
+                                                    </Icon>
+                                                </span>
+                                                <span
+                                                    className={styles.edit_icon}
+                                                    onClick={() => {
+                                                        SetEditPService(false);
+                                                    }}
+                                                >
+                                                    <Icon
+                                                        sx={{ color: '#000' }}
+                                                    >
+                                                        cancel_outline
+                                                    </Icon>
+                                                </span>
+                                            </div>
+                                        )}
+                                    </>
                                 )}
                             </div>
                             <HorizontalBorder height="1px" color="#ddd" />

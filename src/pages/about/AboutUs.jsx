@@ -6,7 +6,7 @@ import IcStar from '../../assets/star_primary_dark.png';
 import ImgHeaderBg from '../../assets/about_header_bg.png';
 import ImgHanish from '../../assets/about_image.jpg';
 import ImgStatsBg from '../../assets/about_stats_bg.jpg';
-import ImgConsultationPoster from '../../assets/consultation_poster.jpg';
+import ImgConsultationPoster from '../../assets/consultation_call_website.jpg';
 import { Spacer } from '../../components/spacer/Spacer';
 import imageList from '../../data/gallery-images';
 import { useEffect, useState } from 'react';
@@ -91,7 +91,7 @@ const AboutUs = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img src={IcChevronIcon} alt={''} />
+                                <img src={IcChevronIcon} alt={'>'} />
                             </span>{' '}
                             <span>About us</span>
                         </p>
@@ -185,7 +185,7 @@ const AboutUs = () => {
                         <div className={css.column}>
                             <h3 className={css.heading}>Mission</h3>
                             <p className={css.desc}>
-                                We are committed to transforming lives by
+                                {/* We are committed to transforming lives by
                                 merging the timeless insights of ancient wisdom
                                 with contemporary understanding. Our approach is
                                 centered on empowering individuals to unlock
@@ -197,51 +197,75 @@ const AboutUs = () => {
                                 complexities of life with a balanced
                                 perspective. By integrating the old with the
                                 new, we provide a pathway for individuals to
-                                discover and realize their fullest capabilities.
+                                discover and realize their fullest capabilities. */}
+                                Our Senior Astrologer, Hanish Bagga is the
+                                Founder and Director of Acharya Ganesh. He has
+                                dedicated over a decade of his life to studying
+                                and has obtained a deep understanding of
+                                Astrology, Vastu and related fields. He now
+                                shares his knowledge through Acharya Ganesh.
+                                Hanish Bagga previously had a successful
+                                Corporate Career however, he decided to quit it
+                                in order to pursue Astrology which has led him
+                                to be the Founder of Acharya Ganesh. He is very
+                                keen on sharing his knowledge and providing
+                                guidance to individuals.
+                                <Spacer vertical={'10px'} />
+                                Hanish Bagga’s upbringing in Rajasthan has
+                                caused him to develop tremendous respect towards
+                                ancient wisdom and the cosmic influences that
+                                surround us. His respect strengthened his
+                                passion for Astrology and now he aims to
+                                transform people’s lives through the forgotten
+                                science of Astro Vastu.
+                                <Spacer vertical={'10px'} />
+                                Hanish Bagga specialised in Astro Vastu which
+                                combines Astrology with Lal Kitab. This is a
+                                unique approach which provides highly useful
+                                remedies and accurate predictions.
                             </p>
                         </div>
                         <div className={css.column}>
                             <h3 className={css.heading}>Vision</h3>
                             <div className={css.bullet_container}>
                                 <Bullet>
-                                    Assisting everyone in realizing their full
-                                    potential.
+                                    Assisting you to realise your Untapped
+                                    Potential.
                                 </Bullet>
                                 <Bullet>
-                                    Facilitating transformation through a blend
-                                    of ancient and modern insights.
+                                    Transforming your life through ancient
+                                    Astrology and Modern insights.{' '}
                                 </Bullet>
                                 <Bullet>
-                                    Unlocking capabilities and transforming
-                                    lives.
+                                    Providing guidance on how to achieve Your
+                                    Dreams and Desires.{' '}
                                 </Bullet>
                                 <Bullet>
-                                    Supporting individuals in achieving their
-                                    true potential.
+                                    Reliving you of any burdens or issues you
+                                    may have.{' '}
                                 </Bullet>
                                 <Bullet>
-                                    Helping each person transform, one step at a
-                                    time.
+                                    Helping you to realise the practical
+                                    benefits of ancient wisdom through Astro
+                                    Vastu.{' '}
                                 </Bullet>
                                 <Bullet>
-                                    Aiding everyone in becoming their best
-                                    selves.
+                                    Receive a one-on-one consultation with the
+                                    Senior Astrologer Hanish Bagga.{' '}
                                 </Bullet>
                                 <Bullet>
-                                    Committed to uplifting lives and enhancing
-                                    the human spirit.
+                                    Remedies to solve your problems about Love,
+                                    Education, Career and more.{' '}
                                 </Bullet>
                                 <Bullet>
-                                    Focusing on individual improvement while
-                                    uplifting society.
+                                    Guiding you on your spiritual journey about
+                                    which Poojas and Deities will be auspicious
+                                    for you.{' '}
                                 </Bullet>
                                 <Bullet>
-                                    Providing support on your journey to become
-                                    the best version of yourself.
-                                </Bullet>
-                                <Bullet>
-                                    Guiding you with timeless wisdom for the
-                                    modern era.
+                                    A detailed Astrological analysis of your
+                                    Strengths and Problems you are likely to
+                                    encounter.{' '}
                                 </Bullet>
                             </div>
                         </div>
@@ -291,13 +315,13 @@ const AboutUs = () => {
                                 </Bullet>
                             </div>
                         </div>
-                        <div className={css.column}>
-                            <img
-                                className={css.consultation_poster}
-                                src={ImgConsultationPoster}
-                                alt={'Consultation poster'}
-                            />
-                        </div>
+                        {/* <div className={css.column}> */}
+                        <img
+                            className={css.consultation_poster}
+                            src={ImgConsultationPoster}
+                            alt={'Consultation poster'}
+                        />
+                        {/* </div> */}
                     </div>
                     <div className={css.row}>
                         <div className={css.column}>
@@ -305,14 +329,16 @@ const AboutUs = () => {
                                 How can I support you
                             </h3>
                             <p className={css.desc}>
-                                At Acharya Ganesh, your well-being, needs, and
-                                personal growth are our core focus. Our main
-                                goal is to assist in your transformation
-                                journey, enabling you to reach your highest
-                                potential. By consulting with Acharya Ganesh and
-                                following the recommended remedies, you’ll
-                                notice significant, measurable changes in your
-                                life.
+                                At Acharya Ganesh, your well-being, needs and
+                                personal growth are our core focus since we aim
+                                to help you realise how easily you are able to
+                                transform your life through Astrology. A Private
+                                Consultation at Acharya Ganesh with our
+                                experienced Astrologers is all it takes for you
+                                to become free of your worries and take control
+                                of your life. Since you will witness immediate
+                                change once remedies, we advise you are followed
+                                through.
                             </p>
                         </div>
                         <div className={css.column}>

@@ -88,6 +88,7 @@ const PaginationTable = ({
             <Box width="100%" overflow="auto">
                 <StyledTable
                     style={{
+                        width: '2000px',
                         overflowX: 'auto',
                         wordBreak: 'break-word',
                     }}

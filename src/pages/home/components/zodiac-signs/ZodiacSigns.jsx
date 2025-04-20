@@ -97,6 +97,11 @@ const ZodiacSigns = () => {
     useEffect(() => {
         const containerWidth = containerRef.current.offsetWidth;
         const wrapperWidth = wrapperRef.current.scrollWidth;
+        console.log(
+            containerWidth,
+            wrapperWidth,
+            Math.ceil(wrapperWidth / containerWidth)
+        );
         setIndicatorCount(Math.ceil(wrapperWidth / containerWidth));
     }, []);
 
@@ -159,7 +164,7 @@ const ZodiacSigns = () => {
                     disabled={currentOffset <= 0}
                     style={{ opacity: currentOffset <= 0 ? 0.2 : 1 }}
                 >
-                    <img src={LeftArrow} alt={''} />
+                    <img src={LeftArrow} alt={'<'} />
                 </button>
                 <button
                     onClick={onNext}
@@ -169,7 +174,7 @@ const ZodiacSigns = () => {
                         opacity: currentOffset >= indicatorCount - 1 ? 0.2 : 1,
                     }}
                 >
-                    <img src={LeftArrow} alt={''} />
+                    <img src={LeftArrow} alt={'>'} />
                 </button>
                 <div className={css.slides_wrapper} ref={wrapperRef}>
                     {Array.isArray(ZodiacSignList) &&
@@ -177,7 +182,7 @@ const ZodiacSigns = () => {
                             <img
                                 key={i}
                                 src={z.img}
-                                alt={'Zodiac image card'}
+                                alt={'Zodiac Sign'}
                                 onClick={() => openLink(z.route)}
                             />
                         ))}
@@ -185,7 +190,11 @@ const ZodiacSigns = () => {
             </div>
             <Spacer vertical={'48px'} />
             <IndicatorContainer
-                currentIndex={currentOffset}
+                currentIndex={
+                    currentOffset >= indicatorCount
+                        ? indicatorCount - 1
+                        : currentOffset
+                }
                 count={indicatorCount}
                 onIndicatorClick={(index) => {
                     const containerWidth = containerRef.current.offsetWidth;

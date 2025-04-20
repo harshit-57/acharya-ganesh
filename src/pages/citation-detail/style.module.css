@@ -74,8 +74,9 @@
     p {
         display: flex;
         align-items: center;
-        font-family: 'Sorts Mill Goudy';
+        /* font-family: 'Sorts Mill Goudy'; */
         font-size: 40px;
+        font-weight: 400;
         color: #fed1a7;
         gap: 16px;
 
