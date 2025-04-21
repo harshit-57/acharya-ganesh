@@ -9,7 +9,7 @@ const initProps = {
     keywords:
         'astrology, horoscope, cosmic, Learn astrology, online astrology, online astro',
     image: 'https://courses.acharyaganesh.com/logo.png?v=3',
-    siteUrl: getBaseUrl() || 'http://147.93.104.111',
+    siteUrl: getBaseUrl() || 'https://acharyaganesh.com',
     checkout: false,
 };
 

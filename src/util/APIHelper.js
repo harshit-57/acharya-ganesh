@@ -4,8 +4,8 @@ const REACT_APP_ENV = 'production';
 
 const REACT_APP_API_URL = 'http://localhost:4200/api';
 const REACT_APP_API_URL_DEV = 'http://34.131.192.173:4200/api';
-const REACT_APP_API_URL_PROD = 'http://147.93.104.111:8000/api';
-const REACT_APP_UPLOAD_URL = 'http://147.93.104.111:8000/api';
+const REACT_APP_API_URL_PROD = 'https://acharyaganesh.com/api';
+const REACT_APP_UPLOAD_URL = 'https://acharyaganesh.com/api';
 
 export const getBaseUrl = () =>
     REACT_APP_ENV == 'production'
