@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
+import { getBaseUrl } from './util/APIHelper';
 
 const initProps = {
     title: 'Acharya Ganesh Astrology Academy',
@@ -8,7 +9,7 @@ const initProps = {
     keywords:
         'astrology, horoscope, cosmic, Learn astrology, online astrology, online astro',
     image: 'https://courses.acharyaganesh.com/logo.png?v=3',
-    siteUrl: 'http://34.131.192.173',
+    siteUrl: getBaseUrl() || 'http://147.93.104.111',
     checkout: false,
 };
 
