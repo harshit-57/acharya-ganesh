@@ -206,7 +206,7 @@ const Edit = () => {
                             image: response?.Images?.length
                                 ? response?.Images[0]
                                 : '',
-                            // imageAlt: "",
+                            imageAlt: response?.Name?.slice(0, 10),
                             focusKeyphrase: response?.Focus_Keyphrase || '',
                             metaTitle: response?.Meta_Title,
                             metaSiteName: response?.Meta_SiteName,
@@ -707,7 +707,7 @@ const Edit = () => {
 
         if (
             !['citation', 'testimonial', 'service']?.includes(type) &&
-            payload?.status == 1 &&
+            // payload?.status == 1 &&
             !payload?.categories?.length
         ) {
             toast.error('Category is required');
