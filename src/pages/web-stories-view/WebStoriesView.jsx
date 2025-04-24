@@ -27,7 +27,7 @@ export const WebStoriesView = () => {
 
     const getCourse = async () => {
         try {
-            const response = await APIHelper.getWebStories({ id: slug });
+            const response = await APIHelper.getWebStories({ slug: slug });
             setWs(response.data.data[0]);
         } catch (e) {
             console.log(e);

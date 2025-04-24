@@ -102,6 +102,9 @@ const PaginationTable = ({
                                 Web Story Name
                             </StyledTableHead>
                             <StyledTableHead align="center">
+                                Web Story Slug
+                            </StyledTableHead>
+                            <StyledTableHead align="center">
                                 Categories
                             </StyledTableHead>
                             <StyledTableHead align="center">
@@ -193,7 +196,7 @@ const PaginationTable = ({
                                                         ? story?.Categories[0]
                                                               ?.CategorySlug
                                                         : '-'
-                                                }/${story.Id}`
+                                                }/${story.Slug}`
                                             )
                                         }
                                     >
@@ -201,6 +204,9 @@ const PaginationTable = ({
                                             ? htmlToText(story.Title)
                                             : 'NA'}
                                     </Link>
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {story?.Slug || 'NA'}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                     {story?.Categories?.length
@@ -255,7 +261,7 @@ const PaginationTable = ({
                                         // }
                                         onClick={() => {
                                             navigate(
-                                                `/admin/content-editor/story/${story.Id}`,
+                                                `/admin/content-editor/story/${story.Slug}`,
                                                 { state: story }
                                             );
                                         }}
