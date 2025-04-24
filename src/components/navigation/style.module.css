@@ -12,7 +12,7 @@
 .containerHide {
     position: fixed;
     background-color: #00000099;
-    z-index: 9999;
+    z-index: 999999;
     top: 0;
     height: 100vh;
     width: 100%;
@@ -20,7 +20,7 @@
 .mobile_menu_popup {
     position: fixed;
     background-color: #23201d;
-    z-index: 99;
+    z-index: 99999;
     top: 0;
     left: 0;
     width: 100%;
@@ -48,6 +48,8 @@
         display: flex;
         gap: 36px;
         flex-direction: column;
+        height: 80vh;
+        overflow: auto;
         li {
             font-size: 16px;
             color: #ffffff;

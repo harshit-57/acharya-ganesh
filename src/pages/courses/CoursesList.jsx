@@ -3,7 +3,7 @@ import { PageContainer } from '../../components/page-container/PageContainer';
 import IcChevronIcon from '../../assets/chevron-down.png';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
-import ImgHeaderBg from '../../assets/courses_header_bg.png';
+import ImgHeaderBg from '../../assets/courses_banner.webp';
 import ICSearchMd from '../../assets/search-md.png';
 import ICFilter from '../../assets/filter-lines.png';
 import { Spacer } from '../../components/spacer/Spacer';
@@ -99,6 +99,7 @@ const CoursesList = () => {
         try {
             const response = await APIHelper.getCourseCategories({
                 status: 1,
+                active: 1,
             });
             setCourseCategories(response.data);
         } catch (e) {

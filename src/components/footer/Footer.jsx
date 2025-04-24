@@ -44,7 +44,7 @@ export const Footer = () => {
                             </a>
                         </li>
                         <li>
-                            <NavLink to={'/'}>Web Stories</NavLink>
+                            <NavLink to={'/web-stories'}>Web Stories</NavLink>
                         </li>
                         <li>
                             <NavLink to={'/spirituality'}>Spirituality</NavLink>

@@ -105,6 +105,13 @@
     background-color: transparent;
 }
 
+.show_more_button {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+}
+
 @media only screen and (max-width: 768px) {
     .header_text_container {
         padding: 25px;

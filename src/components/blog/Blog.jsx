@@ -10,10 +10,18 @@ import LeftArrow from '../../assets/left-arrow.png';
 import useBreakpoint from 'use-breakpoint';
 import { MatxLoading } from '../../admin/components';
 
+const PER_FRAME_ARTICLE_COUNT_ULTRA_WIDE = 5;
+const PER_FRAME_ARTICLE_COUNT_LARGE_DESKTOP = 4;
 const PER_FRAME_ARTICLE_COUNT_DESKTOP = 3;
 const PER_FRAME_ARTICLE_COUNT_TABLET = 2;
 const PER_FRAME_ARTICLE_COUNT_MOBILE = 1;
-const BREAKPOINTS = { mobile: 0, tablet: 768, desktop: 1280 };
+const BREAKPOINTS = {
+    mobile: 0,
+    tablet: 768,
+    desktop: 1255,
+    largeDesktop: 1600,
+    ultraWide: 1945,
+};
 
 const getArticleCountPerFrame = (device) => {
     switch (device) {
@@ -23,14 +31,18 @@ const getArticleCountPerFrame = (device) => {
             return PER_FRAME_ARTICLE_COUNT_TABLET;
         case 'desktop':
             return PER_FRAME_ARTICLE_COUNT_DESKTOP;
+        case 'largeDesktop':
+            return PER_FRAME_ARTICLE_COUNT_LARGE_DESKTOP;
+        case 'ultraWide':
+            return PER_FRAME_ARTICLE_COUNT_ULTRA_WIDE;
         default:
-            return PER_FRAME_ARTICLE_COUNT_DESKTOP;
+            return PER_FRAME_ARTICLE_COUNT_ULTRA_WIDE;
     }
 };
 
-const Blog = () => {
+const Blog = ({ breakpoints }) => {
     const navigate = useNavigate();
-    const { breakpoint } = useBreakpoint(BREAKPOINTS, 'desktop');
+    const { breakpoint } = useBreakpoint(breakpoints || BREAKPOINTS, 'desktop');
     const [articleList, setArticleList] = useState([]);
     const [visibleArticles, setVisibleArticles] = useState([]);
     const [currentSlideOffset, setCurrentSlideOffset] = useState(0);
@@ -95,6 +107,12 @@ const Blog = () => {
     const onPrev = () => {
         if (currentSlideOffset > 0) {
             setCurrentSlideOffset(currentSlideOffset - 1);
+        } else {
+            setCurrentSlideOffset(
+                Math.ceil(
+                    articleList.length / getArticleCountPerFrame(breakpoint)
+                ) - 1
+            );
         }
     };
 
@@ -123,21 +141,22 @@ const Blog = () => {
             {!loading ? (
                 <>
                     <div className={css.article_slide_container}>
-                        <button
-                            onClick={onPrev}
-                            className={css.prev_button}
-                            disabled={currentSlideOffset === 0}
-                            style={{
-                                opacity: currentSlideOffset === 0 ? 0.5 : 1,
-                            }}
-                        >
+                        <button onClick={onPrev} className={css.prev_button}>
                             <img src={LeftArrow} alt="<" />
                         </button>
                         <button onClick={onNext} className={css.next_button}>
                             <img src={LeftArrow} alt=">" />
                         </button>
 
-                        <div className={css.article_slide_wrapper}>
+                        <div
+                            className={css.article_slide_wrapper}
+                            // style={{
+                            //     gridTemplateColumns:
+                            //         getArticleCountPerFrame(breakpoint) >= 4
+                            //             ? `repeat(auto-fill, minmax(300px, 1fr))`
+                            //             : `repeat(auto-fill, minmax(340px, 1fr))`,
+                            // }}
+                        >
                             {Array.isArray(visibleArticles) &&
                                 visibleArticles.map((article, index) => (
                                     <ArticleCard

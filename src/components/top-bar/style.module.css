@@ -2,6 +2,7 @@
     height: 120px;
     position: relative;
     background: #00000025;
+    z-index: 9999;
     .menu_icon {
         display: none;
     }

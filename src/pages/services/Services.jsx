@@ -3,7 +3,7 @@ import { PageContainer } from '../../components/page-container/PageContainer';
 import ServiceCard from './components/service-card/ServiceCard';
 import { useEffect, useState } from 'react';
 import services from '../../data/service-list';
-import ImgHeaderBg from '../../assets/about_header_bg.png';
+import ImgHeaderBg from '../../assets/services_banner.webp';
 import IcChevronIcon from '../../assets/chevron-down.png';
 import SEO from '../../Seo';
 import { TopBar } from '../../components/top-bar/TopBar';

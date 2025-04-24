@@ -19,7 +19,8 @@
 .wrapper {
     height: 80%;
     border-radius: 20px !important;
-    overflow: hidden;
+    aspect-ratio: 9 / 16;
+    position: relative;
 }
 .stories_container {
     border-radius: 20px;
@@ -134,10 +135,12 @@
 }
 
 .prev_button {
-    left: calc(50% - 300px);
+    /* left: calc(50% - 300px); */
+    left: -64px;
 }
 .next_button {
-    right: calc(50% - 300px);
+    /* right: calc(50% - 300px); */
+    right: -64px;
 
     img {
         transform: rotate(180deg);

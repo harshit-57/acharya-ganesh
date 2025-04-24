@@ -10,7 +10,7 @@
 
 .course_poster {
     width: 100%;
-    object-fit: cover;
+    object-fit: fill;
     aspect-ratio: 420/360;
 }
 .buy_now_button {
@@ -64,7 +64,6 @@
 
     .course_poster {
         width: 100%;
-        object-fit: cover;
         aspect-ratio: 420/360;
     }
     .buy_now_button {

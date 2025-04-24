@@ -108,24 +108,34 @@ const ServiceDetail = () => {
                     </NavLink> */}
 
                     <div className={css.row}>
-                        <div className={css.card_desc}>
-                            <div className={`html-content bullet`}>
-                                {parse(service?.Description || '')}
+                        <div className={css.column}>
+                            <div className={css.card_desc}>
+                                <div className={`html-content bullet`}>
+                                    {parse(service?.Description || '')}
+                                </div>
+                                <NavLink
+                                    to={service?.Link || ''}
+                                    className={css.button}
+                                >
+                                    <PrimaryButton>
+                                        {service?.LinkText ||
+                                            'Book Consultation'}
+                                    </PrimaryButton>
+                                </NavLink>
                             </div>
-                            <NavLink
-                                to={service?.Link || ''}
-                                className={css.button}
-                            >
-                                <PrimaryButton>
-                                    {service?.LinkText || 'Book Consultation'}
-                                </PrimaryButton>
-                            </NavLink>
+
+                            <Blog
+                                breakpoints={{
+                                    mobile: 0,
+                                    tablet: 1260,
+                                    desktop: 1605,
+                                    largeDesktop: 1950,
+                                }}
+                            />
+                            <CitationBox />
                         </div>
                         <ServiceSidebar service={service} />
                     </div>
-
-                    <Blog />
-                    <CitationBox />
                 </div>
             </div>
             <Spacer vertical={'20px'} />

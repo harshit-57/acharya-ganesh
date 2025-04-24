@@ -6,8 +6,8 @@
     .thumbnail {
         flex: 1;
         max-width: 50%;
-        aspect-ratio: 1280/720;
-        object-fit: cover;
+        aspect-ratio: 16/9;
+        object-fit: fill;
         border-radius: 24px;
     }
     .title_container {

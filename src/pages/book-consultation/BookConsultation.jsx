@@ -14,18 +14,25 @@ import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
 import GetInTouchBg from '../../assets/book_consultatio_form.png';
 import MainContactForm from '../../components/main-contact-form/Contact';
 import SEO from '../../Seo';
+import { Navigation } from '../../components/navigation/Navigation';
 
 const BookConsultation = () => {
-    const description = "Book a personalized consultation with acharyaganesh for astrology, numerology, kundali matching, and horoscope readings. Get expert guidance tailored to your needs.";
-    const keywords = "book consultation, schedule appointment, online consultation, astrology consultation, numerology consultation, kundali matching, horoscope reading, vedic astrology consultation";
+    const description =
+        'Book a personalized consultation with acharyaganesh for astrology, numerology, kundali matching, and horoscope readings. Get expert guidance tailored to your needs.';
+    const keywords =
+        'book consultation, schedule appointment, online consultation, astrology consultation, numerology consultation, kundali matching, horoscope reading, vedic astrology consultation';
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description}/>
+            <SEO keywords={keywords} description={description} />
             <div
-                style={{ backgroundImage: `url(${ImgHeaderBg})` }}
+                // style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}
             >
+                <img src={ImgHeaderBg} alt="header" className={css.headerImg} />
                 <TopBar />
+                <div className={css.navigation}>
+                    <Navigation />
+                </div>
             </div>
 
             <div className={css.WhyChooseUs}>

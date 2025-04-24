@@ -44,12 +44,6 @@ export const WebStoriesView = () => {
                           isPaused ? action('play') : action('pause');
                       };
 
-                      const handleSeeMore = (e) => {
-                          e.stopPropagation();
-                          // Replace with your desired URL or action
-                          window.open('https://example.com', '_blank');
-                      };
-
                       return (
                           <div
                               className={`${css.story_content_container} ${css.zoom_out}`}
@@ -190,7 +184,7 @@ export const WebStoriesView = () => {
                 <Stories
                     stories={stories?.length ? stories : []}
                     defaultInterval={ws?.TimeDuration * 10}
-                    width={432}
+                    width={'100%'}
                     height={'100%'}
                     preloadCount={1}
                     currentIndex={currentIndex}

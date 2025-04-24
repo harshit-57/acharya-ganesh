@@ -162,7 +162,9 @@
     width: 50%;
     height: 100%;
     aspect-ratio: 1;
-    border-radius: 36px;
+    img {
+        border-radius: 36px;
+    }
 }
 .heading {
     font-size: 42px;
