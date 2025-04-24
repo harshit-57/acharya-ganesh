@@ -84,6 +84,9 @@
 }
 
 @media (max-width: 768px) {
+    .container {
+        padding: 60px 24px;
+    }
     .grid {
         grid-template-columns: 1fr;
     }

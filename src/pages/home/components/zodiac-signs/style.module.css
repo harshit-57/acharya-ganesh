@@ -1,115 +1,135 @@
 .container {
     min-height: auto;
-    padding: 0 120px;
+    padding: 25px 60px;
     display: flex;
     flex-direction: column;
+    gap: 30px;
 }
 
 .section_heading {
-    color: var(--color-caption);
-    font-size: 42px;
     font-family: 'Sorts Mill Goudy', serif;
+    text-align: center;
+    font-size: 42px;
+    color: var(--color-caption);
     font-weight: bold;
 }
 
 .section_sub_heading {
-    font-size: 18px;
     font-family: 'Work Sans';
+    text-align: center;
+    font-size: 18px;
     margin-top: 8px;
 }
 
-.slides_container {
+.zodiac_slide_container {
     width: 100%;
-    margin-top: 48px;
     position: relative;
-
-    .slides_wrapper {
-        display: flex;
-        gap: 40px;
-        overflow-x: auto;
-        &::-webkit-scrollbar {
-            display: none;
-        }
-        img {
-            width: 270px;
-            height: 375px;
-            cursor: pointer;
-        }
-    }
-    .prev_button {
-        left: -60px;
-    }
-    .next_button {
-        right: -60px;
-
-        img {
-            transform: rotate(180deg);
-        }
-    }
-
-    .prev_button,
-    .next_button {
-        z-index: 9999;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 50px;
-        height: 50px;
-        background-color: var(--color-button-primary-bg);
-        border-radius: var(--default-button-border-radius);
-        border: 1px solid transparent;
-        cursor: pointer;
-        transition: 0.2s;
-        border-color: var(--color-border-dark);
-        color: var(--color-black);
-
-        &:hover {
-            background-color: var(--color-button-primary-bg-hover);
-        }
-        img {
-            width: 15px;
-        }
-    }
 }
+
+.zodiac_slide_container button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zodiac_slide_container button:hover > img {
+    filter: brightness(0) invert(1);
+}
+
+.zodiac_slide_container button > img {
+    width: 15px;
+}
+
+.prev_button {
+    left: -50px;
+}
+
+.next_button {
+    right: -50px;
+}
+
+.zodiac_slide_container .next_button img {
+    transform: rotate(180deg);
+}
+
+.prev_button,
+.next_button {
+    z-index: 11;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-button-primary-bg);
+    border-radius: var(--default-button-border-radius);
+    border: 1px solid var(--color-border-dark);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.prev_button:hover,
+.next_button:hover {
+    background-color: var(--color-button-primary-bg-hover);
+}
+
+.zodiac_slide_wrapper {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease-in-out;
+}
+
+.zodiac_card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.zodiac_card img {
+    width: 250px;
+    height: 334px;
+    object-fit: fill;
+}
+
+.zodiac_card p {
+    margin-top: 10px;
+    font-family: 'Work Sans';
+    font-size: 16px;
+    color: var(--color-caption);
+}
+
 @media only screen and (max-width: 768px) {
     .container {
-        padding: 0;
+        padding: 20px 24px;
+        gap: 24px;
     }
 
     .section_heading {
-        font-size: 24px;
-        text-align: center;
+        font-size: 28px;
     }
 
     .section_sub_heading {
-        text-align: center;
         font-size: 14px;
         margin-top: 12px;
     }
 
-    .slides_container {
-        margin-top: 36px;
+    .zodiac_slide_container button > img {
+        width: 13px;
+    }
 
-        .slides_wrapper {
-            gap: 20px;
-            width: 80%;
-            margin: 0 auto;
-        }
-        .prev_button {
-            left: -20px;
-        }
-        .next_button {
-            right: -20px;
-        }
+    .prev_button {
+        left: -20px;
+    }
 
-        .prev_button,
-        .next_button {
-            z-index: 9999;
-            width: 50px;
-            height: 50px;
-            img {
-                width: 13px;
-            }
-        }
+    .next_button {
+        right: -20px;
+    }
+
+    .prev_button,
+    .next_button {
+        width: 40px;
+        height: 40px;
     }
 }

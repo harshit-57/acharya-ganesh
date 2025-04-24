@@ -23,7 +23,7 @@ const CitationBox = () => {
     const fetchCitations = async (page) => {
         try {
             const res = await APIHelper.getCitations({
-                pageSize: 6,
+                pageSize: 9,
                 status: 1,
             });
             setCitations(res.data?.data || []);

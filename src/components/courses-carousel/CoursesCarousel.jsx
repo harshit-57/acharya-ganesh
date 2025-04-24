@@ -9,10 +9,18 @@ import useBreakpoint from 'use-breakpoint';
 import { APIHelper } from '../../util/APIHelper';
 import { NavLink } from 'react-router-dom';
 import { PrimaryButton } from '../primary-button/PrimaryButton';
+const PER_FRAME_COURSE_COUNT_ULTRA_WIDE = 5;
+const PER_FRAME_COURSE_COUNT_LARGE_DESKTOP = 4;
 const PER_FRAME_COURSE_COUNT_DESKTOP = 3;
 const PER_FRAME_COURSE_COUNT_MOBILE = 1;
 const PER_FRAME_COURSE_COUNT_TABLET = 2;
-const BREAKPOINTS = { mobile: 0, tablet: 768, desktop: 1280 };
+const BREAKPOINTS = {
+    mobile: 0,
+    tablet: 768,
+    desktop: 1280,
+    largeDesktop: 1600,
+    ultraWide: 1945,
+};
 
 const getCourseCountPerFrame = (device) => {
     switch (device) {
@@ -22,6 +30,10 @@ const getCourseCountPerFrame = (device) => {
             return PER_FRAME_COURSE_COUNT_TABLET;
         case 'desktop':
             return PER_FRAME_COURSE_COUNT_DESKTOP;
+        case 'largeDesktop':
+            return PER_FRAME_COURSE_COUNT_LARGE_DESKTOP;
+        case 'ultraWide':
+            return PER_FRAME_COURSE_COUNT_ULTRA_WIDE;
         default:
             return PER_FRAME_COURSE_COUNT_DESKTOP;
     }
@@ -104,6 +116,11 @@ export const CoursesCarousel = () => {
     const onPrev = () => {
         if (currentSlideOffset > 0) {
             setCurrentSlideOffset(currentSlideOffset - 1);
+        } else {
+            setCurrentSlideOffset(
+                Math.ceil(courses.length / getCourseCountPerFrame(breakpoint)) -
+                    1
+            );
         }
     };
 
@@ -127,12 +144,7 @@ export const CoursesCarousel = () => {
                 {'Explore Our Recent Courses'}
             </h2>
             <div className={css.course_slide_container}>
-                <button
-                    onClick={onPrev}
-                    className={css.prev_button}
-                    disabled={currentSlideOffset === 0}
-                    style={{ opacity: currentSlideOffset === 0 ? 0.5 : 1 }}
-                >
+                <button onClick={onPrev} className={css.prev_button}>
                     <img src={LeftArrow} alt={'<'} />
                 </button>
                 <button onClick={onNext} className={css.next_button}>

@@ -1,7 +1,7 @@
 import css from './style.module.css';
+import { useState, useEffect } from 'react';
 
-import { PageContainer } from '../../../../components/page-container/PageContainer';
-
+import LeftArrow from '../../../../assets/left-arrow.png';
 import Zodiac1 from '../../../../assets/Pisces-01.png';
 import Zodiac2 from '../../../../assets/Aquarius-02.png';
 import Zodiac3 from '../../../../assets/Capricorn-03.png';
@@ -14,195 +14,204 @@ import Zodiac9 from '../../../../assets/Cancer-09.png';
 import Zodiac10 from '../../../../assets/Gemini-10.png';
 import Zodiac11 from '../../../../assets/Tauras-11.png';
 import Zodiac12 from '../../../../assets/Aries-12.png';
-import LeftArrow from '../../../../assets/left-arrow.png';
 
-import { useEffect } from 'react';
-import { useRef } from 'react';
-import { useState } from 'react';
 import { IndicatorContainer } from '../../../../components/indicator-container/IndicatorContainer';
-
-import { Spacer } from '../../../../components/spacer/Spacer';
+import { PageContainer } from '../../../../components/page-container/PageContainer';
 import { useNavigate } from 'react-router-dom';
+import useBreakpoint from 'use-breakpoint';
 
 const ZodiacSignList = [
     {
         img: Zodiac12,
-        // link: 'https://acharyaganesh.com/zodiac-signs/aries-zodiac-sign',
-        route: 'blog/zodiac-signs/aries-zodiac-sign',
+        route: 'zodiac-signs/aries-zodiac-sign',
+        name: 'Aries',
     },
     {
         img: Zodiac11,
-        // link: 'https://acharyaganesh.com/zodiac-signs/taurus-zodiac-sign',
-        route: 'blog/zodiac-signs/taurus-zodiac-sign',
+        route: 'zodiac-signs/taurus-zodiac-sign',
+        name: 'Taurus',
     },
     {
         img: Zodiac10,
-        // link: 'https://acharyaganesh.com/zodiac-signs/gemini-zodiac-sign',
-        route: 'blog/zodiac-signs/gemini-zodiac-sign',
+        route: 'zodiac-signs/gemini-zodiac-sign',
+        name: 'Gemini',
     },
     {
         img: Zodiac9,
-        // link: 'https://acharyaganesh.com/zodiac-signs/Cancer-zodiac-sign',
-        route: 'blog/zodiac-signs/Cancer-zodiac-sign',
+        route: 'zodiac-signs/cancer-zodiac-sign',
+        name: 'Cancer',
     },
-    {
-        img: Zodiac8,
-        // link: 'https://acharyaganesh.com/zodiac-signs/Leo-zodiac-sign',
-        route: 'blog/zodiac-signs/Leo-zodiac-sign',
-    },
+    { img: Zodiac8, route: 'zodiac-signs/leo-zodiac-sign', name: 'Leo' },
     {
         img: Zodiac7,
-        // link: 'https://acharyaganesh.com/zodiac-signs/virgo-zodiac-signs',
-        route: 'blog/zodiac-signs/virgo-zodiac-signs',
+        route: 'zodiac-signs/virgo-zodiac-signs',
+        name: 'Virgo',
     },
     {
         img: Zodiac6,
-        // link: 'https://acharyaganesh.com/zodiac-signs/Libra-zodiac-sign',
-        route: 'blog/zodiac-signs/Libra-zodiac-sign',
+        route: 'zodiac-signs/libra-zodiac-sign',
+        name: 'Libra',
     },
     {
         img: Zodiac5,
-        // link: 'https://acharyaganesh.com/zodiac-signs/scorpio-zodiac-signs',
-        route: 'blog/zodiac-signs/scorpio-zodiac-signs',
+        route: 'zodiac-signs/scorpio-zodiac-signs',
+        name: 'Scorpio',
     },
     {
         img: Zodiac4,
-        // link: 'https://acharyaganesh.com/zodiac-signs/Sagittarius-zodiac-sign',
-        route: 'blog/zodiac-signs/Sagittarius-zodiac-sign',
+        route: 'zodiac-signs/sagittarius-zodiac-sign',
+        name: 'Sagittarius',
     },
     {
         img: Zodiac3,
-        // link: 'https://acharyaganesh.com/zodiac-signs/Capricorn-zodiac-sign',
-        route: 'blog/zodiac-signs/Capricorn-zodiac-sign',
+        route: 'zodiac-signs/capricorn-zodiac-sign',
+        name: 'Capricorn',
     },
     {
         img: Zodiac2,
-        // link: 'https://acharyaganesh.com/zodiac-signs/aquarius-zodiac-signs',
-        route: 'blog/zodiac-signs/aquarius-zodiac-signs',
+        route: 'zodiac-signs/aquarius-zodiac-signs',
+        name: 'Aquarius',
     },
     {
         img: Zodiac1,
-        link: 'https://acharyaganesh.com/zodiac-signs/Pisces-zodiac-sign',
-        route: 'blog/zodiac-signs/Pisces-zodiac-sign',
+        route: 'zodiac-signs/pisces-zodiac-sign',
+        name: 'Pisces',
     },
 ];
 
+const PER_FRAME_ZODIAC_COUNT = {
+    ultraWide: 5,
+    largeDesktop: 4,
+    desktop: 3,
+    tablet: 2,
+    mobile: 1,
+};
+
+const BREAKPOINTS = {
+    mobile: 0,
+    tablet: 765,
+    desktop: 1024,
+    largeDesktop: 1280,
+    ultraWide: 1600,
+};
+
 const ZodiacSigns = () => {
-    const containerRef = useRef();
-    const wrapperRef = useRef();
-    const [indicatorCount, setIndicatorCount] = useState(0);
-    const [currentOffset, setCurrentOffset] = useState(0);
+    const { breakpoint } = useBreakpoint(BREAKPOINTS, 'desktop');
+    const [visibleZodiacs, setVisibleZodiacs] = useState([]);
+    const [currentSlideOffset, setCurrentSlideOffset] = useState(0);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const containerWidth = containerRef.current.offsetWidth;
-        const wrapperWidth = wrapperRef.current.scrollWidth;
-        console.log(
-            containerWidth,
-            wrapperWidth,
-            Math.ceil(wrapperWidth / containerWidth)
-        );
-        setIndicatorCount(Math.ceil(wrapperWidth / containerWidth));
-    }, []);
+    const getZodiacCountPerFrame = () =>
+        PER_FRAME_ZODIAC_COUNT[breakpoint] || PER_FRAME_ZODIAC_COUNT.desktop;
 
     useEffect(() => {
-        const handleScroll = () => {
-            const containerWidth = containerRef.current.offsetWidth;
-            const scrollLeft = wrapperRef.current.scrollLeft;
-            const currentOffset = Math.floor(
-                scrollLeft / (containerWidth * 0.8)
+        const zodiacsPerFrame = getZodiacCountPerFrame();
+        const totalSlides = Math.ceil(ZodiacSignList.length / zodiacsPerFrame);
+        const startIndex = currentSlideOffset * zodiacsPerFrame;
+        const remainingZodiacs = ZodiacSignList.length - startIndex;
+
+        let newVisibleZodiacs = [];
+
+        if (remainingZodiacs >= zodiacsPerFrame) {
+            newVisibleZodiacs = ZodiacSignList.slice(
+                startIndex,
+                startIndex + zodiacsPerFrame
             );
-            setCurrentOffset(currentOffset);
-        };
-        const wrapperElement = wrapperRef.current;
-        wrapperElement.addEventListener('scroll', handleScroll);
-        return () => {
-            wrapperElement.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+        } else if (
+            currentSlideOffset === totalSlides - 1 &&
+            remainingZodiacs > 0
+        ) {
+            newVisibleZodiacs = [
+                ...ZodiacSignList.slice(
+                    startIndex,
+                    startIndex + remainingZodiacs
+                ),
+                ...ZodiacSignList.slice(0, zodiacsPerFrame - remainingZodiacs),
+            ];
+        }
+
+        setVisibleZodiacs(newVisibleZodiacs);
+    }, [currentSlideOffset, breakpoint]);
+
+    useEffect(() => {
+        const totalSlides = Math.ceil(
+            ZodiacSignList.length / getZodiacCountPerFrame()
+        );
+        const interval = setInterval(() => {
+            setCurrentSlideOffset((prev) => (prev + 1) % totalSlides);
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, [breakpoint]);
 
     const onPrev = () => {
-        const containerWidth = containerRef.current.offsetWidth;
-        const scrollLeft = wrapperRef.current.scrollLeft;
-        const offset = Math.floor(scrollLeft / (containerWidth * 0.8));
-        setCurrentOffset(offset - 1);
-        wrapperRef.current.scrollTo({
-            left: (offset - 1) * (containerWidth * 0.9),
-            behavior: 'smooth',
-        });
+        if (currentSlideOffset > 0) {
+            setCurrentSlideOffset(currentSlideOffset - 1);
+        } else {
+            setCurrentSlideOffset(
+                Math.ceil(ZodiacSignList.length / getZodiacCountPerFrame()) - 1
+            );
+        }
     };
 
     const onNext = () => {
-        const containerWidth = containerRef.current.offsetWidth;
-        const scrollLeft = wrapperRef.current.scrollLeft;
-        const offset = Math.floor(scrollLeft / (containerWidth * 0.8));
-        setCurrentOffset(offset + 1);
-        wrapperRef.current.scrollTo({
-            left: (offset + 1) * (containerWidth * 0.9),
-            behavior: 'smooth',
-        });
+        const totalSlides = Math.ceil(
+            ZodiacSignList.length / getZodiacCountPerFrame()
+        );
+        if (currentSlideOffset < totalSlides - 1) {
+            setCurrentSlideOffset(currentSlideOffset + 1);
+        } else {
+            setCurrentSlideOffset(0);
+        }
     };
 
-    const openLink = (link) => {
-        // window.open(link, '_blank');
-        navigate(link);
+    const onIndicatorClick = (index) => {
+        if (
+            index > -1 &&
+            index < Math.ceil(ZodiacSignList.length / getZodiacCountPerFrame())
+        ) {
+            setCurrentSlideOffset(index);
+        }
+    };
+
+    const openLink = (route) => {
+        navigate(`/${route}`);
     };
 
     return (
         <PageContainer className={css.container}>
             <h2 className={css.section_heading}>
-                Zodiac Signs : Learn The Names And Symbols
+                Zodiac Signs: Learn The Names And Symbols
             </h2>
             <p className={css.section_sub_heading}>
                 Welcome to a world where the ancient wisdom of the stars
-                illuminates the path to understanding ourselves{' '}
+                illuminates the path to understanding ourselves
             </p>
-            <div className={css.slides_container} ref={containerRef}>
-                <button
-                    onClick={onPrev}
-                    className={css.prev_button}
-                    disabled={currentOffset <= 0}
-                    style={{ opacity: currentOffset <= 0 ? 0.2 : 1 }}
-                >
-                    <img src={LeftArrow} alt={'<'} />
+            <div className={css.zodiac_slide_container}>
+                <button onClick={onPrev} className={css.prev_button}>
+                    <img src={LeftArrow} alt="<" />
                 </button>
-                <button
-                    onClick={onNext}
-                    className={css.next_button}
-                    disabled={currentOffset >= indicatorCount - 1}
-                    style={{
-                        opacity: currentOffset >= indicatorCount - 1 ? 0.2 : 1,
-                    }}
-                >
-                    <img src={LeftArrow} alt={'>'} />
+                <button onClick={onNext} className={css.next_button}>
+                    <img src={LeftArrow} alt=">" />
                 </button>
-                <div className={css.slides_wrapper} ref={wrapperRef}>
-                    {Array.isArray(ZodiacSignList) &&
-                        ZodiacSignList.map((z, i) => (
-                            <img
-                                key={i}
-                                src={z.img}
-                                alt={'Zodiac Sign'}
-                                onClick={() => openLink(z.route)}
-                            />
-                        ))}
+                <div className={css.zodiac_slide_wrapper}>
+                    {visibleZodiacs.map((z, index) => (
+                        <div
+                            key={index}
+                            className={css.zodiac_card}
+                            onClick={() => openLink(z.route)}
+                        >
+                            <img src={z.img} alt={z.name} />
+                        </div>
+                    ))}
                 </div>
             </div>
-            <Spacer vertical={'48px'} />
             <IndicatorContainer
-                currentIndex={
-                    currentOffset >= indicatorCount
-                        ? indicatorCount - 1
-                        : currentOffset
-                }
-                count={indicatorCount}
-                onIndicatorClick={(index) => {
-                    const containerWidth = containerRef.current.offsetWidth;
-                    wrapperRef.current.scrollTo({
-                        left: index * (containerWidth * 0.9),
-                        behavior: 'smooth',
-                    });
-                }}
+                currentIndex={currentSlideOffset}
+                count={Math.ceil(
+                    ZodiacSignList.length / getZodiacCountPerFrame()
+                )}
+                onIndicatorClick={onIndicatorClick}
             />
         </PageContainer>
     );

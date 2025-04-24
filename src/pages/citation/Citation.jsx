@@ -12,6 +12,7 @@ import { APIHelper } from '../../util/APIHelper';
 import ICStar from '../../assets/Star 4.png';
 import Loader from './component/loading-animation/loader';
 import SEO from '../../Seo';
+import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
 
 const Citation = () => {
     const [data, setData] = useState([]);
@@ -20,7 +21,7 @@ const Citation = () => {
     const [error, setError] = useState(null);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
-    const pageSize = 100;
+    const pageSize = 24;
 
     useEffect(() => {
         fetchCitations(page);
@@ -28,6 +29,7 @@ const Citation = () => {
 
     const fetchCitations = async (page) => {
         try {
+            setLoading(true);
             const res = await APIHelper.getCitations({
                 page,
                 pageSize,
@@ -86,7 +88,7 @@ const Citation = () => {
             <div className={[css.row, css.discover_cities_container].join(' ')}>
                 <h3 className={css.discover_heading}></h3>
 
-                {loading ? (
+                {loading && !visibleData?.length ? (
                     <div className={css.loaderContainer}>
                         <Loader />
                     </div>
@@ -106,15 +108,27 @@ const Citation = () => {
                             ))}
                         </div>
 
+                        {loading && (
+                            <div className={css.loaderContainer}>
+                                <Loader />
+                            </div>
+                        )}
+
                         {hasMore && (
-                            <button
-                                className={css.showMoreBtn}
+                            // <button
+                            //     className={css.showMoreBtn}
+                            //     onClick={handleShowMore}
+                            // >
+                            //     <img src={ICStar} alt={'*'} />
+                            //     Show More
+                            //     <img src={ICStar} alt={'*'} />
+                            // </button>
+                            <PrimaryButton
+                                className={css.show_more_button}
                                 onClick={handleShowMore}
                             >
-                                <img src={ICStar} alt={'*'} />
-                                Show More
-                                <img src={ICStar} alt={'*'} />
-                            </button>
+                                Show All
+                            </PrimaryButton>
                         )}
                     </>
                 )}

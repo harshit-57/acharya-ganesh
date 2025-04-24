@@ -9,7 +9,9 @@ export const CourseCard = ({ onClick, course, style, className }) => {
                 className={css.thumbnail}
             ></div>
             <div className={css.content_container}>
-                <h2 onClick={onClick}>{course?.Name}</h2>
+                <h2 className="content-two-line" onClick={onClick}>
+                    {course?.Name}
+                </h2>
                 <p>
                     <span>
                         {course?.Sale_Price ? '₹ ' + course?.Regular_Price : ''}

@@ -11,10 +11,11 @@
     padding: 72px 60px;
 }
 .content_container {
-    max-width: 1320px;
+    /* max-width: 1320px; */
     display: flex;
     flex-direction: column;
     gap: 72px;
+    margin: auto;
 }
 .row {
     display: flex;
@@ -26,7 +27,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    /* gap: 24px; */
+    gap: 50px;
 }
 .card_desc {
     flex: 1;

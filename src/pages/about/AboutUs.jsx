@@ -16,6 +16,7 @@ import { Footer } from '../../components/footer/Footer';
 import { Helmet } from 'react-helmet-async';
 import Gallery from '../../components/gallery/Gallery';
 import SEO from '../../Seo';
+import { Link } from 'react-router-dom';
 const AboutUs = () => {
     const [images, setImages] = useState([]);
     const [readMore, setReadMore] = useState('Read More');
@@ -270,18 +271,13 @@ const AboutUs = () => {
                             </div>
                         </div>
                     </div>
-                    {/* <div className={css.gallery_container}>
-                        <h2 className={css.section_heading}>
-                            Memories Over The Years
-                        </h2>
-                        <div className={css.gallery_grid}>
-                            {Array.isArray(images) &&
-                                images.map((img, index) => (
-                                    <img key={index} src={img} alt="" />
-                                ))}
-                        </div>
-                    </div> */}
-                    <Gallery />
+                </div>
+            </div>
+            <div className={css.content_wrapper}>
+                <Gallery />
+            </div>
+            <div className={css.content_wrapper}>
+                <div className={css.content_container}>
                     <div className={css.row}>
                         <div
                             className={[css.column, css.card_primary_bg].join(
@@ -316,11 +312,15 @@ const AboutUs = () => {
                             </div>
                         </div>
                         {/* <div className={css.column}> */}
-                        <img
+                        <Link
+                            to={'/contact'}
                             className={css.consultation_poster}
-                            src={ImgConsultationPoster}
-                            alt={'Consultation poster'}
-                        />
+                        >
+                            <img
+                                src={ImgConsultationPoster}
+                                alt={'Consultation poster'}
+                            />
+                        </Link>
                         {/* </div> */}
                     </div>
                     <div className={css.row}>
