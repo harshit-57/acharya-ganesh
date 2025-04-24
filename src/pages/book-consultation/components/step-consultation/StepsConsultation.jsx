@@ -1,9 +1,8 @@
 import styles from './style.module.css';
-
 import Card from './component/card/card';
 import Heading from './component/heading/Header';
 import { useNavigate } from 'react-router-dom';
-import ConsultingstepBg from '../../../../assets/book_consultation_Steps_bg.png';
+import { Images } from '../../../../util/constants';
 
 const steps = [
     {
@@ -66,7 +65,7 @@ const BookingSteps = () => {
     return (
         <div
             className={styles.container}
-            style={{ backgroundImage: `url(${ConsultingstepBg})` }}
+            style={{ backgroundImage: `url(${Images.default.ConsultingstepBg})` }}
         >
             <Heading text="Steps For Booking A Consultation" />
             <div className={styles.grid}>

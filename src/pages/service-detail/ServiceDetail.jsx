@@ -1,7 +1,5 @@
 import css from './style.module.css';
 import { PageContainer } from '../../components/page-container/PageContainer';
-import IcStar from '../../assets/star_primary_dark.png';
-import ImgHeaderBg from '../../assets/about_header_bg.png';
 import { useEffect, useState } from 'react';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
@@ -20,6 +18,7 @@ import parse from 'html-react-parser';
 import { APIHelper } from '../../util/APIHelper';
 import { ServiceSidebar } from './components/sidebar/ServiceSidebar';
 import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
+import { Images } from '../../util/constants';
 
 const ServiceDetail = () => {
     const { slug } = useParams();
@@ -69,7 +68,7 @@ const ServiceDetail = () => {
         <PageContainer>
             <SEO keywords={keywords} description={description} />
             <div
-                style={{ backgroundImage: `url(${ImgHeaderBg})` }}
+                style={{ backgroundImage: `url(${Images.default.ImgHeaderBg})` }}
                 className={css.header}
             >
                 <TopBar />
@@ -136,7 +135,7 @@ const ServiceDetail = () => {
 const Bullet = ({ children }) => {
     return (
         <div className={css.bullet}>
-            <img src={IcStar} alt={'Star icon'} />
+            <img src={Images.default.IcStar} alt={'Star icon'} />
             <p>{children}</p>
         </div>
     );

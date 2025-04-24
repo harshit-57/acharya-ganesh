@@ -31,9 +31,11 @@
             display: none;
         }
         img {
-            width: 270px;
-            height: 375px;
+            width: 200px;
+            height: 280px;
             cursor: pointer;
+            display: block;
+            margin: 0 auto;
         }
     }
     .prev_button {

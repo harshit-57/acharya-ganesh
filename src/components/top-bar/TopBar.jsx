@@ -1,14 +1,11 @@
+import { Link } from 'react-router-dom';
 import css from './style.module.css';
 
-import Logo from '../../assets/brand_logo.png';
-import IcUser from '../../assets/user.png';
+import { Images } from '../../util/constants';
 import { useNav } from '../../hook/useNav';
 
 const NUMBER_ALT_1 = '+91 73000-04325';
 const NUMBER_ALT_2 = '+91 73000-04326';
-import IcPhone from '../../assets/ic_phone.png';
-import IcMenu from '../../assets/menu-02.png';
-import { Link } from 'react-router-dom';
 const COURSES_LINK = 'https://courses.acharyaganesh.com/';
 
 export const TopBar = () => {
@@ -17,19 +14,19 @@ export const TopBar = () => {
         <div className={css.container}>
             <img
                 className={css.menu_icon}
-                src={IcMenu}
+                src={Images.default.IcMenu}
                 onClick={() => setShowNav(true)}
             />
-            <Link to="/"><img className={css.logo} src={Logo} /></Link>
+            <Link to="/"><img className={css.logo} src={Images.default.Logo} /></Link>
             <div className={css.info_n_action_button_container}>
                 <a href={`tel:${NUMBER_ALT_1}`}>
-                    <ContactLabel icon={IcPhone}>{NUMBER_ALT_1}</ContactLabel>
+                    <ContactLabel icon={Images.default.IcPhone}>{NUMBER_ALT_1}</ContactLabel>
                 </a>
                 <a href={`tel:${NUMBER_ALT_1}`}>
-                    <ContactLabel icon={IcPhone}>{NUMBER_ALT_2}</ContactLabel>
+                    <ContactLabel icon={Images.default.IcPhone}>{NUMBER_ALT_2}</ContactLabel>
                 </a>
                 <a target={'_blank'} href={COURSES_LINK}>
-                    <ActionButton icon={IcUser}>Log in</ActionButton>
+                    <ActionButton icon={Images.default.IcUser}>Log in</ActionButton>
                 </a>
             </div>
         </div>

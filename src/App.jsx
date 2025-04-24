@@ -19,7 +19,7 @@ import { MatchMaking } from './pages/services/match-making/MatchMaking';
 import { WealthAstrology } from './pages/services/wealth-astrology/WealthAstrology';
 import WebStoriesList from './pages/web-stories/WebStoriesList';
 import { WebStoriesView } from './pages/web-stories-view/WebStoriesView';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Login from './admin/pages/login/Login';
 import CitationDetail from './pages/citation-detail/CitationDetail';
 import Citation from './pages/citation/Citation';
@@ -51,7 +51,24 @@ const RouteChangeDetector = () => {
 
     return null;
 };
+
+
+
+
 export default () => {
+ const themes = ['theme1', 'theme2'];
+  const [theme, setTheme] = useState('theme1');
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    
+    themes.forEach(t => root.classList.remove(t));
+
+    
+    root.classList.add(theme);
+  }, [theme]);
+
     return (
         <>
             <RouteChangeDetector />

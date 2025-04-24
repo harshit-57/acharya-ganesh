@@ -16,6 +16,8 @@ import Zodiac11 from '../../../../assets/Tauras-11.png';
 import Zodiac12 from '../../../../assets/Aries-12.png';
 import LeftArrow from '../../../../assets/left-arrow.png';
 
+import { Images } from '../../../../util/constants';
+
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
@@ -26,62 +28,62 @@ import { useNavigate } from 'react-router-dom';
 
 const ZodiacSignList = [
     {
-        img: Zodiac12,
+        img: Images.default.Zodiac12,
         // link: 'https://acharyaganesh.com/zodiac-signs/aries-zodiac-sign',
         route: 'blog/zodiac-signs/aries-zodiac-sign',
     },
     {
-        img: Zodiac11,
+        img: Images.default.Zodiac11,
         // link: 'https://acharyaganesh.com/zodiac-signs/taurus-zodiac-sign',
         route: 'blog/zodiac-signs/taurus-zodiac-sign',
     },
     {
-        img: Zodiac10,
+        img: Images.default.Zodiac10,
         // link: 'https://acharyaganesh.com/zodiac-signs/gemini-zodiac-sign',
         route: 'blog/zodiac-signs/gemini-zodiac-sign',
     },
     {
-        img: Zodiac9,
+        img: Images.default.Zodiac9,
         // link: 'https://acharyaganesh.com/zodiac-signs/Cancer-zodiac-sign',
         route: 'blog/zodiac-signs/Cancer-zodiac-sign',
     },
     {
-        img: Zodiac8,
+        img: Images.default.Zodiac8,
         // link: 'https://acharyaganesh.com/zodiac-signs/Leo-zodiac-sign',
         route: 'blog/zodiac-signs/Leo-zodiac-sign',
     },
     {
-        img: Zodiac7,
+        img: Images.default.Zodiac7,
         // link: 'https://acharyaganesh.com/zodiac-signs/virgo-zodiac-signs',
         route: 'blog/zodiac-signs/virgo-zodiac-signs',
     },
     {
-        img: Zodiac6,
+        img: Images.default.Zodiac6,
         // link: 'https://acharyaganesh.com/zodiac-signs/Libra-zodiac-sign',
         route: 'blog/zodiac-signs/Libra-zodiac-sign',
     },
     {
-        img: Zodiac5,
+        img: Images.default.Zodiac5,
         // link: 'https://acharyaganesh.com/zodiac-signs/scorpio-zodiac-signs',
         route: 'blog/zodiac-signs/scorpio-zodiac-signs',
     },
     {
-        img: Zodiac4,
+        img: Images.default.Zodiac4,
         // link: 'https://acharyaganesh.com/zodiac-signs/Sagittarius-zodiac-sign',
         route: 'blog/zodiac-signs/Sagittarius-zodiac-sign',
     },
     {
-        img: Zodiac3,
+        img: Images.default.Zodiac3,
         // link: 'https://acharyaganesh.com/zodiac-signs/Capricorn-zodiac-sign',
         route: 'blog/zodiac-signs/Capricorn-zodiac-sign',
     },
     {
-        img: Zodiac2,
+        img: Images.default.Zodiac2,
         // link: 'https://acharyaganesh.com/zodiac-signs/aquarius-zodiac-signs',
         route: 'blog/zodiac-signs/aquarius-zodiac-signs',
     },
     {
-        img: Zodiac1,
+        img: Images.default.Zodiac1,
         link: 'https://acharyaganesh.com/zodiac-signs/Pisces-zodiac-sign',
         route: 'blog/zodiac-signs/Pisces-zodiac-sign',
     },

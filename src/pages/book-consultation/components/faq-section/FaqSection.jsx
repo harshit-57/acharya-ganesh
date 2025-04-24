@@ -1,10 +1,7 @@
 import { useState } from 'react';
-
 import styles from './style.module.css';
-
-import IcStar from '../../../../assets/Star 4.png';
-import FAQBg from '../../../../assets/book_consultatio_faq.png';
 import FAQItem from './component/item/FaqItem';
+import { Images } from '../../../../util/constants';
 
 const FAQSection = () => {
     const [showMore, setShowMore] = useState(false);
@@ -71,7 +68,7 @@ Collaboratively administrate empowered markets via plug-and-play networks. Dynam
     return (
         <div
             className={styles.container}
-            style={{ backgroundImage: `url(${FAQBg})` }}
+            style={{ backgroundImage: `url(${Images.default.FAQBg})` }}
         >
             <h2 className={styles.faqTitle}>Frequently Asked Questions</h2>
             {(showMore ? faqs : faqs?.slice(0, 4)).map((e) => {
@@ -81,9 +78,9 @@ Collaboratively administrate empowered markets via plug-and-play networks. Dynam
                 className={styles.showMoreBtn}
                 onClick={() => setShowMore(!showMore)}
             >
-                <img src={IcStar} alt={''} />
+                <img src={Images.default.IcStar4Alt} alt={''} />
                 {showMore ? 'Show Less' : 'Show More'}
-                <img src={IcStar} alt={''} />
+                <img src={Images.default.IcStar4Alt} alt={''} />
             </button>
         </div>
     );

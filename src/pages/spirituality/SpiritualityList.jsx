@@ -1,11 +1,8 @@
 import css from './style.module.css';
 import { PageContainer } from '../../components/page-container/PageContainer';
 import { useParams } from 'react-router-dom';
-import IcChevronIcon from '../../assets/chevron-down.png';
 import { SCardSmall } from './components/card/SCardSmall';
 import { useEffect, useState } from 'react';
-
-import ImgBlogHeader from '../../assets/spirituality_page_banner.jpg';
 import { Spacer } from '../../components/spacer/Spacer';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
@@ -13,6 +10,8 @@ import { Footer } from '../../components/footer/Footer';
 import { APIHelper } from '../../util/APIHelper';
 import { useNavigate } from 'react-router-dom';
 import SEO from '../../Seo';
+import { Images } from '../../util/constants';
+
 const BLOG_PER_PAGE = 9;
 const SpiritualityList = () => {
     const navigate = useNavigate();
@@ -74,7 +73,7 @@ const SpiritualityList = () => {
         <PageContainer className={css.container}>
             <SEO keywords={keywords} description={description}/>
             <div
-                style={{ backgroundImage: `url(${ImgBlogHeader})` }}
+                style={{ backgroundImage: `url(${Images.default.ImgBlogHeaderSpiritual})` }}
                 className={css.header}
             >
                 <TopBar />
@@ -85,7 +84,7 @@ const SpiritualityList = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img src={IcChevronIcon} alt={''} />
+                                <img src={Images.default.IcChevronIcon} alt={''} />
                             </span>{' '}
                             <span>{category?.toUpperCase()} Spirituality</span>
                         </p>

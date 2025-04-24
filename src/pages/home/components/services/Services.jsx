@@ -4,10 +4,7 @@ import ServiceCard from './components/service-card/ServiceCard';
 import { useEffect, useState } from 'react';
 import { PrimaryButton } from '../../../../components/primary-button/PrimaryButton';
 import { APIHelper } from '../../../../util/APIHelper';
-import ImgService1 from '../../../../assets/service_bg_1.png';
-import ImgService2 from '../../../../assets/service_bg_2.png';
-import ImgService3 from '../../../../assets/service_bg_3.png';
-import ImgService4 from '../../../../assets/service_bg_4.png';
+import { Images } from '../../../../util/constants';
 
 const Services = () => {
     const [isShowAll, setIsShowAll] = useState(false);
@@ -29,7 +26,7 @@ const Services = () => {
         }
     };
 
-    const graphics = [ImgService1, ImgService2, ImgService3, ImgService4];
+    const graphics = [Images.default.ImgService1, Images.default.ImgService2, Images.default.ImgService3, Images.default.ImgService4];
 
     return (
         <PageContainer className={css.container}>

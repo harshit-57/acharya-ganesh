@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import css from './style.module.css';
-import CitationBanner from '../../assets/citation-banner.png';
-import IcChevronIcon from '../../assets/chevron-down.png';
 import { NavLink } from 'react-router-dom';
 import { PageContainer } from '../../components/page-container/PageContainer';
 import { TopBar } from '../../components/top-bar/TopBar';
@@ -9,9 +7,10 @@ import { Navigation } from '../../components/navigation/Navigation';
 import { HorizontalBorder, Spacer } from '../../components/spacer/Spacer';
 import { Footer } from '../../components/footer/Footer';
 import { APIHelper } from '../../util/APIHelper';
-import ICStar from '../../assets/Star 4.png';
 import Loader from './component/loading-animation/loader';
 import SEO from '../../Seo';
+
+import { Images } from '../../util/constants';
 
 const Citation = () => {
     const [data, setData] = useState([]);
@@ -62,7 +61,7 @@ const Citation = () => {
         <PageContainer className={css.container}>
             <SEO keywords={keywords} description={description} />
             <div
-                style={{ backgroundImage: `url(${CitationBanner})` }}
+                style={{ backgroundImage: `url(${Images.default.CitationBanner})` }}
                 className={css.header}
             >
                 <TopBar />
@@ -73,7 +72,7 @@ const Citation = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img src={IcChevronIcon} alt={''} />
+                                <img src={Images.default.IcChevronIcon} alt={''} />
                             </span>{' '}
                             <span> Citations</span>
                         </p>
@@ -111,9 +110,9 @@ const Citation = () => {
                                 className={css.showMoreBtn}
                                 onClick={handleShowMore}
                             >
-                                <img src={ICStar} alt={''} />
+                                <img src={Images.default.IcStar4Alt} alt={''} />
                                 Show More
-                                <img src={ICStar} alt={''} />
+                                <img src={Images.default.IcStar4Alt} alt={''} />
                             </button>
                         )}
                     </>

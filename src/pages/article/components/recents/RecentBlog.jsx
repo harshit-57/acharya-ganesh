@@ -1,8 +1,9 @@
 import css from './style.module.css';
-import ImgPlaceholderThumbnail from '../../../../assets/recent_blog_thumbnail_placeholder.jpg';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { APIHelper } from '../../../../util/APIHelper';
+import { Images } from '../../../../util/constants';
+
 export const RecentBlogs = () => {
     const navigate = useNavigate();
     const [articleList, setArticleList] = useState([]);
@@ -40,7 +41,7 @@ export const RecentBlogs = () => {
                         className={css.recent_blog}
                     >
                         <img
-                            src={article?.Image || ImgPlaceholderThumbnail}
+                            src={article?.Image || Images.default.ImgPlaceholderThumbnail}
                             alt={''}
                         />
                         <p>{article?.Title}</p>

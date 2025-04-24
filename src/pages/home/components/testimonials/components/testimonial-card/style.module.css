@@ -51,3 +51,9 @@
     font-style: italic;
     color: #cac3bc;
 }
+
+@media only screen and (max-width: 768px) {
+    .rating_container {
+        padding: 14px;
+    }
+}

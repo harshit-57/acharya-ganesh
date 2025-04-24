@@ -1,6 +1,5 @@
 import css from './style.module.css';
-import IcStar from '../../assets/star_rounded.png';
-import IcStarSelected from '../../assets/star_rounded_selected.png';
+import { Images } from '../../util/constants';
 export const IndicatorContainer = ({
     count = 0,
     currentIndex,
@@ -13,7 +12,7 @@ export const IndicatorContainer = ({
                 <img
                     key={i}
                     onClick={() => onIndicatorClick(i)}
-                    src={currentIndex === i ? IcStarSelected : IcStar}
+                    src={currentIndex === i ? Images.default.IcStarSelected : Images.default.IcStarRounded}
                     alt={'Star icon'}
                 />
             ))}

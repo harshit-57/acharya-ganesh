@@ -1,14 +1,13 @@
 import css from './style.module.css';
 import { PageContainer } from '../page-container/PageContainer';
 import { ArticleCard } from './components/ArticleCard';
-import ImgSectionBg from '../../assets/blog_section_bg.png';
 import { useState, useEffect } from 'react';
 import { APIHelper } from '../../util/APIHelper';
 import { useNavigate } from 'react-router-dom';
 import { IndicatorContainer } from '../indicator-container/IndicatorContainer';
-import LeftArrow from '../../assets/left-arrow.png';
 import useBreakpoint from 'use-breakpoint';
 import { MatxLoading } from '../../admin/components';
+import { Images } from '../../util/constants';
 
 const PER_FRAME_ARTICLE_COUNT_DESKTOP = 3;
 const PER_FRAME_ARTICLE_COUNT_TABLET = 2;
@@ -114,7 +113,7 @@ const Blog = () => {
 
     return (
         <PageContainer
-            style={{ backgroundImage: `url(${ImgSectionBg})` }}
+            style={{ backgroundImage: `url(${Images.default.ImgSectionBgAlt})` }}
             className={css.container}
         >
             <h2 className={css.section_heading}>
@@ -131,10 +130,10 @@ const Blog = () => {
                                 opacity: currentSlideOffset === 0 ? 0.5 : 1,
                             }}
                         >
-                            <img src={LeftArrow} alt="Previous" />
+                            <img src={Images.default.LeftArrow} alt="Previous" />
                         </button>
                         <button onClick={onNext} className={css.next_button}>
-                            <img src={LeftArrow} alt="Next" />
+                            <img src={Images.default.LeftArrow} alt="Next" />
                         </button>
 
                         <div className={css.article_slide_wrapper}>

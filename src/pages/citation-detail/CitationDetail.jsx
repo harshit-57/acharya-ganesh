@@ -5,8 +5,6 @@ import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
 import { Footer } from '../../components/footer/Footer';
 import { HorizontalBorder, Spacer } from '../../components/spacer/Spacer';
-import CitationBanner from '../../assets/citation-banner.png';
-import ImgConsultation from '../../assets/consultation_poster.jpg';
 import {
     useLocation,
     useNavigate,
@@ -15,12 +13,12 @@ import {
 } from 'react-router-dom';
 import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
 import ContactForm from '../../components/contact-form/ContactForm.jsx';
-import ArrowCircle from '../../assets/arrow_circle.png';
 import Blog from '../../components/blog/Blog.jsx';
 import parse from 'html-react-parser';
 import { APIHelper } from '../../util/APIHelper.js';
 import { htmlToText } from 'html-to-text';
 import SEO from '../../Seo.jsx';
+import { Images } from '../../util/constants.js';
 
 const CitationDetail = () => {
     const { slug } = useParams();
@@ -91,7 +89,7 @@ const CitationDetail = () => {
         <PageContainer className={css.container}>
             <SEO keywords={keywords} description={description} />
             <div
-                style={{ backgroundImage: `url(${CitationBanner})` }}
+                style={{ backgroundImage: `url(${Images.default.CitationBanner})` }}
                 className={css.header}
             >
                 <TopBar />
@@ -437,7 +435,7 @@ const CitationDetail = () => {
                     </div>
                     <div className={css.sidebar_container}>
                         <img
-                            src={ImgConsultation}
+                            src={Images.default.ImgConsultationAlt}
                             alt={'Consultation poster'}
                         />
                         <ContactForm />

@@ -11,10 +11,10 @@ import Testimonial from './components/testimonials/Testimonials';
 import Blog from '../../components/blog/Blog';
 import { Footer } from '../../components/footer/Footer';
 import { CoursesCarousel } from '../../components/courses-carousel/CoursesCarousel';
-import { Helmet } from 'react-helmet-async';
 import CitationBox from '../../components/citation-box/CitationBox';
 import VideoReviews from './components/video-review/VideoReview';
 import SEO from '../../Seo';
+
 const Home = () => {
     const keywords = "home, welcome, acharyaganesh, astrology, numerology, spiritual guidance, kundali, horoscope, vedic astrology, daily horoscope, zodiac signs";
     const description = "Welcome to acharyaganesh, your trusted source for astrology, numerology, kundali matching, and daily horoscopes. Explore our services, courses, and expert guidance.";

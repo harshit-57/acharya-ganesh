@@ -1,9 +1,9 @@
 import css from './style.module.css';
 import { PrimaryButton } from '../../../../components/primary-button/PrimaryButton';
 import { Spacer } from '../../../../components/spacer/Spacer';
-import ImgPoster from '../../../../assets/course_1.png';
+
 import parse from 'html-react-parser';
-import { NavLink } from 'react-router-dom';
+
 export const PriceAndPurchaseSection = ({ course }) => {
     return (
         <div className={css.container}>

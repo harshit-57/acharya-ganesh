@@ -1,13 +1,13 @@
 import css from './style.module.css';
-
+import { Images } from '../../util/constants';
 import menus from '../../data/menu-list';
 import MenuButton from './components/menu-button/MenuButton';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import IcXCircle from '../../assets/x-circle.png';
 import { useNav } from '../../hook/useNav';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { APIHelper } from '../../util/APIHelper.js';
+
 export const Navigation = () => {
     const navigate = useNavigate();
     const [menuList, setMenuList] = useState([]);
@@ -118,7 +118,7 @@ export const Navigation = () => {
                     <div className={css.heading_wrapper}>
                         <p>Menu</p>
                         <img
-                            src={IcXCircle}
+                            src={Images.default.IcXCircle}
                             onClick={() => setShowNav(false)}
                             alt={'Close icon'}
                         />

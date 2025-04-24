@@ -3,8 +3,7 @@ import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { PageContainer } from '../../components/page-container/PageContainer';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
-import ImgHeaderBg from '../../assets/blog_header_bg.png';
-
+import { Images } from '../../util/constants';
 import { HorizontalBorder } from '../../components/spacer/Spacer';
 import { CoursesCarousel } from '../../components/courses-carousel/CoursesCarousel';
 import { TitleInformation } from './components/title-info/TitleInformation';
@@ -15,6 +14,7 @@ import parse from 'html-react-parser';
 import { useEffect, useState } from 'react';
 import { APIHelper } from '../../util/APIHelper';
 import SEO from '../../Seo';
+
 const Article = () => {
     const { slug } = useParams();
     const [searchParams] = useSearchParams();
@@ -56,7 +56,7 @@ const Article = () => {
         <PageContainer className={css.container}>
             <SEO keywords={keywords} description={description} />
             <div
-                style={{ backgroundImage: `url(${ImgHeaderBg})` }}
+                style={{ backgroundImage: `url(${Images.default.ImgHeaderBgAlt})` }}
                 className={css.header}
             >
                 <TopBar />

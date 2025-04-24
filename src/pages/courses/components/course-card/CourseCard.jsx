@@ -1,5 +1,4 @@
 import css from './style.module.css';
-import ImgPoster from '../../../../assets/course_poster.png';
 import { PrimaryButton } from '../../../../components/primary-button/PrimaryButton';
 export const CourseCard = ({ onClick, course, style, className }) => {
     return (

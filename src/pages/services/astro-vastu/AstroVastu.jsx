@@ -1,5 +1,5 @@
 import css from './style.module.css';
-import ImgBlogHeader from '../../../assets/blog_header_bg.png';
+import { Images } from '../../../util/constants';
 import { PageContainer } from '../../../components/page-container/PageContainer';
 import { Spacer } from '../../../components/spacer/Spacer';
 import { TopBar } from '../../../components/top-bar/TopBar';
@@ -12,7 +12,7 @@ export const AstroVastu = () => {
         <PageContainer className={css.container}>
             
             <div
-                style={{ backgroundImage: `url(${ImgBlogHeader})` }}
+                style={{ backgroundImage: `url(${Images.default.ImgBlogHeaderAlt})` }}
                 className={css.header}
             >
                 <TopBar />

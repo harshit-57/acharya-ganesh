@@ -1,5 +1,4 @@
 import css from './style.module.css';
-import ImgBlogHeader from '../../../assets/blog_header_bg.png';
 import { PageContainer } from '../../../components/page-container/PageContainer';
 import { Spacer } from '../../../components/spacer/Spacer';
 import { TopBar } from '../../../components/top-bar/TopBar';
@@ -7,11 +6,12 @@ import { Navigation } from '../../../components/navigation/Navigation';
 import { Footer } from '../../../components/footer/Footer';
 import Blog from '../../../components/blog/Blog';
 import CitationBox from '../../../components/citation-box/CitationBox';
+import { Images } from '../../../util/constants';
 export const Astrology = () => {
     return (
         <PageContainer className={css.container}>
             <div
-                style={{ backgroundImage: `url(${ImgBlogHeader})` }}
+                style={{ backgroundImage: `url(${Images.default.ImgBlogHeaderAlt})` }}
                 className={css.header}
             >
                 <TopBar />

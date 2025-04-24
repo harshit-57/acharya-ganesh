@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from './style.module.css';
-import ConsultationFormBg from '../../../../assets/book_consultatio_form.png';
 import { APIHelper } from '../../../../util/APIHelper';
 import moment from 'moment';
 import { formatPrice } from '../../../../util/helper';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Images } from '../../../../util/constants';
 
 const Pricing = {
     online: 17700,
@@ -213,7 +213,7 @@ const FormCompnent = ({ state }) => {
 
     return (
         <form
-            style={{ backgroundImage: `url(${ConsultationFormBg})` }}
+            style={{ backgroundImage: `url(${Images.default.ConsultationFormBg})` }}
             className={styles.form_container}
             onSubmit={handleSubmit}
         >

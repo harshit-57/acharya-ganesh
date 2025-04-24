@@ -1,11 +1,7 @@
 import React from "react";
 import styles from "./style.module.css";
-import BulbIg from "../../../../assets/lightbulb-05.png";
-import VectorIg from "../../../../assets/Vector.png";
-import HourGlassIg from "../../../../assets/hourglass-01 (1).png";
-import RelationshipIg from "../../../../assets/relationship_guidance.png";
-import StressIg from "../../../../assets/Streesreduction.png";
-import BalanceTg from "../../../../assets/scales-01.png";
+
+import { Images } from "../../../../util/constants";
 
 const features = [
   {
@@ -42,17 +38,17 @@ const features = [
 ];
 
 const IconsArr = [
-    BulbIg
+    Images.default.BulbIg
     ,
-    VectorIg
+    Images.default.VectorIg
     ,
-    HourGlassIg
+    Images.default.HourGlassIg
     ,
-    RelationshipIg
+    Images.default.RelationshipIg
     ,
-    StressIg
+    Images.default.StressIg
     ,
-    BalanceTg
+    Images.default.BalanceTg
 ]
 
 const WhyChooseUs = () => {

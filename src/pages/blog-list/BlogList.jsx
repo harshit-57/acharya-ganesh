@@ -1,9 +1,7 @@
 import css from './style.module.css';
 import { PageContainer } from '../../components/page-container/PageContainer';
 import { useParams } from 'react-router-dom';
-import IcChevronIcon from '../../assets/chevron-down.png';
 import { BlogCardSmall } from './components/blog-card/BlogCardSmall';
-
 import ImgBlogHeader from '../../assets/blog_main_bg.png';
 import { Spacer } from '../../components/spacer/Spacer';
 import { useEffect, useState } from 'react';
@@ -13,6 +11,8 @@ import { Footer } from '../../components/footer/Footer';
 import { APIHelper } from '../../util/APIHelper';
 import { useNavigate } from 'react-router-dom';
 import SEO from '../../Seo';
+import { Images } from '../../util/constants';
+
 const BLOG_PER_PAGE = 9;
 const BlogList = () => {
     const navigate = useNavigate();
@@ -85,7 +85,7 @@ const BlogList = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img src={IcChevronIcon} alt={''} />
+                                <img src={Images.default.IcChevronIcon} alt={''} />
                             </span>{' '}
                             <span>{category?.toUpperCase()} Blog</span>
                         </p>
