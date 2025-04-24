@@ -1,4 +1,5 @@
 import { CircularProgress, Box, styled } from '@mui/material';
+import logo from '../../assets/brand_logo.png';
 
 const StyledLoading = styled('div')({
     width: '100%',
@@ -28,7 +29,7 @@ const Loading = ({ style }) => {
     return (
         <StyledLoading style={style || {}}>
             <Box className="wrapper">
-                <img src="/src/assets/brand_logo.png" alt="loading" />
+                <img src={logo} alt="loading" />
                 <CircularProgress
                     sx={{ color: '#9a5c23' }}
                     className="circleProgress"
