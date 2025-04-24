@@ -31,6 +31,8 @@ const WebStoriesList = () => {
         try {
             setLoading(true);
             const response = await APIHelper.getWebStories({
+                status: 1,
+                active: 1,
                 page: currentPage,
                 pageSize: STORIES_PER_PAGE,
             });
@@ -95,7 +97,7 @@ const WebStoriesList = () => {
                                         blog?.Categories?.length
                                             ? blog?.Categories[0]?.CategorySlug
                                             : '-'
-                                    }/${blog?.Id}`
+                                    }/${blog?.Slug}`
                                 )
                             }
                             className={css.blog_card}

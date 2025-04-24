@@ -399,10 +399,11 @@ const Edit = () => {
                     setTags(tagResponse?.data);
                     if (slug != 'new' && state?.Id) {
                         const response = (
-                            await APIHelper.getWebStories({ id: slug })
+                            await APIHelper.getWebStories({ slug: slug })
                         )?.data?.data[0];
                         setData({
                             id: response?.Id,
+                            slug: response?.Slug,
                             title: response?.Title,
                             image: response?.CoverImageUrl || '',
                             imageAlt: response?.CoverImageAlt || '',
@@ -781,7 +782,7 @@ const Edit = () => {
             }
 
         if (payload?.id) {
-            if (!['story', 'testimonial']?.includes(type) && !payload?.slug) {
+            if (!['testimonial']?.includes(type) && !payload?.slug) {
                 toast.error('Slug is required');
                 isValid = false;
                 return isValid;
@@ -1381,6 +1382,7 @@ const Edit = () => {
                 case 'story':
                     previewData = {
                         Id: data.id || undefined,
+                        Slug: data.slug,
                         Title: data.title,
                         ShortDescription: data.shortDescription,
                         PublishedOn: data.publishedOn,
@@ -1414,7 +1416,7 @@ const Edit = () => {
                             previewData?.Categories?.length
                                 ? previewData?.Categories[0]?.CategorySlug
                                 : '-'
-                        }/${previewData?.Id || 'new'}?preview=true`,
+                        }/${previewData?.Slug || 'new'}?preview=true`,
                         { state: { data: previewData } }
                     );
                     break;
