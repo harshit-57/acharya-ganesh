@@ -92,7 +92,7 @@ const BREAKPOINTS = {
     tablet: 765,
     desktop: 1024,
     largeDesktop: 1280,
-    ultraWide: 1600,
+    ultraWide: 1720,
 };
 
 const ZodiacSigns = () => {
