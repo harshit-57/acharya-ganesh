@@ -6,7 +6,7 @@ import IcStar from '../../../../../../assets/star.png';
 const ServiceCard = ({ service, className, graphic }) => {
     return (
         <NavLink
-            to={`/service/${service.Slug}`}
+            to={`/services/${service.Slug}`}
             className={[className, css.nav_link].join(' ')}
         >
             {service.Name}

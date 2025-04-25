@@ -4,10 +4,11 @@ import { PrimaryButton } from '../../../../components/primary-button/PrimaryButt
 export const CourseCard = ({ onClick, course, style, className }) => {
     return (
         <div className={[css.container, className].join(' ')}>
-            <div
-                style={{ backgroundImage: `url(${course?.Images[0]})` }}
+            <img
+                src={course?.Images[0] || ''}
+                alt={course?.Name?.slice(0, 10) || 'course'}
                 className={css.thumbnail}
-            ></div>
+            ></img>
             <div className={css.content_container}>
                 <h2 className="content-two-line" onClick={onClick}>
                     {course?.Name}

@@ -12,18 +12,58 @@ import { NavLink } from 'react-router-dom';
 import { PrimaryButton } from '../primary-button/PrimaryButton';
 import citationList from '../../data/citation-list';
 import { APIHelper } from '../../util/APIHelper';
+import useBreakpoint from 'use-breakpoint';
 
-const CitationBox = () => {
+const BREAKPOINTS = {
+    mobile: 0,
+    tablet: 768,
+    desktop: 1255,
+    largeDesktop: 1570,
+    ultraWide: 1920,
+    ultraWide2: 2270,
+};
+
+const PER_FRAME_CITATION_COUNT_ULTRA_WIDE2 = 6;
+const PER_FRAME_CITATION_COUNT_ULTRA_WIDE = 10;
+const PER_FRAME_CITATION_COUNT_LARGE_DESKTOP = 8;
+const PER_FRAME_CITATION_COUNT_DESKTOP = 9;
+const PER_FRAME_CITATION_COUNT_TABLET = 6;
+const PER_FRAME_CITATION_COUNT_MOBILE = 5;
+
+const CitationBox = ({ breakpoints }) => {
+    const { breakpoint } = useBreakpoint(breakpoints || BREAKPOINTS, 'desktop');
+
+    const getCitationCountPerFrame = (device) => {
+        switch (device) {
+            case 'mobile':
+                return PER_FRAME_CITATION_COUNT_MOBILE;
+            case 'tablet':
+                return PER_FRAME_CITATION_COUNT_TABLET;
+            case 'desktop':
+                return PER_FRAME_CITATION_COUNT_DESKTOP;
+            case 'largeDesktop':
+                return PER_FRAME_CITATION_COUNT_LARGE_DESKTOP;
+            case 'ultraWide':
+                return PER_FRAME_CITATION_COUNT_ULTRA_WIDE;
+            case 'ultraWide2':
+                return PER_FRAME_CITATION_COUNT_ULTRA_WIDE2;
+            default:
+                return PER_FRAME_CITATION_COUNT_ULTRA_WIDE; // Fallback to desktop
+        }
+    };
+
+    const pageSize = getCitationCountPerFrame(breakpoint);
+
     const [citations, setCitations] = React.useState([]);
 
     useEffect(() => {
         fetchCitations();
-    }, []);
+    }, [pageSize]);
 
     const fetchCitations = async (page) => {
         try {
             const res = await APIHelper.getCitations({
-                pageSize: 9,
+                pageSize,
                 status: 1,
             });
             setCitations(res.data?.data || []);
@@ -40,7 +80,7 @@ const CitationBox = () => {
                 {citations?.map((citation) => (
                     <div className={css.city_wrapper}>
                         <NavLink
-                            to={`/citation/${citation?.Slug}`}
+                            to={`/locations/${citation?.Slug}`}
                             state={citation}
                         >
                             <a>{citation?.Title}</a>

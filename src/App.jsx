@@ -50,44 +50,38 @@ export default () => {
             <Routes>
                 <Route index path="/" element={<Home />} />
                 <Route path="/services" element={<Services />} />
-                <Route path="/service/:slug" element={<ServiceDetail />} />
+                <Route path="/services/:slug" element={<ServiceDetail />} />
                 <Route
-                    path="/service/:parent/:slug"
+                    path="/services/:parent/:slug"
                     element={<ServiceDetail />}
                 />
-                <Route path="/blog" element={<BlogList />} />
+                <Route path="/blogs" element={<BlogList />} />
                 <Route path="/blog/:category" element={<BlogList />} />
                 <Route path="/:category/:slug" element={<Article />} />
                 <Route path="/spirituality" element={<SpiritualityList />} />
                 <Route
-                    path="/spirituality/:category"
+                    path="/spirituality/category/:category"
                     element={<SpiritualityList />}
                 />
-                <Route
-                    path="/spirituality/:category/:slug"
-                    element={<SArticle />}
-                />
-                <Route path="/courses" element={<CoursesList />} />
+                <Route path="/spirituality/:slug" element={<SArticle />} />
+                <Route path="/course" element={<CoursesList />} />
                 <Route path="/course/:slug" element={<CourseDetail />} />
-                <Route path="/about" element={<AboutUs />} />
+                <Route path="/about-us" element={<AboutUs />} />
                 <Route path="/web-stories" element={<WebStoriesList />} />
                 <Route
-                    path="/web-stories/:category"
+                    path="/web-stories/category/:category"
                     element={<WebStoriesList />}
                 />
-                <Route
-                    path="/web-stories/:category/:slug"
-                    element={<WebStoriesView />}
-                />
+                <Route path="/web-stories/:slug" element={<WebStoriesView />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/citation" element={<Citation />} />
-                <Route path="/citation/:slug" element={<CitationDetail />} />
+                <Route path="/locations/:slug" element={<CitationDetail />} />
                 <Route
-                    path="/bookConsultation"
+                    path="/book-consultation"
                     element={<BookConsultation />}
                 />
                 <Route
-                    path="/bookConsultationForm"
+                    path="/book-consultation-form"
                     element={<FormConsultation />}
                 />
                 <Route path="*" element={<Navigate to={'/'} />} />

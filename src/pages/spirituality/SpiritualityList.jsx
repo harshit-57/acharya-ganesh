@@ -93,13 +93,7 @@ const SpiritualityList = () => {
                             key={blog?.Id || index}
                             blog={blog}
                             onClick={() =>
-                                navigate(
-                                    `/spirituality/${
-                                        blog?.Categories?.length
-                                            ? blog?.Categories[0]?.CategorySlug
-                                            : '-'
-                                    }/${blog?.Slug}`
-                                )
+                                navigate(`/spirituality/${blog?.Slug}`)
                             }
                             className={css.blog_card}
                         />

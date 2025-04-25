@@ -28,13 +28,7 @@ export const RecentSpirituality = () => {
                 articleList.map((article, index) => (
                     <div
                         onClick={() =>
-                            navigate(
-                                `/spirituality/${
-                                    article?.Categories?.length
-                                        ? article?.Categories[0]?.CategorySlug
-                                        : '-'
-                                }/${article?.Slug}`
-                            )
+                            navigate(`/spirituality/${article?.Slug}`)
                         }
                         key={index}
                         className={css.recent_blog}

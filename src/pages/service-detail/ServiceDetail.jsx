@@ -132,7 +132,16 @@ const ServiceDetail = () => {
                                     largeDesktop: 1950,
                                 }}
                             />
-                            <CitationBox />
+                            <CitationBox
+                                breakpoints={{
+                                    mobile: 0,
+                                    tablet: 1220,
+                                    desktop: 1570,
+                                    largeDesktop: 1920,
+                                    ultraWide: 2270,
+                                    ultraWide2: 2620,
+                                }}
+                            />
                         </div>
                         <ServiceSidebar service={service} />
                     </div>

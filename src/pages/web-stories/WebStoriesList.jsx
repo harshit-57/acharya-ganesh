@@ -92,13 +92,7 @@ const WebStoriesList = () => {
                             key={blog?.Id || index}
                             blog={blog}
                             onClick={() =>
-                                navigate(
-                                    `/web-stories/${
-                                        blog?.Categories?.length
-                                            ? blog?.Categories[0]?.CategorySlug
-                                            : '-'
-                                    }/${blog?.Slug}`
-                                )
+                                navigate(`/web-stories/${blog?.Slug}`)
                             }
                             className={css.blog_card}
                         />

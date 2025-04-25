@@ -195,8 +195,8 @@ const PaginationTable = ({
                                         onClick={() =>
                                             navigate(
                                                 service?.ParentSlug
-                                                    ? `/service/${service?.ParentSlug}/${service.Slug}`
-                                                    : `/service/${service.Slug}`
+                                                    ? `/services/${service?.ParentSlug}/${service.Slug}`
+                                                    : `/services/${service.Slug}`
                                             )
                                         }
                                     >
@@ -223,7 +223,7 @@ const PaginationTable = ({
                                         onClick={() =>
                                             service.ParentSlug &&
                                             navigate(
-                                                `/service/${service.ParentSlug}`
+                                                `/services/${service.ParentSlug}`
                                             )
                                         }
                                     >

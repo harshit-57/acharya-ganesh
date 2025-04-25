@@ -137,3 +137,26 @@
         }
     }
 }
+
+@media screen and (max-width: 576px) {
+    .container {
+        padding: 30px 0;
+    }
+    .section_heading {
+        font-size: 24px;
+        margin: 10px 20px;
+    }
+    .article_slide_container {
+        width: 90%;
+        margin: auto;
+        button > img {
+            width: 13px;
+        }
+        .prev_button {
+            left: -20px;
+        }
+        .next_button {
+            right: -20px;
+        }
+    }
+}

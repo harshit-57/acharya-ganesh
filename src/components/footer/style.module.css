@@ -114,7 +114,7 @@
     text-align: center;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 972px) {
     .sections_container {
         padding: 48px 24px;
         gap: 0;

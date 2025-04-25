@@ -707,7 +707,13 @@ const Edit = () => {
         }
 
         if (
-            !['citation', 'testimonial', 'service']?.includes(type) &&
+            ![
+                'story',
+                'spirituality',
+                'citation',
+                'testimonial',
+                'service',
+            ]?.includes(type) &&
             // payload?.status == 1 &&
             !payload?.categories?.length
         ) {
@@ -1371,10 +1377,8 @@ const Edit = () => {
 
                     navigate(
                         `/spirituality/${
-                            previewData?.Categories?.length
-                                ? previewData?.Categories[0]?.CategorySlug
-                                : '-'
-                        }/${previewData?.Slug || 'new'}?preview=true`,
+                            previewData?.Slug || 'new'
+                        }?preview=true`,
                         { state: { data: previewData } }
                     );
                     break;
@@ -1413,10 +1417,8 @@ const Edit = () => {
 
                     navigate(
                         `/web-stories/${
-                            previewData?.Categories?.length
-                                ? previewData?.Categories[0]?.CategorySlug
-                                : '-'
-                        }/${previewData?.Slug || 'new'}?preview=true`,
+                            previewData?.Slug || 'new'
+                        }?preview=true`,
                         { state: { data: previewData } }
                     );
                     break;
@@ -1435,7 +1437,7 @@ const Edit = () => {
                     };
 
                     navigate(
-                        `/citation/${previewData?.Slug || 'new'}?preview=true`,
+                        `/locations/${previewData?.Slug || 'new'}?preview=true`,
                         { state: { data: previewData } }
                     );
                     break;
@@ -1465,10 +1467,10 @@ const Edit = () => {
 
                     navigate(
                         previewData?.ParentSlug
-                            ? `/service/${previewData?.parentSlug}/${
+                            ? `/services/${previewData?.parentSlug}/${
                                   previewData?.Slug || 'new'
                               }?preview=true`
-                            : `/service/${
+                            : `/services/${
                                   previewData?.Slug || 'new'
                               }?preview=true`,
                         { state: { data: previewData } }
@@ -1490,18 +1492,14 @@ const Edit = () => {
                       data?.categories?.length ? data?.categories[0]?.slug : '-'
                   }`
                 : type === 'spirituality'
-                ? `${window?.location?.origin}/spirituality/${
-                      data?.categories?.length ? data?.categories[0]?.slug : '-'
-                  }`
+                ? `${window?.location?.origin}/spirituality`
                 : type === 'story'
-                ? `${window?.location?.origin}/web-stories/${
-                      data?.categories?.length ? data?.categories[0]?.slug : '-'
-                  }`
+                ? `${window?.location?.origin}/web-stories`
                 : type === 'service'
-                ? `${window?.location?.origin}/service` +
+                ? `${window?.location?.origin}/services` +
                   (data?.parentSlug ? `/${data?.parentSlug}` : '')
                 : type === 'citation'
-                ? `${window?.location?.origin}/citation`
+                ? `${window?.location?.origin}/locations`
                 : `${window?.location?.origin}/${type}/${
                       data?.categories?.length ? data?.categories[0]?.slug : '-'
                   }`,

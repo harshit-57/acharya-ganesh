@@ -43,7 +43,7 @@ const CourseDetail = () => {
                 active: 1,
             });
             if (!response?.data?.data?.length) {
-                navigate('/courses');
+                navigate('/course');
             }
             setCourse(response.data.data[0]);
 

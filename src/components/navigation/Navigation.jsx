@@ -33,7 +33,7 @@ export const Navigation = () => {
         const spiritualitySubMenuTempList = [];
         spiritualityCategories.forEach((category) => {
             spiritualitySubMenuTempList.push({
-                route: `/spirituality/${category?.Slug}`,
+                route: `/spirituality/category/${category?.Slug}`,
                 id: category?.Id,
                 title: category?.Name,
                 subMenus: null,
@@ -42,14 +42,14 @@ export const Navigation = () => {
         const serviceSubMenuTempList = [];
         services.forEach((service) => {
             serviceSubMenuTempList.push({
-                route: `/service/${service?.Slug}`,
+                route: `/services/${service?.Slug}`,
                 id: service?.Id,
                 title: service?.Name,
                 subMenus: subServices
                     ?.filter((s) => s?.ParentId == service?.Id)
                     ?.map((subService) => {
                         return {
-                            route: `/service/${service?.Slug}/${subService?.Slug}`,
+                            route: `/services/${service?.Slug}/${subService?.Slug}`,
                             id: subService?.Id,
                             title: subService?.Name,
                             subMenus: null,
@@ -60,7 +60,7 @@ export const Navigation = () => {
         });
 
         const updatedMenus = menus.map((menu, index) => {
-            if (menu.route === '/blog') {
+            if (menu.route === '/blogs') {
                 let updatedMenu = {
                     ...menu,
                     subMenus: blogSubMenuTempList,

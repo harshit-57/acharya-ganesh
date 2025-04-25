@@ -6,13 +6,13 @@ export default [
         subMenus: null,
     },
     {
-        route: '/about',
+        route: '/about-us',
         id: '',
         title: 'About',
         subMenus: null,
     },
     {
-        route: '/courses',
+        route: '/course',
         id: '',
         title: 'Courses',
         subMenus: null,
@@ -86,7 +86,7 @@ export default [
         subMenus: null,
     },
     {
-        route: '/blog',
+        route: '/blogs',
         id: '',
         title: 'Blog',
         subMenus: [],

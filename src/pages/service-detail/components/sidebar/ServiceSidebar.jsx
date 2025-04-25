@@ -10,7 +10,7 @@ export const ServiceSidebar = ({ service }) => {
         <div className={css.container}>
             <img
                 src={service?.Image || ImgConsultation}
-                alt={'Consultation poster'}
+                alt={service?.ImageAlt || 'Consultation poster'}
                 style={{ cursor: 'pointer' }}
                 onClick={() =>
                     service?.Link
