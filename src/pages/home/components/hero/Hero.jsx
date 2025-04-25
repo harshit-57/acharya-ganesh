@@ -27,7 +27,7 @@ const Hero = () => {
                         range of astrology courses tailored to enthusiasts,
                         practitioners, and aspiring astrologers a like.
                     </p>
-                    <NavLink to={'/bookConsultation'}>
+                    <NavLink to={'/book-consultation'}>
                         <PrimaryButton className={css.book_appointment_button}>
                             book an appointment
                         </PrimaryButton>

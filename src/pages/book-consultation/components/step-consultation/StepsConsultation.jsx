@@ -47,7 +47,7 @@ const BookingSteps = () => {
     const handleClick = () => {
         // window.location.href =
         //     'https://pages.razorpay.com/pl_PfNM4Uhu1DX5XG/view';
-        navigate('/bookConsultationForm', {
+        navigate('/book-consultation-form', {
             state: {
                 consultType: 'offline',
             },
@@ -57,7 +57,7 @@ const BookingSteps = () => {
     const handleClick2 = () => {
         // window.location.href =
         //     'https://pages.razorpay.com/pl_PfNU3x751fwMO9/view';
-        navigate('/bookConsultationForm', {
+        navigate('/book-consultation-form', {
             state: {
                 consultType: 'online',
             },
