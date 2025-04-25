@@ -20,7 +20,13 @@ export const CourseCard = ({ onClick, course, style, className }) => {
                         ? '₹ ' + course?.Sale_Price
                         : '₹ ' + course?.Regular_Price}
                 </p>
-                <PrimaryButton>Buy now</PrimaryButton>
+                <a
+                    className={css.buy_now_button}
+                    href={course?.ProductURL}
+                    target="_blank"
+                >
+                    <PrimaryButton>Buy now</PrimaryButton>
+                </a>
             </div>
         </div>
     );
