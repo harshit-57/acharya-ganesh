@@ -30,10 +30,10 @@ export const Footer = () => {
                             <NavLink to={'/'}>Home</NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/about'}>About</NavLink>
+                            <NavLink to={'/about-us'}>About</NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/courses'}>Courses</NavLink>
+                            <NavLink to={'/course'}>Courses</NavLink>
                         </li>
                         <li>
                             <NavLink to={'/services'}>Services</NavLink>

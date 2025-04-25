@@ -164,7 +164,7 @@ export const CoursesCarousel = () => {
                 )}
                 onIndicatorClick={onIndicatorClick}
             />
-            <NavLink to={'/courses'}>
+            <NavLink to={'/course'}>
                 <PrimaryButton className={css.show_more_button}>
                     Show All
                 </PrimaryButton>

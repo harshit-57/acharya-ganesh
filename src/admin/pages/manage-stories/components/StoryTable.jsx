@@ -191,12 +191,7 @@ const PaginationTable = ({
                                         }}
                                         onClick={() =>
                                             navigate(
-                                                `/web-stories/${
-                                                    story?.Categories?.length
-                                                        ? story?.Categories[0]
-                                                              ?.CategorySlug
-                                                        : '-'
-                                                }/${story.Slug}`
+                                                `/web-stories/${story.Slug}`
                                             )
                                         }
                                     >

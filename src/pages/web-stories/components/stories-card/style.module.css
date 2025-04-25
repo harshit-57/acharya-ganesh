@@ -74,12 +74,7 @@
 }
 @media only screen and (max-width: 768px) {
     .thumbnail_wrapper {
-        aspect-ratio: 1280/720;
-        height: auto;
-
-        img {
-            aspect-ratio: 1280/720;
-        }
+        height: 400px;
     }
     .content_container {
         padding: 24px;

@@ -153,7 +153,7 @@ const PaginationTable = ({
                                         }}
                                         onClick={() =>
                                             navigate(
-                                                `/citation/${citation.Slug}`
+                                                `/locations/${citation.Slug}`
                                             )
                                         }
                                     >

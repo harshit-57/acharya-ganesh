@@ -97,7 +97,7 @@ const Citation = () => {
                         <div className={css.city_container}>
                             {visibleData.map((citation, index) => (
                                 <NavLink
-                                    to={`/citation/${citation?.Slug}`}
+                                    to={`/locations/${citation?.Slug}`}
                                     state={citation}
                                     key={index}
                                 >

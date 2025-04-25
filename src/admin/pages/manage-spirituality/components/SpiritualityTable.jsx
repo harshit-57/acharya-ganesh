@@ -195,14 +195,7 @@ const PaginationTable = ({
                                         }}
                                         onClick={() =>
                                             navigate(
-                                                `/spirituality/${
-                                                    spirituality?.Categories
-                                                        ?.length
-                                                        ? spirituality
-                                                              ?.Categories[0]
-                                                              ?.CategorySlug
-                                                        : '-'
-                                                }/${spirituality.Slug}`
+                                                `/spirituality/${spirituality.Slug}`
                                             )
                                         }
                                     >

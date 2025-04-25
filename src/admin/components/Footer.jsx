@@ -58,7 +58,7 @@ const Footer = () => {
                         <Span sx={{ m: 'auto' }}></Span>
                         <Paragraph sx={{ m: 0 }}>
                             © All Rights Reserved{' '}
-                            <a href="/about">Acharya Ganesh</a>
+                            <a href="/about-us">Acharya Ganesh</a>
                         </Paragraph>
                     </FooterContent>
                 </AppFooter>
