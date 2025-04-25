@@ -168,7 +168,7 @@ const FormCompnent = ({ state }) => {
                             );
                             toast.success(result?.data?.data?.message);
                             alert(result?.data?.message || 'Payment Success');
-                            navigate('/bookConsultation');
+                            navigate('/book-consultation');
                         },
                         modal: {
                             ondismiss: async () => {
