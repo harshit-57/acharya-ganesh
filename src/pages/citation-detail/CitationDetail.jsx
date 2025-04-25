@@ -124,7 +124,7 @@ const CitationDetail = () => {
                         <PrimaryButton
                             className={css.consult_button}
                             onClick={() => {
-                                navigate('/book-consultation');
+                                navigate('/bookConsultation');
                             }}
                         >
                             Consult Hanish Bagga TOday
