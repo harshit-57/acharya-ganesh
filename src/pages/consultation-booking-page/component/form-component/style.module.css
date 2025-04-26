@@ -75,7 +75,6 @@
         padding-left: 48px;
         background: var(--Primary-Color-Color-Secondary-Button, #fed1a7);
         color: black;
-        gap: 20px;
 
         span {
             font-family: Work Sans;
@@ -114,11 +113,5 @@
         font-size: 12px;
         margin-top: 4px;
         margin-left: 12px;
-    }
-}
-
-@media only screen and (max-width: 576px) {
-    .form_container {
-        padding: 40px 20px;
     }
 }

@@ -54,9 +54,6 @@
             font-size: 16px;
             color: #ffffff;
         }
-        &::-webkit-scrollbar {
-            display: none;
-        }
     }
     .menu_button {
         align-items: center;

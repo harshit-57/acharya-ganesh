@@ -80,11 +80,10 @@ const CitationBox = ({ breakpoints }) => {
                 {citations?.map((citation) => (
                     <div className={css.city_wrapper}>
                         <NavLink
-                            className={'content-two-line'}
                             to={`/locations/${citation?.Slug}`}
                             state={citation}
                         >
-                            {citation?.Title}
+                            <a>{citation?.Title}</a>
                         </NavLink>
                     </div>
                 ))}

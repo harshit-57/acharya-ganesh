@@ -2128,7 +2128,7 @@ const Edit = () => {
                                                         </div>
                                                     ) : (
                                                         <div
-                                                            className={`${styles.story_text_container} html-content ql-content`}
+                                                            className={`${styles.story_text_container}`}
                                                         >
                                                             {parse(
                                                                 storyImage?.imageText

@@ -100,46 +100,17 @@
             width: 13px;
         }
         .prev_button {
-            left: 0px;
+            left: -45px;
         }
         .next_button {
-            right: 0px;
+            right: -45px;
         }
 
         .prev_button,
         .next_button {
             z-index: 11;
-            width: 40px;
-            height: 40px;
-        }
-    }
-}
-
-@media only screen and (max-width: 576px) {
-    .container {
-        padding: 30px 20px;
-        gap: 20px;
-    }
-    .section_heading {
-        font-size: 24px;
-    }
-
-    .course_slide_container {
-        button > img {
-            width: 13px;
-        }
-        .prev_button {
-            left: -40px;
-        }
-        .next_button {
-            right: -40px;
-        }
-
-        .prev_button,
-        .next_button {
-            z-index: 11;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
         }
     }
 }

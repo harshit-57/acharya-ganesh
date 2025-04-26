@@ -28,7 +28,6 @@
     display: flex;
     flex-direction: column;
     gap: 50px;
-    width: 100%;
 }
 .card_desc {
     flex: 1;

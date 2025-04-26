@@ -121,9 +121,6 @@
         width: 40%;
     }
     @media only screen and (max-width: 768px) {
-        & {
-            padding: 30px 36px;
-        }
         .row {
             flex-direction: column;
             gap: 20px;
@@ -134,6 +131,9 @@
         }
         .row_form {
             width: 100%;
+        }
+        .bookconsultation {
+            padding: 30px 36px;
         }
         .row_info_content_email {
             flex-direction: column;

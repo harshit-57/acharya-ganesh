@@ -34,14 +34,3 @@
         filter: brightness(1) !important;
     }
 }
-
-@media only screen and (max-width: 576px) {
-    .container {
-        padding: 12px 24px;
-        gap: 8px;
-    }
-
-    .container p {
-        font-size: 14px;
-    }
-}

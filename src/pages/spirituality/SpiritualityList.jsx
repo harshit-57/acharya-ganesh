@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import IcChevronIcon from '../../assets/chevron-down.png';
 import { SCardSmall } from './components/card/SCardSmall';
 import { useEffect, useState } from 'react';
-import ICFilter from '../../assets/filter-lines.png';
+
 import ImgBlogHeader from '../../assets/spirituality_page_banner.jpg';
 import { Spacer } from '../../components/spacer/Spacer';
 import { TopBar } from '../../components/top-bar/TopBar';
@@ -20,23 +20,15 @@ const SpiritualityList = () => {
     const { category } = useParams();
     const [currentPage, setCurrentPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
-    const [spiritualityCategories, setSpiritualityCategories] = useState([]);
     const [loading, setLoading] = useState(false);
     const [spritualitytags, setSpritualityTags] = useState([]);
-    const [showFilterDropDown, setShowFilterDropDown] = useState({
-        category: false,
-    });
-    useEffect(() => {
-        fetchSpiritualities();
-        fetchSpritualityTags();
-        fetchSpritualityCategories();
 
-        return () => {
-            setShowFilterDropDown(false);
-        };
+    useEffect(() => {
+        fetchBlogs();
+        fetchSpritualityTags();
     }, [currentPage, category]);
 
-    const fetchSpiritualities = async () => {
+    const fetchBlogs = async () => {
         try {
             setLoading(true);
             const response = await APIHelper.getSpiritualities({
@@ -67,17 +59,6 @@ const SpiritualityList = () => {
         } finally {
         }
     };
-    const fetchSpritualityCategories = async () => {
-        try {
-            const response = await APIHelper.getSpiritualityCategories({
-                status: 1,
-                active: 1,
-            });
-            setSpiritualityCategories(response.data);
-        } catch (e) {
-            console.log(e);
-        }
-    };
     const keywords = spritualitytags.map((e) => e.Name).join(', ');
     const description =
         'Discover spiritual practices, meditation techniques, and guidance at acharyaganesh. Enhance your spiritual journey with astrology, numerology, and kundali insights.';
@@ -103,43 +84,6 @@ const SpiritualityList = () => {
                     </div>
                 </div>
             </div>
-            {!category && (
-                <div className={css.filter_container}>
-                    <div
-                        className={css.filter_item_wrapper}
-                        style={{ display: 'flex', gap: '10px' }}
-                    >
-                        <div
-                            onClick={() =>
-                                setShowFilterDropDown({
-                                    sort: false,
-                                    category: !showFilterDropDown?.category,
-                                })
-                            }
-                        >
-                            <img src={ICFilter} alt={'Filter'} />
-                            <p>{'Select Category'}</p>
-                            {showFilterDropDown?.category && (
-                                <div className={css.filter_dropdown}>
-                                    <p onClick={() => {}}>Select Category</p>
-                                    {spiritualityCategories?.map((c) => (
-                                        <p
-                                            onClick={() =>
-                                                navigate(
-                                                    `/spirituality/category/${c?.Slug}`
-                                                )
-                                            }
-                                        >
-                                            {c?.Name}
-                                        </p>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            )}
-
             <div className={css.list_container}>
                 {loading && <p>Loading...</p>}
                 {!loading &&

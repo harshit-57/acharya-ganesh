@@ -1,3 +1,5 @@
+.container {
+}
 .header {
     background-color: #5c5c5c;
     min-height: auto !important;
@@ -148,8 +150,7 @@
     }
 
     .list_container {
-        padding: 60px 30px;
-        gap: 40px;
+        padding: 60px 24px;
     }
     .course_card {
         width: 100%;

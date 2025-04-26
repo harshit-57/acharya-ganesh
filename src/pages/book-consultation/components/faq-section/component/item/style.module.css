@@ -1,100 +1,63 @@
 .faqItem {
-    border-bottom: 1px solid #23201d;
-    padding: 12px 0;
+  border-bottom: 1px solid #23201D;
+  padding: 12px 0;
 }
 
 .faqButton {
-    width: 100%;
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    padding: 12px 0;
-    font-size: 18px;
-    font-weight: 500;
-    color: #4a2c1d;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #4a2c1d;
 }
 
 .faqContent {
-    font-family: Work Sans;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 30px;
-    letter-spacing: 0%;
+  font-family: Work Sans;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 0%;
+  li{
+    text-align: start;
+    
+  }
 }
 
-.faqContent li {
-    text-align: start;
-}
 
 .bullet {
-    width: 6px;
-    height: 6px;
-    background-color: #4a2c1d;
-    border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  background-color: #4a2c1d;
+  border-radius: 50%;
 }
 
+
 .arrow {
-    transition: transform 0.3s ease;
-    font-size: 12px;
-    color: #fed1a7;
-    height: 18px;
-    width: 18px;
-    border-radius: 50%;
-    background-color: #23201d;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  transition: transform 0.3s ease;
+  font-size: 12px;
+  color: #FED1A7;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background-color: #23201D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .arrow.open {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .faqAnswer {
-    padding: 10px 15px;
-    color: #6b4226;
-    font-size: 16px;
-    line-height: 1.5;
-}
-
-@media screen and (max-width: 768px) {
-    .faqItem {
-        padding: 8px 0;
-    }
-
-    .faqButton {
-        padding: 8px 0;
-        font-size: 16px;
-    }
-
-    .faqContent {
-        font-size: 18px;
-        line-height: 26px;
-    }
-
-    .faqAnswer {
-        padding: 8px 12px;
-        font-size: 14px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .faqButton {
-        font-size: 14px;
-    }
-
-    .faqContent {
-        font-size: 16px;
-        line-height: 24px;
-    }
-
-    .arrow {
-        height: 16px;
-        width: 16px;
-        font-size: 10px;
-    }
+  padding: 10px 15px;
+  color: #6b4226;
+  font-size: 16px;
+  line-height: 1.5;
 }

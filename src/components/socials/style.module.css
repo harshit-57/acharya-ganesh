@@ -46,8 +46,5 @@
 @media only screen and (max-width: 768px) {
     .container {
         width: 100%;
-        .social_container {
-            gap: 16px;
-        }
     }
 }

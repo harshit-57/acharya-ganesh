@@ -59,9 +59,3 @@
         }
     }
 }
-
-@media only screen and (max-width: 576px) {
-    .container {
-        padding: 50px 24px;
-    }
-}
