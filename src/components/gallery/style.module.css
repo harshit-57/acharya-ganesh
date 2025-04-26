@@ -130,17 +130,46 @@
             width: 13px;
         }
         .prev_button {
-            left: 0px;
+            left: 20px;
         }
         .next_button {
-            right: 0px;
+            right: 20px;
         }
 
         .prev_button,
         .next_button {
             z-index: 11;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
+        }
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .gallery_grid {
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 60px;
+        column-gap: 20px;
+
+        img {
+            flex: 0 0 342px;
+            height: 342px;
+        }
+    }
+
+    .gallery_slide_container {
+        .gallery_slide_wrapper {
+            img {
+                width: 250px;
+                height: 250px;
+            }
+        }
+        .prev_button {
+            left: -20px;
+        }
+        .next_button {
+            right: -20px;
         }
     }
 }

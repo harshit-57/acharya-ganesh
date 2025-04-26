@@ -1,16 +1,9 @@
+/* Base styles */
 .container {
     display: flex;
     flex-direction: column;
-    gap: 72px;
+    gap: 50px;
 }
-/* .header {
-    background-color: #23201d;
-    min-height: 500px;
-    min-width: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: left center;
-} */
 
 .header {
     position: relative;
@@ -30,6 +23,7 @@
     padding-top: 100px;
     background: black;
 }
+
 .navigation {
     display: none;
 }
@@ -46,18 +40,18 @@
     z-index: 1;
 }
 
-.testimonial {
-    padding: 72px 60px;
-}
-
+/* Section Padding */
+.testimonial,
 .faqsection {
-    padding: 72px 60px;
+    padding: 30px 20px;
 }
 
+/* Layout Components */
 .row {
     display: flex;
-    gap: 72px;
+    gap: 50px;
     max-width: 1200px;
+    margin: 20px;
 }
 
 .Hanish_info {
@@ -65,24 +59,27 @@
     flex-direction: column;
     align-items: center;
 }
+
 .person_image {
     flex: 1;
     aspect-ratio: 1;
     border-radius: 36px;
-    min-height: 534px;
     width: 50%;
 }
 
+/* Get in Touch Section */
 .getintouch {
     display: flex;
     justify-content: center;
 }
+
 .getintouch_container {
     display: flex;
     flex-direction: column;
     gap: 72px;
     text-align: center;
 }
+
 .getintouch_row {
     display: flex;
     gap: 72px;
@@ -96,43 +93,36 @@
     gap: 36px;
     width: 50%;
 }
+
+/* Typography */
 .getintouch_heading {
     font-family: Sorts Mill Goudy;
-    font-weight: 400;
     font-size: 42px;
     line-height: 50.4px;
     letter-spacing: -3%;
     text-align: center;
     color: var(--Primary-Color-Caption-Color, #9a5c23);
 }
+
 .row_info_heading {
     font-family: Work Sans;
     font-weight: 600;
     font-size: 28px;
     line-height: 42px;
-    letter-spacing: 0%;
     color: var(--Color-Scheme-Card-Bg, #23201d);
     text-align: start;
 }
-.row_info_heading1 {
-    font-family: Work Sans;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 28px;
-    letter-spacing: 0%;
-    color: #121212;
-    text-align: start;
-}
+
+.row_info_heading1,
 .row_info_heading2 {
     font-family: Work Sans;
-    font-weight: 400;
     font-size: 16px;
     line-height: 28px;
-    letter-spacing: 0%;
     color: #121212;
     text-align: start;
 }
 
+/* About Description */
 .about_description_container {
     flex: 1;
     border-radius: 36px;
@@ -140,58 +130,48 @@
     min-height: 534px;
     width: 50%;
     background-color: #f9eae0;
-
-    h2 {
-        font-family: Sorts Mill Goudy;
-        font-weight: 400;
-        font-size: 42px;
-        line-height: 50.4px;
-        letter-spacing: -3%;
-        color: var(--Primary-Color-Caption-Color, #9a5c23);
-    }
-
-    h4 {
-        font-family: Work Sans;
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 28px;
-        letter-spacing: 0%;
-
-        color: #2c2520;
-    }
-
-    p {
-        font-family: Work Sans;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 28px;
-        letter-spacing: 0%;
-
-        color: #2c2520;
-    }
 }
+
+.about_description_container h2 {
+    font-family: Sorts Mill Goudy;
+    font-size: 42px;
+    line-height: 50.4px;
+    letter-spacing: -3%;
+    color: var(--Primary-Color-Caption-Color, #9a5c23);
+}
+
+.about_description_container h4 {
+    font-family: Work Sans;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 28px;
+    color: #2c2520;
+}
+
+.about_description_container p {
+    font-family: Work Sans;
+    font-size: 16px;
+    line-height: 28px;
+    color: #2c2520;
+}
+
 .BookingSteps {
     padding: 30px 36px;
 }
 
 @media only screen and (max-width: 768px) {
     .container {
-        display: flex;
-        flex-direction: column;
-        gap: 60px;
-    }
-    .row {
-        display: flex;
-        flex-direction: column-reverse;
         gap: 20px;
     }
 
-    .row_info {
-        width: 100%;
+    .row {
+        flex-direction: column-reverse;
+        gap: 20px;
+        padding: 36px 0;
     }
-    .person_image {
-        width: 100%;
-    }
+
+    .row_info,
+    .person_image,
     .about_description_container {
         width: 100%;
     }
@@ -199,38 +179,29 @@
     .header {
         min-height: 360px;
     }
+
     .navigation {
         display: block;
     }
+
     .faqsection {
         padding: 36px 30px;
     }
 
-    .row {
-        padding: 36px 0px;
-    }
     .getintouch_heading {
-        font-family: Sorts Mill Goudy;
-        font-weight: 400;
         font-size: 28px;
         line-height: 33.6px;
-        letter-spacing: -3%;
-        text-align: center;
     }
 
     .getintouch_row {
-        display: flex;
         flex-direction: column;
     }
-    .getintouch {
-        padding: 30px 36px;
-    }
+
+    .getintouch,
     .WhyChooseUs {
-        padding: 30px 36px;
+        padding: 30px 20px;
     }
-    .Hanish_info {
-        padding: 30px 36px;
-    }
+
     .BookingSteps {
         padding: 30px 24px;
     }

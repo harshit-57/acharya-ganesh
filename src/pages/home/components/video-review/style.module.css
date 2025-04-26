@@ -64,7 +64,7 @@
     .section_container {
         display: flex;
         flex-direction: column;
-        gap: 30px;
+        gap: 0px;
     }
     .videoWrapper {
         video {
