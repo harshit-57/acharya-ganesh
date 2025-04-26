@@ -79,6 +79,7 @@ const WebStoriesList = () => {
                             <span>
                                 <img src={IcChevronIcon} alt={'>'} />
                             </span>
+                            <span>Web Stories</span>
                         </p>
                     </div>
                 </div>

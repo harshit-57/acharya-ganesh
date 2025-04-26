@@ -65,7 +65,7 @@ export const WebStoriesView = () => {
                               />
                               {htmlToText(img?.ImageText)?.trim() ? (
                                   <div
-                                      className={`${css.story_text_container} ${css[currentAnimation]}`}
+                                      className={`${css.story_text_container} ${css[currentAnimation]} html-content`}
                                   >
                                       {parse(img?.ImageText)}
                                   </div>

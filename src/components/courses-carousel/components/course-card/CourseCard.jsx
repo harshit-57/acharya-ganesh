@@ -20,7 +20,7 @@ export const CourseCard = ({ course, style, className }) => {
             </a>
             <NavLink to={`/course/${course?.Slug}`}>
                 <div className={css.course_detail_container}>
-                    <h3 className={`${css.course_label} content-three-line`}>
+                    <h3 className={`${css.course_label} content-two-line`}>
                         {course?.Name}
                     </h3>
                     <p>
