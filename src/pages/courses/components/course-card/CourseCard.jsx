@@ -10,17 +10,21 @@ export const CourseCard = ({ onClick, course, style, className }) => {
                 className={css.thumbnail}
             ></img>
             <div className={css.content_container}>
-                <h2 className="content-two-line" onClick={onClick}>
-                    {course?.Name}
-                </h2>
-                <p>
-                    <span>
-                        {course?.Sale_Price ? '₹ ' + course?.Regular_Price : ''}
-                    </span>
-                    {course?.Sale_Price
-                        ? '₹ ' + course?.Sale_Price
-                        : '₹ ' + course?.Regular_Price}
-                </p>
+                <div className={css.content}>
+                    <h2 className="content-two-line" onClick={onClick}>
+                        {course?.Name}
+                    </h2>
+                    <p>
+                        <span>
+                            {course?.Sale_Price
+                                ? '₹ ' + course?.Regular_Price
+                                : ''}
+                        </span>
+                        {course?.Sale_Price
+                            ? '₹ ' + course?.Sale_Price
+                            : '₹ ' + course?.Regular_Price}
+                    </p>
+                </div>
                 <a
                     className={css.buy_now_button}
                     href={course?.ProductURL}

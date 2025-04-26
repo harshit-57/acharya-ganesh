@@ -5,6 +5,7 @@ import IcChevronIcon from '../../assets/chevron-down.png';
 import { BlogCardSmall } from './components/blog-card/BlogCardSmall';
 
 import ImgBlogHeader from '../../assets/blog_main_bg.png';
+import ICFilter from '../../assets/filter-lines.png';
 import { Spacer } from '../../components/spacer/Spacer';
 import { useEffect, useState } from 'react';
 import { TopBar } from '../../components/top-bar/TopBar';
@@ -19,13 +20,22 @@ const BlogList = () => {
     const [blogs, setBlogs] = useState([]);
     const [blogstags, setBlogsTags] = useState([]);
     const { category } = useParams();
+    const [blogCategories, setBlogCategories] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [showFilterDropDown, setShowFilterDropDown] = useState({
+        category: false,
+    });
 
     useEffect(() => {
         fetchBlogs();
         fetchBlogsTags();
+        fetchBlogCategories();
+
+        return () => {
+            setShowFilterDropDown(false);
+        };
     }, [currentPage, category]);
 
     const fetchBlogs = async () => {
@@ -59,6 +69,17 @@ const BlogList = () => {
         } finally {
         }
     };
+    const fetchBlogCategories = async () => {
+        try {
+            const response = await APIHelper.getBlogCategories({
+                status: 1,
+                active: 1,
+            });
+            setBlogCategories(response.data);
+        } catch (e) {
+            console.log(e);
+        }
+    };
     const keywords = blogstags.map((e) => e.Name).join(', ');
     const description =
         'Browse our latest blog posts on astrology, numerology, kundali matching, and daily horoscopes. Stay updated with expert advice and spiritual guidance.';
@@ -86,6 +107,42 @@ const BlogList = () => {
                     </div>
                 </div>
             </div>
+
+            {!category && (
+                <div className={css.filter_container}>
+                    <div
+                        className={css.filter_item_wrapper}
+                        style={{ display: 'flex', gap: '10px' }}
+                    >
+                        <div
+                            onClick={() =>
+                                setShowFilterDropDown({
+                                    sort: false,
+                                    category: !showFilterDropDown?.category,
+                                })
+                            }
+                        >
+                            <img src={ICFilter} alt={'Filter'} />
+                            <p>{'Select Category'}</p>
+                            {showFilterDropDown?.category && (
+                                <div className={css.filter_dropdown}>
+                                    <p onClick={() => {}}>Select Category</p>
+                                    {blogCategories?.map((c) => (
+                                        <p
+                                            onClick={() =>
+                                                navigate(`/blog/${c?.Slug}`)
+                                            }
+                                        >
+                                            {c?.Name}
+                                        </p>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <div className={css.list_container}>
                 {loading && <p>Loading...</p>}
                 {!loading &&

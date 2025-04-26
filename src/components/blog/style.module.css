@@ -132,8 +132,8 @@
         .prev_button,
         .next_button {
             z-index: 11;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
         }
     }
 }
@@ -153,10 +153,13 @@
             width: 13px;
         }
         .prev_button {
-            left: -20px;
+            left: -30px;
         }
         .next_button {
-            right: -20px;
+            right: -30px;
+        }
+        .article_slide_wrapper {
+            display: block;
         }
     }
 }
