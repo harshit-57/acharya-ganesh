@@ -5,11 +5,15 @@ import MenuButton from './components/menu-button/MenuButton';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import IcXCircle from '../../assets/x-circle.png';
+import IcPhone from '../../assets/ic_phone.png';
+import IcUser from '../../assets/user.png';
 import { useNav } from '../../hook/useNav';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { APIHelper } from '../../util/APIHelper.js';
 import { toast } from 'react-toastify';
 import { PrimaryButton } from '../primary-button/PrimaryButton.jsx';
+import { ActionButton, ContactLabel } from '../top-bar/TopBar.jsx';
+import { CONTACT_INFO, LINKS } from '../../util/constants.js';
 export const Navigation = () => {
     const navigate = useNavigate();
     const [menuList, setMenuList] = useState([]);
@@ -170,6 +174,24 @@ export const Navigation = () => {
         <>
             {showNav && (
                 <div className={css.mobile_menu_popup}>
+                    <div className={css.info_button_container}>
+                        <a href={`tel:${CONTACT_INFO.NUMBER_ALT_1}`}>
+                            <ContactLabel
+                                className={css.contact_mob}
+                                icon={IcPhone}
+                            >
+                                {CONTACT_INFO.NUMBER_ALT_1}
+                            </ContactLabel>
+                        </a>
+                        <a href={`tel:${CONTACT_INFO.NUMBER_ALT_2}`}>
+                            <ContactLabel
+                                className={css.contact_mob}
+                                icon={IcPhone}
+                            >
+                                {CONTACT_INFO.NUMBER_ALT_2}
+                            </ContactLabel>
+                        </a>
+                    </div>
                     <div className={css.heading_wrapper}>
                         <p>Menu</p>
                         <img

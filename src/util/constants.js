@@ -8,4 +8,11 @@ export const LINKS = {
     SHOP_URL: 'https://acharyaganesh.shop/',
     ADDRESS_URL:
         'https://maps.google.com/?q=Hall No. 201 Plot No. 959 Niti Khand 1, Opposite Orange County, Indirapuram Ghaziabad, 201014',
+
+    COURSES_LINK: 'https://courses.acharyaganesh.com/',
+};
+
+export const CONTACT_INFO = {
+    NUMBER_ALT_1: '+91 73000-04325',
+    NUMBER_ALT_2: '+91 73000-04326',
 };

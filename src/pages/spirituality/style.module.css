@@ -100,6 +100,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
             & > div {
                 background-color: #f9eae0;
                 border-radius: 40px;
@@ -120,6 +121,8 @@
                     flex-direction: column;
                     padding: 20px;
                     gap: 10px;
+                    max-height: 400px;
+                    overflow-y: scroll;
                     p {
                         cursor: pointer;
                     }

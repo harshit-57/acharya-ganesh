@@ -120,16 +120,23 @@
         gap: 40px;
         flex-direction: column;
     }
-    .section {
-        display: none;
-        gap: 36px;
+    .section:nth-child(1) {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        order: 2;
+
+        li {
+            text-align: center;
+        }
     }
     .section:nth-child(2) {
         flex: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
-
+        order: 1;
         p {
             font-size: 14px;
         }
@@ -140,7 +147,7 @@
         flex-direction: column;
         align-items: center;
         gap: 10px;
-
+        order: 3;
         p {
             font-size: 14px;
         }

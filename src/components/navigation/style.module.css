@@ -26,7 +26,7 @@
     width: 100%;
     height: 100%;
     padding: 50px 24px;
-    gap: 38px;
+    gap: 35px;
     display: flex;
     flex-direction: column;
 
@@ -48,7 +48,7 @@
         display: flex;
         gap: 36px;
         flex-direction: column;
-        height: 80vh;
+        height: 75vh;
         overflow: auto;
         li {
             font-size: 16px;
@@ -75,6 +75,16 @@
         }
         img {
             width: 18px;
+        }
+    }
+
+    .info_button_container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: space-around;
+        .contact_mob {
+            font-size: 12px;
         }
     }
 }
