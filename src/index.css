@@ -84,7 +84,7 @@
     --h1-text-transform: none;
     --h1-font-style: normal;
     --h1-letter-spacing: 0em;
-    --h1-margin-bottom: 2rem;
+    --h1-margin-bottom: 1.2rem;
     --h2-font-family: Poppins, sans-serif;
     --h2-font-size: 24px;
     --h2-line-height: 1.2;
@@ -452,7 +452,7 @@ textarea {
     h5,
     h6 {
         margin: 0;
-        padding-top: 1.5rem;
+        padding-top: 1rem;
         color: var(--color-content-heading);
     }
 
@@ -573,7 +573,7 @@ textarea {
     table,
     blockquote,
     fieldset {
-        margin: 0 0 1.5rem;
+        margin: 0 0 0.5rem;
     }
 
     p:empty {
