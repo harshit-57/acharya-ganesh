@@ -20,13 +20,72 @@
     --color-primary: #fed1a7;
     --color-caption: #9a5c23;
     --color-primary-bg: #fff3eb;
-    --color-gradient-bg: #fff3eb;
+    --color-gradient-bg: #f9eae0;
     --color-button-primary-bg: #fed1a7;
     --color-button-dark: #2c2520;
     --color-card-bg-dark: #23201d;
     --color-header-menu-bg: #2c2520b2;
     --color-header-menu-bg-hover: #e7a06d5d;
     --color-border-dark: #5c4228;
+
+    --default-button-border-radius: 40px;
+}
+
+.theme1 {
+    font-family: 'Work Sans', serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    line-height: 1.5;
+    font-weight: 400;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+
+    --color-black: #000000;
+    --color-white: #ffffff;
+
+    --color-primary: #fed1a7;
+    --color-caption: #9a5c23;
+    --color-primary-bg: #fff3eb;
+    --color-gradient-bg: #f9eae0;
+    --color-button-primary-bg: #fed1a7;
+    --color-button-dark: #2c2520;
+    --color-card-bg-dark: #23201d;
+    --color-header-menu-bg: #2c2520b2;
+    --color-header-menu-bg-hover: #e7a06d5d;
+    --color-border-dark: #5c4228;
+    --color-border-primary: #cebeb1;
+    --default-button-border-radius: 40px;
+}
+.theme2 {
+    font-family: 'Work Sans', serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    line-height: 1.5;
+    font-weight: 400;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+
+    --color-black: #000000;
+    --color-white: #ffffff;
+
+    --color-primary: #a3d5ff; /* Soft blue */
+    --color-caption: #37687d; /* Muted blue for captions */
+    --color-primary-bg: #f0f8ff; /* Alice blue background */
+    --color-gradient-bg: #e0f2ff; /* Slightly deeper blue gradient */
+    --color-button-primary-bg: #8ecae6; /* Blue button */
+    --color-button-dark: #274c5b; /* Darker blue for contrast */
+    --color-card-bg-dark: #1e3a4c; /* Deep navy card background */
+    --color-header-menu-bg: #274c5bbb; /* Semi-transparent blue */
+    --color-header-menu-bg-hover: #8ecae65d; /* Soft blue hover effect */
+    --color-border-dark: #5c8aa8; /* Border with soft steel blue */
 
     --default-button-border-radius: 40px;
 }
@@ -166,6 +225,7 @@ textarea {
 .content-five-line {
     display: -webkit-box;
     -webkit-line-clamp: 1;
+    line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -173,18 +233,22 @@ textarea {
 
 .content-two-line {
     -webkit-line-clamp: 2;
+    line-clamp: 2;
 }
 
 .content-three-line {
     -webkit-line-clamp: 3;
+    line-clamp: 3;
 }
 
 .content-four-line {
     -webkit-line-clamp: 4;
+    line-clamp: 4;
 }
 
 .content-five-line {
     -webkit-line-clamp: 5;
+    line-clamp: 5;
 }
 
 .html-content {

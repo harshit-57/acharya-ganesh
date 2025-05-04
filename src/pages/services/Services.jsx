@@ -3,17 +3,12 @@ import { PageContainer } from '../../components/page-container/PageContainer';
 import ServiceCard from './components/service-card/ServiceCard';
 import { useEffect, useState } from 'react';
 import services from '../../data/service-list';
-import ImgHeaderBg from '../../assets/services_banner.webp';
-import IcChevronIcon from '../../assets/chevron-down.png';
 import SEO from '../../Seo';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
 import { Footer } from '../../components/footer/Footer';
 import { APIHelper } from '../../util/APIHelper';
-import ImgService1 from '../../assets/service_bg_1.png';
-import ImgService2 from '../../assets/service_bg_2.png';
-import ImgService3 from '../../assets/service_bg_3.png';
-import ImgService4 from '../../assets/service_bg_4.png';
+import { Images } from '../../util/constants';
 
 const Services = () => {
     const [serviceList, setServiceList] = useState([]);
@@ -33,7 +28,12 @@ const Services = () => {
         }
     };
 
-    const graphics = [ImgService1, ImgService2, ImgService3, ImgService4];
+    const graphics = [
+        Images.default.ImgService1,
+        Images.default.ImgService2,
+        Images.default.ImgService3,
+        Images.default.ImgService4,
+    ];
 
     const keywords =
         'our story, who we are, about acharyaganesh, astrology, numerology, spiritual guidance, kundali, horoscope, vedic astrology';
@@ -44,7 +44,9 @@ const Services = () => {
         <PageContainer>
             <SEO keywords={keywords} description={description} />
             <div
-                style={{ backgroundImage: `url(${ImgHeaderBg})` }}
+                style={{
+                    backgroundImage: `url(${Images.default.ImgServiceBanner})`,
+                }}
                 className={css.header}
             >
                 <TopBar />
@@ -55,7 +57,10 @@ const Services = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img src={IcChevronIcon} alt={'>'} />
+                                <img
+                                    src={Images.default.IcChevronIcon}
+                                    alt={'>'}
+                                />
                             </span>{' '}
                             <span>Services</span>
                         </p>

@@ -1,14 +1,13 @@
 import css from './style.module.css';
 import { PageContainer } from '../page-container/PageContainer';
 import { ArticleCard } from './components/ArticleCard';
-import ImgSectionBg from '../../assets/blog_section_bg.png';
 import { useState, useEffect } from 'react';
 import { APIHelper } from '../../util/APIHelper';
 import { useNavigate } from 'react-router-dom';
 import { IndicatorContainer } from '../indicator-container/IndicatorContainer';
-import LeftArrow from '../../assets/left-arrow.png';
 import useBreakpoint from 'use-breakpoint';
 import { MatxLoading } from '../../admin/components';
+import { Images } from '../../util/constants';
 
 const PER_FRAME_ARTICLE_COUNT_ULTRA_WIDE = 5;
 const PER_FRAME_ARTICLE_COUNT_LARGE_DESKTOP = 4;
@@ -132,7 +131,9 @@ const Blog = ({ breakpoints }) => {
 
     return (
         <PageContainer
-            style={{ backgroundImage: `url(${ImgSectionBg})` }}
+            style={{
+                backgroundImage: `url(${Images.default.ImgSectionBgAlt})`,
+            }}
             className={css.container}
         >
             <h2 className={css.section_heading}>
@@ -142,10 +143,10 @@ const Blog = ({ breakpoints }) => {
                 <>
                     <div className={css.article_slide_container}>
                         <button onClick={onPrev} className={css.prev_button}>
-                            <img src={LeftArrow} alt="<" />
+                            <img src={Images.default.LeftArrow} alt="<" />
                         </button>
                         <button onClick={onNext} className={css.next_button}>
-                            <img src={LeftArrow} alt=">" />
+                            <img src={Images.default.LeftArrow} alt=">" />
                         </button>
 
                         <div

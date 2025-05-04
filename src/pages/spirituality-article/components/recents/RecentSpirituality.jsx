@@ -1,8 +1,8 @@
 import css from './style.module.css';
-import ImgPlaceholderThumbnail from '../../../../assets/recent_blog_thumbnail_placeholder.jpg';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { APIHelper } from '../../../../util/APIHelper';
+import { Images } from '../../../../util/constants';
 export const RecentSpirituality = () => {
     const navigate = useNavigate();
     const [articleList, setArticleList] = useState([]);
@@ -34,7 +34,10 @@ export const RecentSpirituality = () => {
                         className={css.recent_blog}
                     >
                         <img
-                            src={article?.Image || ImgPlaceholderThumbnail}
+                            src={
+                                article?.Image ||
+                                Images.default.ImgPlaceholderThumbnail
+                            }
                             alt={
                                 article?.ImageAlt ||
                                 article?.Title?.slice(0, 10) ||

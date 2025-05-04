@@ -1,7 +1,7 @@
 import css from './style.module.css';
 import { NavLink } from 'react-router-dom';
 
-import IcStar from '../../../../assets/star.png';
+import { Images } from '../../../../util/constants';
 
 const ServiceCard = ({ service, className, graphic }) => {
     return (
@@ -11,9 +11,9 @@ const ServiceCard = ({ service, className, graphic }) => {
         >
             {service.Name}
             <div className={css.view_label_wrapper}>
-                <img src={IcStar} alt={'*'} />
+                <img src={Images.default.IcStar} alt={'*'} />
                 <p>View</p>
-                <img src={IcStar} alt={'*'} />
+                <img src={Images.default.IcStar} alt={'*'} />
             </div>
             <img className={css.bg} src={graphic} alt={'bg'} />
         </NavLink>

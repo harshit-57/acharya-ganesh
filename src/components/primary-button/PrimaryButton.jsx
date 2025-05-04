@@ -1,6 +1,5 @@
 import css from './style.module.css';
-
-import IcStar from '../../assets/star.png';
+import { Images } from '../../util/constants';
 
 export const PrimaryButton = ({ className, style, children, onClick }) => (
     <div
@@ -8,8 +7,8 @@ export const PrimaryButton = ({ className, style, children, onClick }) => (
         style={style}
         onClick={onClick}
     >
-        <img src={IcStar} alt={'*'} />
+        <img src={Images.default.IcStar} alt={'*'} />
         <p>{children}</p>
-        <img src={IcStar} alt={'*'} />
+        <img src={Images.default.IcStar} alt={'*'} />
     </div>
 );

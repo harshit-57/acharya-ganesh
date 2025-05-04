@@ -1,10 +1,7 @@
 import css from './style.module.css';
 import { PageContainer } from '../../components/page-container/PageContainer';
 import { useParams } from 'react-router-dom';
-import IcChevronIcon from '../../assets/chevron-down.png';
 import { CardSmall } from './components/stories-card/CardSmall';
-
-import ImgBlogHeader from '../../assets/webstory_header_bg.png';
 import { Spacer } from '../../components/spacer/Spacer';
 import { useEffect, useState } from 'react';
 import { TopBar } from '../../components/top-bar/TopBar';
@@ -13,6 +10,8 @@ import { Footer } from '../../components/footer/Footer';
 import { APIHelper } from '../../util/APIHelper';
 import { useNavigate } from 'react-router-dom';
 import SEO from '../../Seo';
+import { Images } from '../../util/constants';
+
 const STORIES_PER_PAGE = 9;
 const WebStoriesList = () => {
     const navigate = useNavigate();
@@ -66,7 +65,9 @@ const WebStoriesList = () => {
         <PageContainer className={css.container}>
             <SEO keywords={keywords} description={description} />
             <div
-                style={{ backgroundImage: `url(${ImgBlogHeader})` }}
+                style={{
+                    backgroundImage: `url(${Images.default.ImgBlogHeaderWebstory})`,
+                }}
                 className={css.header}
             >
                 <TopBar />
@@ -77,7 +78,10 @@ const WebStoriesList = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img src={IcChevronIcon} alt={'>'} />
+                                <img
+                                    src={Images.default.IcChevronIcon}
+                                    alt={'>'}
+                                />
                             </span>
                             <span>Web Stories</span>
                         </p>

@@ -1,11 +1,9 @@
 import css from './style.module.css';
-import IcFacebook from '../../../../assets/ic_facebook_mono.png';
-import IcInstagram from '../../../../assets/ic_instagram_mono.png';
-import IcX from '../../../../assets/ic_x_mono.png';
-import IcPinterest from '../../../../assets/ic_pinterest_mono.png';
+import { Images } from '../../../../util/constants';
 import { useEffect, useMemo, useState } from 'react';
 import { getDaySuffix, getReadingTime } from '../../../../util/helper';
 import { htmlToText } from 'html-to-text';
+
 const months = [
     'January',
     'February',
@@ -78,7 +76,7 @@ export const TitleInformation = ({ article }) => {
                         target={'_blank'}
                     >
                         <div className={css.social_button_wrapper}>
-                            <img src={IcFacebook} alt={'fb'} />
+                            <img src={Images.default.IcFacebook} alt={'fb'} />
                         </div>
                     </a>
                     <a
@@ -88,7 +86,10 @@ export const TitleInformation = ({ article }) => {
                         target={'_blank'}
                     >
                         <div className={css.social_button_wrapper}>
-                            <img src={IcInstagram} alt={'insta'} />
+                            <img
+                                src={Images.default.IcInstagram}
+                                alt={'insta'}
+                            />
                         </div>
                     </a>
                     <a
@@ -96,7 +97,7 @@ export const TitleInformation = ({ article }) => {
                         target={'_blank'}
                     >
                         <div className={css.social_button_wrapper}>
-                            <img src={IcX} alt={'x'} />
+                            <img src={Images.default.IcX} alt={'x'} />
                         </div>
                     </a>
                     <a
@@ -104,7 +105,10 @@ export const TitleInformation = ({ article }) => {
                         target={'_blank'}
                     >
                         <div className={css.social_button_wrapper}>
-                            <img src={IcPinterest} alt={'pinterest'} />
+                            <img
+                                src={Images.default.IcPinterest}
+                                alt={'pinterest'}
+                            />
                         </div>
                     </a>
                 </div>

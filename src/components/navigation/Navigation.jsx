@@ -1,19 +1,16 @@
 import css from './style.module.css';
-
+import { Images } from '../../util/constants';
 import menus from '../../data/menu-list';
 import MenuButton from './components/menu-button/MenuButton';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import IcXCircle from '../../assets/x-circle.png';
-import IcPhone from '../../assets/ic_phone.png';
-import IcUser from '../../assets/user.png';
+import { useState, useEffect } from 'react';
 import { useNav } from '../../hook/useNav';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { APIHelper } from '../../util/APIHelper.js';
 import { toast } from 'react-toastify';
 import { PrimaryButton } from '../primary-button/PrimaryButton.jsx';
-import { ActionButton, ContactLabel } from '../top-bar/TopBar.jsx';
+import { ContactLabel } from '../top-bar/TopBar.jsx';
 import { CONTACT_INFO, LINKS } from '../../util/constants.js';
+
 export const Navigation = () => {
     const navigate = useNavigate();
     const [menuList, setMenuList] = useState([]);
@@ -195,7 +192,7 @@ export const Navigation = () => {
                     <div className={css.heading_wrapper}>
                         <p>Menu</p>
                         <img
-                            src={IcXCircle}
+                            src={Images.default.IcXCircle}
                             onClick={() => setShowNav(false)}
                             alt={'Close'}
                         />

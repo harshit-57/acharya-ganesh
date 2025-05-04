@@ -1,9 +1,9 @@
 import css from './style.module.css';
 import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
-import ImgContactFormBg from '../../assets/contact_form_bg.png';
 import { InputField } from '../../components/input-field/InputField';
 import { useState } from 'react';
 import { APIHelper } from '../../util/APIHelper';
+import { Images } from '../../util/constants';
 const MainContactForm = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -110,7 +110,7 @@ const MainContactForm = () => {
         <div className={css.column}>
             <div
                 style={{
-                    backgroundImage: `url(${ImgContactFormBg})`,
+                    backgroundImage: `url(${Images.default.ImgContactFormBg})`,
                 }}
                 className={css.contact_form}
             >

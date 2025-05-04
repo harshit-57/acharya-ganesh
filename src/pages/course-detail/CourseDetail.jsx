@@ -1,14 +1,10 @@
 import css from './style.module.css';
-import ImgHeaderBg from '../../assets/contact_header_bg.png';
-import IcDescription from '../../assets/ic_description.png';
-import IcStar from '../../assets/star_primary_dark.png';
 import { Footer } from '../../components/footer/Footer';
 import { Navigation } from '../../components/navigation/Navigation';
 import { PageContainer } from '../../components/page-container/PageContainer';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { PriceAndPurchaseSection } from './components/price-n-purchase-section/PriceAndPurchase';
-import { CourseCard } from './components/course-card/CourseCard';
-import ImgCourse1 from '../../assets/course_1.png';
+
 import {
     useLocation,
     useNavigate,
@@ -21,6 +17,7 @@ import parse from 'html-react-parser';
 import { toast } from 'react-toastify';
 import { longFormatters } from 'date-fns';
 import SEO from '../../Seo';
+import { Images } from '../../util/constants';
 const CourseDetail = () => {
     const { slug } = useParams();
     const [searchParams] = useSearchParams();
@@ -60,7 +57,9 @@ const CourseDetail = () => {
         <PageContainer className={css.container}>
             <SEO keywords={keywords} description={description} />
             <div
-                style={{ backgroundImage: `url(${ImgHeaderBg})` }}
+                style={{
+                    backgroundImage: `url(${Images.default.ImgHeaderBgContactAlt})`,
+                }}
                 className={css.header}
             >
                 <TopBar />
@@ -70,7 +69,10 @@ const CourseDetail = () => {
                 <PriceAndPurchaseSection course={course} />
                 <div className={css.description_container}>
                     <div className={css.section_label}>
-                        <img src={IcDescription} alt={'Description'} />
+                        <img
+                            src={Images.default.IcDescription}
+                            alt={'Description'}
+                        />
                         <p>Description</p>
                     </div>
                     <div className={`html-content`}>

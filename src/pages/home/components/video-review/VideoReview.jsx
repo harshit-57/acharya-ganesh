@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import css from './style.module.css';
 import { PageContainer } from '../../../../components/page-container/PageContainer';
-import ImgSectionBg from '../../../../assets/testimonial_bg.png';
 import { PrimaryButton } from '../../../../components/primary-button/PrimaryButton';
+import { Images } from '../../../../util/constants';
 
 const VideoReviews = () => {
     const videos = [
@@ -24,7 +24,7 @@ const VideoReviews = () => {
 
     return (
         <PageContainer
-            style={{ backgroundImage: `url(${ImgSectionBg})` }}
+            style={{ backgroundImage: `url(${Images.default.ImgSectionBg})` }}
             className={css.container}
         >
             <h2 className={css.section_heading}>Our Students Reviews</h2>

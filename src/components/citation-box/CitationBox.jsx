@@ -1,16 +1,9 @@
 import React, { useEffect } from 'react';
 import css from './style.module.css';
-import ImgDiscoverDelhi from '../../assets/discover_delhi.png';
-import ImgDiscoverKolkata from '../../assets/discover_kolkata.png';
-import ImgDiscoverMumbai from '../../assets/discover_mumbai.png';
-import ImgDiscoverBanglore from '../../assets/discover_banglore.png';
-import ImgDiscoverChennai from '../../assets/discover_chennai.png';
-import ImgDiscoverHydrabad from '../../assets/discover_hydrabad.png';
-import ImgDiscoverPune from '../../assets/discover_pune.png';
-import ImgDiscoverAhemdabad from '../../assets/discover_ahemdabad.png';
+
 import { NavLink } from 'react-router-dom';
 import { PrimaryButton } from '../primary-button/PrimaryButton';
-import citationList from '../../data/citation-list';
+
 import { APIHelper } from '../../util/APIHelper';
 import useBreakpoint from 'use-breakpoint';
 

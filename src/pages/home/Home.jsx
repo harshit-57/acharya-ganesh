@@ -11,7 +11,6 @@ import Testimonial from './components/testimonials/Testimonials';
 import Blog from '../../components/blog/Blog';
 import { Footer } from '../../components/footer/Footer';
 import { CoursesCarousel } from '../../components/courses-carousel/CoursesCarousel';
-import { Helmet } from 'react-helmet-async';
 import CitationBox from '../../components/citation-box/CitationBox';
 import VideoReviews from './components/video-review/VideoReview';
 import SEO from '../../Seo';

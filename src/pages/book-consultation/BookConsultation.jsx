@@ -1,17 +1,13 @@
 import { PageContainer } from '../../components/page-container/PageContainer';
 import { TopBar } from '../../components/top-bar/TopBar';
 import css from './style.module.css';
-import ImgHeaderBg from '../../assets/book_consultation_header.png';
-import HanishImg from '../../assets/book_consultation_hanish_bagga.png';
+import { Images } from '../../util/constants';
 import { Footer } from '../../components/footer/Footer';
 import Testimonial from '../home/components/testimonials/Testimonials';
 import { Spacer } from '../../components/spacer/Spacer';
 import BookingSteps from './components/step-consultation/StepsConsultation';
 import WhyChooseUs from './components/why-choose-us/WhyChoose';
 import FAQSection from './components/faq-section/FaqSection';
-import { InputField } from '../../components/input-field/InputField';
-import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
-import GetInTouchBg from '../../assets/book_consultatio_form.png';
 import MainContactForm from '../../components/main-contact-form/Contact';
 import SEO from '../../Seo';
 import { Navigation } from '../../components/navigation/Navigation';
@@ -21,6 +17,7 @@ const BookConsultation = () => {
         'Book a personalized consultation with acharyaganesh for astrology, numerology, kundali matching, and horoscope readings. Get expert guidance tailored to your needs.';
     const keywords =
         'book consultation, schedule appointment, online consultation, astrology consultation, numerology consultation, kundali matching, horoscope reading, vedic astrology consultation';
+
     return (
         <PageContainer className={css.container}>
             <SEO keywords={keywords} description={description} />
@@ -28,7 +25,11 @@ const BookConsultation = () => {
                 // style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}
             >
-                <img src={ImgHeaderBg} alt="header" className={css.headerImg} />
+                <img
+                    src={Images.default.ImgHeaderBg}
+                    alt="header"
+                    className={css.headerImg}
+                />
                 <TopBar />
                 <div className={css.navigation}>
                     <Navigation />
@@ -70,7 +71,7 @@ const BookConsultation = () => {
                     </div>
                     <img
                         className={css.person_image}
-                        src={HanishImg}
+                        src={Images.default.HanishImg}
                         alt={'Hanish Bagga image'}
                     />
                 </div>

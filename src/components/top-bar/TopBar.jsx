@@ -1,13 +1,8 @@
+import { Link } from 'react-router-dom';
 import css from './style.module.css';
 
-import Logo from '../../assets/brand_logo.png';
-import IcUser from '../../assets/user.png';
+import { Images, CONTACT_INFO, LINKS } from '../../util/constants';
 import { useNav } from '../../hook/useNav';
-
-import IcPhone from '../../assets/ic_phone.png';
-import IcMenu from '../../assets/menu-02.png';
-import { Link } from 'react-router-dom';
-import { CONTACT_INFO, LINKS } from '../../util/constants';
 
 export const TopBar = () => {
     const { showNav, setShowNav } = useNav();
@@ -15,26 +10,28 @@ export const TopBar = () => {
         <div className={css.container}>
             <img
                 className={css.menu_icon}
-                src={IcMenu}
+                src={Images.default.IcMenu}
                 alt={'menu'}
                 onClick={() => setShowNav(true)}
             />
             <Link to="/">
-                <img className={css.logo} src={Logo} />
+                <img className={css.logo} src={Images.default.Logo} />
             </Link>
             <div className={css.info_n_action_button_container}>
                 <a href={`tel:${CONTACT_INFO.NUMBER_ALT_1}`}>
-                    <ContactLabel icon={IcPhone}>
+                    <ContactLabel icon={Images.default.IcPhone}>
                         {CONTACT_INFO.NUMBER_ALT_1}
                     </ContactLabel>
                 </a>
                 <a href={`tel:${CONTACT_INFO.NUMBER_ALT_2}`}>
-                    <ContactLabel icon={IcPhone}>
+                    <ContactLabel icon={Images.default.IcPhone}>
                         {CONTACT_INFO.NUMBER_ALT_2}
                     </ContactLabel>
                 </a>
                 <a target={'_blank'} href={LINKS.COURSES_LINK}>
-                    <ActionButton icon={IcUser}>Log in</ActionButton>
+                    <ActionButton icon={Images.default.IcUser}>
+                        Log in
+                    </ActionButton>
                 </a>
             </div>
         </div>

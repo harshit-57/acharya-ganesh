@@ -1,14 +1,12 @@
 import css from './style.module.css';
-import ImgGemstone from '../../assets/Gemstone.webp';
-import ImgPanna from '../../assets/Panna.webp';
-import ImgMukhi from '../../assets/Mukhi.webp';
+import { Images } from '../../util/constants';
 
 export const Shop = () => {
     return (
         <div className={css.recent_container}>
             <h3>Buy Gemstones</h3>
             <div className={css.recent_shop}>
-                <img src={ImgGemstone} alt={'gemstone'} />
+                <img src={Images.default.ImgGemstone} alt={'gemstone'} />
                 <div>
                     <p>
                         Labradorite 7.1 Ratti
@@ -31,7 +29,7 @@ export const Shop = () => {
             </div>
             <h3>Buy Panna</h3>
             <div className={css.recent_shop}>
-                <img src={ImgPanna} alt={'panna'} />
+                <img src={Images.default.ImgPanna} alt={'panna'} />
                 <div>
                     <p>
                         Panna 5.72 Ratti
@@ -53,7 +51,7 @@ export const Shop = () => {
             </div>
             <h3>Buy Rudraksha</h3>
             <div className={css.recent_shop}>
-                <img src={ImgMukhi} alt={'rudraksha'} />
+                <img src={Images.default.ImgMukhi} alt={'rudraksha'} />
                 <div>
                     <p>
                         1 Mukhi Rudraksha

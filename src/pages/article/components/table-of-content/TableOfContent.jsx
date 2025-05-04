@@ -1,8 +1,8 @@
 import css from './style.module.css';
-import IcChevronIcon from '../../../../assets/chevron-down.png';
+import { Images } from '../../../../util/constants';
 import { useMemo, useState } from 'react';
 import parse from 'html-react-parser';
-import { useNavigate } from 'react-router-dom';
+
 
 export const TableOfContent = ({ article }) => {
     if (!article) return null;
@@ -45,7 +45,7 @@ export const TableOfContent = ({ article }) => {
         <div className={css.container}>
             <h3 onClick={() => setShow(!show)}>
                 <img
-                    src={IcChevronIcon}
+                    src={Images.default.IcChevronIcon}
                     style={show ? { transform: 'rotate(0deg)' } : {}}
                     alt={'>'}
                 />

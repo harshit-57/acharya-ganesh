@@ -1,7 +1,6 @@
 import css from './style.module.css';
 import { useState, useEffect } from 'react';
-import ImgSectionBg from '../../assets/course_section_bg.png';
-import LeftArrow from '../../assets/left-arrow.png';
+import { Images } from '../../util/constants';
 import { IndicatorContainer } from '../indicator-container/IndicatorContainer';
 import { PageContainer } from '../page-container/PageContainer';
 import { CourseCard } from './components/course-card/CourseCard';
@@ -137,7 +136,7 @@ export const CoursesCarousel = () => {
 
     return (
         <PageContainer
-            style={{ backgroundImage: `url(${ImgSectionBg})` }}
+            style={{ backgroundImage: `url(${Images.default.ImgSectionBgCS})` }}
             className={css.container}
         >
             <h2 className={css.section_heading}>
@@ -145,10 +144,10 @@ export const CoursesCarousel = () => {
             </h2>
             <div className={css.course_slide_container}>
                 <button onClick={onPrev} className={css.prev_button}>
-                    <img src={LeftArrow} alt={'<'} />
+                    <img src={Images.default.LeftArrow} alt={'<'} />
                 </button>
                 <button onClick={onNext} className={css.next_button}>
-                    <img src={LeftArrow} alt={'>'} />
+                    <img src={Images.default.LeftArrow} alt={'>'} />
                 </button>
                 <div className={css.course_slide_wrapper}>
                     {Array.isArray(visibleCourses) &&

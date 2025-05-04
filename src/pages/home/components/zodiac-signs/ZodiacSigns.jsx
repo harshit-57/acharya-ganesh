@@ -1,20 +1,7 @@
 import css from './style.module.css';
 import { useState, useEffect } from 'react';
 
-import LeftArrow from '../../../../assets/left-arrow.png';
-import Zodiac1 from '../../../../assets/Pisces-01.png';
-import Zodiac2 from '../../../../assets/Aquarius-02.png';
-import Zodiac3 from '../../../../assets/Capricorn-03.png';
-import Zodiac4 from '../../../../assets/Sagittarius-04.png';
-import Zodiac5 from '../../../../assets/Scorpio-05.png';
-import Zodiac6 from '../../../../assets/Libra-06.png';
-import Zodiac7 from '../../../../assets/Virgo-07.png';
-import Zodiac8 from '../../../../assets/Leo-08.png';
-import Zodiac9 from '../../../../assets/Cancer-09.png';
-import Zodiac10 from '../../../../assets/Gemini-10.png';
-import Zodiac11 from '../../../../assets/Tauras-11.png';
-import Zodiac12 from '../../../../assets/Aries-12.png';
-
+import { Images } from '../../../../util/constants';
 import { IndicatorContainer } from '../../../../components/indicator-container/IndicatorContainer';
 import { PageContainer } from '../../../../components/page-container/PageContainer';
 import { useNavigate } from 'react-router-dom';
@@ -22,58 +9,62 @@ import useBreakpoint from 'use-breakpoint';
 
 const ZodiacSignList = [
     {
-        img: Zodiac12,
+        img: Images.default.Zodiac12,
         route: 'zodiac-signs/aries-zodiac-sign',
         name: 'Aries',
     },
     {
-        img: Zodiac11,
+        img: Images.default.Zodiac11,
         route: 'zodiac-signs/taurus-zodiac-sign',
         name: 'Taurus',
     },
     {
-        img: Zodiac10,
+        img: Images.default.Zodiac10,
         route: 'zodiac-signs/gemini-zodiac-sign',
         name: 'Gemini',
     },
     {
-        img: Zodiac9,
+        img: Images.default.Zodiac9,
         route: 'zodiac-signs/cancer-zodiac-sign',
         name: 'Cancer',
     },
-    { img: Zodiac8, route: 'zodiac-signs/leo-zodiac-sign', name: 'Leo' },
     {
-        img: Zodiac7,
+        img: Images.default.Zodiac8,
+        route: 'zodiac-signs/leo-zodiac-sign',
+        name: 'Leo',
+    },
+    {
+        img: Images.default.Zodiac7,
         route: 'zodiac-signs/virgo-zodiac-signs',
         name: 'Virgo',
     },
     {
-        img: Zodiac6,
+        img: Images.default.Zodiac6,
         route: 'zodiac-signs/libra-zodiac-sign',
         name: 'Libra',
     },
     {
-        img: Zodiac5,
+        img: Images.default.Zodiac5,
         route: 'zodiac-signs/scorpio-zodiac-signs',
         name: 'Scorpio',
     },
     {
-        img: Zodiac4,
+        img: Images.default.Zodiac4,
         route: 'zodiac-signs/sagittarius-zodiac-sign',
         name: 'Sagittarius',
     },
     {
-        img: Zodiac3,
+        img: Images.default.Zodiac3,
         route: 'zodiac-signs/capricorn-zodiac-sign',
         name: 'Capricorn',
     },
     {
-        img: Zodiac2,
+        img: Images.default.Zodiac2,
         route: 'zodiac-signs/aquarius-zodiac-signs',
         name: 'Aquarius',
     },
     {
-        img: Zodiac1,
+        img: Images.default.Zodiac1,
         route: 'zodiac-signs/pisces-zodiac-sign',
         name: 'Pisces',
     },
@@ -189,10 +180,10 @@ const ZodiacSigns = () => {
             </p>
             <div className={css.zodiac_slide_container}>
                 <button onClick={onPrev} className={css.prev_button}>
-                    <img src={LeftArrow} alt="<" />
+                    <img src={Images.default.LeftArrow} alt="<" />
                 </button>
                 <button onClick={onNext} className={css.next_button}>
-                    <img src={LeftArrow} alt=">" />
+                    <img src={Images.default.LeftArrow} alt=">" />
                 </button>
                 <div className={css.zodiac_slide_wrapper}>
                     {visibleZodiacs.map((z, index) => (

@@ -37,7 +37,7 @@
     height: auto;
     padding: 40px 30px;
     border-radius: 36px;
-    background-color: #f9eae0;
+    background-color: var(--color-gradient-bg);
     li {
         list-style-image: url('../../assets/star_primary_dark.png');
         padding-inline-start: 1ch;
@@ -120,7 +120,7 @@
         width: 100%;
         padding: 36px 24px;
         border-radius: 24px;
-        background-color: #f9eae0;
+        background-color: var(--color-gradient-bg);
     }
     .card_img_container {
         width: 100%;

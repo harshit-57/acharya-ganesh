@@ -1,19 +1,18 @@
 import css from './style.module.css';
-import IcQuote from '../../../../../../assets/quotation_mark.png';
-import IcRatingStar from '../../../../../../assets/rating_star.png';
-import IcEllipse from '../../../../../../assets/ellipse.png';
+
 import { htmlToText } from 'html-to-text';
+import { Images } from '../../../../../../util/constants';
 export const TestimonialCard = ({ testimonial, style, className }) => {
     return (
         <div style={style} className={[className, css.container].join(' ')}>
             <div className={css.name_container}>
                 <h3>{testimonial?.UserName}</h3>
-                <img src={IcQuote} alt={'qoute'} />
+                <img src={Images.default.IcQuote} alt={'qoute'} />
             </div>
             <div className={css.border_container}>
-                <img src={IcEllipse} alt={'Ellipse'} />
+                <img src={Images.default.IcEllipse} alt={'Ellipse'} />
                 <div></div>
-                <img src={IcEllipse} alt={'Ellipse'} />
+                <img src={Images.default.IcEllipse} alt={'Ellipse'} />
             </div>
             <div className={css.rating_container}>
                 {[
@@ -21,7 +20,11 @@ export const TestimonialCard = ({ testimonial, style, className }) => {
                         Math.round(testimonial?.Rating ? testimonial.Rating : 0)
                     ),
                 ].map((c, i) => (
-                    <img key={i} src={IcRatingStar} alt={'Rating star icon'} />
+                    <img
+                        key={i}
+                        src={Images.default.IcRatingStar}
+                        alt={'Rating star icon'}
+                    />
                 ))}
             </div>
             <p className={css.review}>{htmlToText(testimonial?.Description)}</p>

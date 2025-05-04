@@ -4,10 +4,9 @@ import { TestimonialCard } from './components/testimonial-card/TestimonialCard';
 import { IndicatorContainer } from '../../../../components/indicator-container/IndicatorContainer';
 import { useState } from 'react';
 import { useEffect } from 'react';
-
-import ImgSectionBg from '../../../../assets/testimonial_bg.png';
 import { APIHelper } from '../../../../util/APIHelper.js';
 import useBreakpoint from 'use-breakpoint';
+import { Images } from '../../../../util/constants.js';
 
 // const PER_FRAME_TESTIMONIAL_COUNT = 3;
 const PER_FRAME_TESTIMONIAL_COUNT_DESKTOP = 3;
@@ -67,7 +66,7 @@ const Testimonial = () => {
     }, [currrentOffset, testimonialList, breakpoint]);
     return (
         <PageContainer
-            style={{ backgroundImage: `url(${ImgSectionBg})` }}
+            style={{ backgroundImage: `url(${Images.default.ImgSectionBg})` }}
             className={css.container}
         >
             <h2 className={css.section_heading}>

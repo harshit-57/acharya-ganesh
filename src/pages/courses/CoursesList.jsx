@@ -1,11 +1,7 @@
 import css from './style.module.css';
 import { PageContainer } from '../../components/page-container/PageContainer';
-import IcChevronIcon from '../../assets/chevron-down.png';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
-import ImgHeaderBg from '../../assets/courses_banner.webp';
-import ICSearchMd from '../../assets/search-md.png';
-import ICFilter from '../../assets/filter-lines.png';
 import { Spacer } from '../../components/spacer/Spacer';
 import { useEffect, useState } from 'react';
 import { CourseCard } from './components/course-card/CourseCard';
@@ -13,6 +9,7 @@ import { Footer } from '../../components/footer/Footer';
 import { useNavigate } from 'react-router-dom';
 import { APIHelper } from '../../util/APIHelper';
 import SEO from '../../Seo';
+import { Images } from '../../util/constants';
 const COURSE_PER_PAGE = 8;
 const CoursesList = () => {
     const navigate = useNavigate();
@@ -113,7 +110,9 @@ const CoursesList = () => {
         <PageContainer className={css.container}>
             <SEO keywords={keywords} description={description} />
             <div
-                style={{ backgroundImage: `url(${ImgHeaderBg})` }}
+                style={{
+                    backgroundImage: `url(${Images.default.ImgCourseBanner})`,
+                }}
                 className={css.header}
             >
                 <TopBar />
@@ -124,7 +123,10 @@ const CoursesList = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img src={IcChevronIcon} alt={'>'} />
+                                <img
+                                    src={Images.default.IcChevronIcon}
+                                    alt={'>'}
+                                />
                             </span>{' '}
                             <span>Courses</span>
                         </p>
@@ -134,7 +136,7 @@ const CoursesList = () => {
             <div className={css.filter_container}>
                 <div className={css.filter_item_wrapper}>
                     <div>
-                        <img src={ICSearchMd} alt={'Search'} />
+                        <img src={Images.default.ICSearchMd} alt={'Search'} />
                         <input
                             type={'text'}
                             value={searchQuery}
@@ -162,7 +164,7 @@ const CoursesList = () => {
                             })
                         }
                     >
-                        <img src={ICFilter} alt={'Filter'} />
+                        <img src={Images.default.ICFilter} alt={'Filter'} />
                         <p>{category ? category?.Name : 'Select Category'}</p>
                         {showFilterDropDown?.category && (
                             <div className={css.filter_dropdown}>
@@ -185,7 +187,7 @@ const CoursesList = () => {
                             })
                         }
                     >
-                        <img src={ICFilter} alt={'Filter'} />
+                        <img src={Images.default.ICFilter} alt={'Filter'} />
                         <p>
                             {sortBy == 'pr."PublishedOn"' && order == 'asc'
                                 ? 'Older'

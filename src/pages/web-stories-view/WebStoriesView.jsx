@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
 import css from './style.module.css';
 import Stories from 'react-insta-stories';
-import IcPlay from '../../assets/play.svg';
-import IcPause from '../../assets/pause.svg';
-import LeftArrow from '../../assets/left-arrow.png';
 import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { APIHelper } from '../../util/APIHelper';
 import parse from 'html-react-parser';
 import { htmlToText } from 'html-to-text';
 import { Icon, Link } from '@mui/material';
 import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
+import { Images } from '../../util/constants';
 
 export const WebStoriesView = () => {
     const [searchParams] = useSearchParams();
@@ -54,7 +52,11 @@ export const WebStoriesView = () => {
                                   style={{ zIndex: 1000 }}
                               >
                                   <img
-                                      src={isPaused ? IcPlay : IcPause}
+                                      src={
+                                          isPaused
+                                              ? Images.default.IcPlay
+                                              : Images.default.IcPause
+                                      }
                                       alt={isPaused ? 'Play' : 'Pause'}
                                   />
                               </button>
@@ -113,7 +115,11 @@ export const WebStoriesView = () => {
                                   onClick={handlePlayPause}
                               >
                                   <img
-                                      src={isPaused ? IcPlay : IcPause}
+                                      src={
+                                          isPaused
+                                              ? Images.default.IcPlay
+                                              : Images.default.IcPause
+                                      }
                                       alt={isPaused ? 'Play' : 'Pause'}
                                   />
                               </button>
@@ -170,7 +176,7 @@ export const WebStoriesView = () => {
                         opacity: currentIndex <= 0 ? 0.2 : 1,
                     }}
                 >
-                    <img src={LeftArrow} alt={'<'} />
+                    <img src={Images.default.LeftArrow} alt={'<'} />
                 </button>
                 <button
                     onClick={onNext}
@@ -179,7 +185,7 @@ export const WebStoriesView = () => {
                         opacity: currentIndex >= stories.length - 1 ? 0.2 : 1,
                     }}
                 >
-                    <img src={LeftArrow} alt={'>'} />
+                    <img src={Images.default.LeftArrow} alt={'>'} />
                 </button>
                 <Stories
                     stories={stories?.length ? stories : []}

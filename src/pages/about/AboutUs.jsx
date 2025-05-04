@@ -1,12 +1,6 @@
 import css from './style.module.css';
 import { PageContainer } from '../../components/page-container/PageContainer';
-import IcChevronIcon from '../../assets/chevron-down.png';
-import IcStar from '../../assets/star_primary_dark.png';
-
-import ImgHeaderBg from '../../assets/about_header_bg.png';
-import ImgHanish from '../../assets/about_image.jpg';
-import ImgStatsBg from '../../assets/about_stats_bg.jpg';
-import ImgConsultationPoster from '../../assets/consultation_call_website.jpg';
+import { Images } from '../../util/constants';
 import { Spacer } from '../../components/spacer/Spacer';
 import imageList from '../../data/gallery-images';
 import { useEffect, useState } from 'react';
@@ -16,10 +10,20 @@ import { Footer } from '../../components/footer/Footer';
 import { Helmet } from 'react-helmet-async';
 import Gallery from '../../components/gallery/Gallery';
 import SEO from '../../Seo';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const AboutUs = () => {
     const [images, setImages] = useState([]);
     const [readMore, setReadMore] = useState('Read More');
+    const navigate = useNavigate();
+    const handleClick = () => {
+        // window.location.href =
+        //     'https://pages.razorpay.com/pl_PfNM4Uhu1DX5XG/view';
+        navigate('/contact', {
+            state: {
+                consultType: 'offline',
+            },
+        });
+    };
     const keywords =
         'about us, our story, who we are, about acharyaganesh, astrology, numerology, spiritual guidance, kundali, horoscope, vedic astrology';
     const description =
@@ -81,7 +85,9 @@ const AboutUs = () => {
             </Helmet> */}
             <SEO keywords={keywords} description={description} />
             <div
-                style={{ backgroundImage: `url(${ImgHeaderBg})` }}
+                style={{
+                    backgroundImage: `url(${Images.default.ImgHeaderBg})`,
+                }}
                 className={css.header}
             >
                 <TopBar />
@@ -92,7 +98,10 @@ const AboutUs = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img src={IcChevronIcon} alt={'>'} />
+                                <img
+                                    src={Images.default.IcChevronIcon}
+                                    alt={'>'}
+                                />
                             </span>{' '}
                             <span>About us</span>
                         </p>
@@ -104,7 +113,7 @@ const AboutUs = () => {
                     <div className={css.row}>
                         <img
                             className={css.person_image}
-                            src={ImgHanish}
+                            src={Images.default.ImgHanish}
                             alt={'Hanish Bagga image'}
                         />
                         <div className={css.about_description_container}>
@@ -160,7 +169,9 @@ const AboutUs = () => {
                         </div>
                     </div>
                     <div
-                        style={{ backgroundImage: `url(${ImgStatsBg})` }}
+                        style={{
+                            backgroundImage: `url(${Images.default.ImgStatsBg})`,
+                        }}
                         className={css.stats_container}
                     >
                         <p>
@@ -317,7 +328,7 @@ const AboutUs = () => {
                             className={css.consultation_poster}
                         >
                             <img
-                                src={ImgConsultationPoster}
+                                src={Images.default.ImgConsultationPoster}
                                 alt={'Consultation poster'}
                             />
                         </Link>
@@ -385,7 +396,7 @@ const AboutUs = () => {
 const Bullet = ({ children }) => {
     return (
         <div className={css.bullet}>
-            <img src={IcStar} alt={'Star icon'} />
+            <img src={Images.default.IcStar} alt={'Star icon'} />
             <p>{children}</p>
         </div>
     );

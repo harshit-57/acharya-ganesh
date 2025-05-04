@@ -1,12 +1,12 @@
 import { PageContainer } from '../../components/page-container/PageContainer';
 import { TopBar } from '../../components/top-bar/TopBar';
 import css from './style.module.css';
-import ImgHeaderBg from '../../assets/book_consultation_header.png';
 import React, { useState, useRef } from 'react';
 import { Footer } from '../../components/footer/Footer';
 import FormCompnent from './component/form-component/FormComponent';
 import SEO from '../../Seo';
 import { useLocation } from 'react-router-dom';
+import { Images } from '../../util/constants';
 
 const FormConsultation = () => {
     const { state } = useLocation();
@@ -24,7 +24,7 @@ const FormConsultation = () => {
                 checkout={true}
             />
             <div
-                style={{ backgroundImage: `url(${ImgHeaderBg})` }}
+                style={{ backgroundImage: `url(${Images.default.ImgHeaderBgBookConsult})` }}
                 className={css.header}
             >
                 <TopBar />
