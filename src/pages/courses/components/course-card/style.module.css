@@ -1,6 +1,6 @@
 .container {
     border-radius: 24px;
-    background-color: var(--color-gradient-bg);
+    background-color: var(--color-primary-bg);
     border: 1px solid transparent;
     border-color: var(--color-border-dark);
 }
@@ -10,7 +10,7 @@
     object-fit: fill;
     border-radius: 24px 24px 0 0;
     position: relative;
-    background-color: #ffebdd;
+    background-color: var(--color-gradient-bg);
     height: 60%;
 }
 .content_container {
@@ -45,7 +45,7 @@
                 text-decoration: line-through;
                 font-size: 16px;
                 font-weight: 400;
-                color: #2c2520b2;
+                color: var(--color-header-menu-bg);
             }
         }
     }

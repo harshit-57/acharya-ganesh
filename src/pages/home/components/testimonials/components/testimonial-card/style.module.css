@@ -49,7 +49,7 @@
 .review {
     font-family: 'Work Sans';
     font-style: italic;
-    color: #cac3bc;
+    color: var(--color-gradient-bg);
 }
 
 @media screen and (max-width: 768px) {

@@ -20,14 +20,14 @@
         }
 
         .input {
-            background-color: #f3f3f3;
+            background-color: var(--color-card-bg-light);
             color: var(--color-black);
 
             &:focus {
                 outline-color: var(--color-primary);
             }
             &::placeholder {
-                color: #b5afa8;
+                color: var(--color-placeholder);
             }
         }
 
@@ -37,8 +37,8 @@
             border-radius: 100px;
             font-size: 16px;
             font-weight: 500;
-            background-color: #f3f3f3;
-            border: 1px solid #cac3bc;
+            background-color: var(--color-card-bg-light);
+            border: 1px solid var(--color-border-primary);
             -moz-appearance: none;
             -webkit-appearance: none;
             appearance: none;
@@ -46,7 +46,7 @@
                 outline-color: var(--color-primary);
             }
             &::placeholder {
-                color: #b5afa8;
+                color: var(--color-placeholder);
             }
         }
 
@@ -76,14 +76,13 @@
         font-weight: 500;
         background-color: var(--color-card-bg-dark);
         resize: none;
-        border: 1px solid #cac3bc;
-        color: #ffffff;
+        border: 1px solid var(--color-border-primary);
 
         &::placeholder {
             font-size: 10px;
             font-weight: 500;
             font-size: 16px;
-            color: #b5afa8;
+            color: var(--color-placeholder);
         }
     }
 }

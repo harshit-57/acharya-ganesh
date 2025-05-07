@@ -26,12 +26,12 @@ export const BlogCardSmall = ({ blog, onClick, style, className }) => {
                 >
                     {htmlToText(blog?.Title)}
                 </h2>
-                <div
+                <p
                     className={`html-content content-three-line`}
                     // title={htmlToText(blog?.Description)}
                 >
                     {htmlToText(blog?.Description || '')}
-                </div>
+                </p>
                 <p>
                     {'- Acharya Ganesh'}
                     {/* {blog?.PublishedBy} */}

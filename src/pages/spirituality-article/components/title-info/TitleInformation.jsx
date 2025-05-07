@@ -2,7 +2,7 @@ import css from './style.module.css';
 import { useEffect, useMemo, useState } from 'react';
 import { getDaySuffix, getReadingTime } from '../../../../util/helper';
 import { htmlToText } from 'html-to-text';
-import { Images } from '../../../../util/constants';
+import useApp from '../../../../hook/useApp';
 const months = [
     'January',
     'February',
@@ -18,6 +18,9 @@ const months = [
     'December',
 ];
 export const TitleInformation = ({ article }) => {
+    const {
+        theme: { Images },
+    } = useApp();
     const [timestamp, setTimeStamp] = useState();
     const [year, setYear] = useState();
     useEffect(() => {
@@ -75,7 +78,7 @@ export const TitleInformation = ({ article }) => {
                         target={'_blank'}
                     >
                         <div className={css.social_button_wrapper}>
-                            <img src={Images.default.IcFacebook} alt={'fb'} />
+                            <img src={Images.IcFacebookMono} alt={'fb'} />
                         </div>
                     </a>
                     <a
@@ -85,10 +88,7 @@ export const TitleInformation = ({ article }) => {
                         target={'_blank'}
                     >
                         <div className={css.social_button_wrapper}>
-                            <img
-                                src={Images.default.IcInstagram}
-                                alt={'insta'}
-                            />
+                            <img src={Images.IcInstagramMono} alt={'insta'} />
                         </div>
                     </a>
                     <a
@@ -96,7 +96,7 @@ export const TitleInformation = ({ article }) => {
                         target={'_blank'}
                     >
                         <div className={css.social_button_wrapper}>
-                            <img src={Images.default.IcX} alt={'x'} />
+                            <img src={Images.IcXMono} alt={'x'} />
                         </div>
                     </a>
                     <a
@@ -105,7 +105,7 @@ export const TitleInformation = ({ article }) => {
                     >
                         <div className={css.social_button_wrapper}>
                             <img
-                                src={Images.default.IcPinterest}
+                                src={Images.IcPinterestMono}
                                 alt={'pinterest'}
                             />
                         </div>

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { IndicatorContainer } from '../indicator-container/IndicatorContainer';
 import useBreakpoint from 'use-breakpoint';
 import { MatxLoading } from '../../admin/components';
-import { Images } from '../../util/constants';
+import useApp from '../../hook/useApp';
 
 const PER_FRAME_ARTICLE_COUNT_ULTRA_WIDE = 5;
 const PER_FRAME_ARTICLE_COUNT_LARGE_DESKTOP = 4;
@@ -41,6 +41,9 @@ const getArticleCountPerFrame = (device) => {
 
 const Blog = ({ breakpoints }) => {
     const navigate = useNavigate();
+    const {
+        theme: { Images },
+    } = useApp();
     const { breakpoint } = useBreakpoint(breakpoints || BREAKPOINTS, 'desktop');
     const [articleList, setArticleList] = useState([]);
     const [visibleArticles, setVisibleArticles] = useState([]);
@@ -132,7 +135,7 @@ const Blog = ({ breakpoints }) => {
     return (
         <PageContainer
             style={{
-                backgroundImage: `url(${Images.default.ImgSectionBgAlt})`,
+                backgroundImage: `url(${Images.ImgSectionBgAlt})`,
             }}
             className={css.container}
         >
@@ -143,10 +146,10 @@ const Blog = ({ breakpoints }) => {
                 <>
                     <div className={css.article_slide_container}>
                         <button onClick={onPrev} className={css.prev_button}>
-                            <img src={Images.default.LeftArrow} alt="<" />
+                            <img src={Images.LeftArrow} alt="<" />
                         </button>
                         <button onClick={onNext} className={css.next_button}>
-                            <img src={Images.default.LeftArrow} alt=">" />
+                            <img src={Images.LeftArrow} alt=">" />
                         </button>
 
                         <div

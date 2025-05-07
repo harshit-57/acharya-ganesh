@@ -10,10 +10,13 @@ import { Footer } from '../../components/footer/Footer';
 import { APIHelper } from '../../util/APIHelper';
 import { useNavigate } from 'react-router-dom';
 import SEO from '../../Seo';
-import { Images } from '../../util/constants';
+import useApp from '../../hook/useApp';
 
 const BLOG_PER_PAGE = 9;
 const SpiritualityList = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const navigate = useNavigate();
     const [blogs, setBlogs] = useState([]);
     const { category } = useParams();
@@ -85,7 +88,7 @@ const SpiritualityList = () => {
             <SEO keywords={keywords} description={description} />
             <div
                 style={{
-                    backgroundImage: `url(${Images.default.ImgBlogHeaderSpiritual})`,
+                    backgroundImage: `url(${Images.ImgBlogHeaderSpiritual})`,
                 }}
                 className={css.header}
             >
@@ -97,10 +100,7 @@ const SpiritualityList = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img
-                                    src={Images.default.IcChevronIcon}
-                                    alt={'>'}
-                                />
+                                <img src={Images.IcChevronIcon} alt={'>'} />
                             </span>{' '}
                             <span>{category?.toUpperCase()} Spirituality</span>
                         </p>
@@ -121,7 +121,7 @@ const SpiritualityList = () => {
                                 })
                             }
                         >
-                            <img src={Images.default.ICFilter} alt={'Filter'} />
+                            <img src={Images.ICFilter} alt={'Filter'} />
                             <p>{'Select Category'}</p>
                             {showFilterDropDown?.category && (
                                 <div className={css.filter_dropdown}>

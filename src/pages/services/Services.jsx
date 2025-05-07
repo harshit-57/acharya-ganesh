@@ -8,9 +8,12 @@ import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
 import { Footer } from '../../components/footer/Footer';
 import { APIHelper } from '../../util/APIHelper';
-import { Images } from '../../util/constants';
+import useApp from '../../hook/useApp';
 
 const Services = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const [serviceList, setServiceList] = useState([]);
     useEffect(() => {
         getServices();
@@ -29,10 +32,10 @@ const Services = () => {
     };
 
     const graphics = [
-        Images.default.ImgService1,
-        Images.default.ImgService2,
-        Images.default.ImgService3,
-        Images.default.ImgService4,
+        Images.ImgService1,
+        Images.ImgService2,
+        Images.ImgService3,
+        Images.ImgService4,
     ];
 
     const keywords =
@@ -45,7 +48,7 @@ const Services = () => {
             <SEO keywords={keywords} description={description} />
             <div
                 style={{
-                    backgroundImage: `url(${Images.default.ImgServiceBanner})`,
+                    backgroundImage: `url(${Images.ImgServiceBanner})`,
                 }}
                 className={css.header}
             >
@@ -57,10 +60,7 @@ const Services = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img
-                                    src={Images.default.IcChevronIcon}
-                                    alt={'>'}
-                                />
+                                <img src={Images.IcChevronIcon} alt={'>'} />
                             </span>{' '}
                             <span>Services</span>
                         </p>

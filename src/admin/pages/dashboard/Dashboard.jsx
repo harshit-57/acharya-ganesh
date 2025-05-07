@@ -4,6 +4,8 @@ import { Fragment } from 'react';
 import UsersData from './components/UsersData';
 import LineChart from './components/LineChart';
 import StatCards from './components/StatCards';
+import ThemeCards from './components/ThemeCards';
+import { H1 } from '../../components/Typography';
 
 const ContentBox = styled('div')(({ theme }) => ({
     margin: '30px',
@@ -79,7 +81,11 @@ const Dashboard = () => {
                 <Grid container spacing={3}>
                     <Grid item lg={12} md={12} sm={12} xs={12}>
                         <h2 style={{ textAlign: 'center' }}>Dashboard</h2>
-                        {/* <StatCards /> */}
+
+                        <h1 style={{ textAlign: 'center', marginTop: 5 }}>
+                            Website Themes
+                        </h1>
+                        <ThemeCards />
                         {/* <h2>Users</h2>
                          <UsersData
                             total_registered_users={dashboardData?.totalUsers}

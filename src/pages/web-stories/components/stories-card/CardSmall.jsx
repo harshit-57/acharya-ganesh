@@ -23,12 +23,12 @@ export const CardSmall = ({ blog, onClick, style, className }) => {
                 >
                     {parse(blog?.Title)}
                 </h2>
-                <div
+                <p
                     className={`html-content content-two-line`}
                     title={htmlToText(blog?.ShortDescription)}
                 >
                     {parse(blog?.ShortDescription || '')}
-                </div>
+                </p>
                 <p>
                     {'- Acharya Ganesh'}
                     {/* {blog?.PublishedBy} */}

@@ -2,7 +2,7 @@ import styles from './style.module.css';
 import Card from './component/card/card';
 import Heading from './component/heading/Header';
 import { useNavigate } from 'react-router-dom';
-import { Images } from '../../../../util/constants';
+import useApp from '../../../../hook/useApp';
 
 const steps = [
     {
@@ -41,6 +41,9 @@ const steps = [
 ];
 
 const BookingSteps = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -65,7 +68,9 @@ const BookingSteps = () => {
     return (
         <div
             className={styles.container}
-            style={{ backgroundImage: `url(${Images.default.ConsultingstepBg})` }}
+            style={{
+                backgroundImage: `url(${Images.ConsultingstepBg})`,
+            }}
         >
             <Heading text="Steps For Booking A Consultation" />
             <div className={styles.grid}>

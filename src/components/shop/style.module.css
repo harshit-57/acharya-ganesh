@@ -33,7 +33,7 @@
             background-color: var(--color-primary);
             padding: 8px 12px;
             border-radius: 8px;
-            color: black;
+            color: var(--color-black);
             font-weight: 500;
         }
     }

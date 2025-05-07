@@ -13,9 +13,12 @@ import { useEffect, useState } from 'react';
 import { APIHelper } from '../../util/APIHelper';
 import SEO from '../../Seo';
 import { ArticleSidebar } from './components/sidebar/ArticleSidebar';
-import { Images } from '../../util/constants';
+import useApp from '../../hook/useApp';
 
 const SArticle = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const { slug } = useParams();
     const [searchParams] = useSearchParams();
     const { state } = useLocation();
@@ -47,7 +50,7 @@ const SArticle = () => {
         <PageContainer className={css.container}>
             <SEO keywords={keywords} description={description} />
             <div
-                style={{ backgroundImage: `url(${Images.default.ImgHeaderBgAlt})` }}
+                style={{ backgroundImage: `url(${Images.ImgHeaderBgAlt})` }}
                 className={css.header}
             >
                 <TopBar />

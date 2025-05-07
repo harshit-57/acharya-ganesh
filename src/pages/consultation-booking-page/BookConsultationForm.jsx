@@ -6,9 +6,12 @@ import { Footer } from '../../components/footer/Footer';
 import FormCompnent from './component/form-component/FormComponent';
 import SEO from '../../Seo';
 import { useLocation } from 'react-router-dom';
-import { Images } from '../../util/constants';
+import useApp from '../../hook/useApp';
 
 const FormConsultation = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const { state } = useLocation();
 
     const keywords =
@@ -24,7 +27,9 @@ const FormConsultation = () => {
                 checkout={true}
             />
             <div
-                style={{ backgroundImage: `url(${Images.default.ImgHeaderBgBookConsult})` }}
+                style={{
+                    backgroundImage: `url(${Images.ImgHeaderBgBookConsult})`,
+                }}
                 className={css.header}
             >
                 <TopBar />

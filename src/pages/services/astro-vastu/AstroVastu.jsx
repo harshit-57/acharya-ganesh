@@ -1,5 +1,4 @@
 import css from './style.module.css';
-import { Images } from '../../../util/constants';
 import { PageContainer } from '../../../components/page-container/PageContainer';
 import { Spacer } from '../../../components/spacer/Spacer';
 import { TopBar } from '../../../components/top-bar/TopBar';
@@ -7,11 +6,15 @@ import { Navigation } from '../../../components/navigation/Navigation';
 import { Footer } from '../../../components/footer/Footer';
 import Blog from '../../../components/blog/Blog';
 import CitationBox from '../../../components/citation-box/CitationBox';
+import useApp from '../../../hook/useApp';
 export const AstroVastu = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     return (
         <PageContainer className={css.container}>
             <div
-                style={{ backgroundImage: `url(${Images.default.ImgBlogHeaderAlt})` }}
+                style={{ backgroundImage: `url(${Images.ImgBlogHeaderAlt})` }}
                 className={css.header}
             >
                 <TopBar />

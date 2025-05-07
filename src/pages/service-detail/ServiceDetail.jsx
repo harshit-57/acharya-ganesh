@@ -19,9 +19,12 @@ import parse from 'html-react-parser';
 import { APIHelper } from '../../util/APIHelper';
 import { ServiceSidebar } from './components/sidebar/ServiceSidebar';
 import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
-import { Images } from '../../util/constants';
+import useApp from '../../hook/useApp';
 
 const ServiceDetail = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const { slug } = useParams();
     const navigate = useNavigate();
     const { state } = useLocation();
@@ -71,7 +74,7 @@ const ServiceDetail = () => {
             <SEO keywords={keywords} description={description} />
             <div
                 style={{
-                    backgroundImage: `url(${Images.default.ImgHeaderBg})`,
+                    backgroundImage: `url(${Images.ImgHeaderBg})`,
                 }}
                 className={css.header}
             >
@@ -152,15 +155,6 @@ const ServiceDetail = () => {
             <Spacer vertical={'20px'} />
             <Footer />
         </PageContainer>
-    );
-};
-
-const Bullet = ({ children }) => {
-    return (
-        <div className={css.bullet}>
-            <img src={Images.default.IcStar} alt={'*'} />
-            <p>{children}</p>
-        </div>
     );
 };
 

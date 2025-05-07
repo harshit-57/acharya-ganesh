@@ -4,9 +4,12 @@ import ServiceCard from './components/service-card/ServiceCard';
 import { useEffect, useState } from 'react';
 import { PrimaryButton } from '../../../../components/primary-button/PrimaryButton';
 import { APIHelper } from '../../../../util/APIHelper';
-import { Images } from '../../../../util/constants';
+import useApp from '../../../../hook/useApp';
 
 const Services = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const [isShowAll, setIsShowAll] = useState(false);
     const [serviceList, setServiceList] = useState([]);
 
@@ -26,7 +29,12 @@ const Services = () => {
         }
     };
 
-    const graphics = [Images.default.ImgService1, Images.default.ImgService2, Images.default.ImgService3, Images.default.ImgService4];
+    const graphics = [
+        Images.ImgService1,
+        Images.ImgService2,
+        Images.ImgService3,
+        Images.ImgService4,
+    ];
 
     return (
         <PageContainer className={css.container}>

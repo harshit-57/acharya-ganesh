@@ -4,13 +4,16 @@ import { PrimaryButton } from '../../../../components/primary-button/PrimaryButt
 import { TopBar } from '../../../../components/top-bar/TopBar';
 import { Navigation } from '../../../../components/navigation/Navigation';
 import { NavLink } from 'react-router-dom';
-import { Images } from '../../../../util/constants';
+import useApp from '../../../../hook/useApp';
 
 const Hero = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     return (
         <PageContainer
             className={css.container}
-            style={{ backgroundImage: `url(${Images.default.BgImage})` }}
+            style={{ backgroundImage: `url(${Images.BgImage})` }}
         >
             <TopBar />
             <Navigation />

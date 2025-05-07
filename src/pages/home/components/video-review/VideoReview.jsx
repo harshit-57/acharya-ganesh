@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import css from './style.module.css';
 import { PageContainer } from '../../../../components/page-container/PageContainer';
 import { PrimaryButton } from '../../../../components/primary-button/PrimaryButton';
-import { Images } from '../../../../util/constants';
+import useApp from '../../../../hook/useApp';
 
 const VideoReviews = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const videos = [
         // 'https://player.vimeo.com/video/968714275',
         // 'https://player.vimeo.com/video/968719006',
@@ -24,7 +27,7 @@ const VideoReviews = () => {
 
     return (
         <PageContainer
-            style={{ backgroundImage: `url(${Images.default.ImgSectionBg})` }}
+            style={{ backgroundImage: `url(${Images.ImgSectionBg})` }}
             className={css.container}
         >
             <h2 className={css.section_heading}>Our Students Reviews</h2>

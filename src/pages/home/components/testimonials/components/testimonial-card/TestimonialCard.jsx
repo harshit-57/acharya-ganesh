@@ -1,18 +1,21 @@
 import css from './style.module.css';
 
 import { htmlToText } from 'html-to-text';
-import { Images } from '../../../../../../util/constants';
+import useApp from '../../../../../../hook/useApp';
 export const TestimonialCard = ({ testimonial, style, className }) => {
+    const {
+        theme: { Images },
+    } = useApp();
     return (
         <div style={style} className={[className, css.container].join(' ')}>
             <div className={css.name_container}>
                 <h3>{testimonial?.UserName}</h3>
-                <img src={Images.default.IcQuote} alt={'qoute'} />
+                <img src={Images.IcQuote} alt={'qoute'} />
             </div>
             <div className={css.border_container}>
-                <img src={Images.default.IcEllipse} alt={'Ellipse'} />
+                <img src={Images.IcEllipse} alt={'Ellipse'} />
                 <div></div>
-                <img src={Images.default.IcEllipse} alt={'Ellipse'} />
+                <img src={Images.IcEllipse} alt={'Ellipse'} />
             </div>
             <div className={css.rating_container}>
                 {[
@@ -22,7 +25,7 @@ export const TestimonialCard = ({ testimonial, style, className }) => {
                 ].map((c, i) => (
                     <img
                         key={i}
-                        src={Images.default.IcRatingStar}
+                        src={Images.IcRatingStar}
                         alt={'Rating star icon'}
                     />
                 ))}

@@ -2,9 +2,12 @@ import css from './style.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { APIHelper } from '../../../../util/APIHelper';
-import { Images } from '../../../../util/constants';
+import useApp from '../../../../hook/useApp';
 
 export const RecentBlogs = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const navigate = useNavigate();
     const [articleList, setArticleList] = useState([]);
     useEffect(() => {
@@ -42,8 +45,7 @@ export const RecentBlogs = () => {
                     >
                         <img
                             src={
-                                article?.Image ||
-                                Images.default.ImgPlaceholderThumbnail
+                                article?.Image || Images.ImgPlaceholderThumbnail
                             }
                             alt={
                                 article?.ImageAlt ||

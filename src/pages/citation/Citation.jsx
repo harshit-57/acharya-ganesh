@@ -10,10 +10,12 @@ import { APIHelper } from '../../util/APIHelper';
 import Loader from './component/loading-animation/loader';
 import SEO from '../../Seo';
 import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
-
-import { Images } from '../../util/constants';
+import useApp from '../../hook/useApp';
 
 const Citation = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const [data, setData] = useState([]);
     const [visibleData, setVisibleData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -64,7 +66,7 @@ const Citation = () => {
             <SEO keywords={keywords} description={description} />
             <div
                 style={{
-                    backgroundImage: `url(${Images.default.CitationBanner})`,
+                    backgroundImage: `url(${Images.CitationBanner})`,
                 }}
                 className={css.header}
             >
@@ -76,10 +78,7 @@ const Citation = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img
-                                    src={Images.default.IcChevronIcon}
-                                    alt={'>'}
-                                />
+                                <img src={Images.IcChevronIcon} alt={'>'} />
                             </span>{' '}
                             <span> Citations</span>
                         </p>

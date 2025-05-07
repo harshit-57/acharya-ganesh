@@ -10,10 +10,13 @@ import { Footer } from '../../components/footer/Footer';
 import { APIHelper } from '../../util/APIHelper';
 import { useNavigate } from 'react-router-dom';
 import SEO from '../../Seo';
-import { Images } from '../../util/constants';
+import useApp from '../../hook/useApp';
 
 const STORIES_PER_PAGE = 9;
 const WebStoriesList = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const navigate = useNavigate();
     const [stories, setStories] = useState([]);
     const { category } = useParams();
@@ -66,7 +69,7 @@ const WebStoriesList = () => {
             <SEO keywords={keywords} description={description} />
             <div
                 style={{
-                    backgroundImage: `url(${Images.default.ImgBlogHeaderWebstory})`,
+                    backgroundImage: `url(${Images.ImgBlogHeaderWebstory})`,
                 }}
                 className={css.header}
             >
@@ -78,10 +81,7 @@ const WebStoriesList = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img
-                                    src={Images.default.IcChevronIcon}
-                                    alt={'>'}
-                                />
+                                <img src={Images.IcChevronIcon} alt={'>'} />
                             </span>
                             <span>Web Stories</span>
                         </p>

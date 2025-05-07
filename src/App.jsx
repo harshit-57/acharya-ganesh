@@ -33,6 +33,7 @@ import ServiceDetail from './pages/service-detail/ServiceDetail';
 import ManageSlot from './admin/pages/manage-slot/ManageSlot';
 import ManageService from './admin/pages/manage-service/ManageService';
 import ManageBooking from './admin/pages/manage-booking/ManageBooking';
+import { AppProvider } from './contexts/AppContext';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
@@ -45,57 +46,63 @@ const RouteChangeDetector = () => {
 };
 
 export default () => {
-    const themes = ['theme1', 'theme2'];
-    const [theme, setTheme] = useState('theme1');
-
-    useEffect(() => {
-        const root = document.documentElement;
-
-        themes.forEach((t) => root.classList.remove(t));
-
-        root.classList.add(theme);
-    }, [theme]);
-
     return (
         <>
             <RouteChangeDetector />
             <Routes>
-                <Route index path="/" element={<Home />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/services/:slug" element={<ServiceDetail />} />
                 <Route
-                    path="/services/:parent/:slug"
-                    element={<ServiceDetail />}
-                />
-                <Route path="/blogs" element={<BlogList />} />
-                <Route path="/blog/:category" element={<BlogList />} />
-                <Route path="/:category/:slug" element={<Article />} />
-                <Route path="/spirituality" element={<SpiritualityList />} />
-                <Route
-                    path="/spirituality/category/:category"
-                    element={<SpiritualityList />}
-                />
-                <Route path="/spirituality/:slug" element={<SArticle />} />
-                <Route path="/course" element={<CoursesList />} />
-                <Route path="/course/:slug" element={<CourseDetail />} />
-                <Route path="/about-us" element={<AboutUs />} />
-                <Route path="/web-stories" element={<WebStoriesList />} />
-                <Route
-                    path="/web-stories/category/:category"
-                    element={<WebStoriesList />}
-                />
-                <Route path="/web-stories/:slug" element={<WebStoriesView />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/citation" element={<Citation />} />
-                <Route path="/locations/:slug" element={<CitationDetail />} />
-                <Route
-                    path="/book-consultation"
-                    element={<BookConsultation />}
-                />
-                <Route
-                    path="/book-consultation-form"
-                    element={<FormConsultation />}
-                />
+                    element={
+                        <AppProvider>
+                            <Outlet />
+                        </AppProvider>
+                    }
+                >
+                    <Route index path="/" element={<Home />} />
+                    <Route path="/services" element={<Services />} />
+                    <Route path="/services/:slug" element={<ServiceDetail />} />
+                    <Route
+                        path="/services/:parent/:slug"
+                        element={<ServiceDetail />}
+                    />
+                    <Route path="/blogs" element={<BlogList />} />
+                    <Route path="/blog/:category" element={<BlogList />} />
+                    <Route path="/:category/:slug" element={<Article />} />
+                    <Route
+                        path="/spirituality"
+                        element={<SpiritualityList />}
+                    />
+                    <Route
+                        path="/spirituality/category/:category"
+                        element={<SpiritualityList />}
+                    />
+                    <Route path="/spirituality/:slug" element={<SArticle />} />
+                    <Route path="/course" element={<CoursesList />} />
+                    <Route path="/course/:slug" element={<CourseDetail />} />
+                    <Route path="/about-us" element={<AboutUs />} />
+                    <Route path="/web-stories" element={<WebStoriesList />} />
+                    <Route
+                        path="/web-stories/category/:category"
+                        element={<WebStoriesList />}
+                    />
+                    <Route
+                        path="/web-stories/:slug"
+                        element={<WebStoriesView />}
+                    />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/citation" element={<Citation />} />
+                    <Route
+                        path="/locations/:slug"
+                        element={<CitationDetail />}
+                    />
+                    <Route
+                        path="/book-consultation"
+                        element={<BookConsultation />}
+                    />
+                    <Route
+                        path="/book-consultation-form"
+                        element={<FormConsultation />}
+                    />
+                </Route>
                 <Route path="*" element={<Navigate to={'/'} />} />
 
                 {/* Admin Routes */}

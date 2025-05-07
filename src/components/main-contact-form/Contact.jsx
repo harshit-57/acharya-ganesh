@@ -3,8 +3,12 @@ import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
 import { InputField } from '../../components/input-field/InputField';
 import { useState } from 'react';
 import { APIHelper } from '../../util/APIHelper';
-import { Images } from '../../util/constants';
+import useApp from '../../hook/useApp';
 const MainContactForm = () => {
+    const {
+        theme: { Images },
+    } = useApp();
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -110,7 +114,7 @@ const MainContactForm = () => {
         <div className={css.column}>
             <div
                 style={{
-                    backgroundImage: `url(${Images.default.ImgContactFormBg})`,
+                    backgroundImage: `url(${Images.ImgContactFormBg})`,
                 }}
                 className={css.contact_form}
             >
@@ -159,7 +163,7 @@ const MainContactForm = () => {
                                 formData.service
                                     ? {}
                                     : {
-                                          color: '#b5afa8',
+                                          color: 'var(--color-placeholder)',
                                       }
                             }
                         >

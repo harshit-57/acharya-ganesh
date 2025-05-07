@@ -46,7 +46,7 @@
             text-decoration: line-through;
             font-size: 16px;
             font-weight: 400;
-            color: #2c2520b2;
+            color: var(--color-header-menu-bg);
         }
     }
 }
@@ -99,7 +99,7 @@
                 text-decoration: line-through;
                 font-size: 16px;
                 font-weight: 400;
-                color: #2c2520b2;
+                color: var(--color-header-menu-bg);
             }
         }
     }

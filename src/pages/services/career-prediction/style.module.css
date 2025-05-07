@@ -1,7 +1,7 @@
 .container {
 }
 .header {
-    background-color: #5c5c5c;
+    background-color: var(--color-black);
     min-height: auto !important;
     background-position: center;
     background-repeat: no-repeat;

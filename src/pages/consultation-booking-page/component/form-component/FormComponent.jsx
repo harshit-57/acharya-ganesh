@@ -5,7 +5,7 @@ import moment from 'moment';
 import { formatPrice } from '../../../../util/helper';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Images } from '../../../../util/constants';
+import useApp from '../../../../hook/useApp';
 
 const Pricing = {
     online: 17700,
@@ -13,6 +13,9 @@ const Pricing = {
 };
 
 const FormCompnent = ({ state }) => {
+    const {
+        theme: { Images },
+    } = useApp();
     const [services, setServices] = useState([]);
     const navigate = useNavigate();
     const [slots, setSlots] = useState([]);
@@ -213,7 +216,9 @@ const FormCompnent = ({ state }) => {
 
     return (
         <form
-            style={{ backgroundImage: `url(${Images.default.ConsultationFormBg})` }}
+            style={{
+                backgroundImage: `url(${Images.ConsultationFormBg})`,
+            }}
             className={styles.form_container}
             onSubmit={handleSubmit}
         >

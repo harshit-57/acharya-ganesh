@@ -1,5 +1,4 @@
 import css from './style.module.css';
-import { Images } from '../../util/constants';
 import menus from '../../data/menu-list';
 import MenuButton from './components/menu-button/MenuButton';
 import { useState, useEffect } from 'react';
@@ -10,8 +9,12 @@ import { toast } from 'react-toastify';
 import { PrimaryButton } from '../primary-button/PrimaryButton.jsx';
 import { ContactLabel } from '../top-bar/TopBar.jsx';
 import { CONTACT_INFO, LINKS } from '../../util/constants.js';
+import useApp from '../../hook/useApp.js';
 
 export const Navigation = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const navigate = useNavigate();
     const [menuList, setMenuList] = useState([]);
     const { showNav, setShowNav } = useNav();
@@ -192,7 +195,7 @@ export const Navigation = () => {
                     <div className={css.heading_wrapper}>
                         <p>Menu</p>
                         <img
-                            src={Images.default.IcXCircle}
+                            src={Images.IcXCircle}
                             onClick={() => setShowNav(false)}
                             alt={'Close'}
                         />

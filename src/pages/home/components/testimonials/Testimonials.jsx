@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { APIHelper } from '../../../../util/APIHelper.js';
 import useBreakpoint from 'use-breakpoint';
-import { Images } from '../../../../util/constants.js';
+import useApp from '../../../../hook/useApp.js';
 
 // const PER_FRAME_TESTIMONIAL_COUNT = 3;
 const PER_FRAME_TESTIMONIAL_COUNT_DESKTOP = 3;
@@ -31,6 +31,9 @@ const getTestimonialCountPerFrame = (device) => {
 };
 
 const Testimonial = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const { breakpoint } = useBreakpoint(BREAKPOINTS, 'desktop');
 
     const [testimonialList, setTestimonialList] = useState([]);
@@ -66,7 +69,7 @@ const Testimonial = () => {
     }, [currrentOffset, testimonialList, breakpoint]);
     return (
         <PageContainer
-            style={{ backgroundImage: `url(${Images.default.ImgSectionBg})` }}
+            style={{ backgroundImage: `url(${Images.ImgSectionBg})` }}
             className={css.container}
         >
             <h2 className={css.section_heading}>

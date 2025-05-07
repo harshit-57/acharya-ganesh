@@ -26,7 +26,7 @@
             color: var(--color-white);
             text-transform: uppercase;
             &:hover {
-                background-color: #696460;
+                background-color: var(--color-border-dark);
             }
         }
     }

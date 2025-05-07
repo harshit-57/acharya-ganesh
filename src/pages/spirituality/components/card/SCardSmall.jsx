@@ -26,9 +26,9 @@ export const SCardSmall = ({ blog, onClick, style, className }) => {
                 >
                     {htmlToText(blog?.Title)}
                 </h2>
-                <div className={`html-content content-three-line`}>
+                <p className={`html-content content-three-line`}>
                     {htmlToText(blog?.Description || '')}
-                </div>
+                </p>
                 <p>
                     {'- Acharya Ganesh'}
                     {/* {blog?.PublishedBy} */}

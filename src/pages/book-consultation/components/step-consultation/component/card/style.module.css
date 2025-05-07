@@ -1,7 +1,7 @@
 /* Card styles */
 .card {
-    background-color: #23201d;
-    color: white;
+    background-color: transparent;
+    color: var(--color-white);
     padding: 48px 32px 32px 32px;
     border-radius: 24px;
     text-align: center;
@@ -14,7 +14,7 @@
 
 .step {
     background-color: var(--color-primary);
-    color: #23201d;
+    color: var(--color-border-dark);
     font-size: 1.2rem;
     position: absolute;
     top: 0;
@@ -36,14 +36,14 @@
     font-weight: 600;
     font-family: 'Work Sans', sans-serif;
     letter-spacing: -0.6px;
-    color: #fff3eb;
+    color: var(--color-primary-bg);
 }
 
 .description {
     font-size: clamp(14px, 1.6vw, 16px);
     font-weight: 400;
     font-family: 'Work Sans', sans-serif;
-    color: #fff3eb;
+    color: var(--color-primary-bg);
     line-height: 1.75;
 }
 

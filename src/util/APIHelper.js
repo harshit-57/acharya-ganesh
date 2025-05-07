@@ -63,6 +63,8 @@ export const APIHelper = Object.freeze({
     getSlots: await getApi('v1/GetDivine/getBookingSlots'),
     createBooking: await postApi('v1/GetDivine/createBooking'),
     completeBooking: await postApi('v1/GetDivine/completeBooking'),
+
+    getThemes: await getApi('v1/GetDivine/getThemes'),
 });
 
 export const ADMINAPIHELPER = Object.freeze({
@@ -94,6 +96,8 @@ export const ADMINAPIHELPER = Object.freeze({
     deleteSlot: await postApi('v1/admin/delete-slot'),
 
     getBookings: await getApi('v1/admin/get-bookings'),
+
+    changeTheme: await postApi('v1/admin/change-theme'),
 });
 
 export const UPLOADAPIHELPER = Object.freeze({

@@ -1,12 +1,15 @@
 import css from './style.module.css';
-import { Images } from '../../util/constants';
+import useApp from '../../hook/useApp';
 
 export const Shop = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     return (
         <div className={css.recent_container}>
             <h3>Buy Gemstones</h3>
             <div className={css.recent_shop}>
-                <img src={Images.default.ImgGemstone} alt={'gemstone'} />
+                <img src={Images.ImgGemstone} alt={'gemstone'} />
                 <div>
                     <p>
                         Labradorite 7.1 Ratti
@@ -29,7 +32,7 @@ export const Shop = () => {
             </div>
             <h3>Buy Panna</h3>
             <div className={css.recent_shop}>
-                <img src={Images.default.ImgPanna} alt={'panna'} />
+                <img src={Images.ImgPanna} alt={'panna'} />
                 <div>
                     <p>
                         Panna 5.72 Ratti
@@ -51,7 +54,7 @@ export const Shop = () => {
             </div>
             <h3>Buy Rudraksha</h3>
             <div className={css.recent_shop}>
-                <img src={Images.default.ImgMukhi} alt={'rudraksha'} />
+                <img src={Images.ImgMukhi} alt={'rudraksha'} />
                 <div>
                     <p>
                         1 Mukhi Rudraksha

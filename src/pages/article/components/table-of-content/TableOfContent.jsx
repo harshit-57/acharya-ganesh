@@ -1,10 +1,12 @@
 import css from './style.module.css';
-import { Images } from '../../../../util/constants';
 import { useMemo, useState } from 'react';
 import parse from 'html-react-parser';
-
+import useApp from '../../../../hook/useApp';
 
 export const TableOfContent = ({ article }) => {
+    const {
+        theme: { Images },
+    } = useApp();
     if (!article) return null;
     const getTableContents = useMemo(() => {
         const toc = [];
@@ -45,7 +47,7 @@ export const TableOfContent = ({ article }) => {
         <div className={css.container}>
             <h3 onClick={() => setShow(!show)}>
                 <img
-                    src={Images.default.IcChevronIcon}
+                    src={Images.IcChevronIcon}
                     style={show ? { transform: 'rotate(0deg)' } : {}}
                     alt={'>'}
                 />

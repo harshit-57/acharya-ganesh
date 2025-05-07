@@ -3,16 +3,16 @@
     align-items: center;
     gap: 10px;
     font-family: 'Arial', sans-serif;
-  }
-  
-  .toggle_label {
+}
+
+.toggle_label {
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 14px;
     font-weight: 600;
-  }
-  
-  .toggle_switch {
+}
+
+.toggle_switch {
     width: 50px;
     height: 24px;
     border-radius: 12px;
@@ -20,16 +20,15 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-left: 50px;
-  }
-  
-  .toggle_circle {
+}
+
+.toggle_circle {
     width: 20px;
     height: 20px;
-    background-color: #fff;
+    background-color: var(--color-white);
     border-radius: 50%;
     position: absolute;
     top: 2px;
     transition: transform 0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
+}

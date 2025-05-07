@@ -7,9 +7,12 @@ import parse from 'html-react-parser';
 import { htmlToText } from 'html-to-text';
 import { Icon, Link } from '@mui/material';
 import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
-import { Images } from '../../util/constants';
+import useApp from '../../hook/useApp';
 
 export const WebStoriesView = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const [searchParams] = useSearchParams();
     const { state } = useLocation();
     const { slug } = useParams();
@@ -54,8 +57,8 @@ export const WebStoriesView = () => {
                                   <img
                                       src={
                                           isPaused
-                                              ? Images.default.IcPlay
-                                              : Images.default.IcPause
+                                              ? Images.IcPlay
+                                              : Images.IcPause
                                       }
                                       alt={isPaused ? 'Play' : 'Pause'}
                                   />
@@ -117,8 +120,8 @@ export const WebStoriesView = () => {
                                   <img
                                       src={
                                           isPaused
-                                              ? Images.default.IcPlay
-                                              : Images.default.IcPause
+                                              ? Images.IcPlay
+                                              : Images.IcPause
                                       }
                                       alt={isPaused ? 'Play' : 'Pause'}
                                   />
@@ -176,7 +179,7 @@ export const WebStoriesView = () => {
                         opacity: currentIndex <= 0 ? 0.2 : 1,
                     }}
                 >
-                    <img src={Images.default.LeftArrow} alt={'<'} />
+                    <img src={Images.LeftArrow} alt={'<'} />
                 </button>
                 <button
                     onClick={onNext}
@@ -185,7 +188,7 @@ export const WebStoriesView = () => {
                         opacity: currentIndex >= stories.length - 1 ? 0.2 : 1,
                     }}
                 >
-                    <img src={Images.default.LeftArrow} alt={'>'} />
+                    <img src={Images.LeftArrow} alt={'>'} />
                 </button>
                 <Stories
                     stories={stories?.length ? stories : []}

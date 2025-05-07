@@ -1,35 +1,23 @@
 import css from './style.module.css';
 import { PageContainer } from '../../components/page-container/PageContainer';
-import { Images } from '../../util/constants';
 import { Spacer } from '../../components/spacer/Spacer';
-import imageList from '../../data/gallery-images';
-import { useEffect, useState } from 'react';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
 import { Footer } from '../../components/footer/Footer';
-import { Helmet } from 'react-helmet-async';
 import Gallery from '../../components/gallery/Gallery';
 import SEO from '../../Seo';
 import { Link, useNavigate } from 'react-router-dom';
+import useApp from '../../hook/useApp';
 const AboutUs = () => {
-    const [images, setImages] = useState([]);
-    const [readMore, setReadMore] = useState('Read More');
-    const navigate = useNavigate();
-    const handleClick = () => {
-        // window.location.href =
-        //     'https://pages.razorpay.com/pl_PfNM4Uhu1DX5XG/view';
-        navigate('/contact', {
-            state: {
-                consultType: 'offline',
-            },
-        });
-    };
+    const {
+        theme: { Images },
+    } = useApp();
+
     const keywords =
         'about us, our story, who we are, about acharyaganesh, astrology, numerology, spiritual guidance, kundali, horoscope, vedic astrology';
     const description =
         'Learn about acharyaganesh, your trusted source for astrology, numerology, kundali matching, and daily horoscopes. Discover our mission, team, and how we can guide you on your spiritual journey.';
 
-    useEffect(() => setImages(imageList), []);
     return (
         <PageContainer>
             {/* <Helmet>
@@ -86,7 +74,7 @@ const AboutUs = () => {
             <SEO keywords={keywords} description={description} />
             <div
                 style={{
-                    backgroundImage: `url(${Images.default.ImgHeaderBg})`,
+                    backgroundImage: `url(${Images.ImgHeaderBg})`,
                 }}
                 className={css.header}
             >
@@ -98,10 +86,7 @@ const AboutUs = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img
-                                    src={Images.default.IcChevronIcon}
-                                    alt={'>'}
-                                />
+                                <img src={Images.IcChevronIcon} alt={'>'} />
                             </span>{' '}
                             <span>About us</span>
                         </p>
@@ -113,7 +98,7 @@ const AboutUs = () => {
                     <div className={css.row}>
                         <img
                             className={css.person_image}
-                            src={Images.default.ImgHanish}
+                            src={Images.ImgHanish}
                             alt={'Hanish Bagga image'}
                         />
                         <div className={css.about_description_container}>
@@ -170,7 +155,7 @@ const AboutUs = () => {
                     </div>
                     <div
                         style={{
-                            backgroundImage: `url(${Images.default.ImgStatsBg})`,
+                            backgroundImage: `url(${Images.ImgStatsBg})`,
                         }}
                         className={css.stats_container}
                     >
@@ -328,7 +313,7 @@ const AboutUs = () => {
                             className={css.consultation_poster}
                         >
                             <img
-                                src={Images.default.ImgConsultationPoster}
+                                src={Images.ImgConsultationPoster}
                                 alt={'Consultation poster'}
                             />
                         </Link>
@@ -394,9 +379,13 @@ const AboutUs = () => {
 };
 
 const Bullet = ({ children }) => {
+    const {
+        theme: { Images },
+    } = useApp();
+
     return (
         <div className={css.bullet}>
-            <img src={Images.default.IcStar} alt={'Star icon'} />
+            <img src={Images.IcStar} alt={'Star icon'} />
             <p>{children}</p>
         </div>
     );

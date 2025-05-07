@@ -1,14 +1,17 @@
 import css from './style.module.css';
 import { PageContainer } from '../../components/page-container/PageContainer';
-import { Images } from '../../util/constants';
 import { Spacer } from '../../components/spacer/Spacer';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
 import { Footer } from '../../components/footer/Footer';
 import MainContactForm from '../../components/main-contact-form/Contact';
 import SEO from '../../Seo';
+import useApp from '../../hook/useApp';
 
 const Contact = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const keywords =
         'contact us, get in touch, customer support, astrology contact, numerology contact, spiritual guidance contact, kundali contact, horoscope contact';
     const description =
@@ -68,7 +71,7 @@ const Contact = () => {
             </Helmet> */}
             <div
                 style={{
-                    backgroundImage: `url(${Images.default.ImgHeaderBgContact})`,
+                    backgroundImage: `url(${Images.ImgHeaderBgContact})`,
                 }}
                 className={css.header}
             >
@@ -80,10 +83,7 @@ const Contact = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img
-                                    src={Images.default.IcChevronIcon}
-                                    alt={'>'}
-                                />
+                                <img src={Images.IcChevronIcon} alt={'>'} />
                             </span>{' '}
                             <span>Contact</span>
                         </p>
@@ -101,7 +101,7 @@ const Contact = () => {
                         <Spacer vertical={'36px'} />
                         <div className={css.contact_info_container}>
                             <ContactInfo
-                                icon={Images.default.IcGlobe}
+                                icon={Images.IcGlobe}
                                 title={'Any Questions?'}
                             >
                                 You can always send us a message or email.
@@ -110,7 +110,7 @@ const Contact = () => {
                                 href={`https://maps.google.com/?q=${'Hall No. 201 Plot No. 959 Niti Khand 1, Opposite Orange County, Indirapuram Ghaziabad, 201014'}`}
                             >
                                 <ContactInfo
-                                    icon={Images.default.IcPin}
+                                    icon={Images.IcPin}
                                     title={'Address'}
                                 >
                                     Hall No. 201 Plot No. 959 Niti Khand 1,
@@ -119,7 +119,7 @@ const Contact = () => {
                                 </ContactInfo>
                             </a>
                             <ContactInfo
-                                icon={Images.default.IcContact}
+                                icon={Images.IcContact}
                                 title={'Contact Us'}
                             >
                                 <a href="tel:+917300004325">
@@ -130,7 +130,7 @@ const Contact = () => {
                                 </a>
                             </ContactInfo>
                             <ContactInfo
-                                icon={Images.default.IcEnvelope}
+                                icon={Images.IcEnvelope}
                                 title={'Email Us'}
                             >
                                 <a href="mailto:info@acharyaganesh.com">

@@ -2,7 +2,7 @@
     border-radius: 24px;
     background-color: var(--color-primary-bg);
     border: 1px solid transparent;
-    border-color: var(--color-gradient-bg);
+    border-color: var(--color-border-dark);
     cursor: pointer;
 }
 
@@ -12,7 +12,7 @@
     border-radius: 24px 24px 0 0;
     position: relative;
     overflow: hidden;
-    background-color: var(--color-primary-bg);
+    background-color: var(--color-gradient-bg);
 
     img {
         border-radius: 24px 24px 0 0;
@@ -40,7 +40,7 @@
         border-radius: 40px;
         background-color: var(--color-caption);
         &:hover {
-            background-color: #696460;
+            background-color: var(--color-border-dark);
         }
     }
 }
@@ -59,7 +59,7 @@
         }
     }
     p:nth-child(2) {
-        color: #2c2520b2;
+        color: var(--color-header-menu-bg);
         font-size: 16px;
     }
     p:nth-child(3) {

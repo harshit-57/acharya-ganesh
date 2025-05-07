@@ -19,7 +19,7 @@
 }
 .mobile_menu_popup {
     position: fixed;
-    background-color: #23201d;
+    background-color: var(--color-card-bg-dark);
     z-index: 99999;
     top: 0;
     left: 0;

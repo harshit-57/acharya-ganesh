@@ -1,6 +1,6 @@
 .container {
-    background-color: black;
-    color: white;
+    background-color: var(--color-black);
+    color: var(--color-white);
     padding: 60px;
     border-radius: 35px;
     max-width: 1200px;
@@ -36,7 +36,7 @@
     padding-bottom: 24px;
     padding-left: 48px;
     background: var(--color-primary);
-    color: var(--Color-Scheme-Black, #000000);
+    color: var(--color-black);
     font-family: Work Sans;
     font-weight: 600;
     font-size: 14px;
@@ -62,7 +62,7 @@
     letter-spacing: 0%;
     text-align: center;
     background: var(--color-gradient-bg);
-    color: var(--Color-Scheme-Border-Color, #5c4228);
+    color: var(--color-border-dark);
     border-width: 1px;
     border: 1px solid transparent;
     cursor: pointer;
@@ -71,12 +71,12 @@
 .button:nth-child(1):hover {
     color: var(--color-primary);
     border-width: 1px;
-    background: var(--Primary-Color-Button-Color, #2c2520);
+    background: var(--color-button-dark);
     border: 1px solid var(--color-primary);
     transition: 0.3s ease-in-out;
 }
 .button:nth-child(2):hover {
-    color: var(--primary-color-white-button-text, #ffffff);
+    color: var(--color-white);
     border-width: 1px;
     background: var(--color-header-menu-bg-hover);
     border: var(--color-border-dark);

@@ -1,7 +1,6 @@
 import { PageContainer } from '../../components/page-container/PageContainer';
 import { TopBar } from '../../components/top-bar/TopBar';
 import css from './style.module.css';
-import { Images } from '../../util/constants';
 import { Footer } from '../../components/footer/Footer';
 import Testimonial from '../home/components/testimonials/Testimonials';
 import { Spacer } from '../../components/spacer/Spacer';
@@ -11,8 +10,12 @@ import FAQSection from './components/faq-section/FaqSection';
 import MainContactForm from '../../components/main-contact-form/Contact';
 import SEO from '../../Seo';
 import { Navigation } from '../../components/navigation/Navigation';
+import useApp from '../../hook/useApp';
 
 const BookConsultation = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const description =
         'Book a personalized consultation with acharyaganesh for astrology, numerology, kundali matching, and horoscope readings. Get expert guidance tailored to your needs.';
     const keywords =
@@ -26,7 +29,7 @@ const BookConsultation = () => {
                 className={css.header}
             >
                 <img
-                    src={Images.default.ImgHeaderBg}
+                    src={Images.ImgHeaderBgBookConsult}
                     alt="header"
                     className={css.headerImg}
                 />
@@ -71,7 +74,7 @@ const BookConsultation = () => {
                     </div>
                     <img
                         className={css.person_image}
-                        src={Images.default.HanishImg}
+                        src={Images.HanishImg}
                         alt={'Hanish Bagga image'}
                     />
                 </div>

@@ -5,7 +5,7 @@
 }
 
 .header {
-    background-color: #23201d;
+    background-color: var(--color-black);
     min-height: 500px;
     min-width: 100%;
     background-repeat: no-repeat;
@@ -88,7 +88,7 @@
             font-size: 16px;
             line-height: 24px;
             letter-spacing: 0%;
-            color: var(--Primary-Color-Color-Foreground, #121212);
+            color: var(--color-card-bg-dark);
         }
     }
 
@@ -113,7 +113,7 @@
                 font-size: 16px;
                 line-height: 24px;
                 letter-spacing: 0%;
-                color: var(--Primary-Color-Color-Foreground, #121212);
+                color: var(--color-card-bg-dark);
             }
         }
     }

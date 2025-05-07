@@ -1,37 +1,39 @@
 import { Link } from 'react-router-dom';
 import css from './style.module.css';
 
-import { Images, CONTACT_INFO, LINKS } from '../../util/constants';
+import { CONTACT_INFO, LINKS } from '../../util/constants';
 import { useNav } from '../../hook/useNav';
+import useApp from '../../hook/useApp';
 
 export const TopBar = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const { showNav, setShowNav } = useNav();
     return (
         <div className={css.container}>
             <img
                 className={css.menu_icon}
-                src={Images.default.IcMenu}
+                src={Images.IcMenu}
                 alt={'menu'}
                 onClick={() => setShowNav(true)}
             />
             <Link to="/">
-                <img className={css.logo} src={Images.default.Logo} />
+                <img className={css.logo} src={Images.Logo} />
             </Link>
             <div className={css.info_n_action_button_container}>
                 <a href={`tel:${CONTACT_INFO.NUMBER_ALT_1}`}>
-                    <ContactLabel icon={Images.default.IcPhone}>
+                    <ContactLabel icon={Images.IcPhone}>
                         {CONTACT_INFO.NUMBER_ALT_1}
                     </ContactLabel>
                 </a>
                 <a href={`tel:${CONTACT_INFO.NUMBER_ALT_2}`}>
-                    <ContactLabel icon={Images.default.IcPhone}>
+                    <ContactLabel icon={Images.IcPhone}>
                         {CONTACT_INFO.NUMBER_ALT_2}
                     </ContactLabel>
                 </a>
                 <a target={'_blank'} href={LINKS.COURSES_LINK}>
-                    <ActionButton icon={Images.default.IcUser}>
-                        Log in
-                    </ActionButton>
+                    <ActionButton icon={Images.IcUser}>Log in</ActionButton>
                 </a>
             </div>
         </div>

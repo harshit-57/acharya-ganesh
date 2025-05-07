@@ -18,9 +18,12 @@ import parse from 'html-react-parser';
 import { APIHelper } from '../../util/APIHelper.js';
 import { htmlToText } from 'html-to-text';
 import SEO from '../../Seo.jsx';
-import { Images } from '../../util/constants.js';
+import useApp from '../../hook/useApp.js';
 
 const CitationDetail = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const { slug } = useParams();
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
@@ -89,7 +92,7 @@ const CitationDetail = () => {
         <PageContainer className={css.container}>
             <SEO keywords={keywords} description={description} />
             <div
-                style={{ backgroundImage: `url(${Images.default.CitationBanner})` }}
+                style={{ backgroundImage: `url(${Images.CitationBanner})` }}
                 className={css.header}
             >
                 <TopBar />
@@ -435,7 +438,7 @@ const CitationDetail = () => {
                     </div>
                     <div className={css.sidebar_container}>
                         <img
-                            src={Images.default.ImgConsultationAlt}
+                            src={Images.ImgConsultationAlt}
                             alt={'Consultation poster'}
                         />
                         <ContactForm />

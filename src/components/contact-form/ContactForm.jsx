@@ -150,7 +150,7 @@ const ContactForm = () => {
                             formData.service
                                 ? {}
                                 : {
-                                      color: '#b5afa8',
+                                      color: 'var(--color-placeholder)',
                                   }
                         }
                     >

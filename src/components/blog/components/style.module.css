@@ -2,7 +2,7 @@
     background-color: var(--color-gradient-bg);
     flex: 1;
     border: 1px solid transparent;
-    border-color: #cebeb1;
+    border-color: var(--color-border-primary);
     border-radius: 24px;
     padding: 36px;
     display: flex;
@@ -19,11 +19,11 @@
     }
     &:active > .shortDesc {
         transition: 0.2s;
-        color: #cac3bc;
+        color: var(--color-border-primary);
     }
     &:active > .author {
         transition: 0.2s;
-        color: #ffffff;
+        color: var(--color-white);
     }
     &:active > .category {
         transition: padding 0.2s;

@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './style.module.css';
-
-import { Images } from '../../../../util/constants';
+import useApp from '../../../../hook/useApp';
 
 const features = [
     {
@@ -31,16 +30,20 @@ const features = [
     },
 ];
 
-const IconsArr = [
-    Images.default.BulbIg,
-    Images.default.VectorIg,
-    Images.default.HourGlassIg,
-    Images.default.RelationshipIg,
-    Images.default.StressIg,
-    Images.default.BalanceTg,
-];
-
 const WhyChooseUs = () => {
+    const {
+        theme: { Images },
+    } = useApp();
+
+    const IconsArr = [
+        Images.BulbIg,
+        Images.VectorIg,
+        Images.HourGlassIg,
+        Images.RelationshipIg,
+        Images.StressIg,
+        Images.BalanceTg,
+    ];
+
     return (
         <div className={styles.container}>
             <h2 className={styles.heading}>Why Choose Us?</h2>

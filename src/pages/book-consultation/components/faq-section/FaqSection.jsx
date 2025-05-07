@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import styles from './style.module.css';
 import FAQItem from './component/item/FaqItem';
-import { Images } from '../../../../util/constants';
+import useApp from '../../../../hook/useApp';
 
 const FAQSection = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const [showMore, setShowMore] = useState(false);
 
     const initialFAQs = [
@@ -68,7 +71,7 @@ Collaboratively administrate empowered markets via plug-and-play networks. Dynam
     return (
         <div
             className={styles.container}
-            style={{ backgroundImage: `url(${Images.default.FAQBg})` }}
+            style={{ backgroundImage: `url(${Images.FAQBg})` }}
         >
             <h2 className={styles.faqTitle}>Frequently Asked Questions</h2>
             {(showMore ? faqs : faqs?.slice(0, 4)).map((e) => {
@@ -78,9 +81,9 @@ Collaboratively administrate empowered markets via plug-and-play networks. Dynam
                 className={styles.showMoreBtn}
                 onClick={() => setShowMore(!showMore)}
             >
-                <img src={Images.default.IcStar} alt={'*'} />
+                <img src={Images.IcStar} alt={'*'} />
                 {showMore ? 'Show Less' : 'Show More'}
-                <img src={Images.default.IcStar} alt={'*'} />
+                <img src={Images.IcStar} alt={'*'} />
             </button>
         </div>
     );

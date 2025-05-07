@@ -9,9 +9,12 @@ import { Footer } from '../../components/footer/Footer';
 import { useNavigate } from 'react-router-dom';
 import { APIHelper } from '../../util/APIHelper';
 import SEO from '../../Seo';
-import { Images } from '../../util/constants';
+import useApp from '../../hook/useApp';
 const COURSE_PER_PAGE = 8;
 const CoursesList = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const navigate = useNavigate();
     const [courses, setCourses] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -111,7 +114,7 @@ const CoursesList = () => {
             <SEO keywords={keywords} description={description} />
             <div
                 style={{
-                    backgroundImage: `url(${Images.default.ImgCourseBanner})`,
+                    backgroundImage: `url(${Images.ImgCourseBanner})`,
                 }}
                 className={css.header}
             >
@@ -123,10 +126,7 @@ const CoursesList = () => {
                         <p>
                             <span>Home</span>{' '}
                             <span>
-                                <img
-                                    src={Images.default.IcChevronIcon}
-                                    alt={'>'}
-                                />
+                                <img src={Images.IcChevronIcon} alt={'>'} />
                             </span>{' '}
                             <span>Courses</span>
                         </p>
@@ -136,7 +136,7 @@ const CoursesList = () => {
             <div className={css.filter_container}>
                 <div className={css.filter_item_wrapper}>
                     <div>
-                        <img src={Images.default.ICSearchMd} alt={'Search'} />
+                        <img src={Images.ICSearchMd} alt={'Search'} />
                         <input
                             type={'text'}
                             value={searchQuery}
@@ -164,7 +164,7 @@ const CoursesList = () => {
                             })
                         }
                     >
-                        <img src={Images.default.ICFilter} alt={'Filter'} />
+                        <img src={Images.ICFilter} alt={'Filter'} />
                         <p>{category ? category?.Name : 'Select Category'}</p>
                         {showFilterDropDown?.category && (
                             <div className={css.filter_dropdown}>
@@ -187,7 +187,7 @@ const CoursesList = () => {
                             })
                         }
                     >
-                        <img src={Images.default.ICFilter} alt={'Filter'} />
+                        <img src={Images.ICFilter} alt={'Filter'} />
                         <p>
                             {sortBy == 'pr."PublishedOn"' && order == 'asc'
                                 ? 'Older'

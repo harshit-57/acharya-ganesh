@@ -14,11 +14,12 @@ import {
 import { useEffect, useState } from 'react';
 import { APIHelper } from '../../util/APIHelper';
 import parse from 'html-react-parser';
-import { toast } from 'react-toastify';
-import { longFormatters } from 'date-fns';
 import SEO from '../../Seo';
-import { Images } from '../../util/constants';
+import useApp from '../../hook/useApp';
 const CourseDetail = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const { slug } = useParams();
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
@@ -58,7 +59,7 @@ const CourseDetail = () => {
             <SEO keywords={keywords} description={description} />
             <div
                 style={{
-                    backgroundImage: `url(${Images.default.ImgHeaderBgContactAlt})`,
+                    backgroundImage: `url(${Images.ImgHeaderBgContactAlt})`,
                 }}
                 className={css.header}
             >
@@ -69,10 +70,7 @@ const CourseDetail = () => {
                 <PriceAndPurchaseSection course={course} />
                 <div className={css.description_container}>
                     <div className={css.section_label}>
-                        <img
-                            src={Images.default.IcDescription}
-                            alt={'Description'}
-                        />
+                        <img src={Images.IcDescription} alt={'Description'} />
                         <p>Description</p>
                     </div>
                     <div className={`html-content`}>

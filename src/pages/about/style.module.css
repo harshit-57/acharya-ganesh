@@ -1,5 +1,5 @@
 .header {
-    background-color: #5c5c5c;
+    background-color: var(--color-black);
     min-height: auto !important;
     background-position: center;
     background-repeat: no-repeat;
@@ -106,13 +106,13 @@
         font-weight: 600;
         font-size: 16px;
         line-height: 28px;
-        color: #2c2520;
+        color: var(--color-button-dark);
     }
 
     p {
         font-weight: 400;
         font-size: 16px;
-        color: #2c2520;
+        color: var(--color-button-dark);
     }
 }
 
@@ -177,7 +177,7 @@
 }
 .desc {
     font-size: 18px;
-    color: #121212;
+    color: var(--color-button-dark);
 }
 
 .bullet_container {
@@ -223,7 +223,7 @@
         width: 248px;
         height: 248px;
         border-radius: 24px;
-        background-color: gray;
+        background-color: var(--color-gradient-bg);
         object-fit: cover;
     }
 }
@@ -300,7 +300,6 @@
         padding: 36px 24px;
         border-radius: 24px;
         background-color: var(--color-gradient-bg);
-
     }
     .consultation_poster {
         width: 100%;
@@ -312,7 +311,7 @@
     }
     .desc {
         font-size: 16px;
-        color: #121212;
+        color: var(--color-button-dark);
     }
 
     .bullet_container {
@@ -354,7 +353,7 @@
             width: 248px;
             height: 248px;
             border-radius: 24px;
-            background-color: gray;
+            background-color: var(--color-gradient-bg);
             object-fit: cover;
         }
     }

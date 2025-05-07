@@ -1,6 +1,5 @@
 import css from './style.module.css';
 import { useState, useEffect } from 'react';
-import { Images } from '../../util/constants';
 import { IndicatorContainer } from '../indicator-container/IndicatorContainer';
 import { PageContainer } from '../page-container/PageContainer';
 import { CourseCard } from './components/course-card/CourseCard';
@@ -8,6 +7,7 @@ import useBreakpoint from 'use-breakpoint';
 import { APIHelper } from '../../util/APIHelper';
 import { NavLink } from 'react-router-dom';
 import { PrimaryButton } from '../primary-button/PrimaryButton';
+import useApp from '../../hook/useApp';
 const PER_FRAME_COURSE_COUNT_ULTRA_WIDE = 5;
 const PER_FRAME_COURSE_COUNT_LARGE_DESKTOP = 4;
 const PER_FRAME_COURSE_COUNT_DESKTOP = 3;
@@ -39,6 +39,9 @@ const getCourseCountPerFrame = (device) => {
 };
 
 export const CoursesCarousel = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     const { breakpoint } = useBreakpoint(BREAKPOINTS, 'desktop');
     const [courses, setCourses] = useState([]);
     const [visibleCourses, setVisibleCourses] = useState([]);
@@ -136,7 +139,7 @@ export const CoursesCarousel = () => {
 
     return (
         <PageContainer
-            style={{ backgroundImage: `url(${Images.default.ImgSectionBgCS})` }}
+            style={{ backgroundImage: `url(${Images.ImgSectionBgCS})` }}
             className={css.container}
         >
             <h2 className={css.section_heading}>
@@ -144,10 +147,10 @@ export const CoursesCarousel = () => {
             </h2>
             <div className={css.course_slide_container}>
                 <button onClick={onPrev} className={css.prev_button}>
-                    <img src={Images.default.LeftArrow} alt={'<'} />
+                    <img src={Images.LeftArrow} alt={'<'} />
                 </button>
                 <button onClick={onNext} className={css.next_button}>
-                    <img src={Images.default.LeftArrow} alt={'>'} />
+                    <img src={Images.LeftArrow} alt={'>'} />
                 </button>
                 <div className={css.course_slide_wrapper}>
                     {Array.isArray(visibleCourses) &&

@@ -2,9 +2,12 @@ import css from './style.module.css';
 import { HorizontalBorder } from '../spacer/Spacer';
 import { NavLink } from 'react-router-dom';
 import { LINKS } from '../../util/constants';
-import { Images } from '../../util/constants';
+import useApp from '../../hook/useApp';
 
 export const Footer = () => {
+    const {
+        theme: { Images },
+    } = useApp();
     return (
         <div className={css.container}>
             <div className={css.sections_container}>
@@ -42,7 +45,7 @@ export const Footer = () => {
                 <div className={css.section}>
                     <img
                         className={css.brand_logo}
-                        src={Images.default.ImgBrandLogo}
+                        src={Images.ImgBrandLogo}
                         alt={'Acharya Ganesh Logo'}
                     />
                     <p>
@@ -56,12 +59,12 @@ export const Footer = () => {
                             <a href={LINKS.FACEBOOK_URL} target={'_blank'}>
                                 <img
                                     className={css.social}
-                                    src={Images.default.IcFacebookMono}
+                                    src={Images.IcFacebookMono}
                                     alt={'fb'}
                                 />
                                 <img
                                     className={css.social_color}
-                                    src={Images.default.IcFacebook}
+                                    src={Images.IcFacebook}
                                     alt={'fb'}
                                 />
                             </a>
@@ -70,12 +73,12 @@ export const Footer = () => {
                             <a href={LINKS.INSTAGRAM_URL} target={'_blank'}>
                                 <img
                                     className={css.social}
-                                    src={Images.default.IcInstagramMono}
+                                    src={Images.IcInstagramMono}
                                     alt={'insta'}
                                 />
                                 <img
                                     className={css.social_color}
-                                    src={Images.default.IcInstagram}
+                                    src={Images.IcInstagram}
                                     alt={'insta'}
                                 />
                             </a>
@@ -84,12 +87,12 @@ export const Footer = () => {
                             <a href={LINKS.X_URL} target={'_blank'}>
                                 <img
                                     className={css.social}
-                                    src={Images.default.IcXMono}
+                                    src={Images.IcXMono}
                                     alt={'x'}
                                 />
                                 <img
                                     className={css.social_color}
-                                    src={Images.default.IcX}
+                                    src={Images.IcX}
                                     alt={'x'}
                                 />
                             </a>
@@ -98,12 +101,12 @@ export const Footer = () => {
                             <a href={LINKS.LINKEDIN_URL} target={'_blank'}>
                                 <img
                                     className={css.social}
-                                    src={Images.default.IcLinkedInMono}
+                                    src={Images.IcLinkedInMono}
                                     alt={'linkedin'}
                                 />
                                 <img
                                     className={css.social_color}
-                                    src={Images.default.IcLinkedIn}
+                                    src={Images.IcLinkedIn}
                                     alt={'linkedin'}
                                 />
                             </a>
@@ -112,12 +115,12 @@ export const Footer = () => {
                             <a href={LINKS.PINTEREST_URL} target={'_blank'}>
                                 <img
                                     className={css.social}
-                                    src={Images.default.IcPinterestMono}
+                                    src={Images.IcPinterestMono}
                                     alt={'pinterest'}
                                 />
                                 <img
                                     className={css.social_color}
-                                    src={Images.default.IcPinterest}
+                                    src={Images.IcPinterest}
                                     alt={'pinterest'}
                                 />
                             </a>
@@ -126,12 +129,12 @@ export const Footer = () => {
                             <a href={LINKS.YOUTUBE_URL} target={'_blank'}>
                                 <img
                                     className={css.social}
-                                    src={Images.default.IcYoutubeMono}
+                                    src={Images.IcYoutubeMono}
                                     alt={'youtube'}
                                 />
                                 <img
                                     className={css.social_color}
-                                    src={Images.default.IcYoutube}
+                                    src={Images.IcYoutube}
                                     alt={'youtube'}
                                 />
                             </a>
@@ -143,7 +146,7 @@ export const Footer = () => {
                     <div className={css.address_detail_container}>
                         <a href={LINKS.ADDRESS_URL} target={'_blank'}>
                             <AddressItem
-                                icon={Images.default.IcHome}
+                                icon={Images.IcHome}
                                 desc={
                                     'Hall No. 201 Plot No. 959 Niti Khand 1, Opposite Orange County, Indirapuram Ghaziabad, 201014'
                                 }
@@ -154,7 +157,7 @@ export const Footer = () => {
                             target={'_blank'}
                         >
                             <AddressItem
-                                icon={Images.default.IcMail}
+                                icon={Images.IcMail}
                                 desc={'info@acharyaganesh.com'}
                             />
                         </a>
@@ -163,7 +166,7 @@ export const Footer = () => {
                             target={'_blank'}
                         >
                             <AddressItem
-                                icon={Images.default.IcMail}
+                                icon={Images.IcMail}
                                 desc={'connect@acharyaganesh.com'}
                             />
                         </a>

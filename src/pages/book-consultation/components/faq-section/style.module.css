@@ -24,7 +24,7 @@
     line-height: 1.2;
     letter-spacing: -0.03em;
     text-align: center;
-    color: var(--Primary-Color-Caption-Color, #9a5c23);
+    color: var(--color-caption);
 }
 
 @media (max-width: 768px) {
@@ -38,7 +38,6 @@
     .faqTitle {
         font-size: 28px;
         line-height: 1.2;
-        color: var(--color-caption);
     }
 }
 
@@ -56,4 +55,5 @@
     font-size: 16px;
     cursor: pointer;
     background-color: transparent;
+    margin: auto;
 }

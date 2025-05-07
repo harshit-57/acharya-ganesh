@@ -4,7 +4,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 36px;
-    background-color: antiquewhite;
+    background-color: var(--color-gradient-bg);
     padding: 25px 60px;
     display: flex;
     flex-direction: column;
