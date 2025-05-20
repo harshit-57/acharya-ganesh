@@ -53,12 +53,22 @@ const CourseDetail = () => {
         }
     };
 
-    const keywords = course?.Tags?.map((e) => e.TagName).join(', ');
+    const keywords = course?.Focus_Keyphrase
+        ? `${course?.Focus_Keyphrase}, ${course?.Tags?.map(
+              (e) => e.TagName
+          ).join(', ')}`
+        : course?.Tags?.map((e) => e.TagName).join(', ');
     const description = course?.Meta_Desc;
-
+    const title = course?.Meta_SiteName;
+    const metaTitle = course?.Meta_Title;
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description} />
+            <SEO
+                keywords={keywords}
+                description={description}
+                title={title}
+                metaTitle={metaTitle}
+            />
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}

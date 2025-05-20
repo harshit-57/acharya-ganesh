@@ -60,9 +60,10 @@ const Citation = () => {
     const description =
         'Explore our citations and references for astrology, numerology, kundali matching, and daily horoscopes. Trusted sources for accurate and reliable information.';
 
+    const title = 'Acharya Ganesh Astrology Academy - Citation';
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description} />
+            <SEO keywords={keywords} description={description} title={title} />
             <div
                 style={{ backgroundImage: `url(${CitationBanner})` }}
                 className={css.header}
@@ -127,7 +128,7 @@ const Citation = () => {
                                 className={css.show_more_button}
                                 onClick={handleShowMore}
                             >
-                                Show All
+                                Show More
                             </PrimaryButton>
                         )}
                     </>

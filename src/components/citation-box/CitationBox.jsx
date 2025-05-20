@@ -91,7 +91,7 @@ const CitationBox = ({ breakpoints }) => {
             </div>
             <NavLink to={'/citation'}>
                 <PrimaryButton className={css.show_more_button}>
-                    Show All
+                    Show More
                 </PrimaryButton>
             </NavLink>
         </div>

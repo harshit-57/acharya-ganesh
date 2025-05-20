@@ -60,16 +60,25 @@ const ServiceDetail = () => {
         }
     };
 
-    const keywords =
-        service?.Tags?.map((e) => e.TagName).join(', ') ||
-        'our story, who we are, about acharyaganesh, astrology, numerology, spiritual guidance, kundali, horoscope, vedic astrology';
+    const keywords = service?.Focus_Keyphrase
+        ? `${service?.Focus_Keyphrase}, ${service?.Tags?.map(
+              (e) => e.TagName
+          ).join(', ')}`
+        : service?.Tags?.map((e) => e.TagName).join(', ') ||
+          'our story, who we are, about acharyaganesh, astrology, numerology, spiritual guidance, kundali, horoscope, vedic astrology';
     const description =
         service?.Meta_Desc ||
         'Learn about acharyaganesh, your trusted source for astrology, numerology, kundali matching, and daily horoscopes. Discover our mission, team, and how we can guide you on your spiritual journey.';
-
+    const title = service?.Meta_SiteName;
+    const metaTitle = service?.Meta_Title;
     return (
         <PageContainer>
-            <SEO keywords={keywords} description={description} />
+            <SEO
+                keywords={keywords}
+                description={description}
+                title={title}
+                metaTitle={metaTitle}
+            />
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}
@@ -113,15 +122,16 @@ const ServiceDetail = () => {
                                 <div className={`html-content bullet`}>
                                     {parse(service?.Description || '')}
                                 </div>
-                                <NavLink
-                                    to={service?.Link || ''}
+                                <a
+                                    href={service?.Link || ''}
+                                    target="_blank"
                                     className={css.button}
                                 >
                                     <PrimaryButton>
                                         {service?.LinkText ||
                                             'Book Consultation'}
                                     </PrimaryButton>
-                                </NavLink>
+                                </a>
                             </div>
 
                             <Blog

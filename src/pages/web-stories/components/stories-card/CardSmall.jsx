@@ -3,7 +3,7 @@ import css from './style.module.css';
 import parse from 'html-react-parser';
 export const CardSmall = ({ blog, onClick, style, className }) => {
     return (
-        <div className={[css.container, className].join(' ')}>
+        <div className={[css.container, className].join(' ')} onClick={onClick}>
             <div className={css.thumbnail_wrapper}>
                 {blog?.CoverImageUrl && (
                     <img
@@ -19,7 +19,6 @@ export const CardSmall = ({ blog, onClick, style, className }) => {
                 <h2
                     className={`html-content content-one-line`}
                     title={blog.Title}
-                    onClick={onClick}
                 >
                     {parse(blog?.Title)}
                 </h2>

@@ -109,9 +109,10 @@ const CoursesList = () => {
     const keywords = coursetags.map((e) => e.Name).join(', ');
     const description =
         'Discover our wide range of courses on astrology, numerology, kundali matching, and daily horoscopes. Enhance your knowledge and skills with expert-led training.';
+    const title = 'Acharya Ganesh Astrology Academy | Courses';
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description} />
+            <SEO keywords={keywords} description={description} title={title} />
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}

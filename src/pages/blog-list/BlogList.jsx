@@ -83,10 +83,10 @@ const BlogList = () => {
     const keywords = blogstags.map((e) => e.Name).join(', ');
     const description =
         'Browse our latest blog posts on astrology, numerology, kundali matching, and daily horoscopes. Stay updated with expert advice and spiritual guidance.';
-
+    const title = 'Acharya Ganesh - Blog';
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description} />
+            <SEO keywords={keywords} description={description} title={title} />
 
             <div
                 style={{ backgroundImage: `url(${ImgBlogHeader})` }}

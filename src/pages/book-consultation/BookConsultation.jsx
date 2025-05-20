@@ -21,9 +21,10 @@ const BookConsultation = () => {
         'Book a personalized consultation with acharyaganesh for astrology, numerology, kundali matching, and horoscope readings. Get expert guidance tailored to your needs.';
     const keywords =
         'book consultation, schedule appointment, online consultation, astrology consultation, numerology consultation, kundali matching, horoscope reading, vedic astrology consultation';
+    const title = 'Acharya Ganesh Astrology Academy | Book Consultation';
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description} />
+            <SEO keywords={keywords} description={description} title={title} />
             <div
                 // style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}
@@ -79,7 +80,7 @@ const BookConsultation = () => {
             <div className={css.faqsection}>
                 <FAQSection />
             </div>
-            <div className={css.getintouch}>
+            <div id={'consult'} className={css.getintouch}>
                 <div className={css.getintouch_container}>
                     <div className={css.getintouch_heading}>Get In Touch</div>
                     <div className={css.getintouch_row}>

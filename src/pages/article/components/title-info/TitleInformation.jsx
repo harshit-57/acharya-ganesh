@@ -27,7 +27,7 @@ export const TitleInformation = ({ article }) => {
         const date = new Date(article?.PublishedOn);
         const day = date.getDate();
         setTimeStamp(`${day}${getDaySuffix(day)} ${months[date.getMonth()]}`);
-        setYear(date.getFullYear() - 1);
+        setYear(date.getFullYear());
     }, [article]);
 
     const readingTime = useMemo(

@@ -39,6 +39,10 @@ const RouteChangeDetector = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        if (location.hash) {
+            const element = document.querySelector(location.hash);
+            if (element) element.scrollIntoView({ behavior: 'smooth' });
+        }
     }, [location]);
 
     return null;

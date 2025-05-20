@@ -3,6 +3,7 @@
     background-color: var(--color-gradient-bg);
     border: 1px solid transparent;
     border-color: var(--color-border-dark);
+    cursor: pointer;
 }
 
 .thumbnail {

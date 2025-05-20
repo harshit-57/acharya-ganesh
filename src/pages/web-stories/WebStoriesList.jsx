@@ -61,10 +61,10 @@ const WebStoriesList = () => {
     const keywords = webstoriesTags.map((e) => e.Name).join(', ');
     const description =
         'Explore our interactive web stories on astrology, numerology, kundali matching, and daily horoscopes. Engaging and informative content for your spiritual journey.';
-
+    const title = 'Acharya Ganesh Astrology Academy | Web Stories';
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description} />
+            <SEO keywords={keywords} description={description} title={title} />
             <div
                 style={{ backgroundImage: `url(${ImgBlogHeader})` }}
                 className={css.header}

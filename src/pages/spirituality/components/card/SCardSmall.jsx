@@ -2,7 +2,7 @@ import { htmlToText } from 'html-to-text';
 import css from './style.module.css';
 export const SCardSmall = ({ blog, onClick, style, className }) => {
     return (
-        <div className={[css.container, className].join(' ')}>
+        <div className={[css.container, className].join(' ')} onClick={onClick}>
             <div className={css.thumbnail_wrapper}>
                 {blog?.Image && (
                     <img
@@ -22,7 +22,6 @@ export const SCardSmall = ({ blog, onClick, style, className }) => {
                 <h2
                     className={`content-two-line`}
                     title={htmlToText(blog.Title)}
-                    onClick={onClick}
                 >
                     {htmlToText(blog?.Title)}
                 </h2>

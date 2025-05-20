@@ -85,11 +85,20 @@ const CitationDetail = () => {
     //     },
     // ];
 
-    const keywords = citation?.Slug?.split('-')?.join(', ');
+    const keywords = citation?.Focus_Keyphrase
+        ? `${citation?.Focus_Keyphrase}, ${citation?.Slug}`
+        : citation?.Slug;
     const description = `View detailed citations and references for ${keywords} at acharya-ganesh. Trusted and verified sources for astrology, numerology, and spiritual guidance.`;
+    const title = citation?.Meta_SteName;
+    const metaTitle = citation?.Meta_Title;
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description} />
+            <SEO
+                keywords={keywords}
+                description={description}
+                title={title}
+                metaTitle={metaTitle}
+            />
             <div
                 style={{ backgroundImage: `url(${CitationBanner})` }}
                 className={css.header}
