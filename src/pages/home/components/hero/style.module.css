@@ -54,6 +54,7 @@
     }
     .book_appointment_button {
         margin-top: 24px;
+        color: var(--color-black);
     }
 }
 @media only screen and (max-width: 768px) {
