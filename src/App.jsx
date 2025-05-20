@@ -1,38 +1,74 @@
-import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
-import Home from './pages/home/Home';
-import BlogList from './pages/blog-list/BlogList';
-import CoursesList from './pages/courses/CoursesList';
-import Contact from './pages/contact/Contact';
-import AboutUs from './pages/about/AboutUs';
-import Article from './pages/article/Article';
-import CourseDetail from './pages/course-detail/CourseDetail';
-import SpiritualityList from './pages/spirituality/SpiritualityList';
-import SArticle from './pages/spirituality-article/SArticle';
-import BookConsultation from './pages/book-consultation/BookConsultation';
-import WebStoriesList from './pages/web-stories/WebStoriesList';
-import { WebStoriesView } from './pages/web-stories-view/WebStoriesView';
-import { useEffect } from 'react';
-import Login from './admin/pages/login/Login';
-import CitationDetail from './pages/citation-detail/CitationDetail';
-import Citation from './pages/citation/Citation';
-import Edit from './admin/content-editor/Content';
-import AdminApp from './admin/AdminApp';
-import Dashboard from './admin/pages/dashboard/Dashboard';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Suspense, useEffect, lazy } from 'react';
+
+// Common pages
+const Home = lazy(() => import('./pages/home/Home'));
+const BlogList = lazy(() => import('./pages/blog-list/BlogList'));
+const CoursesList = lazy(() => import('./pages/courses/CoursesList'));
+const Contact = lazy(() => import('./pages/contact/Contact'));
+const AboutUs = lazy(() => import('./pages/about/AboutUs'));
+const Article = lazy(() => import('./pages/article/Article'));
+const CourseDetail = lazy(() => import('./pages/course-detail/CourseDetail'));
+const SpiritualityList = lazy(() =>
+    import('./pages/spirituality/SpiritualityList')
+);
+const SArticle = lazy(() => import('./pages/spirituality-article/SArticle'));
+const BookConsultation = lazy(() =>
+    import('./pages/book-consultation/BookConsultation')
+);
+const WebStoriesList = lazy(() => import('./pages/web-stories/WebStoriesList'));
+const WebStoriesView = lazy(() =>
+    import('./pages/web-stories-view/WebStoriesView')
+);
+const CitationDetail = lazy(() =>
+    import('./pages/citation-detail/CitationDetail')
+);
+const Citation = lazy(() => import('./pages/citation/Citation'));
+const FormConsultation = lazy(() =>
+    import('./pages/consultation-booking-page/BookConsultationForm')
+);
+const Services = lazy(() => import('./pages/services/Services'));
+const ServiceDetail = lazy(() =>
+    import('./pages/service-detail/ServiceDetail')
+);
+
+// Admin pages
+const Login = lazy(() => import('./admin/pages/login/Login'));
+const Edit = lazy(() => import('./admin/content-editor/Content'));
+const AdminApp = lazy(() => import('./admin/AdminApp'));
+const Dashboard = lazy(() => import('./admin/pages/dashboard/Dashboard'));
+const ManageCourses = lazy(() =>
+    import('./admin/pages/manage-course/ManageCourse')
+);
+const ManageBlogs = lazy(() => import('./admin/pages/manage-blog/ManageBlog'));
+const ManageSpirituality = lazy(() =>
+    import('./admin/pages/manage-spirituality/ManageSpirituality')
+);
+const ManageStory = lazy(() =>
+    import('./admin/pages/manage-stories/ManageStory')
+);
+const ManageTestimonial = lazy(() =>
+    import('./admin/pages/manage-testimonial/ManageTestimonial')
+);
+const ManageSupport = lazy(() =>
+    import('./admin/pages/manage-support/ManageSupport')
+);
+const ManageCitation = lazy(() =>
+    import('./admin/pages/manage-citation/ManageCitation')
+);
+const ManageAdmin = lazy(() =>
+    import('./admin/pages/manage-admin/ManageAdmin')
+);
+const ManageSlot = lazy(() => import('./admin/pages/manage-slot/ManageSlot'));
+const ManageService = lazy(() =>
+    import('./admin/pages/manage-service/ManageService')
+);
+const ManageBooking = lazy(() =>
+    import('./admin/pages/manage-booking/ManageBooking')
+);
+
+// Context
 import { AuthProvider } from './admin/contexts/AuthContext';
-import ManageCourses from './admin/pages/manage-course/ManageCourse';
-import ManageBlogs from './admin/pages/manage-blog/ManageBlog';
-import ManageSpirituality from './admin/pages/manage-spirituality/ManageSpirituality';
-import ManageStory from './admin/pages/manage-stories/ManageStory';
-import FormConsultation from './pages/consultation-booking-page/BookConsultationForm';
-import ManageTestimonial from './admin/pages/manage-testimonial/ManageTestimonial';
-import ManageSupport from './admin/pages/manage-support/ManageSupport';
-import ManageCitation from './admin/pages/manage-citation/ManageCitation';
-import ManageAdmin from './admin/pages/manage-admin/ManageAdmin';
-import Services from './pages/services/Services';
-import ServiceDetail from './pages/service-detail/ServiceDetail';
-import ManageSlot from './admin/pages/manage-slot/ManageSlot';
-import ManageService from './admin/pages/manage-service/ManageService';
-import ManageBooking from './admin/pages/manage-booking/ManageBooking';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
@@ -47,100 +83,148 @@ const RouteChangeDetector = () => {
 
     return null;
 };
-export default () => {
+
+export default function App() {
     return (
         <>
             <RouteChangeDetector />
-            <Routes>
-                <Route index path="/" element={<Home />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/services/:slug" element={<ServiceDetail />} />
-                <Route
-                    path="/services/:parent/:slug"
-                    element={<ServiceDetail />}
-                />
-                <Route path="/blogs" element={<BlogList />} />
-                <Route path="/blog/:category" element={<BlogList />} />
-                <Route path="/:category/:slug" element={<Article />} />
-                <Route path="/spirituality" element={<SpiritualityList />} />
-                <Route
-                    path="/spirituality/category/:category"
-                    element={<SpiritualityList />}
-                />
-                <Route path="/spirituality/:slug" element={<SArticle />} />
-                <Route path="/course" element={<CoursesList />} />
-                <Route path="/course/:slug" element={<CourseDetail />} />
-                <Route path="/about-us" element={<AboutUs />} />
-                <Route path="/web-stories" element={<WebStoriesList />} />
-                <Route
-                    path="/web-stories/category/:category"
-                    element={<WebStoriesList />}
-                />
-                <Route path="/web-stories/:slug" element={<WebStoriesView />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/citation" element={<Citation />} />
-                <Route path="/locations/:slug" element={<CitationDetail />} />
-                <Route
-                    path="/book-consultation"
-                    element={<BookConsultation />}
-                />
-                <Route
-                    path="/book-consultation-form"
-                    element={<FormConsultation />}
-                />
-                <Route path="*" element={<Navigate to={'/'} />} />
+            <Suspense
+                fallback={
+                    // <Loading
+                    //     style={{
+                    //         position: 'fixed',
+                    //         top: '50%',
+                    //         left: '50%',
+                    //         transform: 'translate(-50%, -50%)',
+                    //         zIndex: 9999,
+                    //     }}
+                    // />
+                    <div>Loading...</div>
+                }
+            >
+                <Routes>
+                    {/* Public Routes */}
+                    <Route index path="/" element={<Home />} />
+                    <Route path="/services" element={<Services />} />
+                    <Route path="/services/:slug" element={<ServiceDetail />} />
+                    <Route
+                        path="/services/:parent/:slug"
+                        element={<ServiceDetail />}
+                    />
+                    <Route path="/blogs" element={<BlogList />} />
+                    <Route path="/blog/:category" element={<BlogList />} />
+                    <Route path="/:category/:slug" element={<Article />} />
+                    <Route
+                        path="/spirituality"
+                        element={<SpiritualityList />}
+                    />
+                    <Route
+                        path="/spirituality/category/:category"
+                        element={<SpiritualityList />}
+                    />
+                    <Route path="/spirituality/:slug" element={<SArticle />} />
+                    <Route path="/course" element={<CoursesList />} />
+                    <Route path="/course/:slug" element={<CourseDetail />} />
+                    <Route path="/about-us" element={<AboutUs />} />
+                    <Route path="/web-stories" element={<WebStoriesList />} />
+                    <Route
+                        path="/web-stories/category/:category"
+                        element={<WebStoriesList />}
+                    />
+                    <Route
+                        path="/web-stories/:slug"
+                        element={<WebStoriesView />}
+                    />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/citation" element={<Citation />} />
+                    <Route
+                        path="/locations/:slug"
+                        element={<CitationDetail />}
+                    />
+                    <Route
+                        path="/book-consultation"
+                        element={<BookConsultation />}
+                    />
+                    <Route
+                        path="/book-consultation-form"
+                        element={<FormConsultation />}
+                    />
 
-                {/* Admin Routes */}
-                <Route
-                    path="/admin/login"
-                    element={
-                        <AuthProvider>
-                            <Login />
-                        </AuthProvider>
-                    }
-                />
-                <Route
-                    element={
-                        <AuthProvider>
-                            <AdminApp />
-                        </AuthProvider>
-                    }
-                >
+                    {/* Admin Routes */}
                     <Route
-                        path="/admin"
-                        element={<Navigate to={'/admin/dashboard'} />}
+                        path="/admin/login"
+                        element={
+                            <AuthProvider>
+                                <Login />
+                            </AuthProvider>
+                        }
                     />
                     <Route
-                        path="/admin/content-editor/:type/:slug"
-                        element={<Edit />}
-                    />
-                    <Route path="/admin/dashboard" element={<Dashboard />} />
-                    <Route path="/admin/management" element={<ManageAdmin />} />
-                    <Route path="/admin/courses" element={<ManageCourses />} />
-                    <Route path="/admin/blogs" element={<ManageBlogs />} />
-                    <Route
-                        path="/admin/spiritualities"
-                        element={<ManageSpirituality />}
-                    />
-                    <Route path="/admin/stories" element={<ManageStory />} />
-                    <Route path="/admin/services" element={<ManageService />} />
-                    <Route
-                        path="/admin/citations"
-                        element={<ManageCitation />}
-                    />
-                    <Route
-                        path="/admin/testimonials"
-                        element={<ManageTestimonial />}
-                    />
-                    <Route path="/admin/support" element={<ManageSupport />} />
+                        element={
+                            <AuthProvider>
+                                <AdminApp />
+                            </AuthProvider>
+                        }
+                    >
+                        <Route
+                            path="/admin"
+                            element={<Navigate to="/admin/dashboard" />}
+                        />
+                        <Route
+                            path="/admin/content-editor/:type/:slug"
+                            element={<Edit />}
+                        />
+                        <Route
+                            path="/admin/dashboard"
+                            element={<Dashboard />}
+                        />
+                        <Route
+                            path="/admin/management"
+                            element={<ManageAdmin />}
+                        />
+                        <Route
+                            path="/admin/courses"
+                            element={<ManageCourses />}
+                        />
+                        <Route path="/admin/blogs" element={<ManageBlogs />} />
+                        <Route
+                            path="/admin/spiritualities"
+                            element={<ManageSpirituality />}
+                        />
+                        <Route
+                            path="/admin/stories"
+                            element={<ManageStory />}
+                        />
+                        <Route
+                            path="/admin/services"
+                            element={<ManageService />}
+                        />
+                        <Route
+                            path="/admin/citations"
+                            element={<ManageCitation />}
+                        />
+                        <Route
+                            path="/admin/testimonials"
+                            element={<ManageTestimonial />}
+                        />
+                        <Route
+                            path="/admin/support"
+                            element={<ManageSupport />}
+                        />
+                        <Route
+                            path="/admin/booking/slots"
+                            element={<ManageSlot />}
+                        />
+                        <Route
+                            path="/admin/booking"
+                            element={<ManageBooking />}
+                        />
+                    </Route>
 
-                    <Route
-                        path="/admin/booking/slots"
-                        element={<ManageSlot />}
-                    />
-                    <Route path="/admin/booking" element={<ManageBooking />} />
-                </Route>
-            </Routes>
+                    {/* Fallback */}
+                    <Route path="*" element={<Navigate to="/" />} />
+                </Routes>
+            </Suspense>
         </>
     );
-};
+}
