@@ -42,10 +42,16 @@ const SArticle = () => {
 
     const keywords = article?.Tags?.map((e) => e.TagName).join(', ');
     const description = article?.Tags;
-
+    const title = article?.Meta_SiteName;
+    const metaTitle = article?.Meta_Title;
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description} />
+            <SEO
+                keywords={keywords}
+                description={description}
+                title={title}
+                metaTitle={metaTitle}
+            />
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}

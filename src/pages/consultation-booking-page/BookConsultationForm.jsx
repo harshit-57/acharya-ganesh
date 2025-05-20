@@ -15,13 +15,14 @@ const FormConsultation = () => {
         'consultation booking, appointment booking, online booking, astrology booking, numerology booking, kundali matching booking, horoscope reading booking';
     const description =
         'Schedule your consultation with acharyaganesh for astrology, numerology, kundali matching, and horoscope readings. Easy and convenient online booking.';
-
+    const title = 'Acharya Ganesh Astrology Academy | Book Consultation';
     return (
         <PageContainer className={css.container}>
             <SEO
                 keywords={keywords}
                 description={description}
                 checkout={true}
+                title={title}
             />
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}

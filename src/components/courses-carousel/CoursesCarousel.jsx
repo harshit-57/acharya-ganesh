@@ -166,7 +166,7 @@ export const CoursesCarousel = () => {
             />
             <NavLink to={'/course'}>
                 <PrimaryButton className={css.show_more_button}>
-                    Show All
+                    Show More
                 </PrimaryButton>
             </NavLink>
         </PageContainer>

@@ -21,9 +21,10 @@ const Home = () => {
         'home, welcome, acharyaganesh, astrology, numerology, spiritual guidance, kundali, horoscope, vedic astrology, daily horoscope, zodiac signs';
     const description =
         'Welcome to acharyaganesh, your trusted source for astrology, numerology, kundali matching, and daily horoscopes. Explore our services, courses, and expert guidance.';
+    const title = 'Acharya Ganesh Astrology Academy';
     return (
         <PageContainer>
-            <SEO keywords={keywords} description={description} />
+            <SEO keywords={keywords} description={description} title={title} />
             <Section>
                 <Hero />
                 <Services />

@@ -81,9 +81,10 @@ const SpiritualityList = () => {
     const keywords = spritualitytags.map((e) => e.Name).join(', ');
     const description =
         'Discover spiritual practices, meditation techniques, and guidance at acharyaganesh. Enhance your spiritual journey with astrology, numerology, and kundali insights.';
+    const title = 'Acharya Ganesh Astrology Academy | Spirituality';
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description} />
+            <SEO keywords={keywords} description={description} title={title} />
             <div
                 style={{ backgroundImage: `url(${ImgBlogHeader})` }}
                 className={css.header}

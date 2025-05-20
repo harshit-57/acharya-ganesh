@@ -49,7 +49,7 @@ const Services = () => {
                 className={css.show_more_button}
                 onClick={() => setIsShowAll(!isShowAll)}
             >
-                {isShowAll ? 'Show Less' : 'Show All'}
+                {isShowAll ? 'Show Less' : 'Show More'}
             </PrimaryButton>
         </PageContainer>
     );

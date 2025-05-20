@@ -3,7 +3,7 @@ import ImgPoster from '../../../../assets/course_poster.png';
 import { PrimaryButton } from '../../../../components/primary-button/PrimaryButton';
 export const CourseCard = ({ onClick, course, style, className }) => {
     return (
-        <div className={[css.container, className].join(' ')}>
+        <div className={[css.container, className].join(' ')} onClick={onClick}>
             <img
                 src={course?.Images[0] || ''}
                 alt={course?.Name?.slice(0, 10) || 'course'}
@@ -11,9 +11,7 @@ export const CourseCard = ({ onClick, course, style, className }) => {
             ></img>
             <div className={css.content_container}>
                 <div className={css.content}>
-                    <h2 className="content-two-line" onClick={onClick}>
-                        {course?.Name}
-                    </h2>
+                    <h2 className="content-two-line">{course?.Name}</h2>
                     <p>
                         <span>
                             {course?.Sale_Price
