@@ -69,6 +69,7 @@ const ManageBooking = lazy(() =>
 
 // Context
 import { AuthProvider } from './admin/contexts/AuthContext';
+import Loading from './admin/components/MatxLoading';
 
 const RouteChangeDetector = () => {
     const location = useLocation();
@@ -90,16 +91,15 @@ export default function App() {
             <RouteChangeDetector />
             <Suspense
                 fallback={
-                    // <Loading
-                    //     style={{
-                    //         position: 'fixed',
-                    //         top: '50%',
-                    //         left: '50%',
-                    //         transform: 'translate(-50%, -50%)',
-                    //         zIndex: 9999,
-                    //     }}
-                    // />
-                    <div>Loading...</div>
+                    <Loading
+                        style={{
+                            position: 'fixed',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            zIndex: 9999,
+                        }}
+                    />
                 }
             >
                 <Routes>
