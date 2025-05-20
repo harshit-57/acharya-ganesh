@@ -15,6 +15,7 @@ import parse from 'html-react-parser';
 import { useEffect, useState } from 'react';
 import { APIHelper } from '../../util/APIHelper';
 import SEO from '../../Seo';
+import Loading from '../../admin/components/MatxLoading';
 const Article = () => {
     const { slug } = useParams();
     const [searchParams] = useSearchParams();
@@ -59,6 +60,20 @@ const Article = () => {
     const description =
         article?.Meta_Desc ||
         'Explore in-depth articles on astrology, numerology, kundali matching, and daily horoscopes. Get expert insights and tips to enhance your spiritual and personal growth.';
+
+    if (!article)
+        return (
+            <Loading
+                style={{
+                    position: 'fixed',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    zIndex: 9999,
+                }}
+            />
+        );
+
     return (
         <PageContainer className={css.container}>
             <SEO
