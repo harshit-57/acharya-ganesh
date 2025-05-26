@@ -14,6 +14,7 @@ import { Footer } from '../../components/footer/Footer';
 import { APIHelper } from '../../util/APIHelper';
 import { useNavigate } from 'react-router-dom';
 import SEO from '../../Seo';
+import Loader from '../../components/loader/Loader';
 const BLOG_PER_PAGE = 9;
 const BlogList = () => {
     const navigate = useNavigate();
@@ -144,7 +145,7 @@ const BlogList = () => {
             )}
 
             <div className={css.list_container}>
-                {loading && <p>Loading...</p>}
+                {loading && <Loader />}
                 {!loading &&
                     Array.isArray(blogs) &&
                     blogs.map((blog, index) => (

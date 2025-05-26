@@ -7,7 +7,7 @@ import { PageContainer } from '../page-container/PageContainer';
 import { CourseCard } from './components/course-card/CourseCard';
 import useBreakpoint from 'use-breakpoint';
 import { APIHelper } from '../../util/APIHelper';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { PrimaryButton } from '../primary-button/PrimaryButton';
 const PER_FRAME_COURSE_COUNT_ULTRA_WIDE = 5;
 const PER_FRAME_COURSE_COUNT_LARGE_DESKTOP = 4;
@@ -44,6 +44,7 @@ export const CoursesCarousel = () => {
     const [courses, setCourses] = useState([]);
     const [visibleCourses, setVisibleCourses] = useState([]);
     const [currentSlideOffset, setCurrentSlideOffset] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchCourses();
@@ -153,7 +154,11 @@ export const CoursesCarousel = () => {
                 <div className={css.course_slide_wrapper}>
                     {Array.isArray(visibleCourses) &&
                         visibleCourses.map((c, index) => (
-                            <CourseCard key={index} course={c} />
+                            <CourseCard
+                                key={index}
+                                course={c}
+                                onClick={() => navigate(`/course/${c?.Slug}`)}
+                            />
                         ))}
                 </div>
             </div>

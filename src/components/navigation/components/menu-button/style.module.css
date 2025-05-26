@@ -59,7 +59,7 @@
     max-height: 400px;
     overflow-y: auto;
     overflow-x: hidden;
-    a {
+    div {
         color: var(--color-white);
         white-space: nowrap;
 

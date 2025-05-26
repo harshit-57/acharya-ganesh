@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: 48px;
     width: 100%;
+    text-align: center;
 }
 .discover_heading {
     color: var(--color-caption);

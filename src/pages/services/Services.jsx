@@ -14,22 +14,27 @@ import ImgService1 from '../../assets/service_bg_1.png';
 import ImgService2 from '../../assets/service_bg_2.png';
 import ImgService3 from '../../assets/service_bg_3.png';
 import ImgService4 from '../../assets/service_bg_4.png';
+import Loader from '../../components/loader/Loader';
 
 const Services = () => {
     const [serviceList, setServiceList] = useState([]);
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
         getServices();
     }, []);
 
     const getServices = async () => {
         try {
+            setLoading(true);
             const response = await APIHelper.getServices({
                 status: 1,
                 active: 1,
             });
             setServiceList(response.data.data);
+            setLoading(false);
         } catch (e) {
             console.log(e);
+            setLoading(false);
         }
     };
 
@@ -64,6 +69,7 @@ const Services = () => {
             </div>
             <div className={css.content_wrapper}>
                 <div className={css.service_list_container}>
+                    {loading && <Loader />}
                     {Array.isArray(services) &&
                         serviceList?.map((s, index) => (
                             <ServiceCard

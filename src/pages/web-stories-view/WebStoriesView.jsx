@@ -10,8 +10,9 @@ import parse from 'html-react-parser';
 import { htmlToText } from 'html-to-text';
 import { Icon, Link } from '@mui/material';
 import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
+import Loader from '../../components/loader/Loader';
 
-export const WebStoriesView = () => {
+const WebStoriesView = () => {
     const [searchParams] = useSearchParams();
     const { state } = useLocation();
     const { slug } = useParams();
@@ -153,6 +154,8 @@ export const WebStoriesView = () => {
         if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
     };
 
+    if (!ws) return <Loader style={{ position: 'fixed' }} />;
+
     return (
         <div
             className={css.container}
@@ -202,3 +205,5 @@ export const WebStoriesView = () => {
         </div>
     );
 };
+
+export default WebStoriesView;

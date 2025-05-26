@@ -25,57 +25,85 @@ const ZodiacSignList = [
         img: Zodiac12,
         route: 'zodiac-signs/aries-zodiac-sign',
         name: 'Aries',
+        description:
+            'Aries, the first zodiac sign. It is a bold and adventurous. Mars ruled ‘Aries’.  Symbolized by the Ram, Aries individuals are brave, confident, and driven, relentlessly pursuing goals with passion.',
     },
     {
         img: Zodiac11,
         route: 'zodiac-signs/taurus-zodiac-sign',
         name: 'Taurus',
+        description:
+            'Taurus, the second zodiac sign. They are grounded, patient, and practical. Venus ruled ‘Taurus’.  Symbolized by the bull, ‘Taurus’ individuals are reliable, responsible, loyal, and persistent towards their goals.',
     },
     {
         img: Zodiac10,
         route: 'zodiac-signs/gemini-zodiac-sign',
         name: 'Gemini',
+        description:
+            'Gemini, the third zodiac sign. They are curious and versatile. Mercury ruled ‘Gemini’.  Symbolized by the twins, ‘Gemini’ individuals are sociable, enthusiastic, and intelligent.',
     },
     {
         img: Zodiac9,
         route: 'zodiac-signs/cancer-zodiac-sign',
         name: 'Cancer',
+        description:
+            'Cancer, the fourth zodiac sign. They are sensitive and sentimental. Moon ruled ‘Cancer’.  Symbolized by the crab, ‘Cancer’ individuals are energetic, adaptable, and protective.',
     },
-    { img: Zodiac8, route: 'zodiac-signs/leo-zodiac-sign', name: 'Leo' },
+    {
+        img: Zodiac8,
+        route: 'zodiac-signs/leo-zodiac-sign',
+        name: 'Leo',
+        description:
+            'Leo, the fifth zodiac sign. They possess a deep sense of duty and honor. Sun ruled ‘Leo’.  Symbolized by the lion, ‘Leo’ individuals are vital, authoritative, and self-expressive.',
+    },
     {
         img: Zodiac7,
         route: 'zodiac-signs/virgo-zodiac-signs',
         name: 'Virgo',
+        description:
+            'Virgo, the sixth zodiac sign. They are practical and attentive to detail. Mercury ruled ‘Virgo’.  Symbolized by the maiden holding a sheaf of wheat, ‘Virgo’ individuals are sharp, eloquent, and have analytical skills.',
     },
     {
         img: Zodiac6,
         route: 'zodiac-signs/libra-zodiac-sign',
         name: 'Libra',
+        description:
+            'Libra, the seventh zodiac sign. They are creative and diplomatic. Venus ruled ‘Libra’.  Symbolized by the scales of justice, ‘Libra’ individuals are capable of handling hindrances with grace.',
     },
     {
         img: Zodiac5,
         route: 'zodiac-signs/scorpio-zodiac-signs',
         name: 'Scorpio',
+        description:
+            'Scorpio, the eighth zodiac sign. They are passionate and mysterious. Mars ruled ‘Scorpio’.  Symbolized by the scorpion, ‘Scorpio’ individuals are steady, tenacious, and goal-oriented way of living.',
     },
     {
         img: Zodiac4,
         route: 'zodiac-signs/sagittarius-zodiac-sign',
         name: 'Sagittarius',
+        description:
+            'Sagittarius, the ninth zodiac sign. They are wise and like exploration. Jupiter ruled ‘Sagittarius’.  Symbolized by the archer, ‘Sagittarius’ individuals are dynamic and enthusiastic, and driven by inspiration.',
     },
     {
         img: Zodiac3,
         route: 'zodiac-signs/capricorn-zodiac-sign',
         name: 'Capricorn',
+        description:
+            'Capricorn, the tenth zodiac sign. They are the epitome of responsibility and perseverance. Saturn ruled ‘Capricorn’.  Symbolized by the sea-goat, ‘Capricorn’ individuals are pragmatic, hardworking, and look serious in nature.',
     },
     {
         img: Zodiac2,
         route: 'zodiac-signs/aquarius-zodiac-signs',
         name: 'Aquarius',
+        description:
+            'Aquarius, the eleventh zodiac sign. They do selfless services and live a conscious life. Saturn ruled ‘Aquarius’.  Symbolized by the water-bearer, ‘Aquarius’ individuals are introspective, focused, and disciplined.',
     },
     {
         img: Zodiac1,
         route: 'zodiac-signs/pisces-zodiac-sign',
         name: 'Pisces',
+        description:
+            'Pisces, the eleventh zodiac sign. They often live between dreams and reality. Jupiter ruled ‘Pisces’. Symbolized by the two-fish, ‘Pisces’ individuals are compassionate, harmonious, and empathetic.',
     },
 ];
 
@@ -202,6 +230,7 @@ const ZodiacSigns = () => {
                             onClick={() => openLink(z.route)}
                         >
                             <img src={z.img} alt={z.name} />
+                            <p className={css.zodiac_desc}>{z.description}</p>
                         </div>
                     ))}
                 </div>

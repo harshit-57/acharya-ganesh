@@ -13,6 +13,7 @@ import { Footer } from '../../components/footer/Footer';
 import { useNavigate } from 'react-router-dom';
 import { APIHelper } from '../../util/APIHelper';
 import SEO from '../../Seo';
+import Loader from '../../components/loader/Loader';
 const COURSE_PER_PAGE = 8;
 const CoursesList = () => {
     const navigate = useNavigate();
@@ -244,7 +245,7 @@ const CoursesList = () => {
                 </div>
             </div>
             <div className={css.list_container}>
-                {loading && <p>Loading...</p>}
+                {loading && <Loader />}
                 {!loading &&
                     courses &&
                     Array.isArray(courses) &&
