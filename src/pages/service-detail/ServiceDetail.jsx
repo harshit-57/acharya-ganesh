@@ -21,6 +21,7 @@ import parse from 'html-react-parser';
 import { APIHelper } from '../../util/APIHelper';
 import { ServiceSidebar } from './components/sidebar/ServiceSidebar';
 import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
+import Loader from '../../components/loader/Loader';
 
 const ServiceDetail = () => {
     const { slug } = useParams();
@@ -71,6 +72,11 @@ const ServiceDetail = () => {
         'Learn about acharyaganesh, your trusted source for astrology, numerology, kundali matching, and daily horoscopes. Discover our mission, team, and how we can guide you on your spiritual journey.';
     const title = service?.Meta_SiteName;
     const metaTitle = service?.Meta_Title;
+
+    if (!service) {
+        return <Loader style={{ position: 'fixed' }} />;
+    }
+
     return (
         <PageContainer>
             <SEO

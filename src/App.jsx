@@ -1,76 +1,201 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import { Suspense, useEffect, lazy } from 'react';
+import { Suspense, useEffect, Component } from 'react';
+import loadable from '@loadable/component';
+import { AuthProvider } from './admin/contexts/AuthContext';
+import Loader from './components/loader/Loader';
+import Home from './pages/Home/Home';
+class ErrorBoundary extends Component {
+    state = { hasError: false };
+
+    static getDerivedStateFromError() {
+        return { hasError: true };
+    }
+
+    render() {
+        if (this.state.hasError) {
+            return (
+                <div
+                    style={{
+                        margin: '50px auto',
+                        textAlign: 'center',
+                    }}
+                >
+                    <Loader className="mb-4" />
+                    <h1>Oops! Something went wrong.</h1>
+                    <p>Please try refreshing the page or come back later.</p>
+                </div>
+            );
+        }
+        return this.props.children;
+    }
+}
+
+const PageLoader = () => {
+    return <Loader style={{ position: 'fixed' }} />;
+};
 
 // Common pages
-const Home = lazy(() => import('./pages/home/Home'));
-const BlogList = lazy(() => import('./pages/blog-list/BlogList'));
-const CoursesList = lazy(() => import('./pages/courses/CoursesList'));
-const Contact = lazy(() => import('./pages/contact/Contact'));
-const AboutUs = lazy(() => import('./pages/about/AboutUs'));
-const Article = lazy(() => import('./pages/article/Article'));
-const CourseDetail = lazy(() => import('./pages/course-detail/CourseDetail'));
-const SpiritualityList = lazy(() =>
-    import('./pages/spirituality/SpiritualityList')
+// const Home = loadable(() =>
+//      import('./pages/home/Home'), {
+//     fallback: <PageLoader />,
+// });
+const BlogList = loadable(() => import('./pages/blog-list/BlogList'), {
+    fallback: <PageLoader />,
+});
+const CoursesList = loadable(() => import('./pages/courses/CoursesList'), {
+    fallback: <PageLoader />,
+});
+const Contact = loadable(() => import('./pages/contact/Contact'), {
+    fallback: <PageLoader />,
+});
+const AboutUs = loadable(() => import('./pages/about/AboutUs'), {
+    fallback: <PageLoader />,
+});
+const Article = loadable(() => import('./pages/article/Article'), {
+    fallback: <PageLoader />,
+});
+const CourseDetail = loadable(
+    () => import('./pages/course-detail/CourseDetail'),
+    {
+        fallback: <PageLoader />,
+    }
 );
-const SArticle = lazy(() => import('./pages/spirituality-article/SArticle'));
-const BookConsultation = lazy(() =>
-    import('./pages/book-consultation/BookConsultation')
+const SpiritualityList = loadable(
+    () => import('./pages/spirituality/SpiritualityList'),
+    {
+        fallback: <PageLoader />,
+    }
 );
-const WebStoriesList = lazy(() => import('./pages/web-stories/WebStoriesList'));
-const WebStoriesView = lazy(() =>
-    import('./pages/web-stories-view/WebStoriesView')
+const SArticle = loadable(
+    () => import('./pages/spirituality-article/SArticle'),
+    {
+        fallback: <PageLoader />,
+    }
 );
-const CitationDetail = lazy(() =>
-    import('./pages/citation-detail/CitationDetail')
+const BookConsultation = loadable(
+    () => import('./pages/book-consultation/BookConsultation'),
+    {
+        fallback: <PageLoader />,
+    }
 );
-const Citation = lazy(() => import('./pages/citation/Citation'));
-const FormConsultation = lazy(() =>
-    import('./pages/consultation-booking-page/BookConsultationForm')
+const WebStoriesList = loadable(
+    () => import('./pages/web-stories/WebStoriesList'),
+    {
+        fallback: <PageLoader />,
+    }
 );
-const Services = lazy(() => import('./pages/services/Services'));
-const ServiceDetail = lazy(() =>
-    import('./pages/service-detail/ServiceDetail')
+const WebStoriesView = loadable(
+    () => import('./pages/web-stories-view/WebStoriesView'),
+    {
+        fallback: <PageLoader />,
+    }
+);
+const CitationDetail = loadable(
+    () => import('./pages/citation-detail/CitationDetail'),
+    {
+        fallback: <PageLoader />,
+    }
+);
+const Citation = loadable(() => import('./pages/citation/Citation'), {
+    fallback: <PageLoader />,
+});
+const FormConsultation = loadable(
+    () => import('./pages/consultation-booking-page/BookConsultationForm'),
+    {
+        fallback: <PageLoader />,
+    }
+);
+const Services = loadable(() => import('./pages/services/Services'), {
+    fallback: <PageLoader />,
+});
+const ServiceDetail = loadable(
+    () => import('./pages/service-detail/ServiceDetail'),
+    {
+        fallback: <PageLoader />,
+    }
 );
 
 // Admin pages
-const Login = lazy(() => import('./admin/pages/login/Login'));
-const Edit = lazy(() => import('./admin/content-editor/Content'));
-const AdminApp = lazy(() => import('./admin/AdminApp'));
-const Dashboard = lazy(() => import('./admin/pages/dashboard/Dashboard'));
-const ManageCourses = lazy(() =>
-    import('./admin/pages/manage-course/ManageCourse')
+const Login = loadable(() => import('./admin/pages/login/Login'), {
+    fallback: <PageLoader />,
+});
+const Edit = loadable(() => import('./admin/content-editor/Content'), {
+    fallback: <PageLoader />,
+});
+const AdminApp = loadable(() => import('./admin/AdminApp'), {
+    fallback: <PageLoader />,
+});
+const Dashboard = loadable(() => import('./admin/pages/dashboard/Dashboard'), {
+    fallback: <PageLoader />,
+});
+const ManageCourses = loadable(
+    () => import('./admin/pages/manage-course/ManageCourse'),
+    {
+        fallback: <PageLoader />,
+    }
 );
-const ManageBlogs = lazy(() => import('./admin/pages/manage-blog/ManageBlog'));
-const ManageSpirituality = lazy(() =>
-    import('./admin/pages/manage-spirituality/ManageSpirituality')
+const ManageBlogs = loadable(
+    () => import('./admin/pages/manage-blog/ManageBlog'),
+    {
+        fallback: <PageLoader />,
+    }
 );
-const ManageStory = lazy(() =>
-    import('./admin/pages/manage-stories/ManageStory')
+const ManageSpirituality = loadable(
+    () => import('./admin/pages/manage-spirituality/ManageSpirituality'),
+    {
+        fallback: <PageLoader />,
+    }
 );
-const ManageTestimonial = lazy(() =>
-    import('./admin/pages/manage-testimonial/ManageTestimonial')
+const ManageStory = loadable(
+    () => import('./admin/pages/manage-stories/ManageStory'),
+    {
+        fallback: <PageLoader />,
+    }
 );
-const ManageSupport = lazy(() =>
-    import('./admin/pages/manage-support/ManageSupport')
+const ManageTestimonial = loadable(
+    () => import('./admin/pages/manage-testimonial/ManageTestimonial'),
+    {
+        fallback: <PageLoader />,
+    }
 );
-const ManageCitation = lazy(() =>
-    import('./admin/pages/manage-citation/ManageCitation')
+const ManageSupport = loadable(
+    () => import('./admin/pages/manage-support/ManageSupport'),
+    {
+        fallback: <PageLoader />,
+    }
 );
-const ManageAdmin = lazy(() =>
-    import('./admin/pages/manage-admin/ManageAdmin')
+const ManageCitation = loadable(
+    () => import('./admin/pages/manage-citation/ManageCitation'),
+    {
+        fallback: <PageLoader />,
+    }
 );
-const ManageSlot = lazy(() => import('./admin/pages/manage-slot/ManageSlot'));
-const ManageService = lazy(() =>
-    import('./admin/pages/manage-service/ManageService')
+const ManageAdmin = loadable(
+    () => import('./admin/pages/manage-admin/ManageAdmin'),
+    {
+        fallback: <PageLoader />,
+    }
 );
-const ManageBooking = lazy(() =>
-    import('./admin/pages/manage-booking/ManageBooking')
+const ManageSlot = loadable(
+    () => import('./admin/pages/manage-slot/ManageSlot'),
+    {
+        fallback: <PageLoader />,
+    }
+);
+const ManageService = loadable(
+    () => import('./admin/pages/manage-service/ManageService'),
+    {
+        fallback: <PageLoader />,
+    }
+);
+const ManageBooking = loadable(
+    () => import('./admin/pages/manage-booking/ManageBooking'),
+    {
+        fallback: <PageLoader />,
+    }
 );
 
-// Context
-import { AuthProvider } from './admin/contexts/AuthContext';
-import Loading from './admin/components/MatxLoading';
-
+// Scroll to top or anchor on route change
 const RouteChangeDetector = () => {
     const location = useLocation();
 
@@ -87,21 +212,9 @@ const RouteChangeDetector = () => {
 
 export default function App() {
     return (
-        <>
+        <ErrorBoundary>
             <RouteChangeDetector />
-            <Suspense
-                fallback={
-                    <Loading
-                        style={{
-                            position: 'fixed',
-                            top: '50%',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)',
-                            zIndex: 9999,
-                        }}
-                    />
-                }
-            >
+            <Suspense fallback={<PageLoader />}>
                 <Routes>
                     {/* Public Routes */}
                     <Route index path="/" element={<Home />} />
@@ -221,10 +334,10 @@ export default function App() {
                         />
                     </Route>
 
-                    {/* Fallback */}
+                    {/* Fallback Route */}
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
             </Suspense>
-        </>
+        </ErrorBoundary>
     );
 }

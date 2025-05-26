@@ -21,6 +21,7 @@ import parse from 'html-react-parser';
 import { APIHelper } from '../../util/APIHelper.js';
 import { htmlToText } from 'html-to-text';
 import SEO from '../../Seo.jsx';
+import Loader from '../../components/loader/Loader.jsx';
 
 const CitationDetail = () => {
     const { slug } = useParams();
@@ -91,6 +92,9 @@ const CitationDetail = () => {
     const description = `View detailed citations and references for ${keywords} at acharya-ganesh. Trusted and verified sources for astrology, numerology, and spiritual guidance.`;
     const title = citation?.Meta_SteName;
     const metaTitle = citation?.Meta_Title;
+
+    if (!citation) return <Loader style={{ position: 'fixed' }} />;
+
     return (
         <PageContainer className={css.container}>
             <SEO
@@ -133,7 +137,7 @@ const CitationDetail = () => {
                         <PrimaryButton
                             className={css.consult_button}
                             onClick={() => {
-                                navigate('/book-consultation');
+                                navigate('/book-consultation#consult');
                             }}
                         >
                             Consult Hanish Bagga TOday

@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { APIHelper } from '../../util/APIHelper';
 import SEO from '../../Seo';
 import { ArticleSidebar } from './components/sidebar/ArticleSidebar';
+import Loader from '../../components/loader/Loader';
 const SArticle = () => {
     const { slug } = useParams();
     const [searchParams] = useSearchParams();
@@ -44,6 +45,11 @@ const SArticle = () => {
     const description = article?.Tags;
     const title = article?.Meta_SiteName;
     const metaTitle = article?.Meta_Title;
+
+    if (!article) {
+        return <Loader style={{ position: 'fixed' }} />;
+    }
+
     return (
         <PageContainer className={css.container}>
             <SEO

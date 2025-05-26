@@ -13,6 +13,7 @@ import { Footer } from '../../components/footer/Footer';
 import { APIHelper } from '../../util/APIHelper';
 import { useNavigate } from 'react-router-dom';
 import SEO from '../../Seo';
+import Loader from '../../components/loader/Loader';
 const STORIES_PER_PAGE = 9;
 const WebStoriesList = () => {
     const navigate = useNavigate();
@@ -85,7 +86,7 @@ const WebStoriesList = () => {
                 </div>
             </div>
             <div className={css.list_container}>
-                {loading && <p>Loading...</p>}
+                {loading && <Loader />}
                 {!loading &&
                     Array.isArray(stories) &&
                     stories.map((blog, index) => (

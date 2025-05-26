@@ -21,6 +21,7 @@ import parse from 'html-react-parser';
 import { toast } from 'react-toastify';
 import { longFormatters } from 'date-fns';
 import SEO from '../../Seo';
+import Loader from '../../components/loader/Loader';
 const CourseDetail = () => {
     const { slug } = useParams();
     const [searchParams] = useSearchParams();
@@ -61,6 +62,9 @@ const CourseDetail = () => {
     const description = course?.Meta_Desc;
     const title = course?.Meta_SiteName;
     const metaTitle = course?.Meta_Title;
+
+    if (!course) return <Loader style={{ position: 'fixed' }} />;
+
     return (
         <PageContainer className={css.container}>
             <SEO
