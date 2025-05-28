@@ -128,6 +128,7 @@ const ZodiacSigns = () => {
     const [visibleZodiacs, setVisibleZodiacs] = useState([]);
     const [currentSlideOffset, setCurrentSlideOffset] = useState(0);
     const navigate = useNavigate();
+    const [isCardFocus, setIsCardFocus] = useState(false);
 
     const getZodiacCountPerFrame = () =>
         PER_FRAME_ZODIAC_COUNT[breakpoint] || PER_FRAME_ZODIAC_COUNT.desktop;
@@ -165,12 +166,15 @@ const ZodiacSigns = () => {
         const totalSlides = Math.ceil(
             ZodiacSignList.length / getZodiacCountPerFrame()
         );
-        const interval = setInterval(() => {
-            setCurrentSlideOffset((prev) => (prev + 1) % totalSlides);
-        }, 5000);
+        let interval;
+        if (!isCardFocus) {
+            interval = setInterval(() => {
+                setCurrentSlideOffset((prev) => (prev + 1) % totalSlides);
+            }, 5000);
+        }
 
         return () => clearInterval(interval);
-    }, [breakpoint]);
+    }, [breakpoint, isCardFocus]);
 
     const onPrev = () => {
         if (currentSlideOffset > 0) {
@@ -228,6 +232,8 @@ const ZodiacSigns = () => {
                             key={index}
                             className={css.zodiac_card}
                             onClick={() => openLink(z.route)}
+                            onMouseEnter={() => setIsCardFocus(true)}
+                            onMouseLeave={() => setIsCardFocus(false)}
                         >
                             <img src={z.img} alt={z.name} />
                             <p className={css.zodiac_desc}>{z.description}</p>
