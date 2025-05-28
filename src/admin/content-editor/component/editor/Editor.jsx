@@ -55,8 +55,8 @@ const Editor = ({ placeholder, content, setContent, style, className }) => {
         if (typeof window !== 'undefined') {
             import('react-quill')
                 .then((module) => {
-                    const Quill = module.Quill || window.Quill;
-                    if (!window.Quill) window.Quill = Quill;
+                    // const Quill = module.Quill || window.Quill;
+                    // if (!window.Quill) window.Quill = Quill;
 
                     // import('quill-image-resize-module-react')
                     //     .then((ImageResize) => {
@@ -112,7 +112,9 @@ const Editor = ({ placeholder, content, setContent, style, className }) => {
 
                     setReactQuill(() => module.default);
                 })
-                .catch((err) => console.log('sffe ', err));
+                .catch((err) =>
+                    console.error('Failed to load React Quill:', err)
+                );
         }
     }, []);
     const handleChange = (html) => {

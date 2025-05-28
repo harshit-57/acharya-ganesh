@@ -432,7 +432,9 @@ const Edit = () => {
                                         item?.ImageText
                                     )?.trim()
                                         ? 'text'
-                                        : 'link',
+                                        : item?.imageLink
+                                        ? 'link'
+                                        : 'text',
                                     imageUrl: item?.ImageUrl,
                                     imageOrder: item?.ImageOrder || index + 1,
                                     imageLink: item?.ImageLink || '',
