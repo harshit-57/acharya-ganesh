@@ -10,6 +10,8 @@ export default defineConfig({
             '**/*.css',
             '**/*.scss',
             '**/*.sass',
+            '@mui/**',
+            '@emotion/**',
             'react-insta-stories',
         ],
     },
