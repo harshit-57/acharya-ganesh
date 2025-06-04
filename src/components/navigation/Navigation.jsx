@@ -91,7 +91,8 @@ export const Navigation = () => {
     const getBlogCategories = async () => {
         try {
             const response = await APIHelper.getBlogCategories({
-                active: true,
+                active: 1,
+                status: 1,
             });
             setBlogCategories(response.data);
         } catch (e) {
@@ -101,7 +102,8 @@ export const Navigation = () => {
     const getSpiritualityCategories = async () => {
         try {
             const response = await APIHelper.getSpiritualityCategories({
-                active: true,
+                active: 1,
+                status: 1,
             });
             setSpiritualityCategories(response.data);
         } catch (e) {
@@ -112,8 +114,9 @@ export const Navigation = () => {
     const getServices = async () => {
         try {
             const response = await APIHelper.getServices({
-                active: true,
-                isActive: true,
+                active: 1,
+                status: 1,
+                isActive: 1,
             });
             setServices(
                 response?.data?.data?.filter((service) => !service?.ParentId)

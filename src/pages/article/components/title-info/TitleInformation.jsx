@@ -23,19 +23,19 @@ const months = [
 export const TitleInformation = ({ article }) => {
     const [timestamp, setTimeStamp] = useState();
     const [year, setYear] = useState();
+    const [url, setUrl] = useState();
     useEffect(() => {
         const date = new Date(article?.PublishedOn);
         const day = date.getDate();
         setTimeStamp(`${day}${getDaySuffix(day)} ${months[date.getMonth()]}`);
         setYear(date.getFullYear());
+        setUrl(window?.location?.origin + window?.location?.pathname || '');
     }, [article]);
 
     const readingTime = useMemo(
         () => getReadingTime(article?.Description),
         [article]
     );
-
-    const url = window?.location?.origin + window?.location?.pathname || '';
 
     return (
         <div className={css.container}>

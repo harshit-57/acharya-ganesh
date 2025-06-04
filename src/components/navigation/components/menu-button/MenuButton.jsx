@@ -30,6 +30,7 @@ const MenuButton = ({ menu, className }) => {
                     <div className={css.submenu_container}>
                         {subMenus.map((subMenu, index) => (
                             <div
+                                key={index}
                                 onMouseEnter={(e) => {
                                     setOpenSubMenus(subMenu.id);
                                 }}

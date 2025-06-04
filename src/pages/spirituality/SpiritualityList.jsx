@@ -1,6 +1,6 @@
 import css from './style.module.css';
 import { PageContainer } from '../../components/page-container/PageContainer';
-import { useParams } from 'react-router-dom';
+import { useLoaderData, useParams } from 'react-router-dom';
 import IcChevronIcon from '../../assets/chevron-down.png';
 import { SCardSmall } from './components/card/SCardSmall';
 import { useEffect, useState } from 'react';
@@ -16,14 +16,17 @@ import SEO from '../../Seo';
 import Loader from '../../components/loader/Loader';
 const BLOG_PER_PAGE = 9;
 const SpiritualityList = () => {
+    const loaderData = useLoaderData();
     const navigate = useNavigate();
-    const [blogs, setBlogs] = useState([]);
+    const [blogs, setBlogs] = useState(loaderData?.spiritualities || []);
     const { category } = useParams();
     const [currentPage, setCurrentPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
     const [spiritualityCategories, setSpiritualityCategories] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [spritualitytags, setSpritualityTags] = useState([]);
+    const [spritualitytags, setSpritualityTags] = useState(
+        loaderData?.tags || []
+    );
     const [showFilterDropDown, setShowFilterDropDown] = useState({
         category: false,
     });

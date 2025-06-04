@@ -15,9 +15,11 @@ import ImgService2 from '../../assets/service_bg_2.png';
 import ImgService3 from '../../assets/service_bg_3.png';
 import ImgService4 from '../../assets/service_bg_4.png';
 import Loader from '../../components/loader/Loader';
+import { useLoaderData } from 'react-router-dom';
 
 const Services = () => {
-    const [serviceList, setServiceList] = useState([]);
+    const loaderData = useLoaderData();
+    const [serviceList, setServiceList] = useState(loaderData?.services || []);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         getServices();
@@ -69,15 +71,18 @@ const Services = () => {
             </div>
             <div className={css.content_wrapper}>
                 <div className={css.service_list_container}>
-                    {loading && <Loader />}
-                    {Array.isArray(services) &&
+                    {loading ? (
+                        <Loader />
+                    ) : (
+                        Array.isArray(services) &&
                         serviceList?.map((s, index) => (
                             <ServiceCard
                                 key={index}
                                 service={s}
                                 graphic={graphics[index % 4]}
                             />
-                        ))}
+                        ))
+                    )}
                 </div>
             </div>
             <Footer />

@@ -53,7 +53,7 @@ export const TableOfContent = ({ article }) => {
             </h3>
             {show &&
                 getTableContents?.map((item, index) => (
-                    <div className={css.content_table_link}>
+                    <div key={index} className={css.content_table_link}>
                         {/* <img src={IcChevronIcon} alt={'>'} /> */}
                         <a
                             //  href={`#${item?.id}`}

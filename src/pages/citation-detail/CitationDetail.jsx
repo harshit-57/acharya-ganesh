@@ -8,6 +8,7 @@ import { HorizontalBorder, Spacer } from '../../components/spacer/Spacer';
 import CitationBanner from '../../assets/citation-banner.png';
 import ImgConsultation from '../../assets/consultation_poster.jpg';
 import {
+    useLoaderData,
     useLocation,
     useNavigate,
     useParams,
@@ -24,17 +25,18 @@ import SEO from '../../Seo.jsx';
 import Loader from '../../components/loader/Loader.jsx';
 
 const CitationDetail = () => {
+    const loaderData = useLoaderData();
     const { slug } = useParams();
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const { state } = useLocation();
-    const [citation, setCitation] = useState(null);
+    const [citation, setCitation] = useState(loaderData?.citation || null);
     useEffect(() => {
         if (searchParams?.get('preview')) {
             setCitation(state?.data);
             return;
         }
-        getCitation();
+        if (!citation) getCitation();
     }, [slug]);
 
     const getCitation = async () => {
@@ -53,39 +55,6 @@ const CitationDetail = () => {
         }
     };
 
-    // const faqList = [
-    //     {
-    //         question: `How do I find a reliable ${citation?.type || '-'} in ${
-    //             citation?.location
-    //         }?`,
-    //         answer: ` Look for experienced consultants with good reviews, proper certifications, and a proven track record in ${citation?.location}.`,
-    //     },
-    //     {
-    //         question: `What services are included in a ${
-    //             citation?.type || '-'
-    //         } in ${citation?.location}?`,
-    //         answer: `Services typically include site inspection, detailed analysis, recommendations, and follow-up guidance.`,
-    //     },
-    //     {
-    //         question: `How much does a ${citation?.type || '-'} cost in ${
-    //             citation?.location
-    //         }?`,
-    //         answer: ` Consultation fees vary based on property size and type of service required. Contact for detailed pricing.`,
-    //     },
-    //     {
-    //         question: `What should I expect during a ${
-    //             citation?.type || '-'
-    //         } in ${citation?.location}?`,
-    //         answer: ` Expect a thorough property assessment, energy flow analysis, and detailed recommendations for improvements.`,
-    //     },
-    //     {
-    //         question: `How can I book a ${citation?.type || '-'} in ${
-    //             citation?.location
-    //         }?`,
-    //         answer: `Contact us through our website, phone, or email to schedule a consultation at your convenience.`,
-    //     },
-    // ];
-
     const keywords = citation?.Focus_Keyphrase
         ? `${citation?.Focus_Keyphrase}, ${citation?.Slug}`
         : citation?.Slug;
@@ -93,7 +62,18 @@ const CitationDetail = () => {
     const title = citation?.Meta_SteName;
     const metaTitle = citation?.Meta_Title;
 
-    if (!citation) return <Loader style={{ position: 'fixed' }} />;
+    if (!citation)
+        return (
+            <PageContainer className={css.container}>
+                <SEO
+                    keywords={keywords}
+                    description={description}
+                    title={title}
+                    metaTitle={metaTitle}
+                />
+                <Loader style={{ position: 'fixed' }} />
+            </PageContainer>
+        );
 
     return (
         <PageContainer className={css.container}>

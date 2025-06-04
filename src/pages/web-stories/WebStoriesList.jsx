@@ -1,6 +1,6 @@
 import css from './style.module.css';
 import { PageContainer } from '../../components/page-container/PageContainer';
-import { useParams } from 'react-router-dom';
+import { useLoaderData, useParams } from 'react-router-dom';
 import IcChevronIcon from '../../assets/chevron-down.png';
 import { CardSmall } from './components/stories-card/CardSmall';
 
@@ -16,13 +16,16 @@ import SEO from '../../Seo';
 import Loader from '../../components/loader/Loader';
 const STORIES_PER_PAGE = 9;
 const WebStoriesList = () => {
+    const loaderData = useLoaderData();
     const navigate = useNavigate();
-    const [stories, setStories] = useState([]);
+    const [stories, setStories] = useState(loaderData?.stories || []);
     const { category } = useParams();
     const [currentPage, setCurrentPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
     const [loading, setLoading] = useState(false);
-    const [webstoriesTags, setWebStoriesTags] = useState([]);
+    const [webstoriesTags, setWebStoriesTags] = useState(
+        loaderData?.tags || []
+    );
     useEffect(() => {
         fetchStories();
         fetchWebStoriesTags();
