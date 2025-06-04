@@ -1,5 +1,10 @@
 import css from './style.module.css';
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
+import {
+    useLoaderData,
+    useLocation,
+    useParams,
+    useSearchParams,
+} from 'react-router-dom';
 import { PageContainer } from '../../components/page-container/PageContainer';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
@@ -17,16 +22,17 @@ import SEO from '../../Seo';
 import { ArticleSidebar } from './components/sidebar/ArticleSidebar';
 import Loader from '../../components/loader/Loader';
 const SArticle = () => {
+    const loaderData = useLoaderData();
     const { slug } = useParams();
     const [searchParams] = useSearchParams();
     const { state } = useLocation();
-    const [article, setArticle] = useState(null);
+    const [article, setArticle] = useState(loaderData?.article || null);
     useEffect(() => {
         if (searchParams?.get('preview')) {
             setArticle(state?.data);
             return;
         }
-        getArticle();
+        if (!article) getArticle();
     }, [slug]);
     const getArticle = async () => {
         try {
@@ -47,7 +53,17 @@ const SArticle = () => {
     const metaTitle = article?.Meta_Title;
 
     if (!article) {
-        return <Loader style={{ position: 'fixed' }} />;
+        return (
+            <PageContainer className={css.container}>
+                <SEO
+                    keywords={keywords}
+                    description={description}
+                    title={title}
+                    metaTitle={metaTitle}
+                />
+                <Loader style={{ position: 'fixed' }} />
+            </PageContainer>
+        );
     }
 
     return (

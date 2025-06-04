@@ -9,6 +9,7 @@ import { Footer } from '../../components/footer/Footer';
 import SEO from '../../Seo';
 import {
     NavLink,
+    useLoaderData,
     useLocation,
     useNavigate,
     useParams,
@@ -24,19 +25,20 @@ import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
 import Loader from '../../components/loader/Loader';
 
 const ServiceDetail = () => {
+    const loaderData = useLoaderData();
     const { slug } = useParams();
     const navigate = useNavigate();
     const { state } = useLocation();
     const [searchParams] = useSearchParams();
 
-    const [service, setService] = useState(null);
+    const [service, setService] = useState(loaderData?.service || null);
 
     useEffect(() => {
         if (searchParams?.get('preview')) {
             setService(state?.data);
             return;
         }
-        getService();
+        if (!service) getService();
     }, [slug]);
 
     const getService = async () => {

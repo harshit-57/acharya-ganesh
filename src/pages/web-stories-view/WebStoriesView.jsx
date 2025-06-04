@@ -1,10 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import css from './style.module.css';
-import Stories from 'react-insta-stories';
+// import Stories from 'react-insta-stories';
 import IcPlay from '../../assets/play.svg';
 import IcPause from '../../assets/pause.svg';
 import LeftArrow from '../../assets/left-arrow.png';
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
+import {
+    useLoaderData,
+    useLocation,
+    useParams,
+    useSearchParams,
+} from 'react-router-dom';
 import { APIHelper } from '../../util/APIHelper';
 import parse from 'html-react-parser';
 import { htmlToText } from 'html-to-text';
@@ -13,20 +18,30 @@ import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
 import Loader from '../../components/loader/Loader';
 
 const WebStoriesView = () => {
+    const loaderData = useLoaderData();
     const [searchParams] = useSearchParams();
     const { state } = useLocation();
     const { slug } = useParams();
-    const [ws, setWs] = useState(null);
+    const [ws, setWs] = useState(loaderData?.story || null);
+    const [Stories, setStories] = useState(null);
 
     useEffect(() => {
+        import('react-insta-stories')
+            .then((module) => {
+                setStories(() => module.default);
+            })
+            .catch((error) => {
+                console.error('Failed to load Stories component:', error);
+            });
+
         if (searchParams?.get('preview')) {
             setWs(state?.data);
             return;
         }
-        getCourse();
+        if (!ws) getWs();
     }, [slug]);
 
-    const getCourse = async () => {
+    const getWs = async () => {
         try {
             const response = await APIHelper.getWebStories({ slug: slug });
             setWs(response.data.data[0]);
@@ -184,23 +199,25 @@ const WebStoriesView = () => {
                 >
                     <img src={LeftArrow} alt={'>'} />
                 </button>
-                <Stories
-                    stories={stories?.length ? stories : []}
-                    defaultInterval={ws?.TimeDuration * 10}
-                    width={'100%'}
-                    height={'100%'}
-                    preloadCount={1}
-                    currentIndex={currentIndex}
-                    onStoryStart={() => {
-                        setCurrentAnimation(randomAnimation());
-                    }}
-                    onStoryEnd={() => {
-                        if (currentIndex < stories.length - 1)
-                            setCurrentIndex(currentIndex + 1);
-                    }}
-                    onNext={onNext}
-                    onPrevious={onPrev}
-                />
+                {Stories && (
+                    <Stories
+                        stories={stories?.length ? stories : []}
+                        defaultInterval={ws?.TimeDuration * 10}
+                        width={'100%'}
+                        height={'100%'}
+                        preloadCount={1}
+                        currentIndex={currentIndex}
+                        onStoryStart={() => {
+                            setCurrentAnimation(randomAnimation());
+                        }}
+                        onStoryEnd={() => {
+                            if (currentIndex < stories.length - 1)
+                                setCurrentIndex(currentIndex + 1);
+                        }}
+                        onNext={onNext}
+                        onPrevious={onPrev}
+                    />
+                )}
             </div>
         </div>
     );

@@ -77,8 +77,8 @@ const CitationBox = ({ breakpoints }) => {
                 Discover Best Astrologers in your City
             </h3>
             <div className={css.city_container}>
-                {citations?.map((citation) => (
-                    <div className={css.city_wrapper}>
+                {citations?.map((citation, index) => (
+                    <div key={index} className={css.city_wrapper}>
                         <NavLink
                             className={'content-two-line'}
                             to={`/locations/${citation?.Slug}`}

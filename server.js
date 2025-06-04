@@ -33,7 +33,9 @@ if (!isProduction) {
 }
 
 // Serve HTML
-app.use('*all', async (req, res) => {
+
+const URL_REGEX = /^(?!\/(api|assets|favicon\.ico|\.well-known)).*$/;
+app.use(URL_REGEX, async (req, res) => {
     try {
         const url = req.originalUrl.replace(base, '');
 
@@ -45,26 +47,53 @@ app.use('*all', async (req, res) => {
             // Always read fresh template in development
             template = await fs.readFile('./index.html', 'utf-8');
             template = await vite.transformIndexHtml(url, template);
-            render = (await vite.ssrLoadModule('/src/entry-server.jsx')).render;
+            render = (await vite.ssrLoadModule('./src/entry-server.jsx'))
+                .render;
         } else {
             template = templateHtml;
             render = (await import('./dist/server/entry-server.js')).render;
         }
 
         const rendered = await render(url);
+        if (rendered.redirect) {
+            console.log(`Redirecting to: ${rendered.redirect.location}`);
+            return res.redirect(
+                rendered.redirect.status,
+                rendered.redirect.location
+            );
+        }
+
+        if (!rendered.html) {
+            console.error(`No HTML content rendered for: ${url}`);
+            return res.status(500).send('Error: No content rendered');
+        }
 
         const html = template
             .replace(`<!--app-head-->`, rendered.head ?? '')
             .replace(`<!--app-html-->`, rendered.html ?? '')
             .replace('</head>', `${rendered.helmet.meta.toString()}</head>`)
             .replace('</head>', `${rendered.helmet.title.toString()}</head>`)
-            .replace('</head>', `${rendered.helmet.script.toString()}</head>`);
+            .replace('</head>', `${rendered.helmet.script.toString()}</head>`)
+            .replace('</head>', `${rendered.css || ''}</head>`);
 
         res.status(200).set({ 'Content-Type': 'text/html' }).send(html);
     } catch (e) {
         vite?.ssrFixStacktrace(e);
-        console.log(e.stack);
-        res.status(500).end(e.stack);
+        console.error('SSR Error:', e);
+        res.status(500).send(`
+            <html>
+                <head>
+                    <title>Server Error</title>
+                </head>
+                <body>
+                    <h1>Server Error</h1>
+                    <p>The server encountered an error while rendering this page.</p>
+                    <pre>${
+                        isProduction ? 'Check server logs for details' : e.stack
+                    }</pre>
+                </body>
+            </html>
+        `);
     }
 });
 

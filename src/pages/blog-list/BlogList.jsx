@@ -1,6 +1,6 @@
 import css from './style.module.css';
 import { PageContainer } from '../../components/page-container/PageContainer';
-import { useParams } from 'react-router-dom';
+import { useLoaderData, useParams } from 'react-router-dom';
 import IcChevronIcon from '../../assets/chevron-down.png';
 import { BlogCardSmall } from './components/blog-card/BlogCardSmall';
 
@@ -17,9 +17,10 @@ import SEO from '../../Seo';
 import Loader from '../../components/loader/Loader';
 const BLOG_PER_PAGE = 9;
 const BlogList = () => {
+    const loaderData = useLoaderData();
     const navigate = useNavigate();
-    const [blogs, setBlogs] = useState([]);
-    const [blogstags, setBlogsTags] = useState([]);
+    const [blogs, setBlogs] = useState(loaderData?.blogs || []);
+    const [blogstags, setBlogsTags] = useState(loaderData?.tags || []);
     const { category } = useParams();
     const [blogCategories, setBlogCategories] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);

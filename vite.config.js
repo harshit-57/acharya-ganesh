@@ -5,9 +5,25 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
     plugins: [react()],
     ssr: {
-        noExternal: ['react-helmet-async'],
+        noExternal: [
+            'react-helmet-async',
+            '**/*.css',
+            '**/*.scss',
+            '**/*.sass',
+            '@mui/**',
+            '@emotion/**',
+            'react-insta-stories',
+        ],
     },
     build: {
+        rollupOptions: {
+            output: {
+                manualChunks: undefined,
+            },
+        },
         target: 'esnext',
+    },
+    css: {
+        extract: true,
     },
 });

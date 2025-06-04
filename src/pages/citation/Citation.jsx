@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import css from './style.module.css';
 import CitationBanner from '../../assets/citation-banner.png';
 import IcChevronIcon from '../../assets/chevron-down.png';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLoaderData } from 'react-router-dom';
 import { PageContainer } from '../../components/page-container/PageContainer';
 import { TopBar } from '../../components/top-bar/TopBar';
 import { Navigation } from '../../components/navigation/Navigation';
@@ -14,16 +14,17 @@ import { PrimaryButton } from '../../components/primary-button/PrimaryButton';
 import Loader from '../../components/loader/Loader';
 
 const Citation = () => {
-    const [data, setData] = useState([]);
-    const [visibleData, setVisibleData] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const loaderData = useLoaderData();
+    const [data, setData] = useState(loaderData?.citations || []);
+    const [visibleData, setVisibleData] = useState(loaderData?.citations || []);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
     const pageSize = 24;
 
     useEffect(() => {
-        fetchCitations(page);
+        if (!(loaderData?.citations?.length && page == 1)) fetchCitations(page);
     }, [page]);
 
     const fetchCitations = async (page) => {

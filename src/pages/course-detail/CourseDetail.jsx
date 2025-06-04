@@ -10,6 +10,7 @@ import { PriceAndPurchaseSection } from './components/price-n-purchase-section/P
 import { CourseCard } from './components/course-card/CourseCard';
 import ImgCourse1 from '../../assets/course_1.png';
 import {
+    useLoaderData,
     useLocation,
     useNavigate,
     useParams,
@@ -23,17 +24,18 @@ import { longFormatters } from 'date-fns';
 import SEO from '../../Seo';
 import Loader from '../../components/loader/Loader';
 const CourseDetail = () => {
+    const loaderData = useLoaderData();
     const { slug } = useParams();
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const { state } = useLocation();
-    const [course, setCourse] = useState(null);
+    const [course, setCourse] = useState(loaderData?.course || null);
     useEffect(() => {
         if (searchParams?.get('preview')) {
             setCourse(state?.data);
             return;
         }
-        getCourse();
+        if (!course) getCourse();
     }, [slug]);
 
     const getCourse = async () => {
