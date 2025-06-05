@@ -20,7 +20,7 @@ export const TopBar = () => {
                 onClick={() => setShowNav(true)}
             />
             <Link to="/">
-                <img className={css.logo} src={Logo} />
+                <img className={css.logo} src={Logo} alt="Logo" />
             </Link>
             <div className={css.info_n_action_button_container}>
                 <a href={`tel:${CONTACT_INFO.NUMBER_ALT_1}`}>
