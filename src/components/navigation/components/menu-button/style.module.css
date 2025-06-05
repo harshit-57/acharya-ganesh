@@ -27,7 +27,7 @@
 }
 
 .submenu_wrapper {
-    display: none;
+    /* display: none; */
     position: absolute;
     top: 100%;
     left: 0;
@@ -44,9 +44,9 @@
     gap: 10px;
     padding-left: 10px;
 }
-.menu_button_container:hover .submenu_wrapper {
+/* .menu_button_container:hover .submenu_wrapper {
     display: block;
-}
+} */
 .submenu_container {
     background-color: var(--color-black);
     border-radius: 16px;

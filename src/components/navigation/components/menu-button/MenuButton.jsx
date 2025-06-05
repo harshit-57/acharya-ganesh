@@ -1,5 +1,5 @@
 import css from './style.module.css';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import ChevronDown from '../../../../assets/chevron-down.png';
 import { useState } from 'react';
 
@@ -8,14 +8,31 @@ const MenuButton = ({ menu, className }) => {
     const subMenuAvailable = subMenus && subMenus.length > 0;
 
     const navigate = useNavigate();
-    const [openSubMenus, setOpenSubMenus] = useState(null);
+    const location = useLocation();
+    const [openMenus, setOpenMenus] = useState(false);
+    const [openSubMenus, setOpenSubMenus] = useState(false);
 
     const onNavigate = (e, route) => {
-        if (e.currentTarget === e.target) navigate(route);
+        if (e.currentTarget === e.target) {
+            if (
+                location.pathname?.includes('services/') &&
+                route?.includes('services/')
+            )
+                window.open(route, '_self');
+            else navigate(route, { replace: true });
+        }
     };
 
     return (
-        <div className={css.menu_button_container}>
+        <div
+            className={css.menu_button_container}
+            onMouseEnter={(e) => {
+                setOpenMenus(true);
+            }}
+            onMouseLeave={(e) => {
+                setOpenMenus(false);
+            }}
+        >
             <NavLink
                 to={menu?.link ? menu?.link : menu.route}
                 id={menu.id}
@@ -24,8 +41,7 @@ const MenuButton = ({ menu, className }) => {
                 <p>{menu.title}</p>
                 {subMenuAvailable && <img src={ChevronDown} alt="down" />}
             </NavLink>
-
-            {subMenuAvailable && (
+            {subMenuAvailable && openMenus && (
                 <div className={css.submenu_wrapper}>
                     <div className={css.submenu_container}>
                         {subMenus.map((subMenu, index) => (
@@ -42,9 +58,10 @@ const MenuButton = ({ menu, className }) => {
                                     to={subMenu.route}
                                     key={index}
                                     id={subMenu.id}
-                                    onClick={(e) =>
-                                        onNavigate(e, subMenu.route)
-                                    }
+                                    onClick={(e) => {
+                                        onNavigate(e, subMenu.route);
+                                        setOpenMenus(false);
+                                    }}
                                     className={css.submenu_item}
                                 >
                                     {subMenu.title}
@@ -68,12 +85,13 @@ const MenuButton = ({ menu, className }) => {
                                                 to={subSubMenu.route}
                                                 key={index}
                                                 id={subSubMenu.id}
-                                                onClick={(e) =>
+                                                onClick={(e) => {
                                                     onNavigate(
                                                         e,
                                                         subSubMenu.route
-                                                    )
-                                                }
+                                                    );
+                                                    setOpenMenus(false);
+                                                }}
                                                 className={css.subsubmenu_item}
                                             >
                                                 - {subSubMenu.title}
