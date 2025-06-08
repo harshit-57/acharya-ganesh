@@ -47,10 +47,16 @@ const SArticle = () => {
         }
     };
 
-    const keywords = article?.Tags?.map((e) => e.TagName).join(', ');
-    const description = article?.Tags;
-    const title = article?.Meta_SiteName;
-    const metaTitle = article?.Meta_Title;
+    const keywords = article?.Focus_Keyphrase
+        ? `${article?.Focus_Keyphrase}, ${article?.Tags?.map(
+              (e) => e.TagName
+          ).join(', ')}`
+        : article?.Tags?.map((e) => e.TagName).join(', ') || article?.Slug;
+    const title = article?.Meta_SiteName || undefined;
+    const metaTitle = article?.Meta_Title || undefined;
+    const description =
+        article?.Meta_Desc ||
+        'Explore in-depth spirituality on aarti, chalisa, festivals, and more. Discover the spiritual side of life with our expert insights and guidance.';
 
     if (!article) {
         return (

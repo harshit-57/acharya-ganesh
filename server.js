@@ -69,12 +69,11 @@ app.use(URL_REGEX, async (req, res) => {
         }
 
         const html = template
-            .replace(`<!--app-head-->`, rendered.head ?? '')
-            .replace(`<!--app-html-->`, rendered.html ?? '')
-            .replace('</head>', `${rendered.helmet.meta.toString()}</head>`)
-            .replace('</head>', `${rendered.helmet.title.toString()}</head>`)
-            .replace('</head>', `${rendered.helmet.script.toString()}</head>`)
-            .replace('</head>', `${rendered.css || ''}</head>`);
+            .replace(
+                `<!--app-head-->`,
+                `${rendered.head || ''}\n${rendered.css || ''}`
+            )
+            .replace(`<!--app-html-->`, rendered.html ?? '');
 
         res.status(200).set({ 'Content-Type': 'text/html' }).send(html);
     } catch (e) {

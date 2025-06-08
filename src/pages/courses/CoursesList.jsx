@@ -112,9 +112,15 @@ const CoursesList = () => {
     const description =
         'Discover our wide range of courses on astrology, numerology, kundali matching, and daily horoscopes. Enhance your knowledge and skills with expert-led training.';
     const title = 'Acharya Ganesh Astrology Academy | Courses';
+    const metaTitle = 'course';
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description} title={title} />
+            <SEO
+                keywords={keywords}
+                description={description}
+                title={title}
+                metaTitle={metaTitle}
+            />
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}
