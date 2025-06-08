@@ -50,9 +50,9 @@ const Article = () => {
         ? `${article?.Focus_Keyphrase}, ${article?.Tags?.map(
               (e) => e.TagName
           ).join(', ')}`
-        : article?.Tags?.map((e) => e.TagName).join(', ');
-    const siteName = article?.Meta_SiteName || undefined;
-    const metatTitle = article?.Meta_Title || undefined;
+        : article?.Tags?.map((e) => e.TagName).join(', ') || article?.Slug;
+    const title = article?.Meta_SiteName || undefined;
+    const metaTitle = article?.Meta_Title || undefined;
     const description =
         article?.Meta_Desc ||
         'Explore in-depth articles on astrology, numerology, kundali matching, and daily horoscopes. Get expert insights and tips to enhance your spiritual and personal growth.';
@@ -63,8 +63,8 @@ const Article = () => {
                 <SEO
                     keywords={keywords}
                     description={description}
-                    title={siteName}
-                    metaTitle={metatTitle}
+                    title={title}
+                    metaTitle={metaTitle}
                 />
                 <Loader style={{ position: 'fixed' }} />
             </PageContainer>

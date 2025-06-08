@@ -66,9 +66,15 @@ const WebStoriesList = () => {
     const description =
         'Explore our interactive web stories on astrology, numerology, kundali matching, and daily horoscopes. Engaging and informative content for your spiritual journey.';
     const title = 'Acharya Ganesh Astrology Academy | Web Stories';
+    const metaTitle = 'web-stories';
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description} title={title} />
+            <SEO
+                keywords={keywords}
+                description={description}
+                title={title}
+                metaTitle={metaTitle}
+            />
             <div
                 style={{ backgroundImage: `url(${ImgBlogHeader})` }}
                 className={css.header}

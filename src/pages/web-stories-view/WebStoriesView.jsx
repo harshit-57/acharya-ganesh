@@ -16,6 +16,8 @@ import { htmlToText } from 'html-to-text';
 import { Icon, Link } from '@mui/material';
 import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
 import Loader from '../../components/loader/Loader';
+import { PageContainer } from '../../components/page-container/PageContainer';
+import SEO from '../../Seo';
 
 const WebStoriesView = () => {
     const loaderData = useLoaderData();
@@ -169,6 +171,10 @@ const WebStoriesView = () => {
         if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
     };
 
+    const keywords = ws?.Tags?.map((e) => e.TagName).join(', ') || ws?.Slug;
+    const title = ws?.Title || undefined;
+    const metaTitle = ws?.Title || undefined;
+    const description = `Explore in-depth of stories on ${title}. Discover the spiritual side of life with our expert insights and guidance.`;
     if (!ws) return <Loader style={{ position: 'fixed' }} />;
 
     return (
@@ -180,6 +186,12 @@ const WebStoriesView = () => {
                 })`,
             }}
         >
+            <SEO
+                keywords={keywords}
+                description={description}
+                title={title}
+                metaTitle={metaTitle}
+            />
             <div className={css.wrapper}>
                 <button
                     onClick={onPrev}

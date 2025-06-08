@@ -47,9 +47,15 @@ const Services = () => {
     const description =
         'Learn about acharyaganesh, your trusted source for astrology, numerology, kundali matching, and daily horoscopes. Discover our mission, team, and how we can guide you on your spiritual journey.';
     const title = 'Acharya Ganesh Astrology Academy | Services';
+    const metaTitle = 'services';
     return (
         <PageContainer>
-            <SEO keywords={keywords} description={description} title={title} />
+            <SEO
+                keywords={keywords}
+                description={description}
+                title={title}
+                metaTitle={metaTitle}
+            />
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}
                 className={css.header}

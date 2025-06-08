@@ -86,9 +86,15 @@ const SpiritualityList = () => {
     const description =
         'Discover spiritual practices, meditation techniques, and guidance at acharyaganesh. Enhance your spiritual journey with astrology, numerology, and kundali insights.';
     const title = 'Acharya Ganesh Astrology Academy | Spirituality';
+    const metaTitle = category ? category?.toUpperCase() : 'spirituality';
     return (
         <PageContainer className={css.container}>
-            <SEO keywords={keywords} description={description} title={title} />
+            <SEO
+                keywords={keywords}
+                description={description}
+                title={title}
+                metaTitle={metaTitle}
+            />
             <div
                 style={{ backgroundImage: `url(${ImgBlogHeader})` }}
                 className={css.header}
