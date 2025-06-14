@@ -204,9 +204,11 @@ const Edit = () => {
                             description: response?.ProductDescription,
                             slug: response?.Slug,
                             image: response?.Images?.length
-                                ? response?.Images[0]
+                                ? response?.Images[0]?.ImageUrl
                                 : '',
-                            imageAlt: response?.Name?.slice(0, 10),
+                            imageAlt: response?.Images?.length
+                                ? response?.Images[0]?.ImageAlt
+                                : '',
                             focusKeyphrase: response?.Focus_Keyphrase || '',
                             metaTitle: response?.Meta_Title,
                             metaSiteName: response?.Meta_SiteName,

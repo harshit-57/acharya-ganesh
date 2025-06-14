@@ -159,10 +159,10 @@ const PaginationTable = ({
                                 >
                                     {course?.Images?.length ? (
                                         <img
-                                            src={course.Images[0]}
+                                            src={course.Images[0]?.ImageUrl}
                                             alt={
-                                                course.Name?.split(' ')?.length
-                                                    ? course.Name?.split(' ')[0]
+                                                course.Images?.length
+                                                    ? course.Images[0]?.ImageAlt
                                                     : 'course'
                                             }
                                             style={{
