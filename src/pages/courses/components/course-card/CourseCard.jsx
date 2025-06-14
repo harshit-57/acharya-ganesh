@@ -5,8 +5,12 @@ export const CourseCard = ({ onClick, course, style, className }) => {
     return (
         <div className={[css.container, className].join(' ')} onClick={onClick}>
             <img
-                src={course?.Images[0] || ''}
-                alt={course?.Name?.slice(0, 10) || 'course'}
+                src={course?.Images[0]?.ImageUrl || ''}
+                alt={
+                    course?.Images?.length
+                        ? course?.Images[0]?.ImageAlt
+                        : 'course'
+                }
                 className={css.thumbnail}
             ></img>
             <div className={css.content_container}>

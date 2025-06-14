@@ -75,8 +75,8 @@ const Article = () => {
             <SEO
                 keywords={keywords}
                 description={description}
-                title={siteName}
-                metaTitle={metatTitle}
+                title={title}
+                metaTitle={metaTitle}
             />
             <div
                 style={{ backgroundImage: `url(${ImgHeaderBg})` }}

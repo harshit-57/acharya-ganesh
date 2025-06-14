@@ -9,8 +9,12 @@ export const PriceAndPurchaseSection = ({ course }) => {
         <div className={css.container}>
             <img
                 className={css.poster}
-                src={course?.Images?.length ? course?.Images[0] : ''}
-                alt={course?.Name?.slice(0, 10) || 'course poster'}
+                src={course?.Images?.length ? course?.Images[0]?.ImageUrl : ''}
+                alt={
+                    course?.Images?.length
+                        ? course?.Images[0]?.ImageAlt
+                        : 'course poster'
+                }
             />
             <div className={css.price_detail_container}>
                 <p className={css.tag}>
